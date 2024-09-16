@@ -11,6 +11,18 @@ android {
     namespace 'vn.md18.fsquareapplication'
     compileSdk 34
 
+    signingConfigs {
+        config {
+            def props = new Properties()
+            props.load(new FileInputStream(file('../local.properties')))
+
+            keyAlias props['keyAlias']
+            keyPassword props['keyPassword']
+            storeFile file(props['keystore'])
+            storePassword props['keystorePassword']
+        }
+    }
+
     defaultConfig {
         applicationId "vn.md18.fsquareapplication"
         minSdk 24
@@ -28,10 +40,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             matchingFallbacks = ['release']
+            signingConfig signingConfigs.config
         }
         applicationVariants.all { variant ->
             variant.outputs.all {
