@@ -1,0 +1,105 @@
+ext {
+
+    android = [
+            compileSdkVersion: 33,
+            buildToolsVersion: "27.0.3",
+            minSdkVersion    : 23,
+            targetSdkVersion : 33,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    final hilt_version = "2.48"
+    final okhttp3_version = "4.9.1"
+    final retrofit = "2.9.0"
+    final fragment_ktx = "1.3.6"
+    final hilt_view_models = "1.0.0-alpha03"
+    final lifecycle_livedata = "2.3.1"
+    final kotlin_ktx_version = "1.8.0"
+    final lifecycle_extension_version = "2.2.0"
+    final glide_version = "4.12.0"
+    final activity_ktx_version = "1.3.1"
+    final lifecycle_version = "2.3.1"
+    final room_version = "2.5.1"
+    final rxJava_version = "2.2.19"
+    final rxAndroid_version = "2.1.1"
+    final rxBinding_version = "4.0.0"
+    final lottie_version = "3.7.0"
+    final jdbc_version = "3.36.0"
+    final kotlin_std_lib = "1.8.0"
+    final app_compat_version = "1.3.1"
+    final constraint_layout_version = "2.1.1"
+    final junit_version = "4.12"
+    final junit_android_test = "1.1.3"
+    final junit_android_test_espresso = "3.4.0"
+    final calligraphy_version = "3.1.1"
+    final viewpump_version = "2.0.3"
+    final roundimageview_version = "2.3.0"
+    final timber_version = "4.5.1"
+    final notification_version = "1.1.0"
+    final apache_version = "2.6"
+    final shimmer_version = "0.5.0"
+    final vlc_version = "3.2.2"
+    final rx_permission_version = "0.10.0"
+    final permission_version = "2.0.3"
+    final otp_view_version = "2.1.0"
+    final wifi_utils_version = "1.6.6"
+    final date_picker_version = "1.3.1"
+    final mpegMediaMetadataRetriever = "1.0.15"
+    final eventbus_version = "3.1.1"
+    final mp_androidchart_version = "v3.1.0"
+    final number_picker_view = "1.2.0"
+    final nv_bluetooth = "1.8"
+    final rx_network_version = "3.0.8"
+    final ffmpeg_for_android_version = "4.4"
+    final tooltip_version = "1.4.5"
+    final swiperefreshlayout = "1.2.0-alpha01"
+    final location_version = "21.0.1"
+    final alibaba_fastjson_version = "1.1.67.android"
+    final okhttp_urlconnection_version = "3.14.9"
+    final facebook_soloader_version = "0.10.4+"
+    final thingclips_smart_version = "5.1.0"
+    final work_manager_version = "2.7.1"
+    dependencies = [
+            "toasty"                      : "com.github.GrenderG:Toasty:1.3.0",   //Toast
+            "eventBus"                    : "org.greenrobot:eventbus:3.1.1",//
+            "recyclerview-v7"             : "androidx.recyclerview:recyclerview:1.0.0",
+            "gson"                        : "com.google.code.gson:gson:2.8.2",
+            "lifecycle"                   : "android.arch.lifecycle:extensions:1.1.1",
+            "multidex"                    : "com.android.support:multidex:1.0.3",
+            "j_unit_version"              : "junit:junit:$junit_version",
+            "android_j_unit_test"         : "androidx.test.ext:junit:$junit_android_test",
+            "android_j_unit_test_espresso": "androidx.test.espresso:espresso-core:$junit_android_test_espresso",
+            "constraint_layout"           : "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
+            "app_compat"                  : "androidx.appcompat:appcompat:$app_compat_version",
+            "kotlin_stdlib"               : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_std_lib",
+            "kotlin_core"                 : "androidx.core:core-ktx:$kotlin_ktx_version",
+            "hilt"                        : "com.google.dagger:hilt-android:$hilt_version",
+            "hilt_kapt"                   : "com.google.dagger:hilt-compiler:$hilt_version",
+            "hilt_view_models"            : "androidx.hilt: hilt-lifecycle-viewmodel:$hilt_view_models",
+            "lifecycle_extensions"        : "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension_version",
+            "lifecycle_viewmodels"        : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            "lifecycle_runtime_ktx"       : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+            "lifecycle_live_data_ktx"     : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_livedata",
+            "retrofit"                    : "com.squareup.retrofit2:retrofit:$retrofit",
+            "retrofit_covert"             : "com.squareup.retrofit2:converter-gson:$retrofit",
+            "retrofit_convert_adapter"    : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
+            "okhttp3_logging"             : "com.squareup.okhttp3:logging-interceptor:$okhttp3_version",
+            "okhttp3"                     : "com.squareup.okhttp3:okhttp:$okhttp3_version",
+            "rxjava2"                     : "io.reactivex.rxjava2:rxjava:$rxJava_version",
+            "rxandroid2"                  : "io.reactivex.rxjava2:rxandroid:$rxAndroid_version",
+            "rxBinding"                   : "com.jakewharton.rxbinding4:rxbinding:$rxBinding_version",
+            "room_runtime"                : "androidx.room:room-runtime:$room_version",
+            "room_kapt"                   : "androidx.room:room-compiler:$room_version",
+            "room_rxjava2"                : "androidx.room:room-rxjava2:$room_version",
+            "room_testing"                : "androidx.room:room-testing:$room_version",
+            "glide"                       : "com.github.bumptech.glide:glide:$glide_version",
+            "glide_kapt"                  : "com.github.bumptech.glide:compiler:$glide_version",
+            "activity_ktx"                : "androidx.activity:activity-ktx:$activity_ktx_version",
+            "fragment_ktx"                : "androidx.fragment:fragment-ktx:$fragment_ktx",
+            "room_sp_m1_kapt"             : "org.xerial:sqlite-jdbc:$jdbc_version",
+            "lottie"                      : "com.airbnb.android:lottie:$lottie_version",
+            "material"                    : "com.google.android.material:material:1.4.0",
+
+    ]
+}

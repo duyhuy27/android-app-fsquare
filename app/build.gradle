@@ -1,0 +1,186 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'vn.md18.fsquareapplication'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "vn.md18.fsquareapplication"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+    }
+
+    dexOptions {
+        incremental false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ['release']
+        }
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                def flavor = variant.name
+                def versionName = variant.versionName
+                def dateTime = getCurrentDayTime()
+                outputFileName = "${dateTime}-${flavor}-${versionName}.apk"
+            }
+        }
+
+    }
+    flavorDimensions "default"
+    productFlavors {
+        def MQTT_TCP_HOST = "MQTT_TCP_HOST"
+        def MQTT_TCP_PORT = "MQTT_TCP_PORT"
+        def MQTT_TCP_LOCAL_PORT = "MQTT_TCP_LOCAL_PORT"
+        def PHP_SERVER = "PHP_SERVER"
+        def QA_SERVER = "QA_SERVER"
+        def DB_NAME = "DB_NAME"
+        def SHARED_PREFERENCE_FILE_NAME = "SHARED_PREFERENCE_FILE_NAME"
+        def LOADER_EXPIRED_TIME = "LOADER_EXPIRED_TIME"
+        def META_DATA_EXPIRED_TIME = "META_DATA_EXPIRED_TIME"
+        staging {
+            applicationIdSuffix ".stag"
+            buildConfigField "String", PHP_SERVER, '"https://stagingapionehome.vnpt-technology.vn"'
+            buildConfigField "String", MQTT_TCP_HOST, '"stagingapionehome.vnpt-technology.vn"'
+            buildConfigField "int", MQTT_TCP_PORT, '8884'
+            buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
+            buildConfigField("String", QA_SERVER, '"http://sanphamvnpt.vn/question"')
+            buildConfigField("String", DB_NAME, "\"onehome_app_db\"")
+            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"ONEHome_Sharepreference\"")
+            buildConfigField "Integer", LOADER_EXPIRED_TIME, "60"
+            buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
+            buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
+            resValue "string", "app_name", "ONE Home Stag"
+        }
+        dev {
+            applicationIdSuffix ".dev"
+            buildConfigField "String", PHP_SERVER, '"https://devonehome.vnpt-technology.vn"'
+            buildConfigField "String", MQTT_TCP_HOST, '"devonehome.vnpt-technology.vn"'
+            buildConfigField "int", MQTT_TCP_PORT, '8884'
+            buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
+            buildConfigField("String", QA_SERVER, '"http://sanphamvnpt.vn/question"')
+            buildConfigField("String", DB_NAME, "\"onehome_app_db\"")
+            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"ONEHome_Sharepreference\"")
+            buildConfigField "Integer", LOADER_EXPIRED_TIME, "60"
+            buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
+            buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
+            resValue "string", "app_name", "ONE Home Dev"
+        }
+        production {
+            buildConfigField "String", PHP_SERVER, '"https://apionehome.vnpt-technology.vn"'
+            buildConfigField "String", MQTT_TCP_HOST, '"apionehome.vnpt-technology.vn"'
+            buildConfigField "int", MQTT_TCP_PORT, '8884'
+            buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
+            buildConfigField("String", QA_SERVER, '"http://sanphamvnpt.vn/question"')
+            buildConfigField("String", DB_NAME, "\"onehome_app_db\"")
+            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"ONEHome_Sharepreference\"")
+            buildConfigField "Integer", LOADER_EXPIRED_TIME, "60"
+            buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
+            buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
+            resValue "string", "app_name", "ONE Home"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    kapt {
+        generateStubs = true
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    aaptOptions {
+        cruncherEnabled = false
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation rootProject.ext.dependencies["kotlin_stdlib"]
+    implementation rootProject.ext.dependencies["app_compat"]
+    implementation rootProject.ext.dependencies["kotlin_core"]
+    implementation rootProject.ext.dependencies["constraint_layout"]
+    implementation libs.activity
+    testImplementation rootProject.ext.dependencies["j_unit_version"]
+    androidTestImplementation rootProject.ext.dependencies["android_j_unit_test"]
+    androidTestImplementation rootProject.ext.dependencies["android_j_unit_test_espresso"]
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["lifecycle"]
+    implementation rootProject.ext.dependencies["multidex"]
+    implementation(rootProject.ext.dependencies["recyclerview-v7"]) {
+        exclude module: 'support-annotations'
+    }
+    //add by ONE Home Team
+
+    //Dependency Injection with Hilt
+    implementation rootProject.ext.dependencies["hilt"]
+    kapt rootProject.ext.dependencies["hilt_kapt"]
+
+    implementation rootProject.ext.dependencies["material"]
+
+    //Lifecycle component
+    implementation rootProject.ext.dependencies["lifecycle_extensions"]
+    implementation rootProject.ext.dependencies["lifecycle_viewmodels"]
+    implementation rootProject.ext.dependencies["lifecycle_runtime_ktx"]
+    implementation rootProject.ext.dependencies["lifecycle_live_data_ktx"]
+
+    //Retrofit- OkHttp dependency for Network()
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit_covert"]
+    implementation rootProject.ext.dependencies["retrofit_convert_adapter"]
+    implementation rootProject.ext.dependencies["okhttp3_logging"]
+    implementation rootProject.ext.dependencies["okhttp3"]
+
+    //Reactive - Programming
+    implementation rootProject.ext.dependencies["rxjava2"]
+    implementation rootProject.ext.dependencies["rxandroid2"]
+    implementation rootProject.ext.dependencies["rxBinding"]
+    implementation rootProject.ext.dependencies["room_runtime"]
+
+    //Room database - Dependency for databases
+    kapt rootProject.ext.dependencies["room_kapt"]
+    implementation rootProject.ext.dependencies["room_rxjava2"]
+    implementation rootProject.ext.dependencies["room_testing"]
+
+    //Glide loading Image
+    implementation rootProject.ext.dependencies["glide"]
+    kapt rootProject.ext.dependencies["glide_kapt"]
+
+    //Core activity and fragment KTX
+    implementation rootProject.ext.dependencies["activity_ktx"]
+    implementation rootProject.ext.dependencies["fragment_ktx"]
+
+    //Support M1 - Native build
+    kapt rootProject.ext.dependencies["room_sp_m1_kapt"]
+
+    //Lottie library load GIF and Json GIF
+    implementation rootProject.ext.dependencies["lottie"]
+}
+
+static def getCurrentDayTime() {
+    Date today = new Date()
+    SimpleDateFormat df = new SimpleDateFormat("dd.MM.HH.mm")
+    return df.format(today)
+}
