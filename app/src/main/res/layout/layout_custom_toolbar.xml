@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_container"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/frame_start"
+        android:layout_width="@dimen/size_40"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/size_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center_horizontal"
+            android:background="?android:attr/actionBarItemBackground"
+            android:padding="@dimen/size_14"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        style="@style/TextTitleSemiBoldGreyLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Tiêu đề"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,RtlSymmetry" />
+
+    <LinearLayout
+        android:id="@+id/linear_end"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/size_8"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_right_second"
+            android:layout_width="@dimen/size_30"
+            android:layout_height="@dimen/size_30"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/size_6"
+            android:background="?android:attr/actionBarItemBackground"
+            android:padding="@dimen/size_5"
+            android:src="@drawable/ic_edit"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/frame_right"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_right_first"
+            android:layout_width="@dimen/size_30"
+            android:layout_height="@dimen/size_30"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/size_4"
+            android:background="?android:attr/actionBarItemBackground"
+            android:padding="@dimen/size_5"
+            android:src="@drawable/ic_add"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tuya_pair_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/size_8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_right_second"
+            android:layout_gravity="center_vertical"
+            style="@style/TextTitleSemiBoldBlueDark"
+            android:text="QR"
+            android:textColor="#808B9CB2"
+            android:textSize="@dimen/text_size_15"
+            android:layout_marginEnd="@dimen/size_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_change_tuya_pair_mode"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginEnd="@dimen/size_6"
+            android:padding="@dimen/size_5"
+            android:background="?android:attr/actionBarItemBackground"
+            android:src="@drawable/ic_rotate_360" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_right"
+        style="@style/TextTitleSemiBoldBlueDark"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Xong"
+        android:layout_marginEnd="@dimen/size_8"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/text_size_15"
+        android:visibility="visible"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_left"
+        style="@style/TextTitleSemiBoldBlueDark"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Hủy"
+        android:paddingHorizontal="@dimen/size_8"
+        android:layout_marginStart="@dimen/size_8"
+        android:textColor="#7A8088"
+        android:textSize="@dimen/text_size_15"
+        android:visibility="gone"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

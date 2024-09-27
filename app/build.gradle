@@ -28,7 +28,7 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName '1.1.0'
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -72,44 +72,44 @@ android {
         def META_DATA_EXPIRED_TIME = "META_DATA_EXPIRED_TIME"
         staging {
             applicationIdSuffix ".stag"
-            buildConfigField "String", PHP_SERVER, '"https://stagingapionehome.vnpt-technology.vn"'
-            buildConfigField "String", MQTT_TCP_HOST, '"stagingapionehome.vnpt-technology.vn"'
+            buildConfigField "String", PHP_SERVER, '"http://51.79.156.193:5000"'
+            buildConfigField "String", MQTT_TCP_HOST, '""'
             buildConfigField "int", MQTT_TCP_PORT, '8884'
             buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
-            buildConfigField("String", QA_SERVER, '"http://sanphamvnpt.vn/question"')
-            buildConfigField("String", DB_NAME, "\"onehome_app_db\"")
-            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"ONEHome_Sharepreference\"")
+            buildConfigField("String", QA_SERVER, '""')
+            buildConfigField("String", DB_NAME, "\"fsquare_app_db\"")
+            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"FSquare_Sharepreference\"")
             buildConfigField "Integer", LOADER_EXPIRED_TIME, "60"
             buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
             buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
-            resValue "string", "app_name", "ONE Home Stag"
+            resValue "string", "app_name", "FSquareStag"
         }
         dev {
             applicationIdSuffix ".dev"
-            buildConfigField "String", PHP_SERVER, '"https://devonehome.vnpt-technology.vn"'
-            buildConfigField "String", MQTT_TCP_HOST, '"devonehome.vnpt-technology.vn"'
+            buildConfigField "String", PHP_SERVER, '"http://51.79.156.193:5000"'
+            buildConfigField "String", MQTT_TCP_HOST, '""'
             buildConfigField "int", MQTT_TCP_PORT, '8884'
             buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
-            buildConfigField("String", QA_SERVER, '"http://sanphamvnpt.vn/question"')
-            buildConfigField("String", DB_NAME, "\"onehome_app_db\"")
-            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"ONEHome_Sharepreference\"")
+            buildConfigField("String", QA_SERVER, '""')
+            buildConfigField("String", DB_NAME, "\"fsquare_app_db\"")
+            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"FSquare_Sharepreference\"")
             buildConfigField "Integer", LOADER_EXPIRED_TIME, "60"
             buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
             buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
-            resValue "string", "app_name", "ONE Home Dev"
+            resValue "string", "app_name", "FSquareDev"
         }
         production {
-            buildConfigField "String", PHP_SERVER, '"https://apionehome.vnpt-technology.vn"'
-            buildConfigField "String", MQTT_TCP_HOST, '"apionehome.vnpt-technology.vn"'
+            buildConfigField "String", PHP_SERVER, '"http://51.79.156.193:5000"'
+            buildConfigField "String", MQTT_TCP_HOST, '""'
             buildConfigField "int", MQTT_TCP_PORT, '8884'
             buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
-            buildConfigField("String", QA_SERVER, '"http://sanphamvnpt.vn/question"')
-            buildConfigField("String", DB_NAME, "\"onehome_app_db\"")
-            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"ONEHome_Sharepreference\"")
+            buildConfigField("String", QA_SERVER, '""')
+            buildConfigField("String", DB_NAME, "\"fsquare_app_db\"")
+            buildConfigField("String", SHARED_PREFERENCE_FILE_NAME, "\"FSquare_Sharepreference\"")
             buildConfigField "Integer", LOADER_EXPIRED_TIME, "60"
             buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
             buildConfigField "Integer", META_DATA_EXPIRED_TIME, "60"
-            resValue "string", "app_name", "ONE Home"
+            resValue "string", "app_name", "FSquare"
         }
     }
     compileOptions {
@@ -131,6 +131,7 @@ android {
     lintOptions {
         abortOnError false
     }
+    ndkVersion '21.3.6528147'
 }
 
 dependencies {
@@ -193,6 +194,14 @@ dependencies {
 
     //Lottie library load GIF and Json GIF
     implementation rootProject.ext.dependencies["lottie"]
+
+    // Yanzhenjie Permission
+    implementation rootProject.ext.dependencies["permissions"]
+
+    // RxPermission
+    implementation rootProject.ext.dependencies["rxpermissions"]
+
+
 }
 
 static def getCurrentDayTime() {

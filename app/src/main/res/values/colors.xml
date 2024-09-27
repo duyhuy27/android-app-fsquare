@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="light_gray">#dbdbdb</color>
+    <color name="gray">#7e7e7e</color>
+    <color name="semi_gray">#979797</color>
+    <color name="dark_gray">#696969</color>
+    <color name="bg_color">#f7f7f7</color>
+    <color name="black">#000000</color>
+    <color name="black_effective">#2a2a2a</color>
+    <color name="shadow">#d0d8dc</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent_white">#88ffffff</color>
+    <color name="fb">#3b5998</color>
+    <color name="google">#d34836</color>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">@color/light_blue</color>
+    <color name="background_color">#f7f7f7</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_Light">#748792</color>
+    <color name="grey_dark">#434A54</color>
+    <color name="redLight">#FF0000</color>
+
+    <!-- Basic Color-->
+    <color name="lightBlue">#2D74E7</color>
+    <color name="blueDark">#163255</color>
+    <color name="darkBlue">#31465F</color>
+    <color name="greyLightText">#748792</color>
+    <!--Design colors-->
+    <color name="primary">#FF8108</color>
+    <color name="red_dark">#F06423</color>
+    <color name="red_dark2">#D85A1B</color>
+    <color name="cyan_light">#c9ebee</color>
+    <color name="cyan">#b5e3e7</color>
+    <color name="cyan_dark">#70BDC6</color>
+    <color name="navy_blue">#214258</color>
+    <color name="navy_blue_dark">#1C3A4E</color>
+    <color name="light_green">#78DC96</color>
+    <color name="blue_black_dark">#13171d</color>
+    <color name="blue_black_light">#516179</color>
+    <color name="blue_grey_light">#A5B4C8</color>
+    <color name="orange">#FFA500</color>
+    <color name="yellow">#fff44f</color>
+
+
+    <!-- From figma design -->
+    <!-- Main colors -->
+    <color name="main_1">#0064D6</color>
+    <color name="main_2">#0079FA</color>
+    <color name="main_3">#4BC8D1</color>
+    <color name="main_4">#FCC940</color>
+    <color name="main_5">#FB4B4B</color>
+    <color name="main_6">#02C8A4</color>
+
+    <!-- Gray colors -->
+    <color name="gray_1">#000E1F</color>
+    <color name="gray_2">#636970</color>
+    <color name="gray_3">#ADC2D0</color>
+    <color name="gray_4">#F4F6FA</color>
+    <color name="gray_5">#F6F6F6</color>
+    <color name="gray_6">#E4EAF1</color>
+    <color name="gray_20">#339EB6C4</color>
+    <color name="greyLight">#748792</color>
+    <color name="greyDark">#434A54</color>
+    <color name="grey_30">#4DB9D3D2</color>
+    <color name="gray_88">#88666666</color>
+
+    <!-- Define color by figma-->
+    <color name="light_background">#F1F5FC</color>
+    <color name="light_blue">#2D74E7</color>
+    <color name="light_blue_1">#C4D9FD</color>
+    <color name="color_indicator">#4D000000</color>
+    <color name="light_red">#FF4C4C</color>
+    <color name="grey_dark_text">#163255</color>
+    <color name="white_alpha_30">#4DFFFFFF</color>
+    <color name="gray_50_percent">#809EB6C3</color>
+    <color name="grey_light">#9EB6C3</color>
+    <color name="grey_dark_alpha_50">#80E6E9ED</color>
+    <color name="grey_dark_alpha_30">#4DE6E9ED</color>
+
+    <color name="dark_blue">#163255</color>
+    <color name="light_blue_normal">#B3DAFE</color>
+    <color name="dark_blue_normal">#2D74E7</color>
+    <color name="red_bright">#EF4344</color>
+    <color name="neutral_70">#8B9CB2</color>
+    <color name="grey_shimmed">#E1DFDF</color>
+    <color name="neutral_50_">#9DA4AF</color>
+    <color name="neutral_50">#BFCAD9</color>
+
+    <!-- Basic Color-->
+    <color name="dark_blue_1">#31465F</color>
+    <color name="red_light">#FF0000</color>
+    <color name="grey_light_text">#748792</color>
+    <color name="blue_dark_60">#60163255</color>
+    <color name="grey_light_20">#339EB6C3</color>
+
+    <color name="red">#FF0000</color>
 
 </resources>

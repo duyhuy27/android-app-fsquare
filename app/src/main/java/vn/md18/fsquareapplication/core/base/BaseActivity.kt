@@ -4,6 +4,8 @@ package vn.md18.fsquareapplication.core.base
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,10 +20,14 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewbinding.ViewBinding
+import com.airbnb.lottie.LottieProperty
+import com.airbnb.lottie.model.KeyPath
 import vn.md18.fsquareapplication.R
+import vn.md18.fsquareapplication.databinding.DialogLoadingViewBinding
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
 import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
+import vn.md18.fsquareapplication.utils.extensions.getColorCompat
 import java.lang.reflect.ParameterizedType
 import java.util.*
 import javax.inject.Inject
@@ -87,7 +93,13 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
     /**
      * Dialog LoadingView
      */
-    private val dialogLoading: Dialog by lazy { Dialog(this, R.style.DialogTheme) }
+    private val dialogLoading: Dialog by lazy {
+        Dialog(this, R.style.AppTheme_FullScreen_LightStatusBar).apply {
+            window?.setBackgroundDrawableResource(R.color.translucent_white)
+        }
+    }
+
+    private lateinit var dialogLoadingViewBinding: DialogLoadingViewBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,8 +133,37 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
     private fun createLoadingDialog() {
         dialogLoading.apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setContentView(R.layout.dialog_loading_view)
+            dialogLoadingViewBinding =
+                DialogLoadingViewBinding.inflate(LayoutInflater.from(this@BaseActivity))
+            setContentView(dialogLoadingViewBinding.root)
         }
+    }
+
+    fun setConfigLoadingDialog(
+        loadingEnable: Boolean,
+        colorAnimation: Int? = null,
+        colorBackground: Int? = null,
+    ) {
+
+        if (colorAnimation != null) {
+            dialogLoadingViewBinding.loadingAnimation.addValueCallback(
+                KeyPath("**"),
+                LottieProperty.COLOR_FILTER
+            ) {
+                PorterDuffColorFilter(
+                    getColorCompat(colorAnimation),
+                    PorterDuff.Mode.SRC_ATOP
+                )
+            }
+        }
+
+        if (colorBackground != null) {
+            dialogLoading.window?.setBackgroundDrawableResource(colorBackground)
+        }
+
+        dialogLoading.setContentView(dialogLoadingViewBinding.root)
+        onLoading(loadingEnable)
+        //onLoadingWithTimeout(loadingEnable)
     }
 
     /**

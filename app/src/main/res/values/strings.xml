@@ -1,3 +1,22 @@
 <resources>
     <string name="application_touch_twice_to_exits">Nhấn BACK một lần nữa để thoát!</string>
+    <!-- Dialog goto setting-->
+    <string name="not_now">Không phải bây giờ</string>
+    <string name="go_to_settings">Chuyển đến cài đặt</string>
+    <string name="request_external_permission_title">Cho phép FSquare truy cập bộ nhớ điện thoại?</string>
+    <string name="request_external_permission_description">Việc này cho phép ONE Home lưu trữ và truy cập thông tin như ảnh trên điện thoại và thẻ SD của bạn. Chạm Cài đặt > Quyền, rồi bật bộ nhớ.</string>
+    <string name="require_permission">Yêu cầu cấp quyền</string>
+    <string name="require_custom_permission">Vui lòng cấp quyền liên quan đến %s cho ứng dụng!</string>
+    <string name="micro">micro</string>
+    <string name="require_permission_location">Vui lòng cấp quyền truy cập vị trí cho ứng dụng</string>
+    <string name="camera">camera</string>
+    <string name="storage_new">bộ nhớ</string>
+
+    <!-- PullToRefresh view strings -->
+    <string name="pull_refresh_view_refreshing">Đang làm mới</string>
+    <string name="pull_refresh_view_refresh_success">Đã xong</string>
+    <string name="pull_refresh_view_refresh_fail">Không thành công</string>
+    <string name="pull_refresh_view_start">Kéo để làm mới</string>
+    <string name="pull_refresh_view_end">Thả để làm mới</string>
+    <string name="text_btn_save">Lưu</string>
 </resources>

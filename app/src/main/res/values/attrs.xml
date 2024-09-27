@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isTablet">false</bool>
+
+    <!-- TODO: Uncomment when use
+    <declare-styleable name="CustomEditText">
+        <attr name="hint" format="string" />
+        <attr name="maxLength" format="integer" />
+        <attr name="text" format="string" />
+        <attr name="android:inputType" />
+        <attr name="android:imeOptions" />
+    </declare-styleable>
+    -->
+    <declare-styleable name="CustomEdittext">
+        <attr name="hintText" format="string" />
+        <attr name="actionIme" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="actionUnspecified" value="0" />
+            <enum name="actionNone" value="1" />
+            <enum name="actionGo" value="2" />
+            <enum name="actionSearch" value="3" />
+            <enum name="actionSend" value="4" />
+            <enum name="actionDone" value="5" />
+            <enum name="actionNext" value="6" />
+            <enum name="actionPrevious" value="7" />
+        </attr>
+        <attr name="inputType" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="email" value="1" />
+            <enum name="password" value="2" />
+            <enum name="phone" value="3" />
+        </attr>
+        <attr name="showIconTogglePassword" format="boolean" />
+        <attr name="iconStart" format="reference" />
+        <attr name="iconEnd" format="reference" />
+        <attr name="colorIconEnd" format="color" />
+        <attr name="enable" format="boolean" />
+        <attr name="textStart" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CustomMainToolbar">
+        <attr name="title" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomNormalToolbar">
+        <attr name="normalTitle" format="string" />
+    </declare-styleable>
+    <!-- TODO: Uncomment when use
+        <declare-styleable name="CustomToolbar">
+            <attr name="titleToolbar" format="string" />
+            <attr name="enableBackButton" format="boolean" />
+            <attr name="iconFirstRight" format="reference" />
+            <attr name="iconSecondRight" format="reference" />
+        </declare-styleable>
+        -->
+
+    <declare-styleable name="CustomToolbar">
+        <attr name="titleToolbar" format="string" />
+        <attr name="enableBackButton" format="boolean" />
+        <attr name="iconFirstRight" format="reference" />
+        <attr name="iconSecondRight" format="reference" />
+        <attr name="colorIcon" format="reference" />
+        <attr name="textRight" format="string" />
+        <attr name="textLeft" format="string" />
+        <attr name="titleGravity">
+            <flag name="left" value="0x03" />
+            <flag name="center" value="0x11" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomToolbarWithSmallTitle">
+        <attr name="bigTitleToolbar" format="string" />
+        <attr name="smallTitleToolbar" format="string" />
+        <attr name="setBackButton" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomSelectedBar">
+        <attr name="typeBottom" format="enum">
+            <enum name="Devices" value="0" />
+            <enum name="Scene" value="1" />
+            <enum name="Notification" value="2" />
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="ZoomableTextureView">
+        <attr name="minScale" format="float" />
+        <attr name="maxScale" format="float" />
+    </declare-styleable>
+</resources>
