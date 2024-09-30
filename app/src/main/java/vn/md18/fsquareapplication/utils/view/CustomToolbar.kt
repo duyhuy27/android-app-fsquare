@@ -22,17 +22,6 @@ import vn.md18.fsquareapplication.utils.extensions.setOnSafeClickListener
 import vn.md18.fsquareapplication.utils.extensions.setWidthView
 import vn.md18.fsquareapplication.utils.extensions.show
 
-/**
- * Created by @Author: Nam Luong Xuan
- * Project : ONEHomeApplication
- * Create Time : 09:15 - 26/10/2021
- * For all issue contact me : namlx@vnpt-technology.vn
- * Class ToolbarCustom.
- * ----------------------------------
- * @JVMOver load của kotlin, để thay thế các giá trị của constructor mặc định
- * Chi tiết https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/
- */
-
 @SuppressLint("CustomViewStyleable")
 class CustomToolbar @JvmOverloads constructor(
     context: Context,

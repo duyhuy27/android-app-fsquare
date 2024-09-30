@@ -68,12 +68,18 @@ android {
         def QA_SERVER = "QA_SERVER"
         def DB_NAME = "DB_NAME"
         def SHARED_PREFERENCE_FILE_NAME = "SHARED_PREFERENCE_FILE_NAME"
+        def ENV = "ENV"
+        def DEV = '\"dev\"'
+        def STAG = '\"stag\"'
+        def PROD = '\"prod\"'
+        def APP_SCHEMA = "APP_SCHEMA"
         def LOADER_EXPIRED_TIME = "LOADER_EXPIRED_TIME"
         def META_DATA_EXPIRED_TIME = "META_DATA_EXPIRED_TIME"
         staging {
             applicationIdSuffix ".stag"
             buildConfigField "String", PHP_SERVER, '"http://51.79.156.193:5000"'
             buildConfigField "String", MQTT_TCP_HOST, '""'
+            buildConfigField "String", ENV, DEV
             buildConfigField "int", MQTT_TCP_PORT, '8884'
             buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
             buildConfigField("String", QA_SERVER, '""')
@@ -86,6 +92,7 @@ android {
         }
         dev {
             applicationIdSuffix ".dev"
+            buildConfigField "String", ENV, DEV
             buildConfigField "String", PHP_SERVER, '"http://51.79.156.193:5000"'
             buildConfigField "String", MQTT_TCP_HOST, '""'
             buildConfigField "int", MQTT_TCP_PORT, '8884'
@@ -101,6 +108,7 @@ android {
         production {
             buildConfigField "String", PHP_SERVER, '"http://51.79.156.193:5000"'
             buildConfigField "String", MQTT_TCP_HOST, '""'
+            buildConfigField "String", ENV, DEV
             buildConfigField "int", MQTT_TCP_PORT, '8884'
             buildConfigField "int", MQTT_TCP_LOCAL_PORT, '8883'
             buildConfigField("String", QA_SERVER, '""')
@@ -140,6 +148,8 @@ dependencies {
     implementation rootProject.ext.dependencies["kotlin_core"]
     implementation rootProject.ext.dependencies["constraint_layout"]
     implementation libs.activity
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
     testImplementation rootProject.ext.dependencies["j_unit_version"]
     androidTestImplementation rootProject.ext.dependencies["android_j_unit_test"]
     androidTestImplementation rootProject.ext.dependencies["android_j_unit_test_espresso"]
@@ -149,7 +159,10 @@ dependencies {
     implementation(rootProject.ext.dependencies["recyclerview-v7"]) {
         exclude module: 'support-annotations'
     }
-    //add by ONE Home Team
+
+    // edtText OTP lib
+    implementation rootProject.ext.dependencies["otp_view"]
+    implementation rootProject.ext.dependencies["date_picker"]
 
     //Dependency Injection with Hilt
     implementation rootProject.ext.dependencies["hilt"]
@@ -201,7 +214,16 @@ dependencies {
     // RxPermission
     implementation rootProject.ext.dependencies["rxpermissions"]
 
+    implementation rootProject.ext.dependencies["reactivenetwork"]
 
+    implementation rootProject.ext.dependencies["timber"]
+
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
+
+    implementation 'com.elvishew:xlog:1.11.0'
+    implementation 'com.elvishew:xlog-libcat:1.0.0'
 }
 
 static def getCurrentDayTime() {
