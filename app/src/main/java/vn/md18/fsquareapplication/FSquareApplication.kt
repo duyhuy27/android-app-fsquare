@@ -5,10 +5,15 @@ import android.content.Context
 import androidx.annotation.Keep
 import androidx.lifecycle.LifecycleObserver
 import androidx.multidex.MultiDex
+import com.microsoft.appcenter.AppCenter
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes
 import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.internal.Contexts.getApplication
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
+
 
 @Keep
 @HiltAndroidApp
@@ -29,6 +34,10 @@ class FSquareApplication : Application(), LifecycleObserver {
     }
     override fun onCreate() {
         super.onCreate()
+        AppCenter.start(
+            getApplication(this), "\"64d8a3c2-566a-4395-a507-10c417b165d5\"",
+            Analytics::class.java, Crashes::class.java
+        )
         initAppLogger()
     }
 
