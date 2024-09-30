@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // Dùng Jenkins Credentials để lấy API Token cho AppCenter
         APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
         ANDROID_KEYSTORE = credentials('ANDROID_KEYSTORE')  // Keystore file
         KEYSTORE_PASSWORD = credentials('KEYSTORE_PASSWORD')  // Mật khẩu của keystore
@@ -10,16 +9,22 @@ pipeline {
         KEY_PASSWORD = credentials('KEY_PASSWORD')  // Mật khẩu của key alias
     }
 
-    stages { // Thêm khối stages ở đây
+    stages {
+        stage('Create local.properties') {
+            steps {
+                sh '''
+                    echo "sdk.dir=/Users/huynguyen/Library/Android/sdk" > local.properties
+                '''
+            }
+        }
+
         stage('Build') {
             steps {
-                // Lưu file keystore tạm thời để sử dụng trong quá trình build
                 sh '''
                     mkdir -p $WORKSPACE/keystore
                     cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
                 '''
 
-                // Build APK với Gradle và sử dụng keystore để ký
                 sh '''
                     ./gradlew clean assembleRelease \
                     -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
@@ -32,7 +37,6 @@ pipeline {
 
         stage('Upload to AppCenter') {
             steps {
-                // Upload APK đã build lên AppCenter với AppCenter CLI
                 sh '''
                     appcenter distribute release \
                     --app huy.mobcontact-gmail.com/FSquare-Android-Application \
@@ -46,7 +50,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()  // Dọn dẹp workspace sau khi build
+            node { cleanWs() }
         }
         success {
             echo 'Build and upload to AppCenter succeeded!'
