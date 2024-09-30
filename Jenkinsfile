@@ -14,7 +14,6 @@ pipeline {
 
         stage('Update Version') {
             steps {
-                // Chạy script để tự động cập nhật version trong gradle.properties
                 sh './update_version.sh'
             }
         }
@@ -36,9 +35,6 @@ pipeline {
                 sh '''
                     mkdir -p $WORKSPACE/keystore
                     cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
-                '''
-                // Build APK trong dev/debug
-                sh '''
                     ./gradlew clean assembleDevDebug \
                     -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
                     -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
@@ -57,9 +53,7 @@ pipeline {
         stage('Upload to AppCenter') {
             steps {
                 script {
-                    // Tìm file APK trong thư mục dev/debug
                     def apkPath = sh(script: 'find ./app/build/outputs/apk/dev/debug/ -name "*.apk"', returnStdout: true).trim()
-
                     if (apkPath) {
                         echo "APK path: ${apkPath}"  // Kiểm tra đường dẫn APK
                         sh """

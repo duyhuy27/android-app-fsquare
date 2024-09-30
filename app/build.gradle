@@ -7,6 +7,18 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def versionPropsFile = file('../version.properties')
+def Properties versionProps = new Properties()
+
+if (versionPropsFile.exists()) {
+    versionProps.load(new FileInputStream(versionPropsFile))
+}
+
+def versionMajor = versionProps['version.major'].toInteger()
+def versionMinor = versionProps['version.minor'].toInteger()
+def versionPatch = versionProps['version.patch'].toInteger()
+def versionBuild = versionProps['version.build'].toInteger()
+
 android {
     namespace 'vn.md18.fsquareapplication'
     compileSdk 34
@@ -27,8 +39,8 @@ android {
         applicationId "vn.md18.fsquareapplication"
         minSdk 24
         targetSdk 34
-        versionCode project.property("android.injected.version.code").toString().toInteger()
-        versionName project.property("android.injected.version.name").toString()
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 10 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -138,6 +150,14 @@ android {
     }
     lintOptions {
         abortOnError false
+        disable 'InvalidPackage'
+        checkReleaseBuilds false
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
     ndkVersion '21.3.6528147'
 }
