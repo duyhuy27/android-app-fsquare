@@ -30,12 +30,18 @@ pipeline {
                     cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
                 '''
                 sh '''
-                    ./gradlew clean assembleRelease \
+                    ./gradlew clean assembleStagingDebug \
                     -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
                     -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
                     -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
                     -Pandroid.injected.signing.key.password=$KEY_PASSWORD
                 '''
+            }
+        }
+
+        stage('Verify APK') {
+            steps {
+                sh 'ls -la ./app/build/outputs/apk/staging/debug/'
             }
         }
 
@@ -45,7 +51,7 @@ pipeline {
                     appcenter distribute release \
                     --app huy.mobcontact-gmail.com/FSquare-Android-Application \
                     --group "Testers" \
-                    --file ./app/build/outputs/apk/release/app-release.apk \
+                    --file ./app/build/outputs/apk/staging/debug/30.09.14.25-stagingDebug-1.1.0.apk \
                     --token $APP_CENTER_API_TOKEN
                 '''
             }
