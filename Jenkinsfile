@@ -14,6 +14,10 @@ pipeline {
             steps {
                 sh '''
                     echo "sdk.dir=/Users/huynguyen/Library/Android/sdk" > local.properties
+                    echo "keyAlias=$KEY_ALIAS" >> local.properties
+                    echo "keyPassword=$KEY_PASSWORD" >> local.properties
+                    echo "keystore=$ANDROID_KEYSTORE" >> local.properties
+                    echo "keystorePassword=$KEYSTORE_PASSWORD" >> local.properties
                 '''
             }
         }
@@ -49,7 +53,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()  // Không cần node ở đây
+            cleanWs()
         }
         success {
             echo 'Build and upload to AppCenter succeeded!'
