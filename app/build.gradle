@@ -27,8 +27,8 @@ android {
         applicationId "vn.md18.fsquareapplication"
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName '1.1.0'
+        versionCode project.property("android.injected.version.code").toString().toInteger()
+        versionName project.property("android.injected.version.name").toString()
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
