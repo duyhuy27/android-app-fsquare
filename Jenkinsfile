@@ -29,7 +29,7 @@ pipeline {
                     mkdir -p $WORKSPACE/keystore
                     cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
                 '''
-                // Build APK trong dev/debug thay vì staging/debug
+                // Build APK trong dev/debug
                 sh '''
                     ./gradlew clean assembleDevDebug \
                     -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
@@ -54,13 +54,22 @@ pipeline {
 
                     if (apkPath) {
                         echo "APK path: ${apkPath}"  // Kiểm tra đường dẫn APK
-                        sh """
+                        def releaseOutput = sh(script: """
                             appcenter distribute release \
                             --app huy.mobcontact-gmail.com/FSquare-Android-Application \
                             --group "Testers" \
                             --file ${apkPath} \
                             --token $APP_CENTER_API_TOKEN
-                        """
+                        """, returnStdout: true).trim()
+
+                        // Kiểm tra xem phát hành thành công và hiển thị thông báo
+                        if (releaseOutput.contains('Release')) {
+                            echo "Build and upload to AppCenter succeeded!"
+                            echo "APK released successfully. You can share the following link to download the APK:"
+                            echo "https://install.appcenter.ms/users/huy.mobcontact-gmail.com/apps/FSquare-Android-Application/releases/latest"
+                        } else {
+                            error "Failed to upload APK to AppCenter."
+                        }
                     } else {
                         error "APK not found!"
                     }
