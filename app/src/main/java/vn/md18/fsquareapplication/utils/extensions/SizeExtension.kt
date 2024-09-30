@@ -14,14 +14,6 @@ import android.view.View
 import android.view.WindowManager
 import vn.md18.fsquareapplication.utils.Constant
 
-/**
- * Created by @Author: Nam Luong Xuan
- * Project : ONEHomeApplication
- * Create Time : 09:01 - 29/10/2021
- * For all issue contact me : namlx@vnpt-technology.vn
- * Class SizeExtension
- */
-
 fun dpToPx(dp: Float): Int {
     return (dp * Resources.getSystem().displayMetrics.density).toInt()
 }

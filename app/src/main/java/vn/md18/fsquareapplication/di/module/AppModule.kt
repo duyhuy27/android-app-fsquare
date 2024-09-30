@@ -3,6 +3,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.reactivex.disposables.CompositeDisposable
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.datamanager.DataManagerImpl
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
@@ -39,4 +40,7 @@ object AppModule {
     fun providerDataManager(dataManagerImpl: DataManagerImpl): DataManager {
         return dataManagerImpl
     }
+
+    @Provides
+    fun provideCompositeDisposable() = CompositeDisposable()
 }

@@ -21,13 +21,12 @@
     <color name="grey_Light">#748792</color>
     <color name="grey_dark">#434A54</color>
     <color name="redLight">#FF0000</color>
-
-    <!-- Basic Color-->
+    <color name="black_neutral">#262F3B</color>
+    <color name="green_fresh">#29CC91</color>
     <color name="lightBlue">#2D74E7</color>
     <color name="blueDark">#163255</color>
     <color name="darkBlue">#31465F</color>
     <color name="greyLightText">#748792</color>
-    <!--Design colors-->
     <color name="primary">#FF8108</color>
     <color name="red_dark">#F06423</color>
     <color name="red_dark2">#D85A1B</color>

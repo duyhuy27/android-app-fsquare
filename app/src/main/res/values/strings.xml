@@ -19,4 +19,6 @@
     <string name="pull_refresh_view_start">Kéo để làm mới</string>
     <string name="pull_refresh_view_end">Thả để làm mới</string>
     <string name="text_btn_save">Lưu</string>
+
+    <string name="no_internet_connection">Khong co internet</string>
 </resources>
