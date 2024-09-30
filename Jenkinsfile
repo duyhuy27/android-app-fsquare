@@ -10,7 +10,7 @@ pipeline {
         KEY_PASSWORD = credentials('KEY_PASSWORD')
     }
 
-    stages {  // Đảm bảo tất cả các stages nằm trong khối stages
+    stages {
         stage('Create local.properties') {
             steps {
                 sh '''
@@ -29,8 +29,9 @@ pipeline {
                     mkdir -p $WORKSPACE/keystore
                     cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
                 '''
+                // Build APK trong dev/debug thay vì staging/debug
                 sh '''
-                    ./gradlew clean assembleStagingDebug \
+                    ./gradlew clean assembleDevDebug \
                     -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
                     -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
                     -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
@@ -41,23 +42,25 @@ pipeline {
 
         stage('Verify APK') {
             steps {
-                sh 'ls -la ./app/build/outputs/apk/staging/debug/'
+                sh 'ls -la ./app/build/outputs/apk/dev/debug/'
             }
         }
 
         stage('Upload to AppCenter') {
             steps {
                 script {
-                    def apkPath = sh(script: 'find ./app/build/outputs/apk/staging/debug/ -name "*.apk"', returnStdout: true).trim()
+                    // Tìm file APK trong thư mục dev/debug
+                    def apkPath = sh(script: 'find ./app/build/outputs/apk/dev/debug/ -name "*.apk"', returnStdout: true).trim()
 
                     if (apkPath) {
-                        sh '''
+                        echo "APK path: ${apkPath}"  // Kiểm tra đường dẫn APK
+                        sh """
                             appcenter distribute release \
                             --app huy.mobcontact-gmail.com/FSquare-Android-Application \
                             --group "Testers" \
                             --file ${apkPath} \
                             --token $APP_CENTER_API_TOKEN
-                        '''
+                        """
                     } else {
                         error "APK not found!"
                     }
