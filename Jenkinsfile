@@ -7,36 +7,37 @@ pipeline {
         ANDROID_KEYSTORE = credentials('ANDROID_KEYSTORE')  // Keystore file
         KEYSTORE_PASSWORD = credentials('KEYSTORE_PASSWORD')  // Mật khẩu của keystore
         KEY_ALIAS = credentials('KEY_ALIAS')  // Alias của key
-        KEY_PASSWORD = credentials('KEY_PASSWORD')  // Mật khẩu của key a
+        KEY_PASSWORD = credentials('KEY_PASSWORD')  // Mật khẩu của key alias
     }
 
-      stage('Build') {
-             steps {
-                    // Lưu file keystore tạm thời để sử dụng trong quá trình build
-                    sh '''
-                        mkdir -p $WORKSPACE/keystore
-                        cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
-                    '''
+    stages { // Thêm khối stages ở đây
+        stage('Build') {
+            steps {
+                // Lưu file keystore tạm thời để sử dụng trong quá trình build
+                sh '''
+                    mkdir -p $WORKSPACE/keystore
+                    cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
+                '''
 
-                    // Build APK với Gradle và sử dụng keystore để ký
-                    sh '''
-                        ./gradlew clean assembleRelease \
-                        -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
-                        -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
-                        -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
-                        -Pandroid.injected.signing.key.password=$KEY_PASSWORD
-                    '''
-                }
+                // Build APK với Gradle và sử dụng keystore để ký
+                sh '''
+                    ./gradlew clean assembleRelease \
+                    -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
+                    -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
+                    -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
+                    -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+                '''
             }
+        }
 
         stage('Upload to AppCenter') {
             steps {
                 // Upload APK đã build lên AppCenter với AppCenter CLI
                 sh '''
                     appcenter distribute release \
-                    --app huy.mobcontact-gmail.com/FSquare-Android-Application
+                    --app huy.mobcontact-gmail.com/FSquare-Android-Application \
                     --group "Testers" \
-                    --file ./app/build/outputs/apk/release/app-release.apk
+                    --file ./app/build/outputs/apk/release/app-release.apk \
                     --token $APP_CENTER_API_TOKEN
                 '''
             }
