@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "/opt/homebrew/bin:$PATH"
         APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
         ANDROID_KEYSTORE = credentials('ANDROID_KEYSTORE')  // Keystore file
         KEYSTORE_PASSWORD = credentials('KEYSTORE_PASSWORD')  // Mật khẩu của keystore
