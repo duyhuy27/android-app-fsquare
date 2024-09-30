@@ -24,7 +24,6 @@ pipeline {
                     mkdir -p $WORKSPACE/keystore
                     cp $ANDROID_KEYSTORE $WORKSPACE/keystore/Android.jks
                 '''
-
                 sh '''
                     ./gradlew clean assembleRelease \
                     -Pandroid.injected.signing.store.file=$WORKSPACE/keystore/Android.jks \
@@ -50,7 +49,7 @@ pipeline {
 
     post {
         always {
-            node { cleanWs() }
+            cleanWs()  // Không cần node ở đây
         }
         success {
             echo 'Build and upload to AppCenter succeeded!'
