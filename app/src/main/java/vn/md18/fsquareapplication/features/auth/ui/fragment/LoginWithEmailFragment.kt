@@ -1,17 +1,14 @@
-package vn.md18.fsquareapplication
+package vn.md18.fsquareapplication.features.auth.ui.fragment
 
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentLoginWithEmailBinding
-import vn.md18.fsquareapplication.databinding.FragmentSignUpBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 
 class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthViewModel>() {

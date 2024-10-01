@@ -1,21 +1,15 @@
-package vn.md18.fsquareapplication
+package vn.md18.fsquareapplication.features.auth.ui.fragment
 
-import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
-import vn.md18.fsquareapplication.databinding.ActivitySignUpBinding
 import vn.md18.fsquareapplication.databinding.FragmentLoadingBinding
-import vn.md18.fsquareapplication.databinding.FragmentLoginBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import javax.inject.Inject

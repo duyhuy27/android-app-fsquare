@@ -1,4 +1,4 @@
-package vn.md18.fsquareapplication
+package vn.md18.fsquareapplication.features.auth.ui.fragment
 
 import android.text.Editable
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import vn.md18.fsquareapplication.databinding.FragmentOtpBinding
 import com.mukesh.OtpView
 import dagger.hilt.android.AndroidEntryPoint
+import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel

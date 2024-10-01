@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="vn.md18.fsquareapplication.SplashFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
-        android:name="vn.md18.fsquareapplication.LoadingFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.LoadingFragment"
         android:label="fragment_loading"
         tools:layout="@layout/fragment_loading" >
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="vn.md18.fsquareapplication.LoginFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginWithEmailFragment"
-        android:name="vn.md18.fsquareapplication.LoginWithEmailFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.LoginWithEmailFragment"
         android:label="fragment_login_with_email"
         tools:layout="@layout/fragment_login_with_email" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="vn.md18.fsquareapplication.SignUpFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpFragment"
-        android:name="vn.md18.fsquareapplication.OtpFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.OtpFragment"
         android:label="fragment_otp"
         tools:layout="@layout/fragment_otp" />
 
