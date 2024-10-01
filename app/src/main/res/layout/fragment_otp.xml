@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OtpFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <com.mukesh.OtpView
+            android:id="@+id/edtOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_22"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:itemBackground="@color/transparent"
+            android:orientation="horizontal"
+            android:padding="@dimen/size_8"
+            android:textColor="@color/grey_dark_text"
+            app:itemCount="4"
+            app:itemRadius="@dimen/text_size_10"
+            app:itemSpacing="@dimen/size_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_timer"
+            app:lineColor="@color/gray_3"
+            app:lineWidth="1.5dp"
+
+            app:viewType="rectangle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnVerify"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_50"
+            style="@style/ButtonBlue"
+            android:layout_margin="@dimen/size_10"
+            android:text="Next"/>
+
+    </LinearLayout>
+
+</FrameLayout>
