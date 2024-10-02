@@ -10,7 +10,7 @@ sealed class DataState<out R> {
     /**
      * Error State
      */
-    data class Error(val exception: Exception) : DataState<Nothing>()
+    data class Error(val exception: Throwable) : DataState<Nothing>()
 
     /**
      * Loading State
