@@ -60,7 +60,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             if (isValidOtp(otp)) {
                 verifyOtp(otp, email, type)
             } else {
-                activity?.showCustomToast(R.string.err_otp.toString(), Constant.ToastStatus.FAILURE)
+                activity?.showCustomToast(getString(R.string.err_otp), Constant.ToastStatus.FAILURE)
             }
         }
 
@@ -76,7 +76,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             verifyState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        activity?.showCustomToast(R.string.err_verify.toString(), Constant.ToastStatus.FAILURE)
+                        activity?.showCustomToast(getString(R.string.err_verify), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
                     }
@@ -93,7 +93,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             loginState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        activity?.showCustomToast(R.string.err_otp.toString(), Constant.ToastStatus.FAILURE)
+                        activity?.showCustomToast(getString(R.string.err_verify), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 
@@ -114,7 +114,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                     DataState.Loading -> {
                     }
                     is DataState.Success -> {
-                        activity?.showCustomToast(R.string.resend_otp_success.toString(), Constant.ToastStatus.SUCCESS)
+                        activity?.showCustomToast(getString(R.string.resend_otp_success), Constant.ToastStatus.SUCCESS)
                         timeLeftInMillis = 60000
                         startCountDown()
                     }

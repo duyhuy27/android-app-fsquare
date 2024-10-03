@@ -36,7 +36,7 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
             if (isValidEmail(email)) {
                 login(email)
             } else {
-                activity?.showCustomToast(R.string.err_validate_email.toString(), Constant.ToastStatus.FAILURE)
+                activity?.showCustomToast(getString(R.string.err_validate_email), Constant.ToastStatus.FAILURE)
             }
         }
     }
@@ -47,7 +47,7 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
                 data ->
                 when(data){
                     is DataState.Error -> {
-                        activity?.showCustomToast(R.string.err_login.toString(), Constant.ToastStatus.FAILURE)
+                        activity?.showCustomToast(getString(R.string.err_login), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 

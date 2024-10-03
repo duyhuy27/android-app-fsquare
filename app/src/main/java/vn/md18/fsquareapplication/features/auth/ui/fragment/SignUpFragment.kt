@@ -46,7 +46,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
                 data ->
                 when(data){
                     is DataState.Error -> {
-                        activity?.showCustomToast(R.string.err_signup.toString(), Constant.ToastStatus.FAILURE)
+                        activity?.showCustomToast(getString(R.string.err_signup), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 
