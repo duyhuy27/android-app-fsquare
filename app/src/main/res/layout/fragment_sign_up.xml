@@ -17,12 +17,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <vn.md18.fsquareapplication.utils.view.CustomToolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                app:titleToolbar=""
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                app:titleToolbar="" />
 
             <TextView
                 android:layout_width="match_parent"

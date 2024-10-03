@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
-            android:text="Login"
+            android:text="@string/login"
             android:textColor="#040207"
             android:textSize="40dp"
             android:textStyle="bold" />
@@ -90,14 +90,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don’t have an account?"
+                android:text="@string/Do_not_have_an_account"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/btn_Singup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign up"
+                android:text="@string/sinup"
                 android:textColor="@color/primary"
                 android:textSize="14dp" />
         </LinearLayout>
