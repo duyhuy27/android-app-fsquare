@@ -1,8 +1,10 @@
 package vn.md18.fsquareapplication.core.base
 
+import androidx.core.app.NotificationCompat.MessagingStyle.Message
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
+import vn.md18.fsquareapplication.data.model.ErrorResponse
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
 import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
@@ -16,6 +18,8 @@ abstract class BaseViewModel : ViewModel() {
 
     open val errorState = MutableLiveData<String>()
     open val loadingState = MutableLiveData<Boolean>()
+    open val errorMessage = MutableLiveData<Int>()
+
 
 
     fun setLoading(isLoading: Boolean) {
@@ -38,5 +42,28 @@ abstract class BaseViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+    }
+
+    open  fun setError(errorResponse: ErrorResponse) {
+        val errorMessage = errorResponse.message
+
+        when(errorResponse.status) {
+            "Conflict" -> {
+
+            }
+            "Internal Server Error" -> {
+
+            }
+        }
+
+
+    }
+
+    fun setErrorString(errorMessage: String) {
+        errorState.value = errorMessage
+    }
+
+    fun setErrorStringId(errorMessageId: Int) {
+        errorMessage.value = errorMessageId
     }
 }

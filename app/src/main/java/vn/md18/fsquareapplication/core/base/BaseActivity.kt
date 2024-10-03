@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.core.base
 
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -27,7 +28,9 @@ import vn.md18.fsquareapplication.databinding.DialogLoadingViewBinding
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
 import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
+import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.getColorCompat
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import java.lang.reflect.ParameterizedType
 import java.util.*
 import javax.inject.Inject
@@ -106,6 +109,8 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         super.onCreate(savedInstanceState)
         binding = inflateLayout(layoutInflater)
         setContentView(binding.root)
+
+
         createLoadingDialog()
         setUpViewModel()
         onViewLoaded()
@@ -124,6 +129,11 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         viewModel.loadingState.observe(this) {
             onLoading(it)
         }
+        viewModel.errorMessage.observe(this@BaseActivity) {
+            it?.let {
+                onErrorMessage(it)
+            }
+        }
     }
 
 
@@ -136,6 +146,12 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
             dialogLoadingViewBinding =
                 DialogLoadingViewBinding.inflate(LayoutInflater.from(this@BaseActivity))
             setContentView(dialogLoadingViewBinding.root)
+        }
+    }
+
+    private fun onErrorMessage(errorId: Int?) {
+        errorId?.let {
+            showCustomToast(getString(it), Constant.ToastStatus.FAILURE)
         }
     }
 
@@ -350,7 +366,7 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
      */
     override fun onError(error: Any) {
         onLoading(false)
-        Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show()
+        showCustomToast(error.toString(), Constant.ToastStatus.FAILURE)
     }
 
     /**
