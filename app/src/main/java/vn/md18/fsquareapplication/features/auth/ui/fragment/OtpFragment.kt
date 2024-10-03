@@ -99,7 +99,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
 
                     }
                     is DataState.Success -> {
-                        activity?.showCustomToast(R.string.resend_otp_success.toString(), Constant.ToastStatus.SUCCESS)
+                        activity?.showCustomToast(getString(R.string.resend_otp_success), Constant.ToastStatus.SUCCESS)
                         timeLeftInMillis = 60000
                         startCountDown()
                     }
@@ -109,7 +109,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             signUpState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        activity?.showCustomToast(R.string.err_otp.toString(), Constant.ToastStatus.FAILURE)
+                        activity?.showCustomToast(getString(R.string.err_otp), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
                     }
