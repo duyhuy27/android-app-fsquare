@@ -41,15 +41,19 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     }
 
     private fun checkInternetAndNavigate() {
-        networkExtensions.checkInternet { isConnected ->
-            if (isConnected) {
-                lifecycleScope.launch {
-                    delay(3000)
-                    navigateToLoadingFragment()
-                }
-            } else {
-                Log.e("phuczk", "no internet connection")
-            }
+//        networkExtensions.checkInternet { isConnected ->
+//            if (isConnected) {
+//                lifecycleScope.launch {
+//                    delay(3000)
+//                    navigateToLoadingFragment()
+//                }
+//            } else {
+//                Log.e("phuczk", "no internet connection")
+//            }
+//        }
+        lifecycleScope.launch {
+            delay(3000)
+            navigateToLoadingFragment()
         }
     }
 

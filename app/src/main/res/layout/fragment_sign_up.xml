@@ -51,11 +51,11 @@
                 android:textColor="@color/black_neutral"
                 android:layout_marginBottom="@dimen/size_5"/>
 
-            <EditText
-                android:id="@+id/edt_inout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="emal"/>
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+            android:id="@+id/edt_inout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
             <CheckBox
                 android:layout_width="match_parent"

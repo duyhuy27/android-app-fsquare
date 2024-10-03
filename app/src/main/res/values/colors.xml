@@ -75,6 +75,7 @@
     <color name="white_alpha_30">#4DFFFFFF</color>
     <color name="gray_50_percent">#809EB6C3</color>
     <color name="grey_light">#9EB6C3</color>
+    <color name="grey_light_">#F8F9FB</color>
     <color name="grey_dark_alpha_50">#80E6E9ED</color>
     <color name="grey_dark_alpha_30">#4DE6E9ED</color>
 
