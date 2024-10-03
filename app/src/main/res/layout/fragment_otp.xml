@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
         >
         <vn.md18.fsquareapplication.utils.view.CustomToolbar
             android:layout_width="match_parent"
@@ -20,6 +19,7 @@
             app:titleToolbar=""
             android:layout_alignParentBottom="true"/>
         <TextView
+            android:id="@+id/titleOtpFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create New Account"
@@ -38,13 +38,17 @@
             android:textColor="#676767"
             android:layout_marginLeft="20dp"
             />
+
         <com.mukesh.OtpView
             android:id="@+id/edtOTP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/size_20"
             android:imeOptions="actionNext"
-            android:inputType="phone"
+            android:inputType="number"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:itemBackground="@color/transparent"
             android:orientation="horizontal"
             android:padding="@dimen/size_10"
@@ -52,13 +56,9 @@
             app:itemCount="4"
             app:itemRadius="@dimen/text_size_15"
             app:itemSpacing="@dimen/size_15"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_timer"
             app:lineColor="@color/gray_3"
             app:lineWidth="1.5dp"
-            app:viewType="rectangle"
-            android:layout_gravity="center"/>
+            app:viewType="rectangle" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVerify"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/size_50"
             android:text="Submit"
             android:background="@drawable/bg_button_corner_30_primary"

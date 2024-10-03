@@ -1,7 +1,10 @@
 package vn.md18.fsquareapplication.features.auth.ui.fragment
 
 import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import vn.md18.fsquareapplication.databinding.FragmentOtpBinding
@@ -23,26 +26,44 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentOtpBinding = FragmentOtpBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String {
-        TODO("Not yet implemented")
+        return "OTPFragment"
     }
 
     override fun onViewLoaded() {
+        Log.d("auth", "da vao man auth otp")
         arguments?.let {
             type = it.getString("type", "login")
             email = it.getString("email", "")
+        }
+
+        if(type.equals("login")){
+            binding.titleOtpFragment.setText("Login")
         }
     }
 
     override fun addViewListener() {
         val otpView = binding.edtOTP
+        // Thêm listener để theo dõi sự thay đổi OTP
+        otpView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.d("OTP", "OTP nhập vào: $s")
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         binding.btnVerify.setOnClickListener {
             val otp = getOtpFromView(otpView).toString()
             if (isValidOtp(otp)) {
                 verifyOtp(otp, email, type)
             } else {
-
+                // Hiển thị thông báo lỗi nếu OTP không hợp lệ
+                Toast.makeText(requireContext(), "OTP không hợp lệ. Vui lòng nhập lại.", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     override fun addDataObserver() {
@@ -50,8 +71,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             verifyState.observe(this@OtpFragment) {
                 data ->
                 when(data){
-                    is DataState.Error -> TODO()
-                    DataState.Loading -> TODO()
+                    is DataState.Error -> {
+
+                    }
+                    DataState.Loading -> {
+
+                    }
                     is DataState.Success -> {
                         navigateToSuccessfullyFragment()
                     }
@@ -69,7 +94,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     private fun navigateToSuccessfullyFragment(){
-        findNavController().navigate(R.id.action_signUpFragment_to_otpFragment)
+        findNavController().navigate(R.id.action_otpFragment_to_successfullyCreateAccountFragment)
     }
 
     private fun isValidOtp(otp: String): Boolean {

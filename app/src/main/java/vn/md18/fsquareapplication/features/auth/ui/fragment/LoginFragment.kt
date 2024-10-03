@@ -1,37 +1,40 @@
 package vn.md18.fsquareapplication.features.auth.ui.fragment
 
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentLoginBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding, AuthViewModel>() {
     override val viewModel: AuthViewModel by viewModels()
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentLoginBinding = FragmentLoginBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String {
-        TODO("Not yet implemented")
+        return "LoginFragment"
     }
 
     override fun onViewLoaded() {
-        TODO("Not yet implemented")
+        Log.d("auth", "da vao man auth login")
     }
 
     override fun addViewListener() {
-        //        binding.btnSubmit.setOnClickListener {
-        //            navigateToLoginWithEmailFragment()
-        //        }
+                binding.btnLogin.setOnClickListener {
+                    navigateToLoginWithEmailFragment()
+                }
 
-        //        binding.signUpText.setOnClickListener {
-        //            navigateToSignUpFragment()
-        //        }
+                binding.btnSingup.setOnClickListener {
+                    navigateToSignUpFragment()
+                }
 
-        //        binding.btnGuestLogin.setOnClickListener {
-        //            navigateToHomeScreen()
-        //        }
+                binding.btnGuest.setOnClickListener {
+                    navigateToHomeScreen()
+                }
     }
 
     override fun addDataObserver() {
