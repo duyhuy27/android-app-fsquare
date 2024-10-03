@@ -3,12 +3,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SuccessfullyCreateAccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:titleToolbar=""
+            android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/succesfully"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_24"
+            android:text="@string/SuccessfullyCreate_an_account"
+            android:textColor="@color/black_neutral"
+            android:layout_marginTop="@dimen/size_36"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_semi_bold"/>
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_14"
+            android:text="@string/After_this_you_can_explore_our_services_and_enjoy_our_products_Have_fun_and_enjoy_it"
+            android:textColor="@color/neutral_50_"
+            android:layout_marginTop="@dimen/size_16"
+            android:layout_marginBottom="90dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/opensans_semi_bold"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Let_is_Explore"
+            android:layout_margin="15dp"
+            style="@style/ButtonApp"/>
+    </LinearLayout>
 
 </FrameLayout>
