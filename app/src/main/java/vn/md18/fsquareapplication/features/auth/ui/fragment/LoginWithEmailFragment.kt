@@ -28,11 +28,10 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
 
     override fun addViewListener() {
         binding.btnSubmit.setOnClickListener {
-            val email = binding.edtInout.text.toString().trim()
+            val email = binding.edtInout.getText()
             if (isValidEmail(email)) {
                 login(email)
             } else {
-                binding.edtInout.error = "Vui lòng nhập email hợp lệ"
                 Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -43,10 +42,14 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
             loginState.observe(this@LoginWithEmailFragment) {
                 data ->
                 when(data){
-                    is DataState.Error -> TODO()
-                    DataState.Loading -> TODO()
+                    is DataState.Error -> {
+                        Toast.makeText(requireContext(), "Email chua duoc dang ky hoac khong ton tai", Toast.LENGTH_SHORT).show()
+                    }
+                    DataState.Loading -> {
+
+                    }
                     is DataState.Success -> {
-                        val email = binding.edtInout.text.toString()
+                        val email = binding.edtInout.getText()
                         navigateToVerifyOtpFragment("login", email)
                     }
                 }

@@ -29,11 +29,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
 
     override fun addViewListener() {
         binding.btnSubmit.setOnClickListener {
-            val email = binding.edtInout.text.toString().trim()
+            val email = binding.edtInout.getText()
             if (isValidEmail(email)) {
                 signUp(email)
             } else {
-                binding.edtInout.error = "Vui lòng nhập email hợp lệ"
                 Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -51,7 +50,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
 
                     }
                     is DataState.Success -> {
-                        val email = binding.edtInout.text.toString()
+                        val email = binding.edtInout.getText()
                         navigateToVerifyOtpFragment("signup", email)
                     }
                 }
