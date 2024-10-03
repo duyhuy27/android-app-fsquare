@@ -20,6 +20,8 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 
 @AndroidEntryPoint
 class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
@@ -67,7 +69,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             if (isValidOtp(otp)) {
                 verifyOtp(otp, email, type)
             } else {
-                Toast.makeText(requireContext(), R.string.err_otp.toString(), Toast.LENGTH_SHORT).show()
+                activity?.showCustomToast(R.string.err_otp.toString(), Constant.ToastStatus.FAILURE)
             }
         }
 
@@ -83,7 +85,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             verifyState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "OTP không đúng hoặc đã hết hạn", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.err_verify.toString(), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
                     }
@@ -100,13 +102,13 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             loginState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), R.string.err_otp, Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.err_otp.toString(), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 
                     }
                     is DataState.Success -> {
-                        Toast.makeText(requireContext(), R.string.resend_otp_success, Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.resend_otp_success.toString(), Constant.ToastStatus.SUCCESS)
                         timeLeftInMillis = 60000
                         startCountDown()
                     }
@@ -116,12 +118,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             signUpState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), R.string.err_otp, Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.err_otp.toString(), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
                     }
                     is DataState.Success -> {
-                        Toast.makeText(requireContext(), R.string.resend_otp_success, Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.resend_otp_success.toString(), Constant.ToastStatus.SUCCESS)
                         timeLeftInMillis = 60000
                         startCountDown()
                     }

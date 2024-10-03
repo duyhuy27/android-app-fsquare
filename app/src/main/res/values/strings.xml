@@ -35,6 +35,8 @@
     <string name="err_otp">OTP không hợp lệ. Vui lòng nhập lại.</string>
     <string name="cannot_resend_otp">Không thể gửi lại OTP</string>
     <string name="resend_otp_success">OTP đã được gửi lại.</string>
+    <string name="err_verify">OTP không đúng hoặc đã hết hạn</string>
+    <string name="err_validate_email">Email không hợp lệ. Vui lòng kiểm tra lại.</string>
 
 
 

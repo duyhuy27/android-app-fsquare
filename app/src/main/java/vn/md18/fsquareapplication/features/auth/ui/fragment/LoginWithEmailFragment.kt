@@ -36,7 +36,7 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
             if (isValidEmail(email)) {
                 login(email)
             } else {
-                Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
+                activity?.showCustomToast(R.string.err_validate_email.toString(), Constant.ToastStatus.FAILURE)
             }
         }
     }
