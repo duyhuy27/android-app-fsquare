@@ -11,6 +11,7 @@
     <string name="require_permission_location">Vui lòng cấp quyền truy cập vị trí cho ứng dụng</string>
     <string name="camera">camera</string>
     <string name="storage_new">bộ nhớ</string>
+    <string name="next">tiếp theo</string>
 
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
