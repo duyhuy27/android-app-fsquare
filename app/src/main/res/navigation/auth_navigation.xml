@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/successfullyCreateAccountFragment"
-        android:name="vn.md18.fsquareapplication.SuccessfullyCreateAccountFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.SuccessfullyCreateAccountFragment"
         android:label="fragment_successfully_create_account"
         tools:layout="@layout/fragment_successfully_create_account" />
 
