@@ -71,16 +71,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:text="@string/Send_code_reload_in"
                     android:textColor="#676767"
                     android:textSize="14dp" />
                 <TextView
-                    android:id="@+id/txttime"
+                    android:id="@+id/txtTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text=""
-                    android:textColor="#676767"
+                    android:textColor="@color/primary"
                     android:layout_marginLeft="180dp"
                     android:textSize="14dp" />
 
