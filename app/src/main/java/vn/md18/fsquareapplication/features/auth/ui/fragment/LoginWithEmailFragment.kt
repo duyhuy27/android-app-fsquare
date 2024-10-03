@@ -13,6 +13,10 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentLoginWithEmailBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import vn.md18.fsquareapplication.utils.extensions.showToast
+
 @AndroidEntryPoint
 class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthViewModel>() {
     override val viewModel: AuthViewModel by viewModels()
@@ -43,7 +47,7 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
                 data ->
                 when(data){
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Email chua duoc dang ky hoac khong ton tai", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.err_login.toString(), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 

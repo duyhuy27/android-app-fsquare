@@ -30,6 +30,11 @@
     <string name="Send_code_reload_in">Gửi mã tải lại</string>
     <string name="Submit">Nộp</string>
     <string name="resend">Gửi lại</string>
+    <string name="err_login">Email chưa được đăng ký hoặc không tồn tại</string>
+    <string name="err_signup">Email đã được đăng ký hoặc không tồn tại</string>
+    <string name="err_otp">OTP không hợp lệ. Vui lòng nhập lại.</string>
+    <string name="cannot_resend_otp">Không thể gửi lại OTP</string>
+    <string name="resend_otp_success">OTP đã được gửi lại.</string>
 
 
 

@@ -13,6 +13,8 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentSignUpBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
@@ -33,7 +35,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
             if (isValidEmail(email)) {
                 signUp(email)
             } else {
-                Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
+                activity?.showCustomToast("Email chưa được đăng ký hoặc không tồn tại", Constant.ToastStatus.FAILURE)
             }
         }
     }
@@ -44,7 +46,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
                 data ->
                 when(data){
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Email duoc dang ky hoac khong ton tai", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(R.string.err_signup.toString(), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 

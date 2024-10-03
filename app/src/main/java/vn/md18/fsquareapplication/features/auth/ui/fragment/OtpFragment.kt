@@ -28,7 +28,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     private lateinit var email: String
 
     private var countDownTimer: CountDownTimer? = null
-    private var timeLeftInMillis: Long = 60000 // 60 giây
+    private var timeLeftInMillis: Long = 60000
 
     override val viewModel: AuthViewModel by viewModels()
 
@@ -67,7 +67,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             if (isValidOtp(otp)) {
                 verifyOtp(otp, email, type)
             } else {
-                Toast.makeText(requireContext(), "OTP không hợp lệ. Vui lòng nhập lại.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.err_otp.toString(), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -86,7 +86,6 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                         Toast.makeText(requireContext(), "OTP không đúng hoặc đã hết hạn", Toast.LENGTH_SHORT).show()
                     }
                     DataState.Loading -> {
-                        // Có thể hiển thị loading nếu cần
                     }
                     is DataState.Success -> {
                         if(type.equals("signup", ignoreCase = true)){
@@ -101,15 +100,15 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             loginState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Không thể gửi lại OTP", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), R.string.err_otp, Toast.LENGTH_SHORT).show()
                     }
                     DataState.Loading -> {
-                        // Có thể hiển thị loading nếu cần
+
                     }
                     is DataState.Success -> {
-                        Toast.makeText(requireContext(), "OTP đã được gửi lại.", Toast.LENGTH_SHORT).show()
-                        timeLeftInMillis = 60000 // Đặt lại thời gian đếm ngược
-                        startCountDown() // Chỉ gọi ở đây
+                        Toast.makeText(requireContext(), R.string.resend_otp_success, Toast.LENGTH_SHORT).show()
+                        timeLeftInMillis = 60000
+                        startCountDown()
                     }
                 }
             }
@@ -117,15 +116,14 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             signUpState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Không thể gửi lại OTP", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), R.string.err_otp, Toast.LENGTH_SHORT).show()
                     }
                     DataState.Loading -> {
-                        // Có thể hiển thị loading nếu cần
                     }
                     is DataState.Success -> {
-                        Toast.makeText(requireContext(), "OTP đã được gửi lại.", Toast.LENGTH_SHORT).show()
-                        timeLeftInMillis = 60000 // Đặt lại thời gian đếm ngược
-                        startCountDown() // Chỉ gọi ở đây
+                        Toast.makeText(requireContext(), R.string.resend_otp_success, Toast.LENGTH_SHORT).show()
+                        timeLeftInMillis = 60000
+                        startCountDown()
                     }
                 }
             }
@@ -155,7 +153,6 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     private fun startCountDown() {
-        // Hủy bỏ timer hiện tại nếu có
         countDownTimer?.cancel()
 
         binding.txtTime.tag = "countdown"
@@ -169,7 +166,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
 
             override fun onFinish() {
                 binding.txtTime.text = getString(R.string.resend)
-                binding.txtTime.tag = "resend" // Đặt tag để biết có thể resend
+                binding.txtTime.tag = "resend"
             }
         }.start()
     }
