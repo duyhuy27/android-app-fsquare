@@ -27,7 +27,7 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "da vao man auth login with email")
+
     }
 
     override fun addViewListener() {
@@ -54,7 +54,7 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
                     }
                     is DataState.Success -> {
                         val email = binding.edtInout.getText()
-                        navigateToVerifyOtpFragment("login", email)
+                        navigateToVerifyOtpFragment(Constant.KEY_LOGIN, email)
                     }
                 }
             }
@@ -67,8 +67,8 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
 
     private fun navigateToVerifyOtpFragment(type: String, email: String){
         val bundle = Bundle().apply {
-            putString("type", type)
-            putString("email", email)
+            putString(Constant.KEY_TYPE, type)
+            putString(Constant.KEY_EMAIL, email)
         }
         findNavController().navigate(R.id.action_loginWithEmailFragment_to_otpFragment, bundle)
     }

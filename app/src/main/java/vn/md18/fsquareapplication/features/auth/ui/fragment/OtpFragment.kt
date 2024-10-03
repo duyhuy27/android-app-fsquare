@@ -41,13 +41,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "Đã vào màn auth OTP")
         arguments?.let {
-            type = it.getString("type", "")
-            email = it.getString("email", "")
+            type = it.getString(Constant.KEY_TYPE, "")
+            email = it.getString(Constant.KEY_EMAIL, "")
         }
 
-        if (type.equals("login", ignoreCase = true)) {
+        if (type.equals(Constant.KEY_LOGIN, ignoreCase = true)) {
             binding.titleOtpFragment.text = getString(R.string.login)
         }
         startCountDown()
@@ -55,14 +54,6 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
 
     override fun addViewListener() {
         val otpView = binding.edtOTP
-        otpView.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.d("OTP", "OTP nhập vào: $s")
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         binding.btnVerify.setOnClickListener {
             val otp = getOtpFromView(otpView).toString()
@@ -90,7 +81,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                     DataState.Loading -> {
                     }
                     is DataState.Success -> {
-                        if(type.equals("signup", ignoreCase = true)){
+                        if(type.equals(Constant.KEY_SIGNUP, ignoreCase = true)){
                             navigateToSuccessfullyFragment()
                         } else {
                             navigateToHomePage()
@@ -184,7 +175,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     private fun resendOtp() {
-        if(type.equals("login", ignoreCase = true)){
+        if(type.equals(Constant.KEY_LOGIN, ignoreCase = true)){
             viewModel.login(email)
         } else {
             viewModel.signUp(email)

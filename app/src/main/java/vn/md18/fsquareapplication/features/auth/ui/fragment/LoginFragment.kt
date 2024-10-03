@@ -22,7 +22,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, AuthViewModel>() {
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "da vao man auth login")
     }
 
     override fun addViewListener() {
