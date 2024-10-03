@@ -1,40 +1,41 @@
 package vn.md18.fsquareapplication.features.auth.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentLoginWithEmailBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
-
+@AndroidEntryPoint
 class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthViewModel>() {
     override val viewModel: AuthViewModel by viewModels()
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentLoginWithEmailBinding = FragmentLoginWithEmailBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String {
-        TODO("Not yet implemented")
+        return "LoginWithEmailFragment"
     }
 
     override fun onViewLoaded() {
-        TODO("Not yet implemented")
+        Log.d("auth", "da vao man auth login with email")
     }
 
     override fun addViewListener() {
-//        binding.btnSubmit.setOnClickListener {
-//            val email = binding.edEmail.text.toString().trim()
-//            if (isValidEmail(email)) {
-//                // Email hợp lệ, tiến hành đăng ký
-//                login(email)
-//            } else {
-//                // Email không hợp lệ, hiển thị thông báo lỗi
-//                binding.edEmail.error = "Vui lòng nhập email hợp lệ"
-//                Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        binding.btnSubmit.setOnClickListener {
+            val email = binding.edtInout.text.toString().trim()
+            if (isValidEmail(email)) {
+                login(email)
+            } else {
+                binding.edtInout.error = "Vui lòng nhập email hợp lệ"
+                Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun addDataObserver() {
@@ -45,8 +46,8 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
                     is DataState.Error -> TODO()
                     DataState.Loading -> TODO()
                     is DataState.Success -> {
-//                        val email = binding.edEmail.text.toString()
-//                        navigateToVerifyOtpFragment("login", email)
+                        val email = binding.edtInout.text.toString()
+                        navigateToVerifyOtpFragment("login", email)
                     }
                 }
             }

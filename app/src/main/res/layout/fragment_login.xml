@@ -37,7 +37,8 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
-            style="@style/ButtonBlue"
+            style="@style/ButtonApp"
+            android:text="@string/sign_in_with_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp" />
@@ -73,9 +74,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_guest"
-            style="@style/ButtonBlue"
+            style="@style/ButtonGuest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/guest"
             android:layout_margin="20dp" />
 
         <LinearLayout

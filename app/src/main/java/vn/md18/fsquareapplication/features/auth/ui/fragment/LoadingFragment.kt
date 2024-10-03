@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import vn.md18.fsquareapplication.R
@@ -13,7 +14,7 @@ import vn.md18.fsquareapplication.databinding.FragmentLoadingBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() {
 
     @Inject
@@ -23,19 +24,20 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentLoadingBinding = FragmentLoadingBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String {
-        TODO("Not yet implemented")
+        return "LoadingFragment"
     }
 
     override fun onViewLoaded() {
+        Log.d("auth", "da vao man auth loading")
         checkInternetAndNavigate()
     }
 
     override fun addViewListener() {
-        TODO("Not yet implemented")
+
     }
 
     override fun addDataObserver() {
-        TODO("Not yet implemented")
+
     }
 
     private fun checkInternetAndNavigate() {

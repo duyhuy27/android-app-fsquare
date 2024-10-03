@@ -53,19 +53,15 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="r">
         <activity
-            android:name=".features.auth.ui.AuthActivity"
+            android:name=".features.main.ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".features.auth.ui.SignUpActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".features.main.ui.MainActivity"
+            android:name=".features.auth.ui.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

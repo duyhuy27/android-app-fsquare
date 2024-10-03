@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".features.auth.ui.fragment.SplashFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_splash"/>
+    </LinearLayout>
 
 </FrameLayout>

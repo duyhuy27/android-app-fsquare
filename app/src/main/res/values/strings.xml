@@ -11,7 +11,15 @@
     <string name="require_permission_location">Vui lòng cấp quyền truy cập vị trí cho ứng dụng</string>
     <string name="camera">camera</string>
     <string name="storage_new">bộ nhớ</string>
+    <string name="login">Đăng nhập</string>
+    <string name="create_your_account">Tạo tài khoản của bạn</string>
+    <string name="input_your_account">Nhập tài khoản của bạn</string>
+    <string name="your_account">Tài khoản của bạn</string>
+    <string name="remember_me">Lưu tài khoản của tôi</string>
+    <string name="policy">Tôi muốn nhận thông tin tiếp thị và chính sách thông tin từ FSqare.</string>
     <string name="next">tiếp theo</string>
+    <string name="guest">Khách</string>
+    <string name="sign_in_with_email">Đăng nhập bằng Email</string>
 
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
