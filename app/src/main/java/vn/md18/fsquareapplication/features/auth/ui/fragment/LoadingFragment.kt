@@ -28,7 +28,6 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "da vao man auth loading")
         checkInternetAndNavigate()
     }
 

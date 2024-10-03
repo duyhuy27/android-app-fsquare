@@ -20,6 +20,8 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 
 @AndroidEntryPoint
 class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
@@ -28,7 +30,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     private lateinit var email: String
 
     private var countDownTimer: CountDownTimer? = null
-    private var timeLeftInMillis: Long = 60000 // 60 giây
+    private var timeLeftInMillis: Long = 60000
 
     override val viewModel: AuthViewModel by viewModels()
 
@@ -39,13 +41,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "Đã vào màn auth OTP")
         arguments?.let {
-            type = it.getString("type", "")
-            email = it.getString("email", "")
+            type = it.getString(Constant.KEY_TYPE, "")
+            email = it.getString(Constant.KEY_EMAIL, "")
         }
 
-        if (type.equals("login", ignoreCase = true)) {
+        if (type.equals(Constant.KEY_LOGIN, ignoreCase = true)) {
             binding.titleOtpFragment.text = getString(R.string.login)
         }
         startCountDown()
@@ -53,21 +54,13 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
 
     override fun addViewListener() {
         val otpView = binding.edtOTP
-        otpView.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.d("OTP", "OTP nhập vào: $s")
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
 
         binding.btnVerify.setOnClickListener {
             val otp = getOtpFromView(otpView).toString()
             if (isValidOtp(otp)) {
                 verifyOtp(otp, email, type)
             } else {
-                Toast.makeText(requireContext(), "OTP không hợp lệ. Vui lòng nhập lại.", Toast.LENGTH_SHORT).show()
+                activity?.showCustomToast(getString(R.string.err_otp), Constant.ToastStatus.FAILURE)
             }
         }
 
@@ -83,13 +76,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             verifyState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "OTP không đúng hoặc đã hết hạn", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(getString(R.string.err_verify), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
-                        // Có thể hiển thị loading nếu cần
                     }
                     is DataState.Success -> {
-                        if(type.equals("signup", ignoreCase = true)){
+                        if(type.equals(Constant.KEY_SIGNUP, ignoreCase = true)){
                             navigateToSuccessfullyFragment()
                         } else {
                             navigateToHomePage()
@@ -101,15 +93,15 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             loginState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Không thể gửi lại OTP", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(getString(R.string.err_verify), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
-                        // Có thể hiển thị loading nếu cần
+
                     }
                     is DataState.Success -> {
-                        Toast.makeText(requireContext(), "OTP đã được gửi lại.", Toast.LENGTH_SHORT).show()
-                        timeLeftInMillis = 60000 // Đặt lại thời gian đếm ngược
-                        startCountDown() // Chỉ gọi ở đây
+                        activity?.showCustomToast(getString(R.string.resend_otp_success), Constant.ToastStatus.SUCCESS)
+                        timeLeftInMillis = 60000
+                        startCountDown()
                     }
                 }
             }
@@ -117,15 +109,14 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
             signUpState.observe(this@OtpFragment) { data ->
                 when (data) {
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Không thể gửi lại OTP", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(getString(R.string.err_otp), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
-                        // Có thể hiển thị loading nếu cần
                     }
                     is DataState.Success -> {
-                        Toast.makeText(requireContext(), "OTP đã được gửi lại.", Toast.LENGTH_SHORT).show()
-                        timeLeftInMillis = 60000 // Đặt lại thời gian đếm ngược
-                        startCountDown() // Chỉ gọi ở đây
+                        activity?.showCustomToast(getString(R.string.resend_otp_success), Constant.ToastStatus.SUCCESS)
+                        timeLeftInMillis = 60000
+                        startCountDown()
                     }
                 }
             }
@@ -155,7 +146,6 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     private fun startCountDown() {
-        // Hủy bỏ timer hiện tại nếu có
         countDownTimer?.cancel()
 
         binding.txtTime.tag = "countdown"
@@ -169,7 +159,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
 
             override fun onFinish() {
                 binding.txtTime.text = getString(R.string.resend)
-                binding.txtTime.tag = "resend" // Đặt tag để biết có thể resend
+                binding.txtTime.tag = "resend"
             }
         }.start()
     }
@@ -185,7 +175,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     private fun resendOtp() {
-        if(type.equals("login", ignoreCase = true)){
+        if(type.equals(Constant.KEY_LOGIN, ignoreCase = true)){
             viewModel.login(email)
         } else {
             viewModel.signUp(email)

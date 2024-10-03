@@ -29,7 +29,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, AuthViewModel>() {
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "da vao man auth splash")
         checkInternetAndNavigate()
     }
 

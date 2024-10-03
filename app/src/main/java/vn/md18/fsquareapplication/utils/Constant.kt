@@ -1,6 +1,10 @@
 package vn.md18.fsquareapplication.utils
 
 object Constant {
+    const val KEY_LOGIN = "login"
+    const val KEY_SIGNUP = "signup"
+    const val KEY_TYPE = "type"
+    const val KEY_EMAIL = "email"
     const val KEY_UID = "KEY_UID"
     const val KEY_USER_NAME = "KEY_USER_NAME"
     const val KEY_INTRO = "KEY_INTRO"

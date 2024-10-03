@@ -13,6 +13,8 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentSignUpBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
@@ -24,7 +26,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
     }
 
     override fun onViewLoaded() {
-        Log.d("auth", "da vao man auth signup")
+
     }
 
     override fun addViewListener() {
@@ -33,7 +35,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
             if (isValidEmail(email)) {
                 signUp(email)
             } else {
-                Toast.makeText(requireContext(), "Email không hợp lệ. Vui lòng kiểm tra lại.", Toast.LENGTH_SHORT).show()
+                activity?.showCustomToast(R.string.err_validate_email.toString(), Constant.ToastStatus.FAILURE)
             }
         }
     }
@@ -44,14 +46,14 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
                 data ->
                 when(data){
                     is DataState.Error -> {
-                        Toast.makeText(requireContext(), "Email duoc dang ky hoac khong ton tai", Toast.LENGTH_SHORT).show()
+                        activity?.showCustomToast(getString(R.string.err_signup), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
 
                     }
                     is DataState.Success -> {
                         val email = binding.edtInout.getText()
-                        navigateToVerifyOtpFragment("signup", email)
+                        navigateToVerifyOtpFragment(Constant.KEY_SIGNUP, email)
                     }
                 }
             }
@@ -64,8 +66,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
 
     private fun navigateToVerifyOtpFragment(type: String, email: String){
         val bundle = Bundle().apply {
-            putString("type", type)
-            putString("email", email)
+            putString(Constant.KEY_TYPE, type)
+            putString(Constant.KEY_EMAIL, email)
         }
         findNavController().navigate(R.id.action_signUpFragment_to_otpFragment, bundle)
     }
