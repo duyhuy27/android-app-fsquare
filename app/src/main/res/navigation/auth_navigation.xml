@@ -58,6 +58,15 @@
         android:id="@+id/otpFragment"
         android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.OtpFragment"
         android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp" />
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_otpFragment_to_successfullyCreateAccountFragment"
+            app:destination="@id/successfullyCreateAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successfullyCreateAccountFragment"
+        android:name="vn.md18.fsquareapplication.features.auth.ui.fragment.SuccessfullyCreateAccountFragment"
+        android:label="fragment_successfully_create_account"
+        tools:layout="@layout/fragment_successfully_create_account" />
 
 </navigation>

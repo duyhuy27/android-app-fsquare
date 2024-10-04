@@ -3,12 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.auth.ui.fragment.SignUpFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            app:titleToolbar="" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/size_16">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_24"
+                android:text="@string/create_your_account"
+                android:textColor="@color/black_neutral"
+                android:layout_marginTop="@dimen/size_36"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/opensans_semi_bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16"
+                android:text="@string/input_your_account"
+                android:textColor="@color/neutral_50_"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="@dimen/size_30"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/your_account"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+            android:id="@+id/edt_inout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/primary"
+                android:layout_marginTop="@dimen/permission_dp_10"
+                android:text="@string/policy"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+    </LinearLayout>
 
 </FrameLayout>

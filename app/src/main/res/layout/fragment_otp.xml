@@ -12,36 +12,94 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
-        <com.mukesh.OtpView
-            android:id="@+id/edtOTP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_22"
-            android:imeOptions="actionNext"
-            android:inputType="phone"
-            android:itemBackground="@color/transparent"
-            android:orientation="horizontal"
-            android:padding="@dimen/size_8"
-            android:textColor="@color/grey_dark_text"
-            app:itemCount="4"
-            app:itemRadius="@dimen/text_size_10"
-            app:itemSpacing="@dimen/size_10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_timer"
-            app:lineColor="@color/gray_3"
-            app:lineWidth="1.5dp"
-
-            app:viewType="rectangle" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnVerify"
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50"
-            style="@style/ButtonBlue"
-            android:layout_margin="@dimen/size_10"
-            android:text="Next"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:titleToolbar=""
+            android:layout_alignParentBottom="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+            <TextView
+                android:id="@+id/titleOtpFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Create_New_Account"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="#040207"
+                android:layout_marginBottom="5dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Input_OTP_Verification"
+                android:textSize="16dp"
+                android:textColor="#676767"
+                />
+            <com.mukesh.OtpView
+                android:id="@+id/edtOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size_20"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:itemBackground="#F8F9FB"
+                android:orientation="horizontal"
+                android:padding="@dimen/size_10"
+                android:textColor="@color/grey_dark_text"
+                app:itemCount="4"
+                app:itemRadius="@dimen/text_size_15"
+                app:itemSpacing="@dimen/size_15"
+                app:lineColor="@color/gray_3"
+                app:lineWidth="1.5dp"
+                app:viewType="rectangle"
+                app:itemHeight="60dp"
+                app:itemWidth="64dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtreload_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/Send_code_reload_in"
+                    android:textColor="#676767"
+                    android:textSize="14dp" />
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text=""
+                    android:textColor="@color/primary"
+                    android:layout_marginLeft="180dp"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnVerify"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:text="@string/Submit"
+                android:background="@drawable/bg_button_corner_30_primary"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="360dp"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

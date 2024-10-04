@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import vn.md18.fsquareapplication.R
@@ -14,7 +15,7 @@ import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding, AuthViewModel>() {
     @Inject
     lateinit var networkExtensions: NetworkExtensions
@@ -24,7 +25,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, AuthViewModel>() {
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentSplashBinding = FragmentSplashBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String {
-        TODO("Not yet implemented")
+        return "SplashFragment"
     }
 
     override fun onViewLoaded() {
@@ -32,23 +33,28 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, AuthViewModel>() {
     }
 
     override fun addViewListener() {
-        TODO("Not yet implemented")
+
     }
 
     override fun addDataObserver() {
-        TODO("Not yet implemented")
+
     }
 
     private fun checkInternetAndNavigate() {
-        networkExtensions.checkInternet { isConnected ->
-            if (isConnected) {
-                lifecycleScope.launch {
-                    delay(3000)
-                    navigateToLoadingFragment()
-                }
-            } else {
-                Log.e("phuczk", "no internet connection")
-            }
+//        networkExtensions.checkInternet { isConnected ->
+//            if (isConnected) {
+//                lifecycleScope.launch {
+//                    delay(3000)
+//                    navigateToLoadingFragment()
+//                }
+//            } else {
+//                Log.e("phuczk", "no internet connection")
+//            }
+//        }
+
+        lifecycleScope.launch {
+            delay(3000)
+            navigateToLoadingFragment()
         }
     }
 

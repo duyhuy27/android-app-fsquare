@@ -11,6 +11,34 @@
     <string name="require_permission_location">Vui lòng cấp quyền truy cập vị trí cho ứng dụng</string>
     <string name="camera">camera</string>
     <string name="storage_new">bộ nhớ</string>
+    <string name="login">Đăng nhập</string>
+    <string name="create_your_account">Tạo tài khoản của bạn</string>
+    <string name="input_your_account">Nhập tài khoản của bạn</string>
+    <string name="your_account">Tài khoản của bạn</string>
+    <string name="remember_me">Lưu tài khoản của tôi</string>
+    <string name="policy">Tôi muốn nhận thông tin tiếp thị và chính sách thông tin từ FSqare.</string>
+    <string name="next">tiếp theo</string>
+    <string name="guest">Khách</string>
+    <string name="sign_in_with_email">Đăng nhập bằng Email</string>
+    <string name="SuccessfullyCreate_an_account">Đã tạo một tài khoản thành công</string>
+    <string name="After_this_you_can_explore_our_services_and_enjoy_our_products_Have_fun_and_enjoy_it">Sau này, bạn có thể khám phá các dịch vụ của chúng tôi và thưởng thức sản phẩm của chúng tôi. Hãy vui vẻ và tận hưởng nó!</string>
+    <string name="Let_is_Explore">Hãy cùng khám phá</string>
+    <string name="Do_not_have_an_account">Bạn chưa có tài khoản?</string>
+    <string name="sinup">Đăng ký</string>
+    <string name="Create_New_Account">Tạo tài khoản mới</string>
+    <string name="Input_OTP_Verification">Nhập xác minh OTP</string>
+    <string name="Send_code_reload_in">Gửi mã tải lại</string>
+    <string name="Submit">Nộp</string>
+    <string name="resend">Gửi lại</string>
+    <string name="err_login">Email chưa được đăng ký hoặc không tồn tại</string>
+    <string name="err_signup">Email đã được đăng ký hoặc không tồn tại</string>
+    <string name="err_otp">OTP không hợp lệ. Vui lòng nhập lại.</string>
+    <string name="cannot_resend_otp">Không thể gửi lại OTP</string>
+    <string name="resend_otp_success">OTP đã được gửi lại.</string>
+    <string name="err_verify">OTP không đúng hoặc đã hết hạn</string>
+    <string name="err_validate_email">Email không hợp lệ. Vui lòng kiểm tra lại.</string>
+
+
 
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
