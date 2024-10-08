@@ -39,7 +39,6 @@
     <string name="err_validate_email">Email không hợp lệ. Vui lòng kiểm tra lại.</string>
 
 
-
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
     <string name="pull_refresh_view_refresh_success">Đã xong</string>
