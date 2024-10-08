@@ -3,12 +3,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NewAddressFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Add New Address"
+            app:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/permission_dp_20">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:text="@string/Name_Address"
+                android:textColor="#040207"
+                android:textSize="@dimen/size_14" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/permission_dp_15"
+                android:layout_marginBottom="@dimen/permission_dp_20">
+                <vn.md18.fsquareapplication.utils.view.CustomEditText
+                    android:id="@+id/edt_fullname"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    />
+                <ImageView
+                    android:id="@+id/img_search"
+                    android:layout_width="@dimen/size_35"
+                    android:layout_height="@dimen/size_35"
+                    android:src="@drawable/search"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/permission_dp_15"/>
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_Use_current_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Use_current_location"
+                android:layout_marginBottom="@dimen/permission_dp_20"
+                android:layout_marginLeft="@dimen/permission_dp_40"
+                android:layout_marginRight="@dimen/permission_dp_40"
+                style="@style/ButtonApp"/>
+            <ImageView
+                android:id="@+id/img_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/map"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_new_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Add"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+    </LinearLayout>
 
 </FrameLayout>
