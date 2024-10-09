@@ -83,18 +83,16 @@
                 android:textColor="@color/black_neutral"
                 android:layout_marginBottom="@dimen/size_5"/>
 
-            <vn.md18.fsquareapplication.utils.view.CustomEditText
-                android:id="@+id/edt_country"
+            <com.hbb20.CountryPickerView
+                android:id="@+id/countryPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                app:iconEnd="@drawable/arrow"
-                app:actionIme="actionNone"
-                app:showIconTogglePassword="false"
+                android:padding="@dimen/_4sdp"
+                android:background="@drawable/bg_edt_corner_grey"
                 android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20" />
+                android:layout_marginBottom="@dimen/permission_dp_20"
+                />
 
-            <!-- Phone Number -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,6 +123,7 @@
                     app:excludedCountries="ad,ae" />
 
                 <EditText
+                    android:id="@+id/edtNumberPhone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="phone"
