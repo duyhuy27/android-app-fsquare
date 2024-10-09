@@ -25,30 +25,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="@dimen/permission_dp_30">
+                android:layout_margin="@dimen/permission_dp_25">
+
                 <ImageView
                     android:layout_width="@dimen/size_40"
                     android:layout_height="@dimen/size_40"
-                    android:src="@drawable/home"/>
+                    android:src="@drawable/home" />
 
                 <LinearLayout
-                    android:layout_width="200dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/permission_dp_10"
                             android:fontFamily="@font/opensans_semi_bold"
                             android:text="@string/Home"
                             android:textColor="#040207"
                             android:textSize="@dimen/size_16" />
+
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/permission_dp_10"
                             android:fontFamily="@font/opensans_semi_bold"
@@ -59,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/txthome"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/permission_dp_10"
                         android:fontFamily="@font/opensans_semi_bold"
@@ -67,28 +72,32 @@
                         android:textColor="#333333"
                         android:textSize="@dimen/size_14" />
                 </LinearLayout>
+
                 <ImageView
-                    android:layout_width="@dimen/size_20"
-                    android:layout_height="@dimen/size_20"
+                    android:layout_width="@dimen/size_24"
+                    android:layout_height="@dimen/size_24"
                     android:src="@drawable/update"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"/>
+                    android:layout_marginEnd="0dp"/>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="@dimen/permission_dp_30">
+                android:layout_margin="@dimen/permission_dp_25">
+
                 <ImageView
                     android:id="@+id/img_update_home"
                     android:layout_width="@dimen/size_40"
                     android:layout_height="@dimen/size_40"
-                    android:src="@drawable/home"/>
+                    android:src="@drawable/home" />
 
                 <LinearLayout
-                    android:layout_width="200dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -105,19 +114,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/permission_dp_10"
+                        android:layout_marginRight="@dimen/size_70"
                         android:fontFamily="@font/opensans_semi_bold"
                         android:text="Tòa nhà FPT Polytechnic, Trịnh Văn Bô, Hà Nội"
                         android:textColor="#333333"
                         android:textSize="@dimen/size_14" />
                 </LinearLayout>
+
                 <ImageView
                     android:id="@+id/img_update_office"
-                    android:layout_width="@dimen/size_20"
-                    android:layout_height="@dimen/size_20"
+                    android:layout_width="@dimen/size_24"
+                    android:layout_height="@dimen/size_24"
                     android:src="@drawable/update"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="80dp"/>
+                    android:layout_marginEnd="0dp"/>
             </LinearLayout>
+
 
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
