@@ -58,6 +58,21 @@
     <string name="Vietnamese">Tiếng Việt</string>
     <string name="Add_New_Card">Thêm Thẻ Moi</string>
     <string name="Connected">Kết nối</string>
+    <string name="General_Notification">Thông Báo Chung</string>
+    <string name="Sound">Âm Thanh</string>
+    <string name="Special_Offers">Ưu Đãi Đặc Biệt</string>
+    <string name="Promo_And_Discount">Khuyến Mãi Và Giảm Giá</string>
+    <string name="Payments">Thanh Toán</string>
+    <string name="Cashback">Hoàn Tiền</string>
+    <string name="App_Updates">Cập Nhập Ứng Dụng</string>
+    <string name="New_Service_Available">Dịch Vụ Mới Có Sẵn</string>
+    <string name="Remember">Nhớ</string>
+    <string name="Face_ID">Face_ID</string>
+    <string name="BIometric_ID">Sinh Trắc Học ID</string>
+    <string name="Google_Authentication">Xác Thực Google</string>
+    <string name="Change_PIN">Thay Đổi Mã PIN</string>
+    <string name="Change_Password">Thay Đổi Mật Khẩu</string>
+
 
 
 

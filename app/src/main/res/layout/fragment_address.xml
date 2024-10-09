@@ -133,7 +133,7 @@
 
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_add_n"
+            android:id="@+id/btn_add_new_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Add_New_Address"

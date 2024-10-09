@@ -3,12 +3,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.profileandsetting.ui.fragment.SecurityFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <vn.md18.fsquareapplication.utils.view.CustomToolbar
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:titleToolbar="Security"
+           app:textStyle="bold" />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:padding="16dp">
+           <TextView
+               android:id="@+id/txt_Remember"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="@string/Remember"
+               android:textSize="@dimen/permission_sp_16"
+               android:textColor="@android:color/black"
+               android:gravity="start"
+               android:fontFamily="sans-serif-medium"/>
+           <Switch
+               android:layout_width="wrap_content"
+               android:layout_height="40dp"
+               android:showText="false"
+               android:switchMinWidth="50dp"
+               android:switchPadding="0dp"
+               android:textOff="Notifications Off"
+               android:textOn="Notifications On"
+               android:track="@drawable/switch_track"
+               android:thumb="@drawable/switch_thumb"
+               android:background="@drawable/switch_background"
+               android:padding="@dimen/permission_dp_5"/>
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:padding="16dp">
+           <TextView
+               android:id="@+id/txt_Face_ID"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="@string/Face_ID"
+               android:textSize="@dimen/permission_sp_16"
+               android:textColor="@android:color/black"
+               android:gravity="start"
+               android:fontFamily="sans-serif-medium"/>
+           <Switch
+               android:layout_width="wrap_content"
+               android:layout_height="40dp"
+               android:showText="false"
+               android:switchMinWidth="50dp"
+               android:switchPadding="0dp"
+               android:textOff="Notifications Off"
+               android:textOn="Notifications On"
+               android:track="@drawable/switch_track"
+               android:thumb="@drawable/switch_thumb"
+               android:background="@drawable/switch_background"
+               android:padding="@dimen/permission_dp_5"/>
+       </LinearLayout>
+       <TextView
+           android:id="@+id/txt_BIometric_ID"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/BIometric_ID"
+           android:textSize="@dimen/permission_sp_16"
+           android:textColor="@android:color/black"
+           android:gravity="start"
+           android:fontFamily="sans-serif-medium"
+           android:padding="@dimen/permission_sp_16"/>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:padding="16dp">
+           <TextView
+               android:id="@+id/txt_Google_Authentication"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="@string/Google_Authentication"
+               android:textSize="@dimen/permission_sp_16"
+               android:textColor="@android:color/black"
+               android:gravity="start"
+               android:fontFamily="sans-serif-medium"/>
+           <ImageView
+               android:layout_width="@dimen/size_20"
+               android:layout_height="@dimen/size_20"
+               android:src="@drawable/right_arrow"/>
+       </LinearLayout>
+    </LinearLayout>
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/btn_change_pin"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/Change_PIN"
+           android:layout_marginBottom="@dimen/permission_dp_20"
+           android:layout_marginLeft="@dimen/permission_dp_20"
+           android:layout_marginRight="@dimen/permission_dp_20"
+           android:background="#FFFFFF"/>
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/btn_change_password"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/Change_Password"
+           android:layout_marginBottom="@dimen/permission_dp_40"
+           android:layout_marginLeft="@dimen/permission_dp_20"
+           android:layout_marginRight="@dimen/permission_dp_20"
+           style="@style/ButtonApp"/>
+
+   </LinearLayout>
 
 </FrameLayout>
