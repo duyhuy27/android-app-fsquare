@@ -3,12 +3,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".EditProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Edit Profile"
+            app:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/size_20"
+            android:layout_marginTop="@dimen/permission_dp_15">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Full_name"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5" />
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_20"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Birth_Date"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                    android:id="@+id/edt_birth_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    app:iconEnd="@drawable/date"
+                    app:actionIme="actionNone"
+                    app:showIconTogglePassword="false"
+                    android:layout_marginTop="@dimen/permission_dp_5"
+                    android:layout_marginBottom="@dimen/permission_dp_20" />
+            <!-- Email -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Email"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:iconEnd="@drawable/email"
+                app:actionIme="actionNone"
+                app:showIconTogglePassword="false"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_20" />
+
+            <!-- Address -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Country"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:iconEnd="@drawable/arrow"
+                app:actionIme="actionNone"
+                app:showIconTogglePassword="false"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_20" />
+
+            <!-- Phone Number -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Phone"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_20"
+                />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Update"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+    </LinearLayout>
 
 </FrameLayout>

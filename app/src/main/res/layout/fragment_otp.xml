@@ -55,6 +55,7 @@
                 android:padding="@dimen/size_10"
                 android:textColor="@color/grey_dark_text"
                 app:itemCount="4"
+                android:textSize="@dimen/permission_dp_20"
                 app:itemRadius="@dimen/text_size_15"
                 app:itemSpacing="@dimen/size_15"
                 app:lineColor="@color/gray_3"

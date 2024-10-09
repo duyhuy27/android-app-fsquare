@@ -17,7 +17,7 @@
     <string name="your_account">Tài khoản của bạn</string>
     <string name="remember_me">Lưu tài khoản của tôi</string>
     <string name="policy">Tôi muốn nhận thông tin tiếp thị và chính sách thông tin từ FSqare.</string>
-    <string name="next">tiếp theo</string>
+    <string name="next">Tiếp theo</string>
     <string name="guest">Khách</string>
     <string name="sign_in_with_email">Đăng nhập bằng Email</string>
     <string name="SuccessfullyCreate_an_account">Đã tạo một tài khoản thành công</string>
@@ -37,6 +37,26 @@
     <string name="resend_otp_success">OTP đã được gửi lại.</string>
     <string name="err_verify">OTP không đúng hoặc đã hết hạn</string>
     <string name="err_validate_email">Email không hợp lệ. Vui lòng kiểm tra lại.</string>
+
+
+
+    <!-- Setting profile strings -->
+    <string name="Full_name">Tên Đầy Đủ</string>
+    <string name="Birth_Date">Ngày Sinh</string>
+    <string name="Email">Email</string>
+    <string name="Country">Quê Quán</string>
+    <string name="Phone">Điện Thoại</string>
+    <string name="Update">Chỉnh Sửa</string>
+    <string name="Default">Mặc định</string>
+    <string name="Home">Nhà</string>
+    <string name="Office">Văn Phòng</string>
+    <string name="Add_New_Address">Thêm địa chỉ mới</string>
+    <string name="Add">Thêm</string>
+    <string name="Name_Address">Tên Địa Chỉ</string>
+    <string name="Use_current_location">Sử Dụng Vị Trí Hiện Tại</string>
+
+
+
 
 
     <!-- PullToRefresh view strings -->
