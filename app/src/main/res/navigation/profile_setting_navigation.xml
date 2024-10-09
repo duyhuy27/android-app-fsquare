@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="vn.md18.fsquareapplication.ProfileFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -34,12 +34,12 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="vn.md18.fsquareapplication.EditProfileFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/addressFragment"
-        android:name="vn.md18.fsquareapplication.AddressFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.AddressFragment"
         android:label="fragment_address"
         tools:layout="@layout/fragment_address" >
         <action
@@ -48,32 +48,32 @@
     </fragment>
     <fragment
         android:id="@+id/newAddressFragment"
-        android:name="vn.md18.fsquareapplication.NewAddressFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.NewAddressFragment"
         android:label="fragment_new_address"
         tools:layout="@layout/fragment_new_address" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="vn.md18.fsquareapplication.NotificationFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/paymentFragment"
-        android:name="vn.md18.fsquareapplication.PaymentFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
     <fragment
         android:id="@+id/securityFragment"
-        android:name="vn.md18.fsquareapplication.SecurityFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.SecurityFragment"
         android:label="fragment_security"
         tools:layout="@layout/fragment_security" />
     <fragment
         android:id="@+id/languageFragment"
-        android:name="vn.md18.fsquareapplication.LanguageFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="vn.md18.fsquareapplication.PrivacyPolicyFragment"
+        android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.PrivacyPolicyFragment"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" />
 </navigation>

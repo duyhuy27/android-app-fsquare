@@ -250,6 +250,8 @@ dependencies {
 
     implementation 'com.elvishew:xlog:1.11.0'
     implementation 'com.elvishew:xlog-libcat:1.0.0'
+
+    implementation 'com.github.Ajinkrishnak:CountryCodePicker:1.0.2'
 }
 
 static def getCurrentDayTime() {
