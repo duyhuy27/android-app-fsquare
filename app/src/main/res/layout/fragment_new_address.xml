@@ -28,20 +28,25 @@
                 android:text="@string/Name_Address"
                 android:textColor="#040207"
                 android:textSize="@dimen/size_14" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/permission_dp_15"
-                android:layout_marginBottom="@dimen/permission_dp_20">
-                <vn.md18.fsquareapplication.utils.view.CustomEditText
-                    android:id="@+id/edt_fullname"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    />
+                android:background="@drawable/bg_edt_corner_grey"
+                android:padding="@dimen/_6sdp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtNumberPhone"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:inputType="phone"
+                    android:background="@null"
+                    android:maxLength="13"/>
                 <ImageView
                     android:id="@+id/img_search"
-                    android:layout_width="@dimen/size_35"
+                    android:layout_width="@dimen/size_25"
                     android:layout_height="@dimen/size_35"
                     android:src="@drawable/search"
                     android:layout_gravity="center"

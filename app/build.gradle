@@ -252,6 +252,7 @@ dependencies {
     implementation 'com.elvishew:xlog-libcat:1.0.0'
 
     implementation 'com.github.Ajinkrishnak:CountryCodePicker:1.0.2'
+    implementation 'com.hbb20:android-country-picker:0.0.7'
 }
 
 static def getCurrentDayTime() {
