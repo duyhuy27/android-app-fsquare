@@ -54,7 +54,10 @@
     <string name="Add">Thêm</string>
     <string name="Name_Address">Tên Địa Chỉ</string>
     <string name="Use_current_location">Sử Dụng Vị Trí Hiện Tại</string>
-
+    <string name="English">Tiếng Anh</string>
+    <string name="Vietnamese">Tiếng Việt</string>
+    <string name="Add_New_Card">Thêm Thẻ Moi</string>
+    <string name="Connected">Kết nối</string>
 
 
 
