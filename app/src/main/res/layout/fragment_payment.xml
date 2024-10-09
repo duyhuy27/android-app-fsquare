@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.profileandsetting.ui.fragment.PaymentFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Payment"
+            app:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="25dp"
+            android:gravity="center_vertical">
+
+            <!-- ImageView nằm bên trái -->
+            <ImageView
+                android:layout_width="@dimen/size_30"
+                android:layout_height="@dimen/size_30"
+                android:src="@drawable/vietqr"/>
+
+            <!-- TextView đầu tiên -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/permission_dp_10"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:text="VIETQR"
+                android:textColor="#040207"
+                android:textSize="@dimen/size_16"
+                android:gravity="start"
+                android:layout_gravity="center"/>
+
+            <!-- TextView thứ hai -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/permission_dp_10"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:text="@string/Connected"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/size_16"
+                android:gravity="end"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_n"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Add_New_Card"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.profileandsetting.ui.fragment.ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black_neutral"
+        android:gravity="center"
+        >
+        <com.hbb20.CountryPickerView
+            android:id="@+id/countryPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_edt_corner_grey"
+            />
+
+        <Button
+            android:id="@+id/btnSaveCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu Quốc Gia"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</FrameLayout>
