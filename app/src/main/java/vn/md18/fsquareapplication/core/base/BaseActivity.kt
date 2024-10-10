@@ -31,6 +31,8 @@ import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.getColorCompat
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import vn.md18.fsquareapplication.utils.extensions.showCustomToastShort
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import java.lang.reflect.ParameterizedType
 import java.util.*
 import javax.inject.Inject
@@ -123,15 +125,18 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
      * Add observer view -> ViewModel
      */
     override fun addDataObserver() {
-        viewModel.errorState.observe(this) {
-            onError(it)
-        }
-        viewModel.loadingState.observe(this) {
-            onLoading(it)
-        }
-        viewModel.errorMessage.observe(this@BaseActivity) {
-            it?.let {
-                onErrorMessage(it)
+        viewModel.apply {
+            errorState.observe(this@BaseActivity) {
+                FSLogger.e("Huynd","HuyNd: nhay vao base == $it")
+                onError(it)
+            }
+            loadingState.observe(this@BaseActivity) {
+                onLoading(it)
+            }
+            errorMessage.observe(this@BaseActivity) {
+                it?.let {
+                    onErrorMessage(it)
+                }
             }
         }
     }
@@ -364,9 +369,10 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
     /**
      * Base Error Exception
      */
+    @Suppress("DEPRECATION")
     override fun onError(error: Any) {
         onLoading(false)
-        showCustomToast(error.toString(), Constant.ToastStatus.FAILURE)
+        showCustomToastShort(error.toString(), Constant.ToastStatus.FAILURE)
     }
 
     /**

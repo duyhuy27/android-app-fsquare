@@ -37,6 +37,8 @@ class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
 
     }
 
+
+
     override fun onBackPressed() {
         if (!navController.popBackStack()) {
             super.onBackPressed()
