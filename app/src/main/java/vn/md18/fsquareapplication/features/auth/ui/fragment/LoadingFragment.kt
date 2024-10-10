@@ -12,8 +12,11 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentLoadingBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() {
 
@@ -21,7 +24,8 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     lateinit var networkExtensions: NetworkExtensions
 
     override val viewModel: AuthViewModel by viewModels()
-    override fun inflateLayout(layoutInflater: LayoutInflater): FragmentLoadingBinding = FragmentLoadingBinding.inflate(layoutInflater)
+    override fun inflateLayout(layoutInflater: LayoutInflater): FragmentLoadingBinding =
+        FragmentLoadingBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String {
         return "LoadingFragment"
@@ -29,6 +33,7 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
 
     override fun onViewLoaded() {
         checkInternetAndNavigate()
+        FSLogger.e("Get token: ${dataManager.getToken()}")
     }
 
     override fun addViewListener() {
@@ -51,8 +56,12 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
 //            }
 //        }
         lifecycleScope.launch {
-            delay(3000)
-            navigateToLoadingFragment()
+            if (dataManager.getToken() != null) {
+                openActivity(MainActivity::class.java)
+            } else {
+                delay(3000)
+                navigateToLoadingFragment()
+            }
         }
     }
 

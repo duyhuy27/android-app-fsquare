@@ -81,6 +81,13 @@
         <item name="android:textColor">@color/dark_blue</item>
     </style>
 
+    <style name="TextSimiBoldTitleDark24" parent="TextAppearance.AppCompat">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.SemiBold</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="android:textColor">@color/black_text</item>
+    </style>
+
     <!-- text normal bold blue dark  -->
     <style name="TextNormalBoldBlueDark" parent="TextAppearance.AppCompat">
         <item name="android:ellipsize">end</item>
