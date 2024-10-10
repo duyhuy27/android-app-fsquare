@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.profileandsetting.ui.fragment.AddressFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Address"
+            app:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/permission_dp_25">
+
+                <ImageView
+                    android:layout_width="@dimen/size_40"
+                    android:layout_height="@dimen/size_40"
+                    android:src="@drawable/home" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/permission_dp_10"
+                            android:fontFamily="@font/opensans_semi_bold"
+                            android:text="@string/Home"
+                            android:textColor="#040207"
+                            android:textSize="@dimen/size_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/permission_dp_10"
+                            android:fontFamily="@font/opensans_semi_bold"
+                            android:text="@string/Default"
+                            android:textColor="#20C997"
+                            android:textSize="@dimen/size_10" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txthome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/permission_dp_10"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:text="24 Hai Bà Trưng, Hà Nội"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/size_14" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/size_24"
+                    android:layout_height="@dimen/size_24"
+                    android:src="@drawable/update"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="0dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/permission_dp_25">
+
+                <ImageView
+                    android:id="@+id/img_update_home"
+                    android:layout_width="@dimen/size_40"
+                    android:layout_height="@dimen/size_40"
+                    android:src="@drawable/home" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/permission_dp_10"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:text="@string/Office"
+                        android:textColor="#040207"
+                        android:textSize="@dimen/size_16" />
+
+                    <TextView
+                        android:id="@+id/txt_office"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/permission_dp_10"
+                        android:layout_marginRight="@dimen/size_70"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:text="Tòa nhà FPT Polytechnic, Trịnh Văn Bô, Hà Nội"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/size_14" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_update_office"
+                    android:layout_width="@dimen/size_24"
+                    android:layout_height="@dimen/size_24"
+                    android:src="@drawable/update"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="0dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_new_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Add_New_Address"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

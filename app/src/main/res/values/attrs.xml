@@ -61,6 +61,11 @@
         <attr name="colorIcon" format="reference" />
         <attr name="textRight" format="string" />
         <attr name="textLeft" format="string" />
+        <attr name="textStyle">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+        </attr>
         <attr name="titleGravity">
             <flag name="left" value="0x03" />
             <flag name="center" value="0x11" />

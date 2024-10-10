@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.data.network.retrofit
 
 import io.reactivex.Flowable
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -17,6 +18,8 @@ import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
 import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
 
 interface ApplicationService {
+
+    // auth
     @POST(AppAPi.AUTH_SIGNUP)
     fun signUp(
         @Body signUpRequest: SignUpRequest
@@ -33,6 +36,7 @@ interface ApplicationService {
         @Body verifyRequest: VerifyRequest
     ) : Flowable<VerifyResponse>
 
+
     @GET(AppAPi.PRODUCT_LIST)
     fun getProduct(
         @Query("size") size: Int,
@@ -41,5 +45,6 @@ interface ApplicationService {
         @Query("brand") brand: String? = null,
         @Query("category") category: String? = null
     ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
 
 }
