@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.main.ui.fragment.ProfileFragment">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +97,8 @@
             android:layout_marginHorizontal="@dimen/permission_dp_20"
             android:layout_marginTop="@dimen/permission_dp_30"
             app:cardCornerRadius="@dimen/_16sdp"
-            app:cardElevation="@dimen/_6sdp">
+            app:cardElevation="@dimen/_6sdp"
+            android:layout_marginBottom="20dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -344,8 +347,7 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-
     </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
