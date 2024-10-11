@@ -1,7 +1,6 @@
-package vn.md18.fsquareapplication.features.main.ui
+package vn.md18.fsquareapplication.features.main.ui.fragment
 
 import android.view.LayoutInflater
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint

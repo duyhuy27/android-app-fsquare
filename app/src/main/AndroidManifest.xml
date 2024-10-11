@@ -56,13 +56,13 @@
             android:name=".features.auth.ui.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".features.main.ui.MainActivity"
+            android:name=".features.profileandsetting.ui.ProfileAndSettingActivity"
             android:exported="false" />
         <activity
             android:name=".features.auth.ui.AuthActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".features.profileandsetting.ui.ProfileAndSettingActivity"
+            android:name=".features.main.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

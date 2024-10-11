@@ -1,13 +1,8 @@
-package vn.md18.fsquareapplication.features.main.ui
+package vn.md18.fsquareapplication.features.main.ui.fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
-import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentCardBinding
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
