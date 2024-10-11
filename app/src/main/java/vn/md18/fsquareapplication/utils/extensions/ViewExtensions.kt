@@ -3,6 +3,7 @@ package vn.md18.fsquareapplication.utils.extensions
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -22,6 +23,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestOptions
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.checkedChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -230,4 +233,94 @@ fun ImageView.loadImageDrawableNoCache(drawable: Drawable?) {
             .skipMemoryCache(true)
             .into(this)
     }
+}
+
+
+
+/**
+ * ImageView Loading Image By Uri
+ */
+fun ImageView.loadImageUri(uri: Uri?) {
+    Glide.with(this.context).load(uri).fitCenter().centerCrop().into(this)
+}
+
+/**
+ * ImageView Loading Image By URL
+ */
+//fun ImageView.loadImageURL(url: String?, drawable: Int? = null) {
+//    Glide.with(this.context).clear(this)
+//
+//    if (url.isNullOrEmpty() || url == "null") {
+//        this.setImageResource(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+//        return
+//    }
+//
+//    val apiLink = CryptoAES.decrypt3DES(BuildConfig.PHP_SERVER)
+//    val requestOptions = RequestOptions()
+//        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//        .placeholder(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+//        .error(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+//        .transform(CenterCrop())
+//
+//    Glide.with(this.context)
+//        .load("$apiLink/$url")
+//        .thumbnail(0.25f)
+//        .apply(requestOptions)
+//        .into(this)
+//}
+//
+//
+///**
+// * ImageView Loading Image By URL and diskCacheStrategy
+// */
+//fun ImageView.loadImageUrlDiskCacheStrategy(url: String?, drawable: Int? = null) {
+//    if (url.isNullOrEmpty() or (url == "null")) {
+//        this.setImageResource(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+//        return
+//    }
+//    val apiLink = CryptoAES.decrypt3DES(BuildConfig.PHP_SERVER)
+//    if (drawable != null) {
+//        Glide.with(this.context).load("${apiLink}/$url").placeholder(drawable)
+//            .diskCacheStrategy(DiskCacheStrategy.NONE)
+//            .skipMemoryCache(true)
+//            .into(this)
+//    } else {
+//        Glide.with(this.context).load("${apiLink}/$url")
+//            .diskCacheStrategy(DiskCacheStrategy.NONE)
+//            .skipMemoryCache(true)
+//            .into(this)
+//    }
+//}
+//
+///**
+// * ImageView Loading Image By URL
+// */
+//fun ImageView.loadImageURLWithError(url: String?, drawable: Int? = null) {
+//    if (url.isNullOrEmpty() or (url == "null")) {
+//        this.setImageResource(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+//        return
+//    }
+//    val apiLink = CryptoAES.decrypt3DES(BuildConfig.PHP_SERVER)
+//
+//    Glide.with(this.context).load("${apiLink}/$url").error(drawable).into(this)
+//}
+fun ImageView.loadImageURL(url: String?, drawable: Int? = null) {
+    Glide.with(this.context).clear(this)
+
+    if (url.isNullOrEmpty() || url == "null") {
+        this.setImageResource(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+        return
+    }
+
+    val requestOptions = RequestOptions()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .placeholder(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+        .error(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+        .transform(CenterCrop())
+
+    Glide.with(this.context)
+        .load("$url")
+        .thumbnail(0.25f)
+        .apply(requestOptions)
+        .into(this)
 }
