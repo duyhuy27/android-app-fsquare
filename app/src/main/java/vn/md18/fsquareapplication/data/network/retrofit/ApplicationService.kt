@@ -36,6 +36,7 @@ interface ApplicationService {
         @Body verifyRequest: VerifyRequest
     ) : Flowable<VerifyResponse>
 
+
     @GET(AppAPi.PRODUCT_LIST)
     fun getProduct(
         @Query("size") size: Int,
@@ -44,5 +45,6 @@ interface ApplicationService {
         @Query("brand") brand: String? = null,
         @Query("category") category: String? = null
     ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
 
 }
