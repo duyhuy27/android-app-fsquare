@@ -17,7 +17,7 @@
     <string name="your_account">Tài khoản của bạn</string>
     <string name="remember_me">Lưu tài khoản của tôi</string>
     <string name="policy">Tôi muốn nhận thông tin tiếp thị và chính sách thông tin từ FSqare.</string>
-    <string name="next">tiếp theo</string>
+    <string name="next">Tiếp theo</string>
     <string name="guest">Khách</string>
     <string name="sign_in_with_email">Đăng nhập bằng Email</string>
     <string name="SuccessfullyCreate_an_account">Đã tạo một tài khoản thành công</string>
@@ -40,6 +40,52 @@
 
     <string name="error_have_no_internet">Xin vui lòng kiểm tra lại Kết nối mạng</string>
     <string name="error_undefine">Xin vui lòng kiểm tra lại Kết nối mạng</string>
+
+
+    <!-- Setting profile strings -->
+    <string name="Full_name">Tên Đầy Đủ</string>
+    <string name="Birth_Date">Ngày Sinh</string>
+    <string name="Email">Email</string>
+    <string name="Country">Quê Quán</string>
+    <string name="Phone">Điện Thoại</string>
+    <string name="Update">Chỉnh Sửa</string>
+    <string name="Default">Mặc định</string>
+    <string name="Home">Nhà</string>
+    <string name="Office">Văn Phòng</string>
+    <string name="Add_New_Address">Thêm địa chỉ mới</string>
+    <string name="Add">Thêm</string>
+    <string name="Name_Address">Tên Địa Chỉ</string>
+    <string name="Use_current_location">Sử Dụng Vị Trí Hiện Tại</string>
+    <string name="English">Tiếng Anh</string>
+    <string name="Vietnamese">Tiếng Việt</string>
+    <string name="Add_New_Card">Thêm Thẻ Moi</string>
+    <string name="Connected">Kết nối</string>
+    <string name="General_Notification">Thông Báo Chung</string>
+    <string name="Sound">Âm Thanh</string>
+    <string name="Special_Offers">Ưu Đãi Đặc Biệt</string>
+    <string name="Promo_And_Discount">Khuyến Mãi Và Giảm Giá</string>
+    <string name="Payments">Thanh Toán</string>
+    <string name="Cashback">Hoàn Tiền</string>
+    <string name="App_Updates">Cập Nhập Ứng Dụng</string>
+    <string name="New_Service_Available">Dịch Vụ Mới Có Sẵn</string>
+    <string name="Remember">Nhớ</string>
+    <string name="Face_ID">Face_ID</string>
+    <string name="BIometric_ID">Sinh Trắc Học ID</string>
+    <string name="Google_Authentication">Xác Thực Google</string>
+    <string name="Change_PIN">Thay Đổi Mã PIN</string>
+    <string name="Change_Password">Thay Đổi Mật Khẩu</string>
+    <string name="Edit_Profile">Chỉnh sửa hồ sơ</string>
+    <string name="Address">Địa chỉ</string>
+    <string name="Notification">Thông báo</string>
+    <string name="My_Wallete">Ví của tôi</string>
+    <string name="Security">Bảo mật</string>
+    <string name="Language">Ngôn ngữ</string>
+    <string name="Privacy_Policy">Chính sách bảo mật</string>
+    <string name="Logout">Đăng xuất</string>
+    <string name="Profile">Hồ sơ</string>
+
+
+
 
 
     <!-- PullToRefresh view strings -->

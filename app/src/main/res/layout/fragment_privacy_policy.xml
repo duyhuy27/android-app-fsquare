@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:paddingHorizontal="16dp"
-    tools:context=".features.main.ui.MainActivity">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.profileandsetting.ui.fragment.PrivacyPolicyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,4 +70,5 @@
         </ScrollView>
 
     </LinearLayout>
-</LinearLayout>
+
+</FrameLayout>
