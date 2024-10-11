@@ -20,11 +20,13 @@ object Constant {
     const val SYSTEM_NAME = "Android"
     const val ANDROID_MEDIA = "/Android/media"
     const val TYPE_UPLOAD_LOG_FILE = "4"
-
+    const val KEY_REQUEST = "KEY_REQUEST"
     object DataConfig {
         const val ALPHA_ENABLE_VIEW_VALUE: Float = 1f
         const val DURATION_FADE_VIEW_IN_MILLIS: Long = 3000
     }
+
+
 
     enum class BuildFlavor(val value: String) {
         Prod("prod"),
@@ -70,4 +72,6 @@ object Constant {
         const val FORMAT_DATE_LOG = "yyyy-MM-dd"
         const val FORMAT_TIMESTAMP_LOG = "yyyyMMddHHmm"
     }
+
+
 }

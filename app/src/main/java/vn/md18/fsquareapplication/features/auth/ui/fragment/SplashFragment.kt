@@ -52,6 +52,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, AuthViewModel>() {
 //            }
 //        }
 
+
+
         lifecycleScope.launch {
             delay(3000)
             navigateToLoadingFragment()

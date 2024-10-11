@@ -16,6 +16,7 @@ import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
 import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 
@@ -38,7 +39,6 @@ class AuthViewModel @Inject constructor(
 
 
     override fun onDidBindViewModel() {
-        Log.e("Huynd", "Nhay vao day")
     }
 
     fun test () {
@@ -105,6 +105,7 @@ class AuthViewModel @Inject constructor(
                         .toObservable()
                         .subscribe({ response ->
                             response.data?.let { data ->
+                                FSLogger.e("Huynd: data == $data")
                                 dataManager.setToken(data)
                                 _verifyState.value = DataState.Success(response)
                             } ?: run {

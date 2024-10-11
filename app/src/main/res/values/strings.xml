@@ -38,6 +38,8 @@
     <string name="err_verify">OTP không đúng hoặc đã hết hạn</string>
     <string name="err_validate_email">Email không hợp lệ. Vui lòng kiểm tra lại.</string>
 
+    <string name="error_have_no_internet">Xin vui lòng kiểm tra lại Kết nối mạng</string>
+    <string name="error_undefine">Xin vui lòng kiểm tra lại Kết nối mạng</string>
 
 
     <!-- Setting profile strings -->
@@ -72,9 +74,15 @@
     <string name="Google_Authentication">Xác Thực Google</string>
     <string name="Change_PIN">Thay Đổi Mã PIN</string>
     <string name="Change_Password">Thay Đổi Mật Khẩu</string>
-
-
-
+    <string name="Edit_Profile">Chỉnh sửa hồ sơ</string>
+    <string name="Address">Địa chỉ</string>
+    <string name="Notification">Thông báo</string>
+    <string name="My_Wallete">Ví của tôi</string>
+    <string name="Security">Bảo mật</string>
+    <string name="Language">Ngôn ngữ</string>
+    <string name="Privacy_Policy">Chính sách bảo mật</string>
+    <string name="Logout">Đăng xuất</string>
+    <string name="Profile">Hồ sơ</string>
 
 
     <!-- PullToRefresh view strings -->
@@ -88,4 +96,11 @@
     <string name="no_internet_connection">Khong co internet</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_home_label">Home</string>
+    <string name="main_tab_auto_scene_label">Cart</string>
+    <string name="Orders">Orders</string>
+    <string name="wallet">Wallet</string>
+    <string name="profile">Profile</string>
+    <string name="popular">Popular</string>
+    <string name="see_more">See more</string>
 </resources>
