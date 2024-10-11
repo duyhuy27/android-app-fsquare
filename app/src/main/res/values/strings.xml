@@ -74,6 +74,15 @@
     <string name="Google_Authentication">Xác Thực Google</string>
     <string name="Change_PIN">Thay Đổi Mã PIN</string>
     <string name="Change_Password">Thay Đổi Mật Khẩu</string>
+    <string name="Edit_Profile">Chỉnh sửa hồ sơ</string>
+    <string name="Address">Địa chỉ</string>
+    <string name="Notification">Thông báo</string>
+    <string name="My_Wallete">Ví của tôi</string>
+    <string name="Security">Bảo mật</string>
+    <string name="Language">Ngôn ngữ</string>
+    <string name="Privacy_Policy">Chính sách bảo mật</string>
+    <string name="Logout">Đăng xuất</string>
+    <string name="Profile">Hồ sơ</string>
 
 
 
