@@ -106,6 +106,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/minus"
+                        android:backgroundTint="#EFF0F3"
                         android:background="?attr/selectableItemBackgroundBorderless"/>
                 <TextView
                     android:id="@+id/txt_product_quantity"
@@ -123,6 +124,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/plus"
+                        android:backgroundTint="#F4F5F7"
                         android:background="?attr/selectableItemBackgroundBorderless"/>
             </LinearLayout>
             </LinearLayout>
