@@ -83,6 +83,7 @@
     <string name="Privacy_Policy">Chính sách bảo mật</string>
     <string name="Logout">Đăng xuất</string>
     <string name="Profile">Hồ sơ</string>
+    <string name="More">Thêm</string>
 
 
     <!-- PullToRefresh view strings -->
