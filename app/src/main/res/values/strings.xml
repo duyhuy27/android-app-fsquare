@@ -97,7 +97,6 @@
     <string name="See_all">Xem tất cả</string>
 
 
-
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
     <string name="pull_refresh_view_refresh_success">Đã xong</string>
