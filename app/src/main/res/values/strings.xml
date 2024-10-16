@@ -97,19 +97,6 @@
     <string name="See_all">Xem tất cả</string>
 
 
-    <!-- Setting cart strings -->
-    <string name="Checkuot">Thanh Toán</string>
-    <string name="Cart">Giỏ hàng</string>
-
-
-    <!-- Setting wallet strings -->
-    <string name="My_E_Wallet">Ví Điện Tử Của Tôi</string>
-    <string name="Transaction_History">Lịch sử giao dịch</string>
-    <string name="See_all">Xem tất cả</string>
-
-    <string name="More">Thêm</string>
-
-
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
     <string name="pull_refresh_view_refresh_success">Đã xong</string>
