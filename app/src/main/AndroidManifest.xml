@@ -53,6 +53,9 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="r">
         <activity
+            android:name=".features.order.ui.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.auth.ui.SignUpActivity"
             android:exported="false" />
         <activity
@@ -60,7 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".features.auth.ui.AuthActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".features.main.ui.MainActivity"
             android:exported="true">
