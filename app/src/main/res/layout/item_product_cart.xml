@@ -107,7 +107,7 @@
                         android:id="@+id/btn_product_minus_cart"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:padding="5"
+                        android:padding="5dp"
                         android:src="@drawable/minus"
                         android:background="@drawable/image_cart_button_bg"/>
                 <TextView
