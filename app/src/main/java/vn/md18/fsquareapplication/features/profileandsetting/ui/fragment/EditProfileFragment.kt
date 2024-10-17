@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.hbb20.countrypicker.models.CPCountry
+import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentEditProfileBinding
 import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
 
+@AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileViewModel>() {
 
     override val viewModel: ProfileViewModel by viewModels()
