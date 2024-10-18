@@ -85,6 +85,28 @@
     <string name="Profile">Hồ sơ</string>
     <string name="More">Thêm</string>
 
+    <!--Cancel order view strings -->
+    <string name="Cancel_Order">Hủy đơn hàng</string>
+    <string name="Fsquare_looks_forward_to_receiving_customer_feedback_to_improve_our_service">Fsquare rất mong được sự góp ý của khách hàng để dịch vụ được tốt hơn</string>
+    <string name="Changed_my_mind_wont_buy_anymore">Đổi ý, không mua nữa</string>
+    <string name="Found_somewhere_cheaper">Tìm thấy chỗ khác rẻ hơn</string>
+    <string name="Change_product_order_information_quantity_color_size">Thay đổi thông tin sản phẩm đặt hàng (số lượng, màu sắc, kích thước,...)</string>
+    <string name="Other_reasons">Lý do khác</string>
+    <string name="Cancel">Hủy</string>
+    <string name="Order">Đặt hàng</string>
+    <string name="Note">Lưu ý:</string>
+    <string name="Promotional_gifts_may_vary_depending_on_the_time_of_order">- Quà khuyến mãi có thể thay đổi theo thời điểm đặt hàng</string>
+
+
+    <!--My order review strings -->
+    <string name="Review">Đánh giá</string>
+    <string name="How_is_your_order">Đơn hàng của bạn thế nào?</string>
+    <string name="Please_give_your_rating_and_also_your_review">Hãy cho chúng tôi biết đánh giá và nhận xét của bạn...</string>
+    <string name="Add_image">Thêm hình ảnh</string>
+    <string name="Add_video">Thêm video</string>
+    <string name="Comment">Bình luận</string>
+    <string name="Reset">Làm lại</string>
+    <string name="Apply">Áp dụng</string>
 
     <!-- Setting cart strings -->
     <string name="Checkuot">Thanh Toán</string>
