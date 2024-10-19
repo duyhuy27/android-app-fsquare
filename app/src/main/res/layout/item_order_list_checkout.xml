@@ -32,7 +32,7 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="5dp">
                 <TextView
-                    android:id="@+id/txt_product_name_cart"
+                    android:id="@+id/txt_product_name_order_list"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="NIKE Run Swift 2"
@@ -40,12 +40,6 @@
                     android:textColor="#040207"
                     android:fontFamily="@font/opensans_semi_bold"
                     android:layout_weight="1"/>
-                <ImageButton
-                    android:id="@+id/btn_product_delete_cart"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/delete"
-                    android:background="@drawable/image_cart_custom"/>
 
             </LinearLayout>
 
@@ -54,20 +48,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <View
-                    android:id="@+id/txt_color_product_cart"
+                    android:id="@+id/txt_color_product_order_list"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:background="@drawable/circle_red"
                     android:layout_gravity="center_vertical"/>
-               <TextView
-                   android:id="@+id/txt_product_color_cart"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Red"
-                   android:textSize="12dp"
-                   android:textColor="#676767"
-                   android:layout_marginLeft="5dp"
-                   android:fontFamily="@font/opensans_semi_bold"/>
+                <TextView
+                    android:id="@+id/txt_product_color_order_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Red"
+                    android:textSize="12dp"
+                    android:textColor="#676767"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/opensans_semi_bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,7 +71,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"/>
                 <TextView
-                    android:id="@+id/txt_product_size_cart"
+                    android:id="@+id/txt_product_size_order_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Size = 42"
@@ -91,7 +85,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
                 <TextView
-                    android:id="@+id/txt_product_price_cart"
+                    android:id="@+id/txt_product_price_order_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$126.99"
@@ -104,35 +98,23 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:layout_gravity="end">
-                    <ImageView
-                        android:id="@+id/btn_product_minus_cart"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="5dp"
-                        android:src="@drawable/minus"
-                        android:background="@drawable/image_cart_button_bg"/>
-                <TextView
-                    android:id="@+id/txt_product_quantity_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="#333333"
-                    android:fontFamily="@font/opensans_bold"/>
-                    <ImageView
-                        android:id="@+id/btn_product_plus_cart"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="5dp"
-                        android:src="@drawable/plus"
-                        android:background="@drawable/image_cart_button_bg"/>
-            </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_product_quantity_order_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textColor="#333333"
+                        android:fontFamily="@font/opensans_bold"/>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

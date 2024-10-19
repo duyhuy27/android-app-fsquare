@@ -111,6 +111,24 @@
     <!-- Setting cart strings -->
     <string name="Checkuot">Thanh Toán</string>
     <string name="Cart">Giỏ hàng</string>
+    <string name="Edit">Chỉnh sửa</string>
+    <string name="Order_List">Danh sách đơn hàng</string>
+    <string name="Chose_Shipping">Chọn phương thức giao hàng</string>
+    <string name="Chose_Shipping_Type">Chọn loại hình giao hàng</string>
+    <string name="Promo_Code">Mã khuyến mãi</string>
+    <string name="Amount">Số tiền</string>
+    <string name="Shipping">Vận chuyển</string>
+    <string name="Total">Tổng</string>
+    <string name="Continue_to_Payment">Tiếp tục đến bước thanh toán</string>
+    <string name="Apply">Áp dụng</string>
+    <string name="Enter_Promo_Code">Nhập mã khuyến mãi</string>
+    <string name="Order_Successful">Đặt hàng thành công</string>
+    <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
+    <string name="View_Order">Xem đơn hàng</string>
+    <string name="View_E_Receipt">Xem biên nhận điện tử</string>
+
+    <!-- Setting order strings -->
+    <string name="Cancel">Hủy Bỏ</string>
 
 
     <!-- Setting wallet strings -->
