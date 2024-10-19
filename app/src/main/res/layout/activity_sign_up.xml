@@ -17,134 +17,193 @@
         <vn.md18.fsquareapplication.utils.view.CustomToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleToolbar="Edit Profile"
+            app:titleToolbar="Checkout"
             app:textStyle="bold"/>
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="@dimen/size_20"
-            android:layout_marginTop="@dimen/permission_dp_15">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/size_14"
-                android:text="@string/Full_name"
-                android:textColor="@color/black_neutral"
-                android:layout_marginBottom="@dimen/size_5" />
-
-            <vn.md18.fsquareapplication.utils.view.CustomEditText
-                android:id="@+id/edt_fullname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/size_14"
-                android:text="@string/Birth_Date"
-                android:textColor="@color/black_neutral"
-                android:layout_marginBottom="@dimen/size_5"/>
-            <vn.md18.fsquareapplication.utils.view.CustomEditText
-                android:id="@+id/edt_birth_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                app:iconEnd="@drawable/date"
-                app:actionIme="actionNone"
-                app:showIconTogglePassword="false"
-                android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20" />
-            <!-- Email -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/size_14"
-                android:text="@string/Email"
-                android:textColor="@color/black_neutral"
-                android:layout_marginBottom="@dimen/size_5"/>
-
-            <vn.md18.fsquareapplication.utils.view.CustomEditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                app:iconEnd="@drawable/email"
-                app:actionIme="actionNone"
-                app:showIconTogglePassword="false"
-                android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20" />
-
-            <!-- Address -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/size_14"
-                android:text="@string/Country"
-                android:textColor="@color/black_neutral"
-                android:layout_marginBottom="@dimen/size_5"/>
-
-            <com.hbb20.CountryPickerView
-                android:id="@+id/countryPicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_4sdp"
-                android:background="@drawable/bg_edt_corner_grey"
-                android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/size_14"
-                android:text="@string/Phone"
-                android:textColor="@color/black_neutral"
-                android:layout_marginBottom="@dimen/size_5"/>
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_edt_corner_grey"
-                android:padding="@dimen/_5sdp"
-                android:orientation="horizontal">
-                <com.ak.ui.CountryCodePicker
-                    android:id="@+id/ccp_phone"
+                android:orientation="vertical">
+
+                <!-- Địa chỉ -->
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:contentColor="@color/neutral_50_"
-                    app:fontFamily="@font/montserrat_medium"
-                    app:showFlag="true"
-                    android:gravity="center"
-                    app:defaultNameCode="vn"
-                    app:showArrowDown="true"
-                    app:showNameCode="false"
-                    app:arrowSize="@dimen/_20sdp"
-                    app:textSize="@dimen/_12ssp"
-                    app:excludedCountries="ad,ae" />
+                    android:text="@string/Address"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:textSize="18sp"
+                    android:textColor="#333333"
+                    android:layout_marginLeft="20dp"/>
 
-                <EditText
-                    android:id="@+id/edtNumberPhone"
+                <!-- Include address layout -->
+                <include layout="@layout/item_checkuot_address" />
+
+                <!-- Order list title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Order_List"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:textSize="18sp"
+                    android:textColor="#333333"
+                    android:layout_marginLeft="20dp"/>
+
+                <!-- RecyclerView for order list -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_product_cart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="phone"
-                    android:background="@null"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:maxLength="13"/>
-            </LinearLayout>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_order_list_checkout" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Chose_Shipping"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:textSize="18sp"
+                    android:textColor="#333333"
+                    android:layout_marginLeft="20dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/shipping_cart"
+                        android:layout_marginBottom="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Chose_Shipping_Type"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:textSize="18sp"
+                        android:textColor="#333333"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/right_arrow_primari"
+                        android:background="#FFFFFF"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Promo_Code"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:textSize="18sp"
+                    android:textColor="#333333"
+                    android:layout_marginLeft="20dp"/>
+                <EditText
+                    android:id="@+id/et_promo_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Enter_Promo_Code"
+                    android:drawableEnd="@drawable/add"
+                    android:padding="12dp"
+                    android:layout_margin="20dp"
+                    android:textColorHint="#929AB7"
+                    android:background="@drawable/custom_edittext_background"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Update"
-            android:layout_marginBottom="@dimen/permission_dp_40"
-            android:layout_marginLeft="@dimen/permission_dp_20"
-            android:layout_marginRight="@dimen/permission_dp_20"
-            style="@style/ButtonApp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="40dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Amount"
+                            android:layout_weight="1"
+                            android:textColor="#333333"/>
+                        <TextView
+                            android:id="@+id/txt_amuont_checkout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$1,458.28"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:textColor="#333333"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Shipping"
+                            android:layout_weight="1"
+                            android:textColor="#333333"/>
+                        <TextView
+                            android:id="@+id/txt_shipping_checkout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:textColor="#333333"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#CCCCCC"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Total"
+                            android:layout_weight="1"
+                            android:textColor="#333333"/>
+                        <TextView
+                            android:id="@+id/txt_total_checkout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$1,458.28"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:textColor="#333333"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Checkout button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_new_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Continue_to_Payment"
+                    android:layout_marginBottom="@dimen/permission_dp_40"
+                    android:layout_marginLeft="@dimen/permission_dp_20"
+                    android:layout_marginRight="@dimen/permission_dp_20"
+                    style="@style/ButtonApp"/>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>
