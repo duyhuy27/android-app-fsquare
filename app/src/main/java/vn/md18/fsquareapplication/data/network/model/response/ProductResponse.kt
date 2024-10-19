@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.data.network.model.response
 
 import com.google.gson.annotations.SerializedName
+import vn.md18.fsquareapplication.features.main.ui.fragment.Thumbnail
 
 data class ProductResponse(
     @SerializedName("_id")
@@ -12,9 +13,9 @@ data class ProductResponse(
     @SerializedName("minPrice")
     val minPrice: Int,
     @SerializedName("maxPrice")
-    val maxPrice : Int,
+    val maxPrice: Int,
     @SerializedName("rating")
-    val rating : Double,
+    val rating: Double,
     @SerializedName("reviewCount")
     val reviewCount: Int,
     @SerializedName("isFavorite")

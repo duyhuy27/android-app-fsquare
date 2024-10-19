@@ -31,7 +31,7 @@ class ProfileAndSettingActivity : BaseActivity<ActivityProfileAndSettingBinding,
 
     override fun onViewLoaded() {
 
-        receivedKey = intent.getStringExtra("EXTRA_KEY")
+        receivedKey = intent.getStringExtra("STATUS_KEY")
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.profile_nav_host_fragment) as NavHostFragment
