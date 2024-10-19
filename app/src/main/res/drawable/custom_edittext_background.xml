@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <!-- Màu nền -->
+            <solid android:color="#E3E6EF"/> <!-- Thay đổi màu nền ở đây -->
+
+            <!-- Viền -->
+            <stroke
+                android:width="2dp"
+                android:color="#E3E6EF"/> <!-- Thay đổi màu viền ở đây -->
+
+            <!-- Bo góc -->
+            <corners android:radius="10dp"/> <!-- Độ bo góc của EditText -->
+        </shape>
+    </item>
+</selector>

@@ -3,12 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.order.fragment.VNPFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <vn.md18.fsquareapplication.utils.view.CustomToolbar
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:titleToolbar="MOBILE BANKING"
+           app:textStyle="bold"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="QR PAY"
+           android:textSize="40dp"
+           android:fontFamily="@font/montserrat_semi_bold"
+           android:textColor="#254AA5"
+           android:layout_gravity="center"
+           android:layout_marginTop="50dp"/>
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Đưa mã QR vào trung tâm camera,tiến trình quét mã sẽ diễn ra tự động"
+           android:textSize="15sp"
+           android:textColor="#254AA5"
+           android:layout_marginTop="10dp"
+           android:layout_marginLeft="50dp"
+           android:layout_marginRight="50dp"
+           android:gravity="center"/>
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/image_qr"
+           android:layout_gravity="center"
+           android:layout_marginTop="40dp"/>
+
+   </LinearLayout>
 
 </FrameLayout>
