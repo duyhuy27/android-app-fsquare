@@ -18,6 +18,12 @@ object Constant {
     const val KEY_NOTIFICATION = "NOTIFICATION"
     const val KEY_PAYMENT = "PAYMENT"
 
+    const val PENDING = "Pending"
+    const val PROCESSING = "Processing"
+    const val SHIPPED = "Shipped"
+    const val DELIVERED = "Delivered"
+    const val CANCELED = "Canceled"
+
     const val REQUEST_CODE_WRITE_EXTERNAL_PERMISSION = 11
     const val REQUEST_CODE_ACCESS_FINE_LOCATION_AP_MODE = 15
     const val REQUEST_CODE_PICK_DEVICES = 16
