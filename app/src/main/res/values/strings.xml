@@ -120,21 +120,23 @@
     <string name="Shipping">Vận chuyển</string>
     <string name="Total">Tổng</string>
     <string name="Continue_to_Payment">Tiếp tục đến bước thanh toán</string>
-    <string name="Apply">Áp dụng</string>
     <string name="Enter_Promo_Code">Nhập mã khuyến mãi</string>
     <string name="Order_Successful">Đặt hàng thành công</string>
     <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
     <string name="View_Order">Xem đơn hàng</string>
     <string name="View_E_Receipt">Xem biên nhận điện tử</string>
 
-    <!-- Setting order strings -->
-    <string name="Cancel">Hủy Bỏ</string>
-
 
     <!-- Setting wallet strings -->
     <string name="My_E_Wallet">Ví Điện Tử Của Tôi</string>
     <string name="Transaction_History">Lịch sử giao dịch</string>
     <string name="See_all">Xem tất cả</string>
+    <string name="Enter_the_amount_of_top_up">Nhập số tiền cần nạp</string>
+    <string name="Continue">Tiếp tục</string>
+    <string name="Select_the_Top_Up_method_you_want_to_use.">Chọn phương thức nạp tiền mà bạn muốn sử dụng.</string>
+    <string name="Add_New_Card.">Thêm thẻ mới.</string>
+    <string name="Confirm_Payment.">Xác nhận thanh toán</string>
+
 
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>
