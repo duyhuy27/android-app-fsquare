@@ -122,6 +122,39 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="#C6D0DC"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            android:background="@drawable/custom_edittext_background">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/add1"
+                android:layout_marginEnd="8dp"/>
+            <TextView
+                android:id="@+id/txt_add_new_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Add_New_Card"
+                android:textSize="16sp"
+                android:textColor="#5A5F7D"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_apply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Confirm_Payment."
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+
     </LinearLayout>
 
 </FrameLayout>

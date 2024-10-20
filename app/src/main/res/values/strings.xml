@@ -134,6 +134,8 @@
     <string name="Enter_the_amount_of_top_up">Nhập số tiền cần nạp</string>
     <string name="Continue">Tiếp tục</string>
     <string name="Select_the_Top_Up_method_you_want_to_use.">Chọn phương thức nạp tiền mà bạn muốn sử dụng.</string>
+    <string name="Add_New_Card.">Thêm thẻ mới.</string>
+    <string name="Confirm_Payment.">Xác nhận thanh toán</string>
 
 
     <!-- PullToRefresh view strings -->
