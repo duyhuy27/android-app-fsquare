@@ -42,6 +42,7 @@
                 android:layout_marginLeft="10dp"
                 />
             <RadioButton
+                android:id="@+id/radio_viet_qr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#C6D0DC"/>
@@ -67,6 +68,7 @@
                 android:layout_marginLeft="10dp"
                 />
             <RadioButton
+                android:id="@+id/radio_apple_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#C6D0DC"/>
@@ -92,6 +94,7 @@
                 android:layout_marginLeft="10dp"
                 />
             <RadioButton
+                android:id="@+id/radio_master_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#C6D0DC"/>
@@ -117,6 +120,7 @@
                 android:layout_marginLeft="10dp"
                 />
             <RadioButton
+                android:id="@+id/radio_viza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#C6D0DC"/>
@@ -145,7 +149,7 @@
                 android:fontFamily="@font/montserrat_semi_bold"/>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_apply"
+            android:id="@+id/btn_confirm_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Confirm_Payment."
