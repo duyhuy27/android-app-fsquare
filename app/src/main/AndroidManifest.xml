@@ -56,7 +56,7 @@
             android:name=".features.main.ui.NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".features.main.ui.`Favorite&NewestActivity`"
+            android:name=".features.main.ui.FavoriteAndNewestActivity"
             android:exported="false" />
         <activity
             android:name=".features.detail.ui.DetailProductActivity"
