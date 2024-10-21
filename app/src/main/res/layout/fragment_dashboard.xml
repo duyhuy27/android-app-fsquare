@@ -46,12 +46,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_popular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_product_banner_dashboard"
-        android:layout_marginTop="@dimen/text_size_20"
+        android:layout_marginTop="@dimen/text_size_10"
         android:id="@+id/rcv_banner"/>
+
+    <include
+        layout="@layout/item_brand"
+        />
 
     <GridView
         android:id="@+id/grdProduct"
@@ -63,8 +64,4 @@
         android:horizontalSpacing="15dp"
         tools:listitem="@layout/item_product"
         />
-
-
-
-
 </LinearLayout>

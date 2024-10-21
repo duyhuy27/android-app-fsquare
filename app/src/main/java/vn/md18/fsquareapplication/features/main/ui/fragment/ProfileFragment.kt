@@ -23,10 +23,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, MainViewModel>() {
     }
 
     override fun addViewListener() {
-        binding.btnTest.setOnClickListener { Toast.makeText(context, "hihi1", Toast.LENGTH_SHORT).show() }
-        binding.avatar.setOnClickListener { Toast.makeText(requireContext(), "hihi1", Toast.LENGTH_SHORT).show() }
-        binding.btnAddress.setOnClickListener { Toast.makeText(requireContext(), "hihi1", Toast.LENGTH_SHORT).show() }
-        binding.btnProfile.setOnClickListener { Toast.makeText(context, "hihi", Toast.LENGTH_SHORT).show() }
+        binding.btnAddress.setOnClickListener { navigation(Constant.KEY_ADDRESS) }
+        binding.btnProfile.setOnClickListener { navigation(Constant.KEY_EDIT_PROFILE)}
         binding.btnNotification.setOnClickListener{ navigation(Constant.KEY_NOTIFICATION) }
         binding.btnWallet.setOnClickListener{ navigation(Constant.KEY_PAYMENT) }
         binding.btnSecurity.setOnClickListener{ navigation(Constant.KEY_SECURITY) }
