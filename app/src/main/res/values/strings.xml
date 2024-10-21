@@ -120,7 +120,6 @@
     <string name="Shipping">Vận chuyển</string>
     <string name="Total">Tổng</string>
     <string name="Continue_to_Payment">Tiếp tục đến bước thanh toán</string>
-    <string name="Apply">Áp dụng</string>
     <string name="Enter_Promo_Code">Nhập mã khuyến mãi</string>
     <string name="Order_Successful">Đặt hàng thành công</string>
     <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
@@ -128,7 +127,6 @@
     <string name="View_E_Receipt">Xem biên nhận điện tử</string>
 
     <!-- Setting order strings -->
-    <string name="Cancel">Hủy Bỏ</string>
 
 
     <!-- Setting wallet strings -->
