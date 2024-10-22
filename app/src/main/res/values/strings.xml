@@ -107,6 +107,7 @@
     <string name="Comment">Bình luận</string>
     <string name="Reset">Làm lại</string>
     <string name="Apply">Áp dụng</string>
+    <string name="Promo">Khuyến mại</string>
 
     <!-- Setting cart strings -->
     <string name="Checkuot">Thanh Toán</string>
@@ -136,6 +137,11 @@
     <string name="Select_the_Top_Up_method_you_want_to_use.">Chọn phương thức nạp tiền mà bạn muốn sử dụng.</string>
     <string name="Add_New_Card.">Thêm thẻ mới.</string>
     <string name="Confirm_Payment.">Xác nhận thanh toán</string>
+    <string name="Enter_your_PIN_to_confirm_top_up.">Nhập mã PIN của bạn để xác nhận nạp tiền.</string>
+    <string name="Payment_Methods">Phương thức thanh toán</string>
+    <string name="Transaction_IN">Nhận tiền</string>
+    <string name="Date">Ngày</string>
+    <string name="Status">Trạng thái</string>
 
 
     <!-- PullToRefresh view strings -->
