@@ -20,8 +20,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -50,8 +50,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -80,8 +80,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -110,8 +110,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -142,7 +142,7 @@
         android:orientation="horizontal"
         android:weightSum="4"
         android:padding="10dp"
-        android:layout_marginVertical="@dimen/_10sdp">
+        >
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -150,8 +150,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -180,8 +180,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -210,8 +210,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
@@ -240,8 +240,8 @@
             android:orientation="vertical"
             >
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_64sdp"
-                android:layout_height="@dimen/_64sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
                 app:cardBackgroundColor="#F4F5F7"
                 app:cardCornerRadius="@dimen/_100sdp"
                 android:layout_gravity="center"
