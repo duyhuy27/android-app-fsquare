@@ -60,7 +60,7 @@ class MainViewModel @Inject constructor(
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
-                    mainRepository.getProductList(size = 1, page = 1)
+                    mainRepository.getProductList(size = 10, page = 1)
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
