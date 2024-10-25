@@ -58,7 +58,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:textColor="#676767"
                 android:fontFamily="@font/opensans_semi_bold"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                 android:text="|"
                 android:textSize="@dimen/_15sdp"
                 android:textColor="#676767"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/opensans_semi_bold"
                 />
             <androidx.cardview.widget.CardView
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 app:cardBackgroundColor="#F1F2F6"
                 app:cardCornerRadius="@dimen/_6sdp"
-                android:layout_marginStart="@dimen/_10sdp">
+                android:layout_marginStart="@dimen/_5sdp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
