@@ -53,6 +53,9 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="r">
         <activity
+            android:name=".features.main.ui.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.main.ui.NotificationActivity"
             android:exported="false" />
         <activity
