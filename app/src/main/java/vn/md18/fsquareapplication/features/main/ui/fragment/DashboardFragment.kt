@@ -9,7 +9,8 @@ import vn.md18.fsquareapplication.databinding.FragmentDashboardBinding
 import vn.md18.fsquareapplication.features.main.adapter.ProductAdapter
 import vn.md18.fsquareapplication.features.main.adapter.ProductBannerAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
-import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import android.os.Handler
+import android.os.Looper
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,6 +21,10 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     }
 
     override val viewModel: MainViewModel by viewModels()
+
+    private var handler: Handler? = null
+    private var autoScrollRunnable: Runnable? = null
+    private var currentPosition = 0
 
     @Inject
     lateinit var bannerAdapter: ProductBannerAdapter
@@ -44,35 +49,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
             }
 //            generateDummyProducts()
         }
-    }
 
-//    private fun generateDummyProducts() {
-//        val dummyProducts = listOf(
-//            ProductResponse(
-//                _id = "1", name = "Product 1", thumbnail = Thumbnail("url_to_image_1"), minPrice = 10, maxPrice = 15, rating = 4.5, reviewCount = 100, isFavorite = false
-//            ),
-//            ProductResponse(
-//                _id = "2", name = "Product 2", thumbnail = Thumbnail("url_to_image_2"), minPrice = 20, maxPrice = 25, rating = 4.0, reviewCount = 80, isFavorite = true
-//            ),
-//            ProductResponse(
-//                _id = "3", name = "Product 3", thumbnail = Thumbnail("url_to_image_3"), minPrice = 15, maxPrice = 20, rating = 3.5, reviewCount = 50, isFavorite = false
-//            ),
-//            ProductResponse(
-//                _id = "4", name = "Product 4", thumbnail = Thumbnail("url_to_image_4"), minPrice = 5, maxPrice = 10, rating = 5.0, reviewCount = 200, isFavorite = true
-//            ),
-//            ProductResponse(
-//                _id = "5",
-//                name = "Product 5",
-//                thumbnail = Thumbnail("url_to_image_5"),
-//                minPrice = 12,
-//                maxPrice = 18,
-//                rating = 4.2,
-//                reviewCount = 60,
-//                isFavorite = false
-//            )
-//        )
-//        productAdapter.submitList(dummyProducts)
-//    }
+        startAutoScroll()
+    }
 
 
 
@@ -87,6 +66,29 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
                 productAdapter.updateProducts(it)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        stopAutoScroll()
+    }
+
+    private fun startAutoScroll() {
+        handler = Handler(Looper.getMainLooper())
+        autoScrollRunnable = Runnable {
+            if (currentPosition == bannerAdapter.itemCount) {
+                currentPosition = 0
+                binding.rcvBanner.scrollToPosition(0)
+            } else {
+                binding.rcvBanner.smoothScrollToPosition(currentPosition++)
+            }
+            handler?.postDelayed(autoScrollRunnable!!, 3000)
+        }
+        handler?.postDelayed(autoScrollRunnable!!, 3000)
+    }
+
+    private fun stopAutoScroll() {
+        handler?.removeCallbacks(autoScrollRunnable!!)
     }
 }
 
