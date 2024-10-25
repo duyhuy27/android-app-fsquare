@@ -11,7 +11,7 @@ import vn.md18.fsquareapplication.features.main.adapter.ProductBannerAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import javax.inject.Inject
-import vn.md18.fsquareapplication.data.network.model.response.Thumbnail
+
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>() {
     companion object {
@@ -39,9 +39,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
                 setHasFixedSize(true)
                 adapter = bannerAdapter
             }
-//            grdProduct.apply {
-//                adapter = productAdapter
-//            }
+            grdProduct.apply {
+                grdProduct.adapter = productAdapter
+            }
 //            generateDummyProducts()
         }
     }
@@ -84,9 +84,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
         viewModel.listProductBanner.observe(this@DashboardFragment) {
             binding.apply {
                 bannerAdapter.submitList(it)
+                productAdapter.updateProducts(it)
             }
         }
     }
 }
 
-data class Thumbnail(val url: String)

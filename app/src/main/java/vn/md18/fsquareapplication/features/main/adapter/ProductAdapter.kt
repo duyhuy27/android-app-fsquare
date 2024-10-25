@@ -1,52 +1,56 @@
 package vn.md18.fsquareapplication.features.main.adapter
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
+import android.widget.BaseAdapter
+import dagger.hilt.android.qualifiers.ApplicationContext
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
-import vn.md18.fsquareapplication.databinding.ItemProductBannerDashboardBinding
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
-import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 
-class ProductAdapter @Inject constructor() : BaseRecycleAdapter<ProductResponse>(){
-    override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
-    }
+class ProductAdapter @Inject constructor(
+    @ApplicationContext private val context: Context
+) : BaseAdapter() {
 
-    override fun setEmptyViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
-    }
+    private var productList: List<ProductResponse> = listOf()
 
-    override fun setNormalViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return NormalViewHolder(
-            ItemProductBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+    override fun getCount(): Int = productList.size
+
+    override fun getItem(position: Int): ProductResponse = productList[position]
+
+    override fun getItemId(position: Int): Long = position.toLong()
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val binding: ItemProductBinding
+        val view: View
+
+        if (convertView == null) {
+            binding = ItemProductBinding.inflate(
+                LayoutInflater.from(context), parent, false
             )
-        )
-    }
-
-    override fun setErrorViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
-    }
-
-    inner class NormalViewHolder(viewBinding: ItemProductBinding) :
-        BaseViewHolder<ItemProductBinding>(viewBinding) {
-        @SuppressLint("SetTextI18n")
-        override fun bindData(position: Int) {
-            val product: ProductResponse = itemList[position]
-            binding.apply {
-                txtProductPrice.text = product.maxPrice.toString() + " $"
-                txtProductName.text = product.name
-                imgProduct.loadImageURL(product.thumbnail.url)
-            }
+            view = binding.root
+            view.tag = binding
+        } else {
+            binding = convertView.tag as ItemProductBinding
+            view = convertView
         }
 
+        val product = productList[position]
+        binding.apply {
+            txtProductPrice.text = "${product.maxPrice} $"
+            txtProductName.text = product.name
+            imgProduct.loadImageURL(product.thumbnail.url)
+        }
+
+        return view
     }
 
+    fun updateProducts(newProducts: List<ProductResponse>) {
+        productList = newProducts
+        notifyDataSetChanged()
+    }
 }
+

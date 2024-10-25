@@ -1,7 +1,6 @@
 package vn.md18.fsquareapplication.data.network.model.response
 
 import com.google.gson.annotations.SerializedName
-import vn.md18.fsquareapplication.features.main.ui.fragment.Thumbnail
 
 data class ProductResponse(
     @SerializedName("_id")
