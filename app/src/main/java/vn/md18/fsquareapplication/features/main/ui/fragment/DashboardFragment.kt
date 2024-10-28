@@ -11,6 +11,11 @@ import vn.md18.fsquareapplication.features.main.adapter.ProductBannerAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
+import vn.md18.fsquareapplication.R
+import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +43,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     override fun getTagFragment(): String = DashboardFragment::class.java.simpleName
 
     override fun onViewLoaded() {
+
+        productAdapter.setViewModel(viewModel)
+
         binding.apply {
             rcvBanner.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -47,11 +55,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
             grdProduct.apply {
                 grdProduct.adapter = productAdapter
             }
-//            generateDummyProducts()
         }
 
         startAutoScroll()
     }
+
 
 
 
@@ -66,6 +74,22 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
                 productAdapter.updateProducts(it)
             }
         }
+        viewModel.favoriteState.observe(this@DashboardFragment) { data ->
+            when (data) {
+                is DataState.Error -> {
+                    activity?.showCustomToast("Add to Favorite Failure", Constant.ToastStatus.FAILURE)
+                }
+                DataState.Loading -> {
+
+                }
+                is DataState.Success -> {
+                    activity?.showCustomToast("Add to favorite Success", Constant.ToastStatus.SUCCESS)
+                }
+            }
+        }
+
+
+
     }
 
     override fun onDestroyView() {

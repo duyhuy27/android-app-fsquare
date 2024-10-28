@@ -8,12 +8,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
-import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
+import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
+import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
+import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
+import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
-import vn.md18.fsquareapplication.utils.ErrorUtils
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
-import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +36,21 @@ class MainViewModel @Inject constructor(
 
     private val _listProductBanner = MutableLiveData<List<ProductResponse>>()
     val listProductBanner: LiveData<List<ProductResponse>> = _listProductBanner
+
+    private val _listFavorite = MutableLiveData<List<FavoriteResponse>>()
+    val listFavorite: LiveData<List<FavoriteResponse>> = _listFavorite
+
+    private val _favoriteState: MutableLiveData<DataState<CreateFavoriteResponse>> = MutableLiveData()
+    val favoriteState: LiveData<DataState<CreateFavoriteResponse>> get() = _favoriteState
+
+    private val _deleteFavoriteState: MutableLiveData<DataState<DeleteFavoriteRespone>> = MutableLiveData()
+    val deleteFavoriteState: LiveData<DataState<DeleteFavoriteRespone>> get() = _deleteFavoriteState
+
+    private val _listBag = MutableLiveData<List<GetBagResponse>>()
+    val listBag: LiveData<List<GetBagResponse>> = _listBag
+
+    private val _updateQuantityState: MutableLiveData<DataState<UpdateQuantityBagResponse>> = MutableLiveData()
+    val updateQuantityState: LiveData<DataState<UpdateQuantityBagResponse>> get() = _updateQuantityState
 
 
     override fun onDidBindViewModel() {
@@ -77,6 +97,118 @@ class MainViewModel @Inject constructor(
             }
             else {
                 setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
+    fun getFavoriteList() {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.getFavoriteList()
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            response.data.let {
+                                _listFavorite.value = it
+                                setErrorString(response.message.toString())
+                            }
+                        },
+                            { throwable ->
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            }
+            else {
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
+    fun createFavorite(shoes: String) {
+        val favoriteRequest = FavoriteRequest(shoes = shoes)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.createFavorite(favoriteRequest = favoriteRequest)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            _favoriteState.value = DataState.Success(response)
+                        }, { err ->
+                            _favoriteState.value = DataState.Error(err)
+                        })
+                )
+            } else {
+                setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun deleteFavorite(_id: String) {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.deleteFavorite(id = _id)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            _deleteFavoriteState.postValue(DataState.Success(response))
+                        }, { err ->
+                            _deleteFavoriteState.postValue(DataState.Error(err))
+                        })
+                )
+            } else {
+                setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun getBagList() {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.getBagList()
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            response.data.let {
+                                _listBag.value = it
+                                setErrorString(response.message.toString())
+                            }
+                        },
+                            { throwable ->
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            }
+            else {
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
+    fun updateQuantity(_id: String, action: String) {
+        var request = UpdateQuantityBagRequest(action = action)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.updateQuantityBag(id = _id, updateQuantityBagRequest = request)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            _updateQuantityState.postValue(DataState.Success(response))
+                        }, { err ->
+                            _updateQuantityState.postValue(DataState.Error(err))
+                        })
+                )
+            } else {
+                setErrorStringId(R.string.no_internet_connection)
             }
         }
     }

@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentHomeBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
+import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 
 @AndroidEntryPoint
@@ -30,7 +32,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>() {
     }
 
     override fun addViewListener() {
+        binding.buttonActionFirst.setOnClickListener {
+            val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
+                putExtra("typeFavNew", "Fav")
 
+            }
+            startActivity(intent)
+        }
     }
 
     override fun addDataObserver() {

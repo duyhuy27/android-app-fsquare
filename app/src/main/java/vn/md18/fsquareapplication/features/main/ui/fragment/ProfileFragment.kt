@@ -46,6 +46,5 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, MainViewModel>() {
         val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
         intent.putExtra("STATUS_KEY", status)
         startActivity(intent)
-        Toast.makeText(context, "hihi", Toast.LENGTH_SHORT).show()
     }
 }
