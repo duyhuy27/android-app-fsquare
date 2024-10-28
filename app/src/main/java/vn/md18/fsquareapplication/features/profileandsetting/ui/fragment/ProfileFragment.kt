@@ -33,8 +33,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     override fun addViewListener() {
-        binding.btnTest.setOnClickListener { Toast.makeText(context, "hihi1", Toast.LENGTH_SHORT).show() }
-        binding.avatar.setOnClickListener { Toast.makeText(requireContext(), "hihi1", Toast.LENGTH_SHORT).show() }
+
         binding.btnAddress.setOnClickListener { Toast.makeText(requireContext(), "hihi1", Toast.LENGTH_SHORT).show() }
         binding.btnProfile.setOnClickListener { Toast.makeText(context, "hihi", Toast.LENGTH_SHORT).show() }
         binding.btnNotification.setOnClickListener{ navigation(Constant.KEY_NOTIFICATION) }
