@@ -126,6 +126,12 @@
     <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
     <string name="View_Order">Xem đơn hàng</string>
     <string name="View_E_Receipt">Xem biên nhận điện tử</string>
+    <string name="Description">Mô tả</string>
+    <string name="Size">Kích thước</string>
+    <string name="Color">Màu sắc</string>
+    <string name="Product_description">Mô tả sản phẩm</string>
+    <string name="Price">Giá</string>
+    <string name="Add_to_Cart">Thêm vào giỏ hàng</string>
 
 
     <!-- Setting wallet strings -->
