@@ -106,7 +106,6 @@
     <string name="Add_video">Thêm video</string>
     <string name="Comment">Bình luận</string>
     <string name="Reset">Làm lại</string>
-    <string name="Apply">Áp dụng</string>
 
     <!-- Setting cart strings -->
     <string name="Checkuot">Thanh Toán</string>
@@ -127,8 +126,18 @@
     <string name="View_Order">Xem đơn hàng</string>
     <string name="View_E_Receipt">Xem biên nhận điện tử</string>
 
-    <!-- Setting order strings -->
-    <string name="Cancel">Hủy Bỏ</string>
+    <!-- Filter strings -->
+    <string name="Filter">Bộ lọc</string>
+    <string name="Categories">Thể loại</string>
+    <string name="Gender">Giới tính</string>
+    <string name="All">Tất cả</string>
+    <string name="Man">Nam</string>
+    <string name="Women">Nữ</string>
+    <string name="Price">Giá</string>
+    <string name="Popular">Phổ biến</string>
+    <string name="Newest_shoes">Mới nhất</string>
+    <string name="Special">Đặc biệt</string>
+    <string name="Rating">Xếp hạng</string>
 
 
     <!-- Setting wallet strings -->

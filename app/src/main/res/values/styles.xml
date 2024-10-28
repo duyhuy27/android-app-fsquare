@@ -198,6 +198,18 @@
         <item name="android:background">@drawable/bg_button_corner_30_border_orange</item>
     </style>
 
+    <style name="ButtonFilter" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">#676767</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/size_10</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/TextTitleSemiBoldBlueDark</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:background">@drawable/bg_button_corner_30_border_grey</item>
+    </style>
+
     <style name="ButtonApp1" parent="Widget.AppCompat.Button">
         <item name="android:textColor">#5A5F7D</item>
         <item name="android:layout_height">?attr/actionBarSize</item>

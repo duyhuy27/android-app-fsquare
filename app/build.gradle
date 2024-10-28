@@ -254,6 +254,10 @@ dependencies {
 
     implementation 'com.github.Ajinkrishnak:CountryCodePicker:1.0.2'
     implementation 'com.hbb20:android-country-picker:0.0.7'
+
+    //RangeSlider
+    implementation 'com.google.android.material:material:1.9.0'
+
 }
 
 static def getCurrentDayTime() {
