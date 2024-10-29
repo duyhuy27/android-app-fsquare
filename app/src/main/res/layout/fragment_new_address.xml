@@ -15,12 +15,24 @@
             android:layout_height="wrap_content"
             app:titleToolbar="Add New Address"
             app:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/City"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:textColor="#272B41"
+            android:fontFamily="@font/montserrat_semi_bold"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_corner_grey"
             android:padding="@dimen/_6sdp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:orientation="horizontal">
 
             <EditText
@@ -29,23 +41,134 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:inputType="phone"
+                android:textColor="#333333"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:background="@null"
                 android:enabled="false"
                 android:maxLength="13"/>
             <ImageView
                 android:id="@+id/img_province"
-                android:layout_width="@dimen/size_25"
+                android:layout_width="@dimen/size_55"
                 android:layout_height="@dimen/size_35"
                 android:padding="5dp"
                 android:src="@drawable/arrow"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/permission_dp_15"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/District"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18sp"
+            android:textColor="#272B41"
+            android:fontFamily="@font/montserrat_semi_bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edt_corner_grey"
+            android:padding="@dimen/_6sdp"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtDistrict"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="@null"
+                android:enabled="false"
+                android:maxLength="13"
+                android:textColor="#333333"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+            <ImageView
+                android:id="@+id/img_District"
+                android:layout_width="@dimen/size_55"
+                android:layout_height="@dimen/size_35"
+                android:padding="5dp"
+                android:src="@drawable/arrow"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/permission_dp_15"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Sub_district"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18sp"
+            android:textColor="#272B41"
+            android:fontFamily="@font/montserrat_semi_bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edt_corner_grey"
+            android:padding="@dimen/_6sdp"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtSup_District"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="@null"
+                android:enabled="false"
+                android:maxLength="13"
+                android:textColor="#333333"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+            <ImageView
+                android:id="@+id/imgSup_District"
+                android:layout_width="@dimen/size_55"
+                android:layout_height="@dimen/size_35"
+                android:padding="5dp"
+                android:src="@drawable/arrow"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/permission_dp_15"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Street_and_Apartment"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18sp"
+            android:textColor="#272B41"
+            android:fontFamily="@font/montserrat_semi_bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edt_corner_grey"
+            android:padding="@dimen/_6sdp"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtStreet_and_Apartment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="@null"
+                android:enabled="false"
+                android:maxLength="13"
+                android:textColor="#333333"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:hint="Nhập địa chi tiết địa chỉ"
+                android:textColorHint="#676767"
+                />
+        </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_new_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Add"
+            android:layout_marginTop="70dp"
             android:layout_marginBottom="@dimen/permission_dp_40"
             android:layout_marginLeft="@dimen/permission_dp_20"
             android:layout_marginRight="@dimen/permission_dp_20"
