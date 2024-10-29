@@ -11,4 +11,6 @@ object AppAPi {
     const val FAVORITE_LIST = "/api/customer/v1/favorites"
 
     const val BAG_LIST = "/api/customer/v1/bags"
+
+    const val PROVINCE_LIST = "/api/customer/v1/locations/provinces"
 }
