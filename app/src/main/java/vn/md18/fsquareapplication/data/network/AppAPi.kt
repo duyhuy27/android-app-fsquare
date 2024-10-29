@@ -7,4 +7,10 @@ object AppAPi {
     const val AUTH_VERIFY_OTP = "/auth/customer/v1/verifications"
 
     const val PRODUCT_LIST = "/api/customer/v2/shoes"
+
+    const val FAVORITE_LIST = "/api/customer/v1/favorites"
+
+    const val BAG_LIST = "/api/customer/v1/bags"
+
+    const val PROVINCE_LIST = "/api/customer/v1/locations/provinces"
 }

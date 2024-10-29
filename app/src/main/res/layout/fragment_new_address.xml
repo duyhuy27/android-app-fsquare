@@ -18,56 +18,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/permission_dp_20">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semi_bold"
-                android:text="@string/Name_Address"
-                android:textColor="#040207"
-                android:textSize="@dimen/size_14" />
+            android:background="@drawable/bg_edt_corner_grey"
+            android:padding="@dimen/_6sdp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edt_corner_grey"
-                android:padding="@dimen/_6sdp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/edtNumberPhone"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:inputType="phone"
-                    android:background="@null"
-                    android:maxLength="13"/>
-                <ImageView
-                    android:id="@+id/img_search"
-                    android:layout_width="@dimen/size_25"
-                    android:layout_height="@dimen/size_35"
-                    android:src="@drawable/search"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/permission_dp_15"/>
-            </LinearLayout>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_Use_current_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/Use_current_location"
-                android:layout_marginBottom="@dimen/permission_dp_20"
-                android:layout_marginLeft="@dimen/permission_dp_40"
-                android:layout_marginRight="@dimen/permission_dp_40"
-                style="@style/ButtonApp"/>
-            <ImageView
-                android:id="@+id/img_map"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/edtProvince"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:src="@drawable/map"
-                android:layout_gravity="center"/>
-
+                android:inputType="phone"
+                android:background="@null"
+                android:enabled="false"
+                android:maxLength="13"/>
+            <ImageView
+                android:id="@+id/img_province"
+                android:layout_width="@dimen/size_25"
+                android:layout_height="@dimen/size_35"
+                android:padding="5dp"
+                android:src="@drawable/arrow"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/permission_dp_15"/>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_new_address"

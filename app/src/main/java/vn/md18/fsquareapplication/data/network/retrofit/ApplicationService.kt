@@ -1,20 +1,30 @@
 package vn.md18.fsquareapplication.data.network.retrofit
 
 import io.reactivex.Flowable
-import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.AppAPi
+import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
+import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
+import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
+import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
+import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
 
 interface ApplicationService {
@@ -46,5 +56,28 @@ interface ApplicationService {
         @Query("category") category: String? = null
     ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
 
+    @GET(AppAPi.FAVORITE_LIST)
+    fun getFavorite() : Flowable<DataResponse<List<FavoriteResponse>, PaginationResponse>>
 
+    @POST(AppAPi.FAVORITE_LIST)
+    fun createFavorite(
+        @Body favoriteRequest: FavoriteRequest
+    ) : Flowable<CreateFavoriteResponse>
+
+    @DELETE(AppAPi.FAVORITE_LIST + "/{id}")
+    fun deleteFavorite(
+        @Path("id") id: String
+    ) : Flowable<DeleteFavoriteRespone>
+
+    @GET(AppAPi.BAG_LIST)
+    fun getBags() : Flowable<DataResponse<List<GetBagResponse>, PaginationResponse>>
+
+    @PUT(AppAPi.BAG_LIST + "/{id}")
+    fun updateQuantityBag(
+        @Path("id") id: String,
+        @Body updateQuantityBagRequest: UpdateQuantityBagRequest
+    ) : Flowable<UpdateQuantityBagResponse>
+
+    @GET(AppAPi.PROVINCE_LIST)
+    fun getProvinces() : Flowable<DataResponse<List<GetProvinceResponse>, PaginationResponse>>
 }

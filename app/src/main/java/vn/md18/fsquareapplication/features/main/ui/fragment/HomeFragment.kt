@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentHomeBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
+import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 
 @AndroidEntryPoint
@@ -21,11 +23,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>() {
     override fun getTagFragment(): String = HomeFragment::class.java.simpleName
 
     override fun onViewLoaded() {
+        val dashboardFragment = DashboardFragment()
 
+        // Thêm DashboardFragment vào dashboard_fragment_container
+        childFragmentManager.beginTransaction()
+            .replace(R.id.dashboard_fragment_container, dashboardFragment)
+            .commit()
     }
 
     override fun addViewListener() {
+        binding.buttonActionFirst.setOnClickListener {
+            val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
+                putExtra("typeFavNew", "Fav")
 
+            }
+            startActivity(intent)
+        }
     }
 
     override fun addDataObserver() {

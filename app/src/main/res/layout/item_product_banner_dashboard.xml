@@ -10,7 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/size_26">
+        android:paddingLeft="@dimen/size_26"
+        android:paddingTop="26dp"
+        android:paddingBottom="26dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_market_nike"
@@ -43,7 +45,7 @@
            <TextView
                android:id="@+id/tv_title"
                style="@style/TextSimiBoldTitleDark24"
-               android:layout_width="@dimen/size_130"
+               android:layout_width="@dimen/size_150"
                android:layout_height="wrap_content"
                android:textSize="@dimen/text_size_24"
                 />
@@ -51,7 +53,7 @@
            <TextView
                android:id="@+id/tv_price"
                style="@style/TextSimiBoldTitleDark24"
-               android:layout_width="wrap_content"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="@dimen/size_6"
                android:textColor="@color/primary"

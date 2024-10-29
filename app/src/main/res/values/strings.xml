@@ -85,17 +85,69 @@
     <string name="Profile">Hồ sơ</string>
     <string name="More">Thêm</string>
 
+    <!--Cancel order view strings -->
+    <string name="Cancel_Order">Hủy đơn hàng</string>
+    <string name="Fsquare_looks_forward_to_receiving_customer_feedback_to_improve_our_service">Fsquare rất mong được sự góp ý của khách hàng để dịch vụ được tốt hơn</string>
+    <string name="Changed_my_mind_wont_buy_anymore">Đổi ý, không mua nữa</string>
+    <string name="Found_somewhere_cheaper">Tìm thấy chỗ khác rẻ hơn</string>
+    <string name="Change_product_order_information_quantity_color_size">Thay đổi thông tin sản phẩm đặt hàng (số lượng, màu sắc, kích thước,...)</string>
+    <string name="Other_reasons">Lý do khác</string>
+    <string name="Cancel">Hủy</string>
+    <string name="Order">Đặt hàng</string>
+    <string name="Note">Lưu ý:</string>
+    <string name="Promotional_gifts_may_vary_depending_on_the_time_of_order">- Quà khuyến mãi có thể thay đổi theo thời điểm đặt hàng</string>
+
+
+    <!--My order review strings -->
+    <string name="Review">Đánh giá</string>
+    <string name="How_is_your_order">Đơn hàng của bạn thế nào?</string>
+    <string name="Please_give_your_rating_and_also_your_review">Hãy cho chúng tôi biết đánh giá và nhận xét của bạn...</string>
+    <string name="Add_image">Thêm hình ảnh</string>
+    <string name="Add_video">Thêm video</string>
+    <string name="Comment">Bình luận</string>
+    <string name="Reset">Làm lại</string>
+    <string name="Apply">Áp dụng</string>
+    <string name="Promo">Khuyến mại</string>
 
     <!-- Setting cart strings -->
     <string name="Checkuot">Thanh Toán</string>
     <string name="Cart">Giỏ hàng</string>
+    <string name="Edit">Chỉnh sửa</string>
+    <string name="Order_List">Danh sách đơn hàng</string>
+    <string name="Chose_Shipping">Chọn phương thức giao hàng</string>
+    <string name="Chose_Shipping_Type">Chọn loại hình giao hàng</string>
+    <string name="Promo_Code">Mã khuyến mãi</string>
+    <string name="Amount">Số tiền</string>
+    <string name="Shipping">Vận chuyển</string>
+    <string name="Total">Tổng</string>
+    <string name="Continue_to_Payment">Tiếp tục đến bước thanh toán</string>
+    <string name="Enter_Promo_Code">Nhập mã khuyến mãi</string>
+    <string name="Order_Successful">Đặt hàng thành công</string>
+    <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
+    <string name="View_Order">Xem đơn hàng</string>
+    <string name="View_E_Receipt">Xem biên nhận điện tử</string>
+    <string name="Description">Mô tả</string>
+    <string name="Size">Kích thước</string>
+    <string name="Color">Màu sắc</string>
+    <string name="Product_description">Mô tả sản phẩm</string>
+    <string name="Price">Giá</string>
+    <string name="Add_to_Cart">Thêm vào giỏ hàng</string>
 
 
     <!-- Setting wallet strings -->
     <string name="My_E_Wallet">Ví Điện Tử Của Tôi</string>
     <string name="Transaction_History">Lịch sử giao dịch</string>
     <string name="See_all">Xem tất cả</string>
-
+    <string name="Enter_the_amount_of_top_up">Nhập số tiền cần nạp</string>
+    <string name="Continue">Tiếp tục</string>
+    <string name="Select_the_Top_Up_method_you_want_to_use.">Chọn phương thức nạp tiền mà bạn muốn sử dụng.</string>
+    <string name="Add_New_Card.">Thêm thẻ mới.</string>
+    <string name="Confirm_Payment.">Xác nhận thanh toán</string>
+    <string name="Enter_your_PIN_to_confirm_top_up.">Nhập mã PIN của bạn để xác nhận nạp tiền.</string>
+    <string name="Payment_Methods">Phương thức thanh toán</string>
+    <string name="Transaction_IN">Nhận tiền</string>
+    <string name="Date">Ngày</string>
+    <string name="Status">Trạng thái</string>
 
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>

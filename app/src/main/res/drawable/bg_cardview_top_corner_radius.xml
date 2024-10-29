@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" /> <!-- Màu nền của CardView -->
+    <corners
+        android:topLeftRadius="200dp"
+    android:topRightRadius="200dp"/>
+</shape>

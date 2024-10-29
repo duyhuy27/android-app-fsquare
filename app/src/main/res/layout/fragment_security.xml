@@ -115,7 +115,7 @@
            android:layout_marginBottom="@dimen/permission_dp_20"
            android:layout_marginLeft="@dimen/permission_dp_20"
            android:layout_marginRight="@dimen/permission_dp_20"
-           android:background="#FFFFFF"/>
+           android:background="#F4F5F7"/>
        <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/btn_change_password"
            android:layout_width="match_parent"

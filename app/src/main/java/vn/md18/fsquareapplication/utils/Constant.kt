@@ -10,6 +10,19 @@ object Constant {
     const val KEY_INTRO = "KEY_INTRO"
     const val KEY_TOKEN = "KEY_TOKEN"
     const val EMPTY_STRING = ""
+    const val KEY_EDIT_PROFILE = "EDIT_PROFILE"
+    const val KEY_ADDRESS = "ADDRESS"
+    const val KEY_SECURITY = "SECURITY"
+    const val KEY_LANGUAGE = "LANGUAGE"
+    const val KEY_POLICY = "PRIVACY_POLICY"
+    const val KEY_NOTIFICATION = "NOTIFICATION"
+    const val KEY_PAYMENT = "PAYMENT"
+
+    const val PENDING = "Pending"
+    const val PROCESSING = "Processing"
+    const val SHIPPED = "Shipped"
+    const val DELIVERED = "Delivered"
+    const val CANCELED = "Canceled"
 
     const val REQUEST_CODE_WRITE_EXTERNAL_PERMISSION = 11
     const val REQUEST_CODE_ACCESS_FINE_LOCATION_AP_MODE = 15
