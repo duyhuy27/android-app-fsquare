@@ -3,21 +3,14 @@ package vn.md18.fsquareapplication.features.profileandsetting.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import vn.md18.fsquareapplication.data.network.model.response.GetDistrictsResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.databinding.ItemProvinceBinding
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 
-class ProvinceAdapter @Inject constructor() : BaseRecycleAdapter<GetProvinceResponse>() {
-
-    private var onItemClickListener: ((GetProvinceResponse) -> Unit)? = null
-
-    // Hàm thiết lập callback từ bên ngoài cho sự kiện click
-    fun setOnItemClickListener(listener: (GetProvinceResponse) -> Unit) {
-        onItemClickListener = listener
-    }
-
+class DistrictAdapter @Inject constructor() : BaseRecycleAdapter<GetDistrictsResponse>(){
     override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
         return null
     }
@@ -37,23 +30,28 @@ class ProvinceAdapter @Inject constructor() : BaseRecycleAdapter<GetProvinceResp
     }
 
     override fun setErrorViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
+       return null
     }
 
-    inner class NormalViewHolder(binding: ItemProvinceBinding) :
-        BaseViewHolder<ItemProvinceBinding>(binding) {
-
+    inner class NormalViewHolder(viewBinding: ItemProvinceBinding) :
+        BaseViewHolder<ItemProvinceBinding>(viewBinding) {
         @SuppressLint("SetTextI18n")
         override fun bindData(position: Int) {
-            val province: GetProvinceResponse = itemList[position]
+            val province: GetDistrictsResponse = itemList[position]
             binding.apply {
-                txtProvince.text = province.provinceName
-
-                // Thiết lập sự kiện click và truyền toàn bộ đối tượng `GetProvinceResponse`
-                root.setOnClickListener {
-                    onItemClickListener?.invoke(province)
-                }
+                txtProvince.text = province.districtName
+            }
+            binding.root.setOnClickListener {
+                onItemClickListener?.invoke(province)
             }
         }
+
+    }
+
+    private var onItemClickListener: ((GetDistrictsResponse) -> Unit)? = null
+
+    // Setter để thiết lập callback từ bên ngoài
+    fun setOnItemClickListener(listener: (GetDistrictsResponse) -> Unit) {
+        onItemClickListener = listener
     }
 }

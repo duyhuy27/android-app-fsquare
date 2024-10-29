@@ -84,6 +84,11 @@
     <string name="Logout">Đăng xuất</string>
     <string name="Profile">Hồ sơ</string>
     <string name="More">Thêm</string>
+    <string name="City">Thành phố</string>
+    <string name="District">Huyện</string>
+    <string name="Sub_district">Phường-Xã</string>
+    <string name="Street_and_Apartment">Đường và số nhà</string>
+
 
     <!--Cancel order view strings -->
     <string name="Cancel_Order">Hủy đơn hàng</string>
@@ -148,7 +153,6 @@
     <string name="Transaction_IN">Nhận tiền</string>
     <string name="Date">Ngày</string>
     <string name="Status">Trạng thái</string>
-
 
     <!-- PullToRefresh view strings -->
     <string name="pull_refresh_view_refreshing">Đang làm mới</string>

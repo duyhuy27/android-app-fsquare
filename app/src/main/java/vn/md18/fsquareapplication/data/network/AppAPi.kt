@@ -13,4 +13,8 @@ object AppAPi {
     const val BAG_LIST = "/api/customer/v1/bags"
 
     const val PROVINCE_LIST = "/api/customer/v1/locations/provinces"
+
+    const val DISTRICTS_LIST = "/api/customer/v1/locations/districts"
+
+    const val WARDS_LIST = "/api/customer/v1/locations/wards"
 }

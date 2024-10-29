@@ -8,10 +8,14 @@ import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepositoryImpl
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.features.main.repository.MainRepositoryImpl
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepository
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepositoryImpl
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.WardRepository
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.WardRepositoryImpl
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -27,4 +31,10 @@ interface RepositoryModule {
 
     @Binds
     fun provideProvinceRepository(provinceRepositoryImpl: ProvinceRepositoryImpl) : ProvinceRepository
+
+    @Binds
+    fun provideDistrictRepository(districtRepositoryImpl: DistrictRepositoryImpl) : DistrictRepository
+
+    @Binds
+    fun provideWardRepository(wardRepositoryImpl: WardRepositoryImpl) : WardRepository
 }
