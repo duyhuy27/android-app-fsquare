@@ -10,6 +10,8 @@ import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.features.main.repository.MainRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepositoryImpl
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepository
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepositoryImpl
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -22,4 +24,7 @@ interface RepositoryModule {
 
     @Binds
     fun provideProfileRepository(profileRepositoryImpl: ProfileRepositoryImpl) : ProfileRepository
+
+    @Binds
+    fun provideProvinceRepository(provinceRepositoryImpl: ProvinceRepositoryImpl) : ProvinceRepository
 }
