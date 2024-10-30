@@ -13,29 +13,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Update Version') {
-            steps {
-                script {
-                    // Lấy ngày giờ hiện tại để sử dụng trong version name
-                    def currentDate = new Date()
-                    def month = String.format("%02d", currentDate.getMonth() + 1) // Tháng (0-11)
-                    def day = String.format("%02d", currentDate.getDate()) // Ngày (1-31)
-                    def hour = String.format("%02d", currentDate.getHours()) // Giờ (0-23)
-                    def minute = String.format("%02d", currentDate.getMinutes()) // Phút (0-59)
-
-                    // Đặt version name theo định dạng MMDDHHmm
-                    def versionName = "${month}${day}${hour}${minute}"
-                    echo "Generated versionName: ${versionName}"
-
-                    // Cập nhật file build.gradle với versionName mới
-                    sh """
-                        sed -i'' -e "s/versionName .*/versionName '${versionName}'/" app/build.gradle
-                    """
-                }
-            }
-        }
-
         stage('Create local.properties') {
             steps {
                 sh '''
