@@ -82,7 +82,8 @@ pipeline {
             sh """
                 curl -s -X POST https://api.telegram.org/bot\$TELEGRAM_TOKEN/sendMessage \
                 -d chat_id=\$TELEGRAM_CHAT_ID \
-                -d text='Build successful! New APK uploaded.'
+                -d text='🎉 **FSquare Build Notification** 🎉\n\nChúng tôi vui mừng thông báo rằng bản build mới của ứng dụng FSquare đã thành công! \n\n✅ **Phiên bản mới nhất đã được tải lên** và sẵn sàng để bạn trải nghiệm.\n\n🔗 **Tải ngay APK tại đây:** [FSquare - Download](https://install.appcenter.ms/users/huy.mobcontact-gmail.com/apps/fsquare-android-application/distribution_groups/testers)\n\nCảm ơn bạn đã đồng hành cùng chúng tôi! Hãy cùng khám phá những tính năng mới và cải tiến trong ứng dụng FSquare.' \
+                -d parse_mode='Markdown'
             """
         }
         failure {
