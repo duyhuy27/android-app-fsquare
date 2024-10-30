@@ -15,6 +15,8 @@ import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
+import vn.md18.fsquareapplication.data.network.model.request.location.AddLocationCustomerRequest
+import vn.md18.fsquareapplication.data.network.model.request.location.UpdateLocationCustomerRequest
 import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
 import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
@@ -28,6 +30,10 @@ import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
 import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
+import vn.md18.fsquareapplication.data.network.model.response.location.AddLocationCustomerResponse
+import vn.md18.fsquareapplication.data.network.model.response.location.DeleteLocationCustomerResponse
+import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
+import vn.md18.fsquareapplication.data.network.model.response.location.UpdateLocationCustomerResponse
 
 interface ApplicationService {
 
@@ -92,4 +98,23 @@ interface ApplicationService {
     fun getWard(
         @Path("id") id: String,
     ) : Flowable<DataResponse<List<GetWardsRepose>, PaginationResponse>>
+
+    @GET(AppAPi.LOCATION_LIST)
+    fun getLocationCustomer() : Flowable<DataResponse<List<GetLocationCustomerResponse>, PaginationResponse>>
+
+    @POST(AppAPi.LOCATION_LIST)
+    fun createLocationCustomer(
+        @Body locationCustomerRequest: AddLocationCustomerRequest
+    ) : Flowable<AddLocationCustomerResponse>
+
+    @PUT(AppAPi.LOCATION_LIST + "/{id}")
+    fun updateLocationCustomer(
+        @Path("id") id: String,
+        @Body locationCustomerRequest: UpdateLocationCustomerRequest
+    ) : Flowable<UpdateLocationCustomerResponse>
+
+    @DELETE(AppAPi.LOCATION_LIST + "/{id}")
+    fun deleteLocationCustomer(
+        @Path("id") id: String
+    ) : Flowable<DeleteLocationCustomerResponse>
 }

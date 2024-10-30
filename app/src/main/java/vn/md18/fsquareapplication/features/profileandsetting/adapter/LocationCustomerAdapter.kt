@@ -4,16 +4,17 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
+import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.databinding.ItemProvinceBinding
+import vn.md18.fsquareapplication.databinding.ItemRecyclerViewAddressBinding
+import vn.md18.fsquareapplication.databinding.ItemShippingAddressBinding
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 
-class ProvinceAdapter @Inject constructor() : BaseRecycleAdapter<GetProvinceResponse>() {
-
-    private var onItemClickListener: ((GetProvinceResponse) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (GetProvinceResponse) -> Unit) {
+class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLocationCustomerResponse>(){
+    private var onItemClickListener: ((GetLocationCustomerResponse) -> Unit)? = null
+    fun setOnItemClickListener(listener: (GetLocationCustomerResponse) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -27,7 +28,7 @@ class ProvinceAdapter @Inject constructor() : BaseRecycleAdapter<GetProvinceResp
 
     override fun setNormalViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
         return NormalViewHolder(
-            ItemProvinceBinding.inflate(
+            ItemRecyclerViewAddressBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -39,17 +40,22 @@ class ProvinceAdapter @Inject constructor() : BaseRecycleAdapter<GetProvinceResp
         return null
     }
 
-    inner class NormalViewHolder(binding: ItemProvinceBinding) :
-        BaseViewHolder<ItemProvinceBinding>(binding) {
+    inner class NormalViewHolder(binding: ItemRecyclerViewAddressBinding) :
+        BaseViewHolder<ItemRecyclerViewAddressBinding>(binding) {
 
         @SuppressLint("SetTextI18n")
         override fun bindData(position: Int) {
-            val province: GetProvinceResponse = itemList[position]
+            val location: GetLocationCustomerResponse = itemList[position]
             binding.apply {
-                txtProvince.text = province.provinceName
-
+                txtHome.text = location.title
+                txtAddress.text = location.address + ", " + location.wardName + ", " + location.districtName + ", " + location.provinceName
+                if(location.isDefault){
+                    txtDefault.text = "mac dinh"
+                }else{
+                    txtDefault.text = null
+                }
                 root.setOnClickListener {
-                    onItemClickListener?.invoke(province)
+                    onItemClickListener?.invoke(location)
                 }
             }
         }
