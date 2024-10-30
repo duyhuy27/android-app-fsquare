@@ -7,30 +7,29 @@
 
     <fragment
         android:id="@+id/orderDetailFragment"
-        android:name="vn.md18.fsquareapplication.features.order.fragment.OrderDetailFragment"
+        android:name="vn.md18.fsquareapplication.features.checkout.ui.fragment.OrderDetailFragment"
         android:label="fragment_order_detail"
         tools:layout="@layout/fragment_order_detail" >
         <action
             android:id="@+id/action_orderDetailFragment_to_shippingAddressFragment"
             app:destination="@id/shippingAddressFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/shippingAddressFragment"
-        android:name="vn.md18.fsquareapplication.features.order.fragment.ShippingAddressFragment"
-        android:label="fragment_shipping_address"
-        tools:layout="@layout/fragment_shipping_address" >
         <action
-            android:id="@+id/action_shippingAddressFragment_to_VNPFragment"
+            android:id="@+id/action_orderDetailFragment_to_VNPFragment"
             app:destination="@id/VNPFragment" />
     </fragment>
     <fragment
+        android:id="@+id/shippingAddressFragment"
+        android:name="vn.md18.fsquareapplication.features.checkout.ui.fragment.ShippingAddressFragment"
+        android:label="fragment_shipping_address"
+        tools:layout="@layout/fragment_shipping_address" />
+    <fragment
         android:id="@+id/VNPFragment"
-        android:name="vn.md18.fsquareapplication.features.order.fragment.VNPFragment"
+        android:name="vn.md18.fsquareapplication.features.checkout.ui.fragment.VNPFragment"
         android:label="fragment_v_n_p"
         tools:layout="@layout/fragment_v_n_p" />
     <fragment
         android:id="@+id/paymentSuccessfullyFragment"
-        android:name="vn.md18.fsquareapplication.features.order.fragment.PaymentSuccessfullyFragment"
+        android:name="vn.md18.fsquareapplication.features.checkout.ui.fragment.PaymentSuccessfullyFragment"
         android:label="fragment_payment_successfully"
         tools:layout="@layout/fragment_payment_successfully" />
 </navigation>

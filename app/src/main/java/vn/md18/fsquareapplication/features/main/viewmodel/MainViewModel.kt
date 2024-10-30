@@ -19,6 +19,7 @@ import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -177,8 +178,8 @@ class MainViewModel @Inject constructor(
                         .toObservable()
                         .subscribe({ response ->
                             response.data.let {
+                                FSLogger.d("dang o ham lay danh sach gio hang")
                                 _listBag.value = it
-                                setErrorString(response.message.toString())
                             }
                         },
                             { throwable ->
