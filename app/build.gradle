@@ -64,7 +64,7 @@ android {
             variant.outputs.all {
                 def flavor = variant.name
                 def versionName = variant.versionName
-                def dateTime = ${getCurrentDayTime()}
+                def dateTime = getCurrentDayTime()
                 outputFileName = "${dateTime}-${flavor}-${versionName}.apk"
             }
         }
