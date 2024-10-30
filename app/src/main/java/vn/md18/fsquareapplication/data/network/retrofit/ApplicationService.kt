@@ -19,6 +19,9 @@ import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResp
 import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
 import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetDistrictsResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
 import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
@@ -76,4 +79,17 @@ interface ApplicationService {
         @Path("id") id: String,
         @Body updateQuantityBagRequest: UpdateQuantityBagRequest
     ) : Flowable<UpdateQuantityBagResponse>
+
+    @GET(AppAPi.PROVINCE_LIST)
+    fun getProvinces() : Flowable<DataResponse<List<GetProvinceResponse>, PaginationResponse>>
+
+    @GET(AppAPi.DISTRICTS_LIST + "/{id}")
+    fun getDistrict(
+        @Path("id") id: String,
+    ) : Flowable<DataResponse<List<GetDistrictsResponse>, PaginationResponse>>
+
+    @GET(AppAPi.WARDS_LIST + "/{id}")
+    fun getWard(
+        @Path("id") id: String,
+    ) : Flowable<DataResponse<List<GetWardsRepose>, PaginationResponse>>
 }
