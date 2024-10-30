@@ -28,7 +28,7 @@ pipeline {
 
                     // Cập nhật file build.gradle với versionName mới
                     sh """
-                        sed -i '' "s/versionName .*/versionName '${versionName}'/" app/build.gradle
+                        sed -i "s/versionName .*/versionName '${versionName}'/" app/build.gradle
                     """
                 }
             }
