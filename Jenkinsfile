@@ -8,10 +8,11 @@ pipeline {
         KEYSTORE_PASSWORD = credentials('KEYSTORE_PASSWORD')
         KEY_ALIAS = credentials('KEY_ALIAS')
         KEY_PASSWORD = credentials('KEY_PASSWORD')
+        TELEGRAM_TOKEN = credentials('TELEGRAM_TOKEN') // Thêm biến môi trường cho TOKEN
+        TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID') // Thêm biến môi trường cho CHAT_ID
     }
 
     stages {
-
         stage('Update Version') {
             steps {
                 sh './update_version.sh'
@@ -77,9 +78,21 @@ pipeline {
         }
         success {
             echo 'Build and upload to AppCenter succeeded!'
+            // Gửi tin nhắn Telegram
+            sh """
+                curl -s -X POST https://api.telegram.org/bot\$TELEGRAM_TOKEN/sendMessage \
+                -d chat_id=\$TELEGRAM_CHAT_ID \
+                -d text='Build successful! New APK uploaded.'
+            """
         }
         failure {
             echo 'Build or upload to AppCenter failed.'
+            // Gửi tin nhắn Telegram khi build thất bại
+            sh """
+                curl -s -X POST https://api.telegram.org/bot\$TELEGRAM_TOKEN/sendMessage \
+                -d chat_id=\$TELEGRAM_CHAT_ID \
+                -d text='Build failed. Please check the logs.'
+            """
         }
     }
 }
