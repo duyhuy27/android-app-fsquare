@@ -155,7 +155,7 @@
                 android:layout_height="match_parent"
                 android:inputType="phone"
                 android:background="@null"
-                android:enabled="false"
+
                 android:maxLength="13"
                 android:textColor="#333333"
                 android:fontFamily="@font/montserrat_semi_bold"

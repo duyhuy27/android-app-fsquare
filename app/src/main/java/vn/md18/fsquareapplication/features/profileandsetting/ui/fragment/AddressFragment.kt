@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
@@ -23,21 +24,28 @@ import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileVi
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewModel>() {
+class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>() {
     override val viewModel: LocationViewModel by viewModels()
 
     @Inject
     lateinit var locationCustomerAdapter: LocationCustomerAdapter
-    override fun inflateLayout(layoutInflater: LayoutInflater): FragmentNewAddressBinding = FragmentNewAddressBinding.inflate(layoutInflater)
+    override fun inflateLayout(layoutInflater: LayoutInflater): FragmentAddressBinding = FragmentAddressBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = NewAddressFragment::class.java.simpleName
 
     override fun onViewLoaded() {
         viewModel.getLocationCustomerList()
-
+        binding.apply {
+            rcvAddress.apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                setHasFixedSize(true)
+                adapter = locationCustomerAdapter
+            }
+        }
     }
 
     override fun addViewListener() {
+        viewModel.getLocationCustomerList()
         binding.apply {
             btnAddNewAddress.setOnClickListener{
                 findNavController().navigate(R.id.action_addressFragment_to_newAddressFragment)

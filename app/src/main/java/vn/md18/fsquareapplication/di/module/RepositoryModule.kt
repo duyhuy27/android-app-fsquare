@@ -16,6 +16,8 @@ import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.Provinc
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.WardRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.WardRepositoryImpl
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepository
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepositoryImpl
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -37,4 +39,7 @@ interface RepositoryModule {
 
     @Binds
     fun provideWardRepository(wardRepositoryImpl: WardRepositoryImpl) : WardRepository
+
+    @Binds
+    fun provideLocationRepository(locationCustomerRepositoryImpl: LocationCustomerRepositoryImpl) : LocationCustomerRepository
 }
