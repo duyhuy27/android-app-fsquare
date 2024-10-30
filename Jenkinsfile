@@ -8,14 +8,29 @@ pipeline {
         KEYSTORE_PASSWORD = credentials('KEYSTORE_PASSWORD')
         KEY_ALIAS = credentials('KEY_ALIAS')
         KEY_PASSWORD = credentials('KEY_PASSWORD')
-        TELEGRAM_TOKEN = credentials('TELEGRAM_TOKEN') // Thêm biến môi trường cho TOKEN
-        TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID') // Thêm biến môi trường cho CHAT_ID
+        TELEGRAM_TOKEN = credentials('TELEGRAM_TOKEN')
+        TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID')
     }
 
     stages {
         stage('Update Version') {
             steps {
-                sh './update_version.sh'
+                script {
+                    // Lấy ngày giờ hiện tại để sử dụng trong version name
+                    def currentDate = new Date()
+                    def month = String.format("%02d", currentDate.getMonth() + 1) // Tháng (0-11)
+                    def day = String.format("%02d", currentDate.getDate()) // Ngày (1-31)
+                    def hour = String.format("%02d", currentDate.getHours()) // Giờ (0-23)
+                    def minute = String.format("%02d", currentDate.getMinutes()) // Phút (0-59)
+
+                    // Đặt version name theo định dạng MMDDHHmm
+                    def versionName = "${month}${day}${hour}${minute}"
+
+                    // Cập nhật file build.gradle với versionName mới
+                    sh """
+                        sed -i '' "s/versionName .*/versionName '${versionName}'/" app/build.gradle
+                    """
+                }
             }
         }
 
@@ -56,7 +71,7 @@ pipeline {
                 script {
                     def apkPath = sh(script: 'find ./app/build/outputs/apk/dev/debug/ -name "*.apk"', returnStdout: true).trim()
                     if (apkPath) {
-                        echo "APK path: ${apkPath}"  // Kiểm tra đường dẫn APK
+                        echo "APK path: ${apkPath}"
                         sh """
                             appcenter distribute release \
                             --app huy.mobcontact-gmail.com/FSquare-Android-Application \

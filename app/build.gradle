@@ -17,7 +17,6 @@ if (versionPropsFile.exists()) {
 def versionMajor = versionProps['version.major'].toInteger()
 def versionMinor = versionProps['version.minor'].toInteger()
 def versionPatch = versionProps['version.patch'].toInteger()
-def versionBuild = versionProps['version.build'].toInteger()
 
 android {
     namespace 'vn.md18.fsquareapplication'
@@ -39,8 +38,8 @@ android {
         applicationId "vn.md18.fsquareapplication"
         minSdk 24
         targetSdk 34
-        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 10 + versionBuild
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 10
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -65,7 +64,7 @@ android {
             variant.outputs.all {
                 def flavor = variant.name
                 def versionName = variant.versionName
-                def dateTime = getCurrentDayTime()
+                def dateTime = ${getCurrentDayTime()}
                 outputFileName = "${dateTime}-${flavor}-${versionName}.apk"
             }
         }
