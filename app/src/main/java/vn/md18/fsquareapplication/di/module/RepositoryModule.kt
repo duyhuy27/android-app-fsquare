@@ -8,6 +8,8 @@ import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepositoryImpl
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.features.main.repository.MainRepositoryImpl
+import vn.md18.fsquareapplication.features.main.repository.OrderRepository
+import vn.md18.fsquareapplication.features.main.repository.OrderRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepository
@@ -42,4 +44,7 @@ interface RepositoryModule {
 
     @Binds
     fun provideLocationRepository(locationCustomerRepositoryImpl: LocationCustomerRepositoryImpl) : LocationCustomerRepository
+
+    @Binds
+    fun provideOrderRepository(orderRepositoryImpl: OrderRepositoryImpl) :OrderRepository
 }

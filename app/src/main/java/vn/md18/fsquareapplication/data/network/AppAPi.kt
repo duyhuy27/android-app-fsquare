@@ -19,4 +19,6 @@ object AppAPi {
     const val WARDS_LIST = "/api/customer/v1/locations/wards"
 
     const val LOCATION_LIST = "api/customer/v1/customers/location"
+
+    const val ORDER_LIST = "api/customer/v1/orders"
 }
