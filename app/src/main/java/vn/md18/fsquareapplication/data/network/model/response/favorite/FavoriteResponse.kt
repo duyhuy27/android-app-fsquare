@@ -1,6 +1,7 @@
-package vn.md18.fsquareapplication.data.network.model.response
+package vn.md18.fsquareapplication.data.network.model.response.favorite
 
 import com.google.gson.annotations.SerializedName
+import vn.md18.fsquareapplication.data.network.model.response.Thumbnail
 
 data class FavoriteResponse(
     @SerializedName("_id")

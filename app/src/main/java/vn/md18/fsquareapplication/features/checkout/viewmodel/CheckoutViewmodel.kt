@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
-import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
-import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions

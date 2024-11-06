@@ -4,9 +4,9 @@ import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
-import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
-import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
-import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.SignUpResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.VerifyResponse
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
 import javax.inject.Inject
 
