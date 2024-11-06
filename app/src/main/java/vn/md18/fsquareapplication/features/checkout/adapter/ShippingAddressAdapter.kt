@@ -1,18 +1,16 @@
-package vn.md18.fsquareapplication.features.profileandsetting.adapter
+package vn.md18.fsquareapplication.features.checkout.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
-import vn.md18.fsquareapplication.databinding.ItemProvinceBinding
 import vn.md18.fsquareapplication.databinding.ItemRecyclerViewAddressBinding
 import vn.md18.fsquareapplication.databinding.ItemShippingAddressBinding
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 
-class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLocationCustomerResponse>(){
+class ShippingAddressAdapter @Inject constructor() : BaseRecycleAdapter<GetLocationCustomerResponse>(){
     private var onItemClickListener: ((GetLocationCustomerResponse) -> Unit)? = null
     fun setOnItemClickListener(listener: (GetLocationCustomerResponse) -> Unit) {
         onItemClickListener = listener
@@ -28,7 +26,7 @@ class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLoca
 
     override fun setNormalViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
         return NormalViewHolder(
-            ItemRecyclerViewAddressBinding.inflate(
+            ItemShippingAddressBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -40,8 +38,8 @@ class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLoca
         return null
     }
 
-    inner class NormalViewHolder(binding: ItemRecyclerViewAddressBinding) :
-        BaseViewHolder<ItemRecyclerViewAddressBinding>(binding) {
+    inner class NormalViewHolder(binding: ItemShippingAddressBinding) :
+        BaseViewHolder<ItemShippingAddressBinding>(binding) {
 
         @SuppressLint("SetTextI18n")
         override fun bindData(position: Int) {
@@ -54,7 +52,7 @@ class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLoca
                 }else{
                     txtDefault.text = null
                 }
-                btnEditAddress.setOnClickListener {
+                chkIsChoose.setOnClickListener {
                     onItemClickListener?.invoke(location)
                 }
             }

@@ -45,25 +45,25 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     }
 
     private fun checkInternetAndNavigate() {
-        networkExtensions.checkInternet { isConnected ->
-            if (isConnected) {
-                lifecycleScope.launch {
-                    delay(3000)
-                    navigateToLoadingFragment()
-                }
-            } else {
-                Log.e("phuczk", "no internet connection")
-            }
-        }
-//        lifecycleScope.launch {
-//            if (dataManager.getToken() != null) {
-//                FSLogger.e("day la token: ${dataManager.getToken()}")
-//                openActivity(MainActivity::class.java)
+//        networkExtensions.checkInternet { isConnected ->
+//            if (isConnected) {
+//                lifecycleScope.launch {
+//                    delay(3000)
+//                    navigateToLoadingFragment()
+//                }
 //            } else {
-//                delay(3000)
-//                navigateToLoadingFragment()
+//                Log.e("phuczk", "no internet connection")
 //            }
 //        }
+        lifecycleScope.launch {
+            if (dataManager.getToken() != null) {
+                FSLogger.e("day la token: ${dataManager.getToken()}")
+                openActivity(MainActivity::class.java)
+            } else {
+                delay(3000)
+                navigateToLoadingFragment()
+            }
+        }
     }
 
     private fun navigateToLoadingFragment() {

@@ -4,13 +4,17 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.EditText
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.databinding.FragmentNewAddressBinding
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.DistrictAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.ProvinceAdapter
@@ -31,6 +35,7 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
     @Inject
     lateinit var wardAdapter: WardAdapter
 
+    private var location: GetLocationCustomerResponse? = null
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentNewAddressBinding =
         FragmentNewAddressBinding.inflate(layoutInflater)
@@ -38,71 +43,109 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
     override fun getTagFragment(): String = NewAddressFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        viewModel.getProvinceList()
+        location = requireArguments().getSerializable("location") as? GetLocationCustomerResponse
+
+        if(location != null){
+            binding.apply {
+                btnAddNewAddress.text = "Update Address"
+                edtSupDistrict.setText(location?.wardName ?: "")
+                edtDistrict.setText(location?.districtName ?: "")
+                edtStreetAndApartment.setText(location?.address ?: "")
+                edtProvince.setText(location?.provinceName ?: "")
+            }
+        }
     }
 
     override fun addViewListener() {
         binding.apply {
             imgProvince.setOnClickListener {
-                showDialog(requireContext(),edtProvince)
+                showDialog(requireContext(), edtProvince)
             }
             imgDistrict.setOnClickListener {
-                showDialogDistrict(requireContext(),edtDistrict)
+                showDialogDistrict(requireContext(), edtDistrict)
             }
             imgSupDistrict.setOnClickListener {
-                showDialogWard(requireContext(),edtSupDistrict)
+                showDialogWard(requireContext(), edtSupDistrict)
             }
 
             btnAddNewAddress.setOnClickListener {
-                viewModel.addLocationCustomerList("",edtDistrict.text.toString(), edtStreetAndApartment.text.toString(), edtSupDistrict.text.toString(), edtProvince.text.toString())
+                if(location != null) {
+                    viewModel.updateLocationCustomerList(
+                        id = location!!.id,
+                        title = location!!.title,
+                        address = edtStreetAndApartment.text.toString(),
+                        wardName = edtSupDistrict.text.toString(),
+                        districtName = edtDistrict.text.toString(),
+                        provinceName = edtProvince.text.toString(),
+                        isDefault = location!!.isDefault
+                    )
+                } else {
+                    viewModel.addLocationCustomerList(
+                        "",
+                        edtStreetAndApartment.text.toString(),
+                        edtSupDistrict.text.toString(),
+                        edtDistrict.text.toString(),
+                        edtProvince.text.toString()
+                    )
+                }
             }
         }
     }
 
     override fun addDataObserver() {
-        viewModel.listProvince.observe(this@NewAddressFragment) {
-            binding.apply {
-                provinceAdapter.submitList(it)
+        viewModel.apply {
+            listProvince.observe(viewLifecycleOwner) { provinceList ->
+                provinceAdapter.submitList(provinceList)
             }
-        }
-
-        viewModel.listDistrict.observe(this@NewAddressFragment) {
-            binding.apply {
-                districtAdapter.submitList(it)
+            listDistrict.observe(viewLifecycleOwner) { districtList ->
+                districtAdapter.submitList(districtList)
             }
-        }
-
-        viewModel.listWard.observe(this@NewAddressFragment) {
-            binding.apply {
-                wardAdapter.submitList(it)
+            listWard.observe(viewLifecycleOwner) { wardList ->
+                wardAdapter.submitList(wardList)
             }
-        }
 
-        viewModel.addLocationState.observe(this@NewAddressFragment){
-            when(it){
-                is DataState.Error -> {
-                    activity?.showCustomToast("Add to Location Failure", Constant.ToastStatus.FAILURE)
+            addLocationState.observe(viewLifecycleOwner) { dataState ->
+                when (dataState) {
+                    is DataState.Success -> {
+                        setFragmentResult(Constant.KEY_REQUEST, bundleOf(Constant.KEY_ADD_SUCCESS to true))
+                        activity?.showCustomToast("Thêm địa chỉ thành công!", Constant.ToastStatus.SUCCESS)
+                        findNavController().popBackStack()
+                    }
+                    is DataState.Error -> {
+                        activity?.showCustomToast("Có lỗi xảy ra", Constant.ToastStatus.FAILURE)
+                    }
+                    DataState.Loading -> {
+                    }
                 }
-                DataState.Loading -> {
+            }
 
-                }
-                is DataState.Success -> {
-                    activity?.showCustomToast("Add to Location Success", Constant.ToastStatus.SUCCESS)
+            updateLocationState.observe(viewLifecycleOwner) { dataState ->
+                when (dataState) {
+                    is DataState.Success -> {
+                        setFragmentResult(Constant.KEY_REQUEST, bundleOf(Constant.KEY_UPDATE_SUCCESS to true))
+                        activity?.showCustomToast("Update địa chỉ thành công!", Constant.ToastStatus.SUCCESS)
+                        findNavController().popBackStack()
+                    }
+                    is DataState.Error -> {
+                        activity?.showCustomToast("Có lỗi xảy ra", Constant.ToastStatus.FAILURE)
+                    }
+                    DataState.Loading -> {
+                    }
                 }
             }
         }
     }
 
+
     private fun showDialog(context: Context, editText: EditText) {
+        viewModel.getProvinceList()
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_province, null)
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.rcv_province)
         val alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()
 
-        // Thiết lập sự kiện click cho Adapter
         provinceAdapter.setOnItemClickListener { provinceName ->
-            // Cập nhật EditText khi chọn một tỉnh
             editText.setText(provinceName.provinceName)
             alertDialog.dismiss()
 
@@ -111,9 +154,6 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = provinceAdapter
-
-
-
         alertDialog.show()
     }
 
@@ -124,9 +164,7 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
             .setView(dialogView)
             .create()
 
-        // Thiết lập sự kiện click cho Adapter
         districtAdapter.setOnItemClickListener { districtName ->
-            // Cập nhật EditText khi chọn một tỉnh
             editText.setText(districtName.districtName)
             alertDialog.dismiss()
 
@@ -147,21 +185,12 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
         val alertDialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()
-
-        // Thiết lập sự kiện click cho Adapter
         wardAdapter.setOnItemClickListener { wardName ->
-            // Cập nhật EditText khi chọn một tỉnh
             editText.setText(wardName)
             alertDialog.dismiss()
-
         }
-
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = wardAdapter
-
-
-
         alertDialog.show()
     }
-
 }

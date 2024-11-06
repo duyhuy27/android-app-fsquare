@@ -36,7 +36,9 @@
                    android:layout_marginLeft="20dp"/>
 
                <!-- Include address layout -->
-               <include layout="@layout/item_checkuot_address" />
+               <include
+                   android:id="@+id/item_checkout_address"
+                   layout="@layout/item_checkuot_address" />
 
                <!-- Order list title -->
                <TextView

@@ -12,6 +12,7 @@ object Constant {
     const val EMPTY_STRING = ""
     const val KEY_EDIT_PROFILE = "EDIT_PROFILE"
     const val KEY_ADDRESS = "ADDRESS"
+    const val KEY_NEW_ADDRESS = "NEW_ADDRESS"
     const val KEY_SECURITY = "SECURITY"
     const val KEY_LANGUAGE = "LANGUAGE"
     const val KEY_POLICY = "PRIVACY_POLICY"
@@ -34,6 +35,8 @@ object Constant {
     const val ANDROID_MEDIA = "/Android/media"
     const val TYPE_UPLOAD_LOG_FILE = "4"
     const val KEY_REQUEST = "KEY_REQUEST"
+    const val KEY_UPDATE_SUCCESS = "updateSuccess"
+    const val KEY_ADD_SUCCESS = "addSuccess"
     object DataConfig {
         const val ALPHA_ENABLE_VIEW_VALUE: Float = 1f
         const val DURATION_FADE_VIEW_IN_MILLIS: Long = 3000

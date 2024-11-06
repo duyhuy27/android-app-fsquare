@@ -12,8 +12,10 @@ import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject

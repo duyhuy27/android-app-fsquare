@@ -44,8 +44,7 @@
                 android:textColor="#333333"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:background="@null"
-                android:enabled="false"
-                android:maxLength="13"/>
+                android:enabled="false" />
             <ImageView
                 android:id="@+id/img_province"
                 android:layout_width="@dimen/size_55"
@@ -81,7 +80,6 @@
                 android:inputType="phone"
                 android:background="@null"
                 android:enabled="false"
-                android:maxLength="13"
                 android:textColor="#333333"
                 android:fontFamily="@font/montserrat_semi_bold"/>
             <ImageView
@@ -119,7 +117,6 @@
                 android:inputType="phone"
                 android:background="@null"
                 android:enabled="false"
-                android:maxLength="13"
                 android:textColor="#333333"
                 android:fontFamily="@font/montserrat_semi_bold"/>
             <ImageView
@@ -153,10 +150,7 @@
                 android:id="@+id/edtStreet_and_Apartment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="phone"
                 android:background="@null"
-
-                android:maxLength="13"
                 android:textColor="#333333"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:hint="Nhập địa chi tiết địa chỉ"

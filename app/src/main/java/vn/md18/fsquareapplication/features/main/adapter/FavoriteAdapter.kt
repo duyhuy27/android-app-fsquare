@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
+import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import javax.inject.Inject
@@ -17,9 +18,9 @@ class FavoriteAdapter @Inject constructor(
 ) : BaseAdapter() {
 
     private var productList: List<FavoriteResponse> = listOf()
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: FavoriteViewmodel
 
-    fun setViewModel(viewModel: MainViewModel) {
+    fun setViewModel(viewModel: FavoriteViewmodel) {
         this.viewModel = viewModel
     }
 

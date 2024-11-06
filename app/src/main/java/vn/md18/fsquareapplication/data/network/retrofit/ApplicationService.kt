@@ -4,12 +4,14 @@ import io.reactivex.Flowable
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.AppAPi
+import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
@@ -17,7 +19,9 @@ import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRe
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.AddLocationCustomerRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateLocationCustomerRequest
+import vn.md18.fsquareapplication.data.network.model.response.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.DeleteBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
 import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
@@ -81,11 +85,20 @@ interface ApplicationService {
     @GET(AppAPi.BAG_LIST)
     fun getBags() : Flowable<DataResponse<List<GetBagResponse>, PaginationResponse>>
 
-    @PUT(AppAPi.BAG_LIST + "/{id}")
+    @POST(AppAPi.BAG_LIST)
+    fun createBag(
+        @Body addBagRequest: AddBagRequest
+    ) : Flowable<AddBagResponse>
+
+    @PATCH(AppAPi.BAG_LIST + "/{id}")
     fun updateQuantityBag(
         @Path("id") id: String,
         @Body updateQuantityBagRequest: UpdateQuantityBagRequest
     ) : Flowable<UpdateQuantityBagResponse>
+
+    @DELETE(AppAPi.BAG_LIST)
+    fun deleteBag(
+    ) : Flowable<DeleteBagResponse>
 
     @GET(AppAPi.PROVINCE_LIST)
     fun getProvinces() : Flowable<DataResponse<List<GetProvinceResponse>, PaginationResponse>>
@@ -108,7 +121,7 @@ interface ApplicationService {
         @Body locationCustomerRequest: AddLocationCustomerRequest
     ) : Flowable<AddLocationCustomerResponse>
 
-    @PUT(AppAPi.LOCATION_LIST + "/{id}")
+    @PATCH(AppAPi.LOCATION_LIST + "/{id}")
     fun updateLocationCustomer(
         @Path("id") id: String,
         @Body locationCustomerRequest: UpdateLocationCustomerRequest
