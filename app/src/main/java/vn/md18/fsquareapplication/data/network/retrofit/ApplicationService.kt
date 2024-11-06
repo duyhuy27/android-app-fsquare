@@ -26,6 +26,7 @@ import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteResp
 import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetDistrictsResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
 import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
@@ -130,4 +131,7 @@ interface ApplicationService {
     fun deleteLocationCustomer(
         @Path("id") id: String
     ) : Flowable<DeleteLocationCustomerResponse>
+
+    @GET(AppAPi.ORDER_LIST)
+    fun getOrder() : Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>>
 }

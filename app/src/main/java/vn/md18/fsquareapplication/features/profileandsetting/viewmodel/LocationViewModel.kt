@@ -11,12 +11,14 @@ import vn.md18.fsquareapplication.data.network.model.request.location.AddLocatio
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateLocationCustomerRequest
 import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetDistrictsResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
 import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.AddLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.UpdateLocationCustomerResponse
+import vn.md18.fsquareapplication.features.main.repository.OrderRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepository
@@ -53,6 +55,7 @@ class LocationViewModel @Inject constructor(
 
     private val _updateLocationState: MutableLiveData<DataState<UpdateLocationCustomerResponse>> = MutableLiveData()
     val updateLocationState: LiveData<DataState<UpdateLocationCustomerResponse>> get() = _updateLocationState
+
 
 
     override fun onDidBindViewModel() {
