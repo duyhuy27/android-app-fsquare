@@ -64,6 +64,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"/>
         </LinearLayout>
         <RadioButton
+            android:id="@+id/chkIsChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/primary" />

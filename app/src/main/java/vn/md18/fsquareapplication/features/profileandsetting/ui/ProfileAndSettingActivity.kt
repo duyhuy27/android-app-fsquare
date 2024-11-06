@@ -48,6 +48,7 @@ class ProfileAndSettingActivity : BaseActivity<ActivityProfileAndSettingBinding,
         when(screen){
             Constant.KEY_EDIT_PROFILE -> navController.navigate(R.id.editProfileFragment)
             Constant.KEY_ADDRESS -> navController.navigate(R.id.addressFragment)
+            Constant.KEY_NEW_ADDRESS -> navController.navigate(R.id.newAddressFragment)
             Constant.KEY_PAYMENT -> navController.navigate(R.id.paymentFragment)
             Constant.KEY_NOTIFICATION -> navController.navigate(R.id.notificationFragment)
             Constant.KEY_SECURITY -> navController.navigate(R.id.securityFragment)

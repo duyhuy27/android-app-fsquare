@@ -50,15 +50,18 @@ class AuthViewModel @Inject constructor(
         networkExtension.checkInternet {
             isConnect ->
             if (isConnect) {
+                setLoading(true)
                 compositeDisposable.add(
                     authRepository.signUp(signUpRequest = signUpRequest)
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe ({ response ->
+                            setLoading(false)
                             _signUpState.value = DataState.Success(response)
                         },{
                             err ->
+                            setLoading(false)
                             _signUpState.value = DataState.Error(err)
                         })
                 )
@@ -74,15 +77,18 @@ class AuthViewModel @Inject constructor(
         networkExtension.checkInternet {
                 isConnect ->
             if (isConnect) {
+                setLoading(true)
                 compositeDisposable.add(
                     authRepository.login(loginRequest = loginRequest)
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe ({ response ->
+                            setLoading(false)
                             _loginState.value = DataState.Success(response)
                         },{
                             err ->
+                            setLoading(false)
                             _loginState.value = DataState.Error(err)
                         })
                 )
@@ -97,7 +103,8 @@ class AuthViewModel @Inject constructor(
         val verifyRequest = VerifyRequest(otp = otp, email = email, type = type, fcmToken = fcmToken)
         networkExtension.checkInternet { isConnect ->
             if (isConnect) {
-                _verifyState.value = DataState.Loading // Đặt trạng thái Loading
+                _verifyState.value = DataState.Loading
+                setLoading(true)
                 compositeDisposable.add(
                     authRepository.verify(verifyRequest = verifyRequest)
                         .subscribeOn(schedulerProvider.io())
@@ -105,13 +112,16 @@ class AuthViewModel @Inject constructor(
                         .toObservable()
                         .subscribe({ response ->
                             response.data?.let { data ->
+                                setLoading(false)
                                 FSLogger.e("Huynd: data == $data")
                                 dataManager.setToken(data)
                                 _verifyState.value = DataState.Success(response)
                             } ?: run {
+                                setLoading(false)
                                 _verifyState.value = DataState.Error(Exception("No data received"))
                             }
                         }, { error ->
+                            setLoading(false)
                             _verifyState.value = DataState.Error(error)
                         })
                 )

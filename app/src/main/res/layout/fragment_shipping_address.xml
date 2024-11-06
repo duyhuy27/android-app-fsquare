@@ -24,6 +24,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_shipping_address" />
         <LinearLayout
+            android:id="@+id/btnAddAddress"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"

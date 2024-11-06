@@ -7,15 +7,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentCardBinding
 import vn.md18.fsquareapplication.features.main.adapter.BagAdapter
+import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CardFragment : BaseFragment<FragmentCardBinding, MainViewModel>() {
+class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>() {
 
     @Inject
     lateinit var bagAdapter: BagAdapter
-    override val viewModel: MainViewModel by  activityViewModels()
+    override val viewModel: BagViewmodel by  activityViewModels()
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentCardBinding  = FragmentCardBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = CardFragment::class.java.simpleName

@@ -16,14 +16,15 @@ import vn.md18.fsquareapplication.databinding.ActivityMainBinding
 import vn.md18.fsquareapplication.features.main.adapter.FavoriteAdapter
 import vn.md18.fsquareapplication.features.main.adapter.MainPagerAdapter
 import vn.md18.fsquareapplication.features.main.adapter.ProductAdapter
+import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, MainViewModel>() {
-    override val viewModel: MainViewModel  by viewModels()
+class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, FavoriteViewmodel>() {
+    override val viewModel: FavoriteViewmodel  by viewModels()
 
     @Inject
     lateinit var mPagerAdapter: MainPagerAdapter

@@ -2,9 +2,12 @@ package vn.md18.fsquareapplication.features.main.repository
 
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
+import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
+import vn.md18.fsquareapplication.data.network.model.response.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.DeleteBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
 import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
@@ -51,5 +54,13 @@ class MainRepositoryImpl @Inject constructor(
         updateQuantityBagRequest: UpdateQuantityBagRequest
     ): Flowable<UpdateQuantityBagResponse> {
         return applicationServices.updateQuantityBag(id = id, updateQuantityBagRequest)
+    }
+
+    override fun createBag(addBagRequest: AddBagRequest): Flowable<AddBagResponse> {
+        return applicationServices.createBag(addBagRequest)
+    }
+
+    override fun deleteBag(): Flowable<DeleteBagResponse> {
+        return applicationServices.deleteBag()
     }
 }

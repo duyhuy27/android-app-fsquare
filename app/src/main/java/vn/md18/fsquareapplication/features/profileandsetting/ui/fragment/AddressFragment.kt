@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
+import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentAddressBinding
 import vn.md18.fsquareapplication.databinding.FragmentHomeBinding
 import vn.md18.fsquareapplication.databinding.FragmentNewAddressBinding
@@ -21,6 +23,7 @@ import vn.md18.fsquareapplication.features.profileandsetting.adapter.LocationCus
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.ProvinceAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.LocationViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
+import vn.md18.fsquareapplication.utils.Constant
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,6 +38,13 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
 
     override fun onViewLoaded() {
         viewModel.getLocationCustomerList()
+        setFragmentResultListener(Constant.KEY_REQUEST) { _, bundle ->
+            val updateResult = bundle.getBoolean(Constant.KEY_UPDATE_SUCCESS)
+            val addResult = bundle.getBoolean(Constant.KEY_ADD_SUCCESS)
+            if (updateResult || addResult) {
+                viewModel.getLocationCustomerList()
+            }
+        }
         binding.apply {
             rcvAddress.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -45,11 +55,18 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
     }
 
     override fun addViewListener() {
-        viewModel.getLocationCustomerList()
         binding.apply {
             btnAddNewAddress.setOnClickListener{
-                findNavController().navigate(R.id.action_addressFragment_to_newAddressFragment)
+                val bundle = Bundle()
+                findNavController().navigate(R.id.action_addressFragment_to_newAddressFragment, bundle)
             }
+            locationCustomerAdapter.setOnItemClickListener { location ->
+                val bundle = Bundle().apply {
+                    putSerializable("location", location)
+                }
+                findNavController().navigate(R.id.action_addressFragment_to_newAddressFragment, bundle)
+            }
+
         }
     }
 
@@ -57,6 +74,19 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
         viewModel.listLocationCustomer.observe(this@AddressFragment) {
             binding.apply {
                 locationCustomerAdapter.submitList(it)
+                locationCustomerAdapter.notifyDataSetChanged()
+            }
+        }
+
+        viewModel.addLocationState.observe(this@AddressFragment) { state ->
+            if (state is DataState.Success) {
+                viewModel.getLocationCustomerList()
+            }
+        }
+
+        viewModel.updateLocationState.observe(this@AddressFragment) { state ->
+            if (state is DataState.Success) {
+                viewModel.getLocationCustomerList()
             }
         }
     }

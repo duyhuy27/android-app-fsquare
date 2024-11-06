@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Toast
 import dagger.hilt.android.qualifiers.ApplicationContext
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
+import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import javax.inject.Inject
@@ -54,8 +56,8 @@ class ProductAdapter @Inject constructor(
             imgProduct.loadImageURL(product.thumbnail.url)
             imgAddToFav.setOnClickListener {
                 viewModel.createFavorite(product._id)
-
             }
+
         }
 
         return view
