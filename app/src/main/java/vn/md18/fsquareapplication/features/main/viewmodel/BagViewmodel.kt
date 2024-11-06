@@ -7,13 +7,11 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
-import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
-import vn.md18.fsquareapplication.data.network.model.response.AddBagResponse
-import vn.md18.fsquareapplication.data.network.model.response.DeleteBagResponse
-import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
-import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
-import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger

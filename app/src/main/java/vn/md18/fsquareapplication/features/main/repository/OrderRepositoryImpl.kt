@@ -2,8 +2,14 @@ package vn.md18.fsquareapplication.features.main.repository
 
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
+import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
+import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.AddOrderResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
 import javax.inject.Inject
 
@@ -12,6 +18,25 @@ class OrderRepositoryImpl @Inject constructor(
 ) : OrderRepository {
     override fun getOrderList(): Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>> {
         return applicationService.getOrder()
+    }
+
+    override fun getOrderDetail(id: String): Flowable<GetOrderDetailResponse> {
+        return applicationService.getOrderById(id)
+    }
+
+    override fun updateOrderStatus(
+        id: String,
+        updateOrderRequest: UpdateOrderRequest
+    ): Flowable<UpdateOrderResponse> {
+        return applicationService.updateOrderStatus(id, updateOrderRequest)
+    }
+
+    override fun createOrder(addOrderRequest: AddOrderRequest): Flowable<AddOrderResponse> {
+        return applicationService.createOrder(addOrderRequest)
+    }
+
+    override fun deleteOrder(id: String): Flowable<DeleteOrderResponse> {
+        return applicationService.deleteOrder(id)
     }
 
 }

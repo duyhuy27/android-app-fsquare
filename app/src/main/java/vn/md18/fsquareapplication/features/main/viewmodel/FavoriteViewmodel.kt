@@ -7,9 +7,9 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
-import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
-import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
-import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.favorite.DeleteFavoriteRespone
+import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteResponse
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import javax.inject.Inject

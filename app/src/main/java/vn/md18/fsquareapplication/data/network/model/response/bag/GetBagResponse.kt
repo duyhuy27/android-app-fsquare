@@ -1,4 +1,4 @@
-package vn.md18.fsquareapplication.data.network.model.response
+package vn.md18.fsquareapplication.data.network.model.response.bag
 
 import com.google.gson.annotations.SerializedName
 

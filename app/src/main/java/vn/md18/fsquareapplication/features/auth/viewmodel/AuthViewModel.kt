@@ -1,6 +1,5 @@
 package vn.md18.fsquareapplication.features.auth.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,9 +10,9 @@ import vn.md18.fsquareapplication.data.model.ErrorResponse
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
-import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
-import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
-import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.SignUpResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.VerifyResponse
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger

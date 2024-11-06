@@ -6,7 +6,6 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import vn.md18.fsquareapplication.data.model.DataResponse
@@ -19,26 +18,32 @@ import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRe
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.AddLocationCustomerRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateLocationCustomerRequest
-import vn.md18.fsquareapplication.data.network.model.response.AddBagResponse
-import vn.md18.fsquareapplication.data.network.model.response.CreateFavoriteResponse
-import vn.md18.fsquareapplication.data.network.model.response.DeleteBagResponse
-import vn.md18.fsquareapplication.data.network.model.response.DeleteFavoriteRespone
-import vn.md18.fsquareapplication.data.network.model.response.FavoriteResponse
-import vn.md18.fsquareapplication.data.network.model.response.GetBagResponse
+import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
+import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
+import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.favorite.DeleteFavoriteRespone
+import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetDistrictsResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
-import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
-import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
-import vn.md18.fsquareapplication.data.network.model.response.UpdateQuantityBagResponse
-import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.SignUpResponse
+import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.VerifyResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.AddLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.DeleteLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.UpdateLocationCustomerResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.AddOrderResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
 
 interface ApplicationService {
 
@@ -134,4 +139,25 @@ interface ApplicationService {
 
     @GET(AppAPi.ORDER_LIST)
     fun getOrder() : Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>>
+
+    @GET(AppAPi.ORDER_LIST + "/{id}")
+    fun getOrderById(
+        @Path("id") id: String,
+    ) : Flowable<GetOrderDetailResponse>
+
+    @POST(AppAPi.ORDER_LIST)
+    fun createOrder(
+        @Body addOrderRequest: AddOrderRequest
+    ) : Flowable<AddOrderResponse>
+
+    @PATCH(AppAPi.ORDER_LIST + "/{id}")
+    fun updateOrderStatus(
+        @Path("id") id: String,
+        @Body updateOrderRequest: UpdateOrderRequest
+    ) : Flowable<UpdateOrderResponse>
+
+    @DELETE(AppAPi.ORDER_LIST + "/{id}")
+    fun deleteOrder(
+        @Path("id") id: String
+    ) : Flowable<DeleteOrderResponse>
 }
