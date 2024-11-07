@@ -1,5 +1,8 @@
 package vn.md18.fsquareapplication.features.profileandsetting.ui.fragment
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +20,7 @@ import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentAddressBinding
 import vn.md18.fsquareapplication.databinding.FragmentHomeBinding
 import vn.md18.fsquareapplication.databinding.FragmentNewAddressBinding
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.ui.fragment.HomeFragment
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.LocationCustomerAdapter
@@ -24,6 +28,8 @@ import vn.md18.fsquareapplication.features.profileandsetting.adapter.ProvinceAda
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.LocationViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
 import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import vn.md18.fsquareapplication.utils.view.CustomToolbar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -66,7 +72,13 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
                 }
                 findNavController().navigate(R.id.action_addressFragment_to_newAddressFragment, bundle)
             }
-
+            toolbarAddress.onClickBackPress = {
+                val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                    flags = FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_NEW_TASK
+                    putExtra("SELECTED_TAB", MainViewModel.TAB_PROFILE)
+                }
+                startActivity(intent)
+            }
         }
     }
 

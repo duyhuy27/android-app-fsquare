@@ -71,6 +71,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
                 }
             }
         }.attach()
+
+        val selectedTab = intent.getIntExtra("SELECTED_TAB", TAB_DASHBOARD_PAGE)
+        if (selectedTab == TAB_PROFILE) {
+            binding.pagerMain.setCurrentItem(TAB_PROFILE, false)
+        }
     }
 
 

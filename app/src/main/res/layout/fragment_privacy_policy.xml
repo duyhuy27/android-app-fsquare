@@ -13,6 +13,7 @@
 
         <!-- Custom toolbar -->
         <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:id="@+id/toolbarPolicy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titleToolbar="Privacy  Policy"

@@ -2,6 +2,7 @@ package vn.md18.fsquareapplication.features.profileandsetting.ui.fragment
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.core.os.bundleOf
@@ -16,6 +17,8 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.databinding.FragmentNewAddressBinding
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
+import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.DistrictAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.ProvinceAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.WardAdapter
@@ -58,6 +61,11 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
 
     override fun addViewListener() {
         binding.apply {
+            binding.apply {
+                toolbarAddAddress.onClickBackPress = {
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+                }
+            }
             imgProvince.setOnClickListener {
                 showDialog(requireContext(), edtProvince)
             }
