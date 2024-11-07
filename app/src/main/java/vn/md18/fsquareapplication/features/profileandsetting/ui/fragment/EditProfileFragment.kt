@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.features.profileandsetting.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentEditProfileBinding
 import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
+import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
 
 @AndroidEntryPoint
@@ -36,7 +39,15 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
     }
 
     override fun addViewListener() {
-
+        binding.apply {
+            toolbarEditProfile.onClickBackPress = {
+                val intent = Intent(requireContext(), MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra("SELECTED_TAB", MainViewModel.TAB_PROFILE)
+                }
+                startActivity(intent)
+            }
+        }
     }
 
     override fun addDataObserver() {
