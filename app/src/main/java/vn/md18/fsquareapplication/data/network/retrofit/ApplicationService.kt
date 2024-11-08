@@ -44,6 +44,7 @@ import vn.md18.fsquareapplication.data.network.model.response.order.AddOrderResp
 import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
+import vn.md18.fsquareapplication.data.network.model.response.profile.GetProfileResponse
 
 interface ApplicationService {
 
@@ -160,4 +161,8 @@ interface ApplicationService {
     fun deleteOrder(
         @Path("id") id: String
     ) : Flowable<DeleteOrderResponse>
+
+    @GET(AppAPi.PROFILE_DATA)
+    fun getProfile(
+    ) : Flowable<GetProfileResponse>
 }

@@ -21,4 +21,6 @@ object AppAPi {
     const val LOCATION_LIST = "api/customer/v1/customers/location"
 
     const val ORDER_LIST = "api/customer/v1/orders"
+
+    const val PROFILE_DATA = "api/customer/v1/customers/profile"
 }
