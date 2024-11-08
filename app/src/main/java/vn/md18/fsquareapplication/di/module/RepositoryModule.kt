@@ -18,6 +18,8 @@ import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.Provinc
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProvinceRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.WardRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.WardRepositoryImpl
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.editprofile.EditProfileRepository
+import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.editprofile.EditProfileRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepositoryImpl
 
@@ -47,4 +49,7 @@ interface RepositoryModule {
 
     @Binds
     fun provideOrderRepository(orderRepositoryImpl: OrderRepositoryImpl) :OrderRepository
+
+    @Binds
+    fun profileRepository(editProfileRepositoryImpl: EditProfileRepositoryImpl) :EditProfileRepository
 }

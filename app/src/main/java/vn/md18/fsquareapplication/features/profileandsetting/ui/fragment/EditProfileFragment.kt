@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,13 @@ import androidx.fragment.app.viewModels
 import com.hbb20.countrypicker.models.CPCountry
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
+import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentEditProfileBinding
 import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileViewModel>() {
@@ -36,6 +39,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
 
     override fun onViewLoaded() {
         setupCountryPickerView()
+        viewModel.getProfile()
     }
 
     override fun addViewListener() {
@@ -51,6 +55,17 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
     }
 
     override fun addDataObserver() {
+        viewModel.getProfile.observe(this@EditProfileFragment) {
+            binding.apply {
+                if (it is DataState.Success){
+                    it.data?.let { it1 -> edtFullname.setText(it1.firstName.toString() + it1.lastName.toString()) }
+                    it.data?.let { it1 -> FSLogger.e(it1.firstName)}
+                    it.data?.let { it1 -> edtBirthDate.setText(it1.birthDay.toString()) }
+                    it.data?.let { it1 -> edtEmail.setText(it1.email.toString()) }
+                    edtNumberPhone.setText(it.data?.phone.toString())
+                }
+            }
+        }
     }
 
     private fun setupCountryPickerView() {
