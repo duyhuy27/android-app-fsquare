@@ -4,73 +4,67 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentEnumOrderBinding
-import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
-import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
-import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
+import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
+import vn.md18.fsquareapplication.utils.OrderStatus
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, MainViewModel>() {
-    override val viewModel: MainViewModel by activityViewModels()
+class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>() {
+    @Inject
+    lateinit var orderAdapter: OrderAdapter
+    override val viewModel: OrderViewModel by activityViewModels()
 
-    override fun inflateLayout(layoutInflater: LayoutInflater): FragmentEnumOrderBinding = FragmentEnumOrderBinding.inflate(layoutInflater)
+    override fun inflateLayout(layoutInflater: LayoutInflater): FragmentEnumOrderBinding =
+        FragmentEnumOrderBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = EnumOrderFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        val status = arguments?.getString(ARG_STATUS) ?: Constant.PENDING
-
-        when (status) {
-            Constant.PENDING -> binding.tx1.text = "tab 1"
-            Constant.PROCESSING -> binding.tx1.text = "tab 2"
-            Constant.SHIPPED -> binding.tx1.text = "tab 3"
-            Constant.DELIVERED -> binding.tx1.text = "tab 4"
-            Constant.CANCELED -> binding.tx1.text = "tab 5"
+        val status = arguments?.getSerializable(ARG_STATUS) as? OrderStatus ?: OrderStatus.PENDING
+        binding.rcvOrder.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            setHasFixedSize(true)
         }
+        fetchOrderList(status)
+
+        orderAdapter.setViewModel(viewModel)
     }
 
     override fun addViewListener() {
 
     }
 
+    private fun fetchOrderList(status: OrderStatus) {
+        viewModel.getOrderList(status)
+    }
+
     override fun addDataObserver() {
-
+        viewModel.listOrder.observe(viewLifecycleOwner) { orders ->
+            if (orders.isEmpty()) {
+                binding.rcvOrder.visibility = android.view.View.GONE
+                binding.imgNoOrders.visibility = android.view.View.VISIBLE
+            } else {
+                binding.rcvOrder.visibility = android.view.View.VISIBLE
+                binding.imgNoOrders.visibility = android.view.View.GONE
+                orderAdapter.submitList(orders)
+            }
+        }
     }
+
     companion object {
-        private const val ARG_STATUS = "status"
+        private const val ARG_STATUS = "ARG_STATUS"
+
         @JvmStatic
-        fun newInstance(status: String): EnumOrderFragment {
-            val fragment = EnumOrderFragment()
-            val args = Bundle()
-            args.putString(ARG_STATUS, status)
-            fragment.arguments = args
-            return fragment
-        }
-        @JvmStatic
-        fun newInstance(): EnumOrderFragment {
-            return EnumOrderFragment()
-        }
-    }
-
-    private fun fetchPendingList(){
-        Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun fetchProcessingList(){
-        Toast.makeText(context, "2", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun fetchShippedList(){
-        Toast.makeText(context, "3", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun fetchDeliveredList(){
-        Toast.makeText(context, "4", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun fetchCanceledList(){
-        Toast.makeText(context, "5", Toast.LENGTH_SHORT).show()
+        fun newInstance(status: OrderStatus) =
+            EnumOrderFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_STATUS, status)
+                }
+            }
     }
 }

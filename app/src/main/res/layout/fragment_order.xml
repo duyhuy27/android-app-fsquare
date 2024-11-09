@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.main.ui.fragment.OrderFragment">
 
@@ -10,20 +11,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/primary"
-            app:tabSelectedTextColor="@android:color/black"
-            app:tabTextColor="@android:color/darker_gray"
-            app:tabIndicatorHeight="3dp" />
+            android:orientation="horizontal"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:scrollbars="none">
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp">
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- ViewPager2 chứa các trang đơn hàng -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </FrameLayout>

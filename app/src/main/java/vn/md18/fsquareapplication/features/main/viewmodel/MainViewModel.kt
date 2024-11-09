@@ -60,6 +60,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getProductBanner() {
+        setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
@@ -68,17 +69,20 @@ class MainViewModel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe({ response ->
+                            setLoading(false)
                             response.data.let {
                                 _listProductBanner.value = it
                                 setErrorString(response.message.toString())
                             }
                         },
                             { throwable ->
+                                setLoading(false)
                                 setErrorString(throwable.message.toString())
                             })
                 )
             }
             else {
+                setLoading(false)
                 setErrorStringId(R.string.error_have_no_internet)
             }
         }
@@ -86,6 +90,7 @@ class MainViewModel @Inject constructor(
 
     fun createFavorite(shoes: String) {
         val favoriteRequest = FavoriteRequest(shoes = shoes)
+        setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
@@ -94,12 +99,15 @@ class MainViewModel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe({ response ->
+                            setLoading(false)
                             _favoriteState.value = DataState.Success(response)
                         }, { err ->
+                            setLoading(false)
                             _favoriteState.value = DataState.Error(err)
                         })
                 )
             } else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }

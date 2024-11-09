@@ -38,6 +38,7 @@ class BagViewmodel @Inject constructor(
     }
 
     fun getBagList() {
+        setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
@@ -46,17 +47,20 @@ class BagViewmodel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe({ response ->
+                            setLoading(false)
                             response.data.let {
                                 FSLogger.d("dang o ham lay danh sach gio hang")
                                 _listBag.value = it
                             }
                         },
                             { throwable ->
+                                setLoading(false)
                                 setErrorString(throwable.message.toString())
                             })
                 )
             }
             else {
+                setLoading(false)
                 setErrorStringId(R.string.error_have_no_internet)
             }
         }
@@ -64,6 +68,7 @@ class BagViewmodel @Inject constructor(
 
     fun updateQuantity(_id: String, action: String) {
         var request = UpdateQuantityBagRequest(action = action)
+        setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
@@ -72,8 +77,10 @@ class BagViewmodel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe({ response ->
+                            setLoading(false)
                             _updateQuantityState.postValue(DataState.Success(response))
                         }, { err ->
+                            setLoading(false)
                             _updateQuantityState.postValue(DataState.Error(err))
                         })
                 )

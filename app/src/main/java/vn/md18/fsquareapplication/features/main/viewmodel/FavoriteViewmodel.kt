@@ -33,9 +33,9 @@ class FavoriteViewmodel @Inject constructor(
     }
 
     fun getFavoriteList() {
+        setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
-                setLoading(true)
                 compositeDisposable.add(
                     mainRepository.getFavoriteList()
                         .subscribeOn(schedulerProvider.io())
@@ -54,6 +54,7 @@ class FavoriteViewmodel @Inject constructor(
                 )
             }
             else {
+                setLoading(false)
                 setErrorStringId(R.string.error_have_no_internet)
             }
         }
@@ -81,9 +82,9 @@ class FavoriteViewmodel @Inject constructor(
     }
 
     fun deleteFavorite(_id: String) {
+        setLoading(false)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
-                setLoading(true)
                 compositeDisposable.add(
                     mainRepository.deleteFavorite(id = _id)
                         .subscribeOn(schedulerProvider.io())
@@ -98,6 +99,7 @@ class FavoriteViewmodel @Inject constructor(
                         })
                 )
             } else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }

@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -10,6 +11,8 @@ import vn.md18.fsquareapplication.databinding.FragmentWalletBinding
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
+import vn.md18.fsquareapplication.features.payment.ui.PaymentActivity
+import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
 import javax.inject.Inject
 
 
@@ -36,6 +39,18 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, OrderViewModel>() {
 
     override fun addViewListener() {
         viewModel.getOrderList()
+
+        binding.apply {
+            imgVietQr.setOnClickListener {
+                navigation("PAYMENT_METHOD")
+            }
+
+            txtSeeall.setOnClickListener {
+                navigation("TRANSACTION")
+            }
+
+
+        }
     }
 
     override fun addDataObserver() {
@@ -48,5 +63,11 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, OrderViewModel>() {
     companion object {
         @JvmStatic
         fun newInstance() = WalletFragment()
+    }
+
+    private fun navigation(status: String){
+        val intent = Intent(requireContext(), PaymentActivity::class.java)
+        intent.putExtra("STATUS_KEY", status)
+        startActivity(intent)
     }
 }

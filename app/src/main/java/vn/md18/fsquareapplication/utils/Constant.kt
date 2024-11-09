@@ -25,6 +25,13 @@ object Constant {
     const val DELIVERED = "Delivered"
     const val CANCELED = "Canceled"
 
+    const val VIET_QR = "VIET_QR"
+    const val APPLE_PAY = "APPLE_PAY"
+    const val MASTER_CARD = "MASTER_CARD"
+    const val VISA = "VISA"
+    const val PAYMENT_METHOD = "PAYMENT_METHOD"
+
+
     const val REQUEST_CODE_WRITE_EXTERNAL_PERMISSION = 11
     const val REQUEST_CODE_ACCESS_FINE_LOCATION_AP_MODE = 15
     const val REQUEST_CODE_PICK_DEVICES = 16
