@@ -46,10 +46,10 @@ class AuthViewModel @Inject constructor(
 
     fun signUp(email: String) {
         val signUpRequest = SignUpRequest(email = email)
+        setLoading(true)
         networkExtension.checkInternet {
             isConnect ->
             if (isConnect) {
-                setLoading(true)
                 compositeDisposable.add(
                     authRepository.signUp(signUpRequest = signUpRequest)
                         .subscribeOn(schedulerProvider.io())
@@ -73,10 +73,10 @@ class AuthViewModel @Inject constructor(
 
     fun login(email: String) {
         val loginRequest = LoginRequest(email = email)
+        setLoading(true)
         networkExtension.checkInternet {
                 isConnect ->
             if (isConnect) {
-                setLoading(true)
                 compositeDisposable.add(
                     authRepository.login(loginRequest = loginRequest)
                         .subscribeOn(schedulerProvider.io())
@@ -93,6 +93,7 @@ class AuthViewModel @Inject constructor(
                 )
             }
             else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }
@@ -100,10 +101,10 @@ class AuthViewModel @Inject constructor(
 
     fun verify(otp: String, email: String, type: String, fcmToken: String) {
         val verifyRequest = VerifyRequest(otp = otp, email = email, type = type, fcmToken = fcmToken)
+        setLoading(true)
         networkExtension.checkInternet { isConnect ->
             if (isConnect) {
                 _verifyState.value = DataState.Loading
-                setLoading(true)
                 compositeDisposable.add(
                     authRepository.verify(verifyRequest = verifyRequest)
                         .subscribeOn(schedulerProvider.io())
@@ -125,6 +126,7 @@ class AuthViewModel @Inject constructor(
                         })
                 )
             } else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }

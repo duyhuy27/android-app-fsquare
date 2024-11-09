@@ -5,11 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".features.main.ui.fragment.fragment_enum_order.EnumOrderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tx1"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:listitem="@layout/item_product_order" />
+
+    <ImageView
+        android:id="@+id/imgNoOrders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="140dp"
+        android:src="@drawable/ic_no_order"
+        android:visibility="gone"
+     />
 
 </FrameLayout>

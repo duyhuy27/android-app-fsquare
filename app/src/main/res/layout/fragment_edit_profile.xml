@@ -103,13 +103,14 @@
                 android:layout_marginBottom="@dimen/size_5"/>
 
             <LinearLayout
+                android:id="@+id/countryPickerPhoneLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edt_corner_grey"
                 android:padding="@dimen/_5sdp"
                 android:orientation="horizontal">
                 <com.ak.ui.CountryCodePicker
-                    android:id="@+id/ccp_phone"
+                    android:id="@+id/countryPickerPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:contentColor="@color/neutral_50_"
@@ -132,6 +133,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:maxLength="13"/>
             </LinearLayout>
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton

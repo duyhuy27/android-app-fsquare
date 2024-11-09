@@ -5,12 +5,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.databinding.ItemProductCartBinding
+import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
+import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 
 class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
+
+    private lateinit var viewModel: BagViewmodel
+
+    fun setViewModel(viewModel: BagViewmodel) {
+        this.viewModel = viewModel
+    }
     override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
         return null
     }
@@ -47,7 +55,10 @@ class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
                 imgCart.loadImageURL(product.thumbnail)
 
                 btnProductPlusCart.setOnClickListener {
-
+                    viewModel.updateQuantity(product._id, "increase")
+                }
+                btnProductPlusCart.setOnClickListener {
+                    viewModel.updateQuantity(product._id, "decrease")
                 }
             }
         }
