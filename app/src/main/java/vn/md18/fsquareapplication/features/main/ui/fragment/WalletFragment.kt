@@ -13,6 +13,7 @@ import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.features.payment.ui.PaymentActivity
 import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 
@@ -56,7 +57,14 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, OrderViewModel>() {
     override fun addDataObserver() {
         viewModel.listOrder.observe(this@WalletFragment) {
             binding.apply {
-                orderAdapter.submitList(it)
+                if (it.isEmpty()) {
+                    rcvProductCart.visibility = android.view.View.GONE
+                    imgNoTransaction.visibility = android.view.View.VISIBLE
+                } else {
+                    rcvProductCart.visibility = android.view.View.VISIBLE
+                    imgNoTransaction.visibility = android.view.View.GONE
+                    orderAdapter.submitList(it)
+                }
             }
         }
     }

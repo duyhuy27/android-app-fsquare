@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:id="@+id/toolbarPaymentWallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titleToolbar="Top Up E-Wallet"

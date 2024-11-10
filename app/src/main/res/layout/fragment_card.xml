@@ -41,7 +41,7 @@
            tools:listitem="@layout/item_product_cart" />
 
        <androidx.appcompat.widget.AppCompatButton
-           android:id="@+id/btn_add_new_address"
+           android:id="@+id/btn_Checkout"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="@string/Checkuot"

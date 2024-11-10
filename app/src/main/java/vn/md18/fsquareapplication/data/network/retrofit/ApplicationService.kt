@@ -14,6 +14,7 @@ import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
+import vn.md18.fsquareapplication.data.network.model.request.UpdateProfileRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.AddLocationCustomerRequest
@@ -33,6 +34,7 @@ import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
 import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import vn.md18.fsquareapplication.data.network.model.response.UpdateProfileResponse
 import vn.md18.fsquareapplication.data.network.model.response.auth.SignUpResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.auth.VerifyResponse
@@ -164,5 +166,10 @@ interface ApplicationService {
 
     @GET(AppAPi.PROFILE_DATA)
     fun getProfile(
-    ) : Flowable<GetProfileResponse>
+    ) : Flowable<DataResponse<GetProfileResponse, PaginationResponse>>
+
+    @PATCH(AppAPi.PROFILE_DATA)
+    fun updateProfile(
+        @Body updateProfileRequest: UpdateProfileRequest
+    ) : Flowable<UpdateProfileResponse>
 }

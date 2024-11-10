@@ -23,8 +23,9 @@ import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, FavoriteViewmodel>() {
-    override val viewModel: FavoriteViewmodel  by viewModels()
+class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, FavoriteViewmodel>(), FavoriteAdapter.OnFavoriteActionListener {
+
+    override val viewModel: FavoriteViewmodel by viewModels()
 
     @Inject
     lateinit var mPagerAdapter: MainPagerAdapter
@@ -33,11 +34,13 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
     lateinit var favoriteAdapter: FavoriteAdapter
 
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityFavoriteBinding = ActivityFavoriteBinding.inflate(layoutInflater)
+
     override fun onViewLoaded() {
-        favoriteAdapter.setViewModel(viewModel)
+        favoriteAdapter.setFavoriteActionListener(this)
+
         binding.apply {
             grdProduct.apply {
-                grdProduct.adapter = favoriteAdapter
+                adapter = favoriteAdapter
             }
         }
     }
@@ -52,20 +55,21 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
                 favoriteAdapter.updateProducts(it)
             }
         }
-
         viewModel.deleteFavoriteState.observe(this@FavoriteAndNewestActivity) { data ->
             when (data) {
                 is DataState.Error -> {
-                    showCustomToast("Delete to Favorite Failure", Constant.ToastStatus.FAILURE)
+                    showCustomToast("Delete from Favorite Failed", Constant.ToastStatus.FAILURE)
                 }
                 DataState.Loading -> {
-
                 }
                 is DataState.Success -> {
-                    showCustomToast("Delete to favorite Success", Constant.ToastStatus.SUCCESS)
+                    showCustomToast("Deleted from Favorite Successfully", Constant.ToastStatus.SUCCESS)
                     viewModel.getFavoriteList()
                 }
             }
         }
+    }
+    override fun onRemoveFavorite(productId: String) {
+        viewModel.deleteFavorite(productId)
     }
 }

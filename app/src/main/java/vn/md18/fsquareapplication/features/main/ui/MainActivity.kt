@@ -73,8 +73,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
         }.attach()
 
         val selectedTab = intent.getIntExtra("SELECTED_TAB", TAB_DASHBOARD_PAGE)
-        if (selectedTab == TAB_PROFILE) {
-            binding.pagerMain.setCurrentItem(TAB_PROFILE, false)
+        when(selectedTab){
+            TAB_WALLET -> binding.pagerMain.setCurrentItem(TAB_WALLET, false)
+            TAB_PROFILE -> binding.pagerMain.setCurrentItem(TAB_PROFILE, false)
+            TAB_ORDERS -> binding.pagerMain.setCurrentItem(TAB_ORDERS, false)
+            TAB_CARD_CONTEXT -> binding.pagerMain.setCurrentItem(TAB_CARD_CONTEXT, false)
+            TAB_DASHBOARD_PAGE -> binding.pagerMain.setCurrentItem(TAB_DASHBOARD_PAGE, false)
         }
     }
 

@@ -14,7 +14,7 @@ import vn.md18.fsquareapplication.utils.OrderStatus
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>() {
+class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>(), OrderAdapter.OnOrderActionListener {
     @Inject
     lateinit var orderAdapter: OrderAdapter
     override val viewModel: OrderViewModel by activityViewModels()
@@ -32,7 +32,7 @@ class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>
         }
         fetchOrderList(status)
 
-        orderAdapter.setViewModel(viewModel)
+        orderAdapter.setOrderActionListener(this)
     }
 
     override fun addViewListener() {
@@ -66,5 +66,9 @@ class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>
                     putSerializable(ARG_STATUS, status)
                 }
             }
+    }
+
+    override fun onUpdateOrder(id: String, status: OrderStatus) {
+        viewModel.updateOrder(id, status)
     }
 }

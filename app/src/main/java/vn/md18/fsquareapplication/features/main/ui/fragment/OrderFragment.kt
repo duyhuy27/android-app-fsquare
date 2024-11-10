@@ -67,7 +67,6 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, MainViewModel>() {
             }
 
             tabLayout.addView(tabContainer)
-
             tabTextView.setOnClickListener {
                 binding.viewPager.currentItem = i
             }

@@ -14,10 +14,15 @@ import javax.inject.Inject
 
 class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
 
-    private lateinit var viewModel: BagViewmodel
+    interface OnBagActionListener {
+        fun onRemoveBag()
+        fun onUpdateQuantityBag(productId: String, action: String)
+    }
 
-    fun setViewModel(viewModel: BagViewmodel) {
-        this.viewModel = viewModel
+    private var bagActionListener: OnBagActionListener? = null
+
+    fun setBagActionListener(listener: OnBagActionListener) {
+        bagActionListener = listener
     }
     override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
         return null
@@ -55,13 +60,12 @@ class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
                 imgCart.loadImageURL(product.thumbnail)
 
                 btnProductPlusCart.setOnClickListener {
-                    viewModel.updateQuantity(product._id, "increase")
+                    bagActionListener?.onUpdateQuantityBag(product._id, "increase")
                 }
                 btnProductPlusCart.setOnClickListener {
-                    viewModel.updateQuantity(product._id, "decrease")
+                    bagActionListener?.onUpdateQuantityBag(product._id, "decrease")
                 }
             }
         }
-
     }
 }

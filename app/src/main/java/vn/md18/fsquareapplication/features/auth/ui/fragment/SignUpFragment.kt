@@ -38,6 +38,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, AuthViewModel>() {
                 activity?.showCustomToast(R.string.err_validate_email.toString(), Constant.ToastStatus.FAILURE)
             }
         }
+        binding.toolbarSignupWithEmail.onClickBackPress = {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     override fun addDataObserver() {

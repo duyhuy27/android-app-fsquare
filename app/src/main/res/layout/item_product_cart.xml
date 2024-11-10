@@ -39,6 +39,7 @@
                     android:textSize="14dp"
                     android:textColor="#040207"
                     android:fontFamily="@font/opensans_semi_bold"
+                    android:maxLines="1"
                     android:layout_weight="1"/>
                 <ImageButton
                     android:id="@+id/btn_product_delete_cart"
