@@ -61,6 +61,7 @@
                 android:textColor="@android:color/black"
                 android:gravity="start"
                 android:fontFamily="@font/opensans_regular"
+                android:maxLines="1"
                 android:layout_marginLeft="@dimen/_10sdp"/>
         </LinearLayout>
         <RadioButton

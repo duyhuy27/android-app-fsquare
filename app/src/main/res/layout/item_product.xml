@@ -39,6 +39,7 @@
             android:text="Adidas Yeezy Boost 700"
             android:textColor="@color/black"
             android:textSize="@dimen/_14sdp"
+            android:maxLines="1"
             android:fontFamily="@font/opensans_semi_bold"
             android:layout_marginVertical="@dimen/_10sdp"
             />

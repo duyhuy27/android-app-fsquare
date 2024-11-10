@@ -32,7 +32,6 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
     }
 
     override fun onViewLoaded() {
-        // Kiểm tra và tự động điền email nếu đã lưu trước đó
         val savedEmail = sharedPreferences.getString("saved_email", "")
         if (!savedEmail.isNullOrEmpty()) {
             binding.edtInout.setText(savedEmail)
@@ -49,6 +48,10 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
                 activity?.showCustomToast(getString(R.string.err_validate_email), Constant.ToastStatus.FAILURE)
             }
         }
+
+        binding.toolbarLoginWithEmail.onClickBackPress = {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     override fun addDataObserver() {
@@ -59,7 +62,6 @@ class LoginWithEmailFragment : BaseFragment<FragmentLoginWithEmailBinding, AuthV
                         activity?.showCustomToast(getString(R.string.err_login), Constant.ToastStatus.FAILURE)
                     }
                     DataState.Loading -> {
-                        // Handle loading state if necessary
                     }
                     is DataState.Success -> {
                         val email = binding.edtInout.getText()

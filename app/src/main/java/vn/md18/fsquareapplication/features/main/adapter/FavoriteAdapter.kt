@@ -16,10 +16,15 @@ class FavoriteAdapter @Inject constructor(
 ) : BaseAdapter() {
 
     private var productList: List<FavoriteResponse> = listOf()
-    private lateinit var viewModel: FavoriteViewmodel
 
-    fun setViewModel(viewModel: FavoriteViewmodel) {
-        this.viewModel = viewModel
+    interface OnFavoriteActionListener {
+        fun onRemoveFavorite(productId: String)
+    }
+
+    private var favoriteActionListener: OnFavoriteActionListener? = null
+
+    fun setFavoriteActionListener(listener: OnFavoriteActionListener) {
+        favoriteActionListener = listener
     }
 
     override fun getCount(): Int = productList.size
@@ -49,8 +54,7 @@ class FavoriteAdapter @Inject constructor(
             txtProductName.text = product.name
             imgProduct.loadImageURL(product.thumbnail.url)
             imgAddToFav.setOnClickListener {
-                viewModel.deleteFavorite(product._id)
-
+                favoriteActionListener?.onRemoveFavorite(product._id)
             }
         }
 
@@ -62,4 +66,3 @@ class FavoriteAdapter @Inject constructor(
         notifyDataSetChanged()
     }
 }
-

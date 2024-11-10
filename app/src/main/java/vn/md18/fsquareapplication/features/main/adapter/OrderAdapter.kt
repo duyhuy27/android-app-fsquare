@@ -18,10 +18,14 @@ import javax.inject.Inject
 
 class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>() {
 
-    private lateinit var viewModel: OrderViewModel
+    interface OnOrderActionListener{
+        fun onUpdateOrder(id: String, status: OrderStatus)
+    }
 
-    fun setViewModel(viewModel: OrderViewModel) {
-        this.viewModel = viewModel
+    private var orderActionListener: OnOrderActionListener? = null
+
+    fun setOrderActionListener(listener: OnOrderActionListener) {
+        orderActionListener = listener
     }
 
     override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
@@ -90,7 +94,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
             builder.setTitle("Cancel Order")
                 .setMessage("Are you sure you want to cancel this order?")
                 .setPositiveButton("OK") { _, _ ->
-                    viewModel.updateOrder(order.id, OrderStatus.CANCELED)
+                    orderActionListener?.onUpdateOrder(order.id, OrderStatus.CANCELED)
                 }
                 .setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()

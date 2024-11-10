@@ -62,10 +62,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_product_cart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             tools:listitem="@layout/item_transaction_history"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
+        <ImageView
+            android:id="@+id/imgNoTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="140dp"
+            android:src="@drawable/box"
+            android:visibility="gone"
+            />
     </LinearLayout>
-
 </FrameLayout>

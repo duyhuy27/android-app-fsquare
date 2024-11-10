@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.profileandsetting.ui.fragment
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -20,7 +21,10 @@ import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import java.util.Calendar
 
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileViewModel>() {
@@ -45,6 +49,22 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
 
     override fun addViewListener() {
         binding.apply {
+            btnDatePicker.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+                val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+                    edtBirth.setText(formattedDate)
+                }, year, month, day)
+                datePickerDialog.show()
+            }
+
+            btnSubmit.setOnClickListener {
+                viewModel.updateProfile(edtFullname.getText().toString(), edtFullname.getText(), edtBirth.getText().toString(), edtNumberPhone.getText().toString(), "")
+            }
             toolbarEditProfile.onClickBackPress = {
                 val intent = Intent(requireContext(), MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -67,12 +87,20 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
         viewModel.getProfile.observe(this@EditProfileFragment) {
             binding.apply {
                 if (it is DataState.Success){
-                    it.data?.let { it1 -> edtFullname.setText(it1.firstName.toString() + it1.lastName.toString()) }
-                    it.data?.let { it1 -> FSLogger.e(it1.firstName)}
-                    it.data?.let { it1 -> edtBirthDate.setText(it1.birthDay.toString()) }
-                    it.data?.let { it1 -> edtEmail.setText(it1.email.toString()) }
+                    it.data?.let { it1 -> edtFullname.setText(it1.firstName + it1.lastName) }
+                    it.data?.let { it1 -> FSLogger.e(it1.email)}
+                    it.data?.let { it1 -> edtBirth.setText(it1.birthDay) }
+                    it.data?.let { it1 -> edtEmail.setText(it1.email) }
                     edtNumberPhone.setText(it.data?.phone.toString())
                 }
+            }
+        }
+
+        viewModel.updateProfileState.observe(this@EditProfileFragment) {
+            if(it is DataState.Success){
+                activity?.showCustomToast("Update Profile Success", Constant.ToastStatus.SUCCESS)
+            }else{
+                activity?.showCustomToast("Update Profile Failed", Constant.ToastStatus.FAILURE)
             }
         }
     }

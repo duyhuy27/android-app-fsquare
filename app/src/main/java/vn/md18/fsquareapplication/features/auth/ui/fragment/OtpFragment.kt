@@ -69,6 +69,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                 resendOtp()
             }
         }
+
+        binding.toolbarOTP.onClickBackPress = {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     override fun addDataObserver() {
@@ -81,6 +85,9 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                     DataState.Loading -> {
                     }
                     is DataState.Success -> {
+                        data.data?.let { token ->
+                            dataManager.setToken(token.toString())
+                        }
                         if(type.equals(Constant.KEY_SIGNUP, ignoreCase = true)){
                             navigateToSuccessfullyFragment()
                         } else {
