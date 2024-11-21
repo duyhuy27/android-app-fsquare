@@ -2,11 +2,11 @@ package vn.md18.fsquareapplication.data.network.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class BrandResponse(
+data class CategoriesResponse(
     @SerializedName("_id")
-    val _id: String,
+    var _id: String,
     @SerializedName("thumbnail")
-    val thumbnail: String,
+    var thumbnail: String,
     @SerializedName("name")
-    val name: String
+    var name: String
 )

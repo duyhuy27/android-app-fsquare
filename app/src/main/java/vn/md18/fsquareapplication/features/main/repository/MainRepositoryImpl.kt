@@ -5,6 +5,8 @@ import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
+import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
+import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
@@ -60,7 +62,27 @@ class MainRepositoryImpl @Inject constructor(
         return applicationServices.createBag(addBagRequest)
     }
 
+    override fun deleteBagById(id: String): Flowable<DeleteBagResponse> {
+        return applicationServices.deleteBagById(id)
+    }
+
     override fun deleteBag(): Flowable<DeleteBagResponse> {
         return applicationServices.deleteBag()
+    }
+
+    override fun getCategories(
+        size: Int?,
+        page: Int?,
+        search: String?
+    ): Flowable<DataResponse<List<CategoriesResponse>, PaginationResponse>> {
+        return applicationServices.getCategories(size = size!!, page = page!!)
+    }
+
+    override fun getBrands(
+        size: Int?,
+        page: Int?,
+        search: String?
+    ): Flowable<DataResponse<List<BrandResponse>, PaginationResponse>> {
+        return applicationServices.getBrands(size = size!!, page = page!!)
     }
 }

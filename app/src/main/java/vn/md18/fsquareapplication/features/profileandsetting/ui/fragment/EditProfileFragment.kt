@@ -63,7 +63,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
             }
 
             btnSubmit.setOnClickListener {
-                viewModel.updateProfile(edtFullname.getText().toString(), edtFullname.getText(), edtBirth.getText().toString(), edtNumberPhone.getText().toString(), "")
+                viewModel.updateProfile(edtFirstName.getText().toString(), edtLastName.getText(), edtBirth.getText().toString(), edtNumberPhone.getText().toString(), "")
             }
             toolbarEditProfile.onClickBackPress = {
                 val intent = Intent(requireContext(), MainActivity::class.java).apply {
@@ -71,6 +71,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
                     putExtra("SELECTED_TAB", MainViewModel.TAB_PROFILE)
                 }
                 startActivity(intent)
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
 
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -79,6 +80,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
                     putExtra("SELECTED_TAB", MainViewModel.TAB_PROFILE)
                 }
                 startActivity(intent)
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
         }
     }
@@ -87,8 +89,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
         viewModel.getProfile.observe(this@EditProfileFragment) {
             binding.apply {
                 if (it is DataState.Success){
-                    it.data?.let { it1 -> edtFullname.setText(it1.firstName + it1.lastName) }
-                    it.data?.let { it1 -> FSLogger.e(it1.email)}
+                    it.data?.let { it1 -> edtFirstName.setText(it1.firstName) }
+                    it.data?.let { it1 -> edtLastName.setText(it1.lastName) }
                     it.data?.let { it1 -> edtBirth.setText(it1.birthDay) }
                     it.data?.let { it1 -> edtEmail.setText(it1.email) }
                     edtNumberPhone.setText(it.data?.phone.toString())
@@ -121,14 +123,14 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
         countryPicker.cpViewHelper.refreshView()
     }
 
-    private fun getCountryCodeFromName(countryName: String?): String? {
-        return if (countryName != null) {
-            binding.countryPicker.cpViewHelper.cpDataStore.countryList
-                .firstOrNull { it.name.equals(countryName, ignoreCase = true) }?.alpha2
-        } else {
-            null
-        }
-    }
+//    private fun getCountryCodeFromName(countryName: String?): String? {
+//        return if (countryName != null) {
+//            binding.countryPicker.cpViewHelper.cpDataStore.countryList
+//                .firstOrNull { it.name.equals(countryName, ignoreCase = true) }?.alpha2
+//        } else {
+//            null
+//        }
+//    }
 
     private fun saveSelectedCountry() {
 //        selectedCountry?.let { country ->

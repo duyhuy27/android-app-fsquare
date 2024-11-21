@@ -89,7 +89,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                             dataManager.setToken(token.toString())
                         }
                         if(type.equals(Constant.KEY_SIGNUP, ignoreCase = true)){
-                            navigateToSuccessfullyFragment()
+                            navigateToPolicySignupFragment()
                         } else {
                             navigateToHomePage()
                         }
@@ -140,6 +140,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
 
     private fun navigateToSuccessfullyFragment() {
         findNavController().navigate(R.id.action_otpFragment_to_successfullyCreateAccountFragment)
+    }
+
+    private fun navigateToPolicySignupFragment() {
+        findNavController().navigate(R.id.action_otpFragment_to_policySignupFragment)
     }
 
     private fun navigateToHomePage() {

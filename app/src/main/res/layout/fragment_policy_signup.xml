@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.auth.ui.fragment.PolicySignupFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Điều khoản và Điều Kiện"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chấp nhận Điều khoản và Điều Kiện: Bằng cách sử dụng ứng dụng của chúng tôi, bạn đồng ý tuân thủ các điều khoản và điều kiện này.\n\nĐặt hàng và Thanh toán: Bạn chịu trách nhiệm trả tiền cho mọi đơn hàng được đặt qua ứng dụng của chúng tôi. Chúng tôi có thể chấp nhận thanh toán qua các phương thức đã chỉ định trong ứng dụng.\n\nThực phẩm và Dịch vụ: Chúng tôi sẽ cố gắng cung cấp thực phẩm và dịch vụ chất lượng như mô tả trong ứng dụng. Chúng tôi không chịu trách nhiệm cho bất kỳ sự cố hoặc hậu quả nào do thực phẩm hoặc dịch vụ gây ra.\n\nHủy đơn hàng: Bạn có thể hủy đơn hàng trước thời điểm nó được xác nhận bởi nhà cung cấp thực phẩm. Chúng tôi có thể hủy đơn hàng nếu không thể đảm bảo giao hàng đúng hẹn hoặc vì lý do khách quan khác.\n\nQuyền Sở Hữu Trí Tuệ: Tất cả quyền sở hữu trí tuệ liên quan đến ứng dụng và nội dung của chúng tôi thuộc về chúng tôi.\n\nQuyền Riêng Tư: Chúng tôi sẽ bảo vệ thông tin cá nhân của bạn theo chính sách quyền riêng tư của chúng tôi.\n\nBảo Mật: Chúng tôi cam kết bảo mật thông tin của bạn và thực hiện các biện pháp an toàn để bảo vệ dữ liệu.\n\nSử dụng Hợp Lý: Bạn đồng ý sử dụng ứng dụng của chúng tôi cho các mục đích hợp lý và không vi phạm pháp luật.\n\nThay Đổi Điều Khoản và Điều Kiện: Chúng tôi có quyền thay đổi điều khoản và điều kiện này theo quyết định của chúng tôi.\n\nKết thúc Sử dụng: Bạn có thể ngừng sử dụng ứng dụng của chúng tôi bất kỳ lúc nào. Chúng tôi cũng có quyền ngừng cung cấp dịch vụ cho bạn nếu bạn vi phạm các điều khoản này.\n\nLiên Hệ: Nếu bạn có bất kỳ câu hỏi hoặc phàn nàn nào, vui lòng liên hệ với chúng tôi theo thông tin liên hệ đã được cung cấp trong ứng dụng."
+                android:textSize="14sp"
+                android:lineSpacingExtra="8dp" />
+
+            <CheckBox
+                android:id="@+id/chkAgree"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:backgroundTint="@color/primary"
+                android:layout_marginTop="10dp"
+                android:text="dong y voi dieu khoan va dich vu"
+                android:layout_marginBottom="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Confirm_delete"
+                style="@style/ButtonApp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

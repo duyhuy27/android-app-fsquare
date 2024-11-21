@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
 import dagger.hilt.android.qualifiers.ApplicationContext
+import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
@@ -51,17 +52,28 @@ class ProductAdapter @Inject constructor(
 
         val product = productList[position]
         binding.apply {
-            txtProductPrice.text = "${product.maxPrice} $"
+            txtProductPrice.text = "${product.maxPrice} VND"
             txtProductName.text = product.name
+            txtRating.text = "${product.rating}"
+            txtSale.text = "${product.sales} sold"
             imgProduct.loadImageURL(product.thumbnail.url)
+            imgAddToFav.setImageResource(
+                if (product.isFavorite) R.drawable.add_to_fav else R.drawable.add
+            )
             imgAddToFav.setOnClickListener {
-                viewModel.createFavorite(product._id)
+                val isAdding = !product.isFavorite
+                product.isFavorite = isAdding
+                imgAddToFav.setImageResource(
+                    if (isAdding) R.drawable.add_to_fav else R.drawable.add
+                )
+                viewModel.createFavorite(product._id, isAdding)
+                viewModel.createBag("6123456789abcdef01234567", 2)
             }
-
         }
 
         return view
     }
+
 
     fun updateProducts(newProducts: List<ProductResponse>) {
         productList = newProducts

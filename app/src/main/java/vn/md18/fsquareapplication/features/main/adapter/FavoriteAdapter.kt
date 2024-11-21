@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import dagger.hilt.android.qualifiers.ApplicationContext
+import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteResponse
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
@@ -50,9 +51,12 @@ class FavoriteAdapter @Inject constructor(
 
         val product = productList[position]
         binding.apply {
-            txtProductPrice.text = "${product.maxPrice} $"
+            txtProductPrice.text = "${product.maxPrice} VND"
             txtProductName.text = product.name
+            txtSale.text = "${product.sales} sold"
+            txtRating.text = "${product.avgRating}"
             imgProduct.loadImageURL(product.thumbnail.url)
+            imgAddToFav.setImageResource(R.drawable.trash)
             imgAddToFav.setOnClickListener {
                 favoriteActionListener?.onRemoveFavorite(product._id)
             }

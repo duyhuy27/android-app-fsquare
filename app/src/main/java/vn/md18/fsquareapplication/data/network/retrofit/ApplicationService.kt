@@ -21,6 +21,8 @@ import vn.md18.fsquareapplication.data.network.model.request.location.AddLocatio
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateLocationCustomerRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
+import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
+import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
@@ -108,6 +110,11 @@ interface ApplicationService {
     fun deleteBag(
     ) : Flowable<DeleteBagResponse>
 
+    @DELETE(AppAPi.BAG_LIST + "/{id}")
+    fun deleteBagById(
+        @Path("id") id: String,
+    ) : Flowable<DeleteBagResponse>
+
     @GET(AppAPi.PROVINCE_LIST)
     fun getProvinces() : Flowable<DataResponse<List<GetProvinceResponse>, PaginationResponse>>
 
@@ -172,4 +179,18 @@ interface ApplicationService {
     fun updateProfile(
         @Body updateProfileRequest: UpdateProfileRequest
     ) : Flowable<UpdateProfileResponse>
+
+    @GET(AppAPi.CATEGORIES_LIST)
+    fun getCategories(
+        @Query("size") size: Int,
+        @Query("page") page: Int,
+        @Query("search") search: String? = null,
+    ) : Flowable<DataResponse<List<CategoriesResponse>, PaginationResponse>>
+
+    @GET(AppAPi.BRANDS_LIST)
+    fun getBrands(
+        @Query("size") size: Int,
+        @Query("page") page: Int,
+        @Query("search") search: String? = null,
+    ) : Flowable<DataResponse<List<BrandResponse>, PaginationResponse>>
 }

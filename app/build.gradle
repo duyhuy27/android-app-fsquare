@@ -255,7 +255,7 @@ dependencies {
     implementation 'com.hbb20:android-country-picker:0.0.7'
 
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'com.hbb20:ccp:2.5.1'
+    implementation 'com.hbb20:ccp:2.5.2'
 }
 
 static def getCurrentDayTime() {

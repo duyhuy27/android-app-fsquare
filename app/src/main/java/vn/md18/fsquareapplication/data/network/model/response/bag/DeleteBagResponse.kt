@@ -8,4 +8,7 @@ data class DeleteBagResponse(
 
     @SerializedName("message")
     var message: String,
+
+    @SerializedName("data")
+    var data: String
 )

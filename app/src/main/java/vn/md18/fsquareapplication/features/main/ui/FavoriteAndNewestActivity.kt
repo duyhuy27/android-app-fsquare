@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,6 +14,7 @@ import vn.md18.fsquareapplication.core.base.BaseActivity
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.ActivityFavoriteBinding
 import vn.md18.fsquareapplication.databinding.ActivityMainBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.features.main.adapter.FavoriteAdapter
 import vn.md18.fsquareapplication.features.main.adapter.MainPagerAdapter
 import vn.md18.fsquareapplication.features.main.adapter.ProductAdapter
@@ -36,6 +38,7 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityFavoriteBinding = ActivityFavoriteBinding.inflate(layoutInflater)
 
     override fun onViewLoaded() {
+        viewModel.getFavoriteList()
         favoriteAdapter.setFavoriteActionListener(this)
 
         binding.apply {
@@ -46,7 +49,11 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
     }
 
     override fun addViewListener() {
-        viewModel.getFavoriteList()
+        binding.apply {
+            btnBack.setOnClickListener {
+                onBackPressed()
+            }
+        }
     }
 
     override fun addDataObserver() {
@@ -70,6 +77,22 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
         }
     }
     override fun onRemoveFavorite(productId: String) {
-        viewModel.deleteFavorite(productId)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_delete_fav, null)
+        val binding = DialogConfirmDeleteFavBinding.bind(dialogView)
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        binding.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        binding.btnConfirm.setOnClickListener {
+            viewModel.deleteFavorite(productId)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 }

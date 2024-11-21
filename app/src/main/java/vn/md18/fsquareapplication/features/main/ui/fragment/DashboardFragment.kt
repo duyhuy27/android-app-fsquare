@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
@@ -47,6 +49,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     override fun onViewLoaded() {
 
         productAdapter.setViewModel(viewModel)
+        viewModel.getProductBanner()
+        viewModel.getProduct()
 
         binding.apply {
             rcvBanner.apply {
@@ -62,35 +66,40 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
         startAutoScroll()
     }
 
-
-
-
     override fun addViewListener() {
-        viewModel.getProductBanner()
+        binding.tvSeeMoreNewest.setOnClickListener {
+            val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
+                putExtra("typeFavNew", "New")
+
+            }
+            startActivity(intent)
+        }
     }
 
     override fun addDataObserver() {
         viewModel.listProductBanner.observe(this@DashboardFragment) {
             binding.apply {
                 bannerAdapter.submitList(it)
+            }
+        }
+        viewModel.listProduct.observe(this@DashboardFragment) {
+            binding.apply {
                 productAdapter.updateProducts(it)
             }
         }
         viewModel.favoriteState.observe(this@DashboardFragment) { data ->
             when (data) {
                 is DataState.Error -> {
-                    activity?.showCustomToast("Add to Favorite Failure", Constant.ToastStatus.FAILURE)
+                    activity?.showCustomToast("Action Failed", Constant.ToastStatus.FAILURE)
                 }
-                DataState.Loading -> {
-
-                }
+                DataState.Loading -> {  }
                 is DataState.Success -> {
-                    activity?.showCustomToast("Add to favorite Success", Constant.ToastStatus.SUCCESS)
+                    val action = if (data.data) "added to" else "removed from"
+                    activity?.showCustomToast("Successfully $action favorite", Constant.ToastStatus.SUCCESS
+                    )
                 }
             }
         }
-
-
 
     }
 
@@ -117,4 +126,3 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
         handler?.removeCallbacks(autoScrollRunnable!!)
     }
 }
-

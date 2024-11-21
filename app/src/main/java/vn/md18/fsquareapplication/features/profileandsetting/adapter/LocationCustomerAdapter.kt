@@ -48,7 +48,10 @@ class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLoca
             val location: GetLocationCustomerResponse = itemList[position]
             binding.apply {
                 txtHome.text = location.title
-                txtAddress.text = location.address + ", " + location.wardName + ", " + location.districtName + ", " + location.provinceName
+                txtAddress.text = (location.address + ", " +
+                        location.wardName + ", " +
+                        location.districtName + ", " +
+                        location.provinceName).toString()
                 if(location.isDefault){
                     txtDefault.text = "mac dinh"
                 }else{

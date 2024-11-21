@@ -44,6 +44,8 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
         FragmentNewAddressBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = NewAddressFragment::class.java.simpleName
+    var provinceIdUpdate = ""
+    var districtIdUpdate = ""
 
     override fun onViewLoaded() {
         location = requireArguments().getSerializable("location") as? GetLocationCustomerResponse
@@ -51,10 +53,13 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
         if(location != null){
             binding.apply {
                 btnAddNewAddress.text = "Update Address"
+                edtTitle.setText(location?.title ?: "")
+                edtStreetAndApartment.setText(location?.address ?: "")
                 edtSupDistrict.setText(location?.wardName ?: "")
                 edtDistrict.setText(location?.districtName ?: "")
-                edtStreetAndApartment.setText(location?.address ?: "")
                 edtProvince.setText(location?.provinceName ?: "")
+                provinceIdUpdate = getProvinceIdByName(edtProvince.text.toString()).toString()
+                districtIdUpdate = getDistrictIdByName(edtDistrict.text.toString()).toString()
             }
         }
     }
@@ -78,18 +83,23 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
 
             btnAddNewAddress.setOnClickListener {
                 if(location != null) {
+                    val provinceName = edtProvince.text.toString()
+                    val districtName = edtDistrict.text.toString()
+                    val wardName = edtSupDistrict.text.toString()
+
+                    // Kiểm tra và xử lý cập nhật các trường, set giá trị rỗng cho các trường không thay đổi
                     viewModel.updateLocationCustomerList(
                         id = location!!.id,
-                        title = location!!.title,
+                        title = edtTitle.text.toString(),
                         address = edtStreetAndApartment.text.toString(),
-                        wardName = edtSupDistrict.text.toString(),
-                        districtName = edtDistrict.text.toString(),
-                        provinceName = edtProvince.text.toString(),
+                        wardName = if (wardName.isNotEmpty()) wardName else "",  // Nếu ward không rỗng thì cập nhật
+                        districtName = if (districtName.isNotEmpty()) districtName else "",  // Nếu district không rỗng thì cập nhật
+                        provinceName = if (provinceName.isNotEmpty()) provinceName else "",  // Nếu province không rỗng thì cập nhật
                         isDefault = location!!.isDefault
                     )
                 } else {
                     viewModel.addLocationCustomerList(
-                        "",
+                        edtTitle.text.toString(),
                         edtStreetAndApartment.text.toString(),
                         edtSupDistrict.text.toString(),
                         edtDistrict.text.toString(),
@@ -201,4 +211,16 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
         recyclerView.adapter = wardAdapter
         alertDialog.show()
     }
+
+    fun getProvinceIdByName(provinceName: String): String? {
+        val provinceList = viewModel.listProvince.value ?: return null
+        return provinceList.find { it.provinceName == provinceName }?.provinceID
+    }
+
+    fun getDistrictIdByName(districtName: String): String? {
+        val districtList = viewModel.listDistrict.value ?: return null
+        return districtList.find { it.districtName == districtName }?.districtID
+    }
+
+
 }

@@ -3,23 +3,33 @@ package vn.md18.fsquareapplication.features.main.ui.fragment
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
+import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
+import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
 import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.loadImageUri
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment<FragmentProfileBinding, MainViewModel>() {
-    override val viewModel: MainViewModel by activityViewModels()
+class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
+    override val viewModel: ProfileViewModel by activityViewModels()
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentProfileBinding = FragmentProfileBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = ProfileFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-          
+        viewModel.getProfile()
+        binding.apply {
+            btnEditAvatar.setOnClickListener {
+
+            }
+        }
+
     }
 
     override fun addViewListener() {
@@ -34,7 +44,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, MainViewModel>() {
     }
 
     override fun addDataObserver() {
-          
+        viewModel.getProfile.observe(this@ProfileFragment) {
+            binding.apply {
+                if (it is DataState.Success){
+                    it.data?.let { it1 -> txtName.text = "${ it1.firstName} ${it1.lastName}"}
+                    it.data?.let { it1 -> txtPhonenumber.text = it1.phone }
+                    it.data?.let { it1 -> avatar.loadImageUri(it1.avatar.toUri()) }
+                }
+            }
+        }
     }
 
     companion object {
