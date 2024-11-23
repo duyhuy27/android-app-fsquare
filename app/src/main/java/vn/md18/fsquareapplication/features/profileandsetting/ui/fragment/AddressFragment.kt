@@ -79,6 +79,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
                     putExtra("SELECTED_TAB", MainViewModel.TAB_PROFILE)
                 }
                 startActivity(intent)
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
 
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -87,6 +88,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
                     putExtra("SELECTED_TAB", MainViewModel.TAB_PROFILE)
                 }
                 startActivity(intent)
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
         }
 

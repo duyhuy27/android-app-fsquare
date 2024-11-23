@@ -37,13 +37,15 @@
     <string name="resend_otp_success">OTP đã được gửi lại.</string>
     <string name="err_verify">OTP không đúng hoặc đã hết hạn</string>
     <string name="err_validate_email">Email không hợp lệ. Vui lòng kiểm tra lại.</string>
+    <string name="checkbox_policy">Vui lòng đọc kỹ điều khoản và ấn xác nhận để tiếp tục</string>
 
     <string name="error_have_no_internet">Xin vui lòng kiểm tra lại Kết nối mạng</string>
     <string name="error_undefine">Xin vui lòng kiểm tra lại Kết nối mạng</string>
 
 
     <!-- Setting profile strings -->
-    <string name="Full_name">Tên Đầy Đủ</string>
+    <string name="First_Name">Tên</string>
+    <string name="Last_Name">Họ</string>
     <string name="Birth_Date">Ngày Sinh</string>
     <string name="Email">Email</string>
     <string name="Country">Quê Quán</string>
@@ -88,6 +90,11 @@
     <string name="District">Huyện</string>
     <string name="Sub_district">Phường-Xã</string>
     <string name="Street_and_Apartment">Đường và số nhà</string>
+    <string name="Title_Address">Kiểu địa chỉ</string>
+
+    <string name="Delete_Favorite">Xóa yêu thích</string>
+    <string name="Text_confirm_delete_fav">Bạn có chắc muốn xoas sản phẩm này khỏi danh sách yêu thích ?</string>
+    <string name="Confirm_delete">Đồng ý</string>
 
 
     <!--Cancel order view strings -->

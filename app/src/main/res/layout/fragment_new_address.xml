@@ -23,7 +23,8 @@
             android:text="@string/City"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:textSize="18sp"
             android:textColor="#272B41"
             android:fontFamily="@font/montserrat_semi_bold"
@@ -33,7 +34,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_corner_grey"
             android:padding="@dimen/_6sdp"
-            android:layout_margin="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <EditText
@@ -61,6 +63,7 @@
             android:text="@string/District"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
             android:textSize="18sp"
             android:textColor="#272B41"
             android:fontFamily="@font/montserrat_semi_bold"
@@ -70,7 +73,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_corner_grey"
             android:padding="@dimen/_6sdp"
-            android:layout_margin="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <EditText
@@ -98,6 +102,7 @@
             android:text="@string/Sub_district"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
             android:textSize="18sp"
             android:textColor="#272B41"
             android:fontFamily="@font/montserrat_semi_bold"
@@ -107,7 +112,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_corner_grey"
             android:padding="@dimen/_6sdp"
-            android:layout_margin="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <EditText
@@ -135,6 +141,7 @@
             android:text="@string/Street_and_Apartment"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
             android:textSize="18sp"
             android:textColor="#272B41"
             android:fontFamily="@font/montserrat_semi_bold"
@@ -144,17 +151,48 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edt_corner_grey"
             android:padding="@dimen/_6sdp"
-            android:layout_margin="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/edtStreet_and_Apartment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:textColor="#333333"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:hint="Nhập địa chi tiết địa chỉ"
+                android:textColorHint="#676767"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Title_Address"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:textColor="#272B41"
+            android:fontFamily="@font/montserrat_semi_bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edt_corner_grey"
+            android:padding="@dimen/_6sdp"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:textColor="#333333"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:hint="Nhập kiểu địa chỉ"
                 android:textColorHint="#676767"
                 />
         </LinearLayout>

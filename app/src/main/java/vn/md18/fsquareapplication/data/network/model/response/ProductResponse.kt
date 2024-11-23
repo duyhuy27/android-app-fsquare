@@ -17,8 +17,10 @@ data class ProductResponse(
     val rating: Double,
     @SerializedName("reviewCount")
     val reviewCount: Int,
+    @SerializedName("sales")
+    val sales: Int,
     @SerializedName("isFavorite")
-    val isFavorite: Boolean,
+    var isFavorite: Boolean,
 )
 
 data class Thumbnail(

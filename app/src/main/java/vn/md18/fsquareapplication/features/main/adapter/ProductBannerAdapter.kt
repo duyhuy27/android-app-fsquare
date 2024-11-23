@@ -40,7 +40,7 @@ class ProductBannerAdapter @Inject constructor() : BaseRecycleAdapter<ProductRes
         override fun bindData(position: Int) {
             val product: ProductResponse = itemList[position]
             binding.apply {
-                tvPrice.text = product.maxPrice.toString() + " $"
+                tvPrice.text = product.maxPrice.toString() + " VND"
                 tvTitle.text = product.name
                 imgProduct.loadImageURL(product.thumbnail.url)
             }

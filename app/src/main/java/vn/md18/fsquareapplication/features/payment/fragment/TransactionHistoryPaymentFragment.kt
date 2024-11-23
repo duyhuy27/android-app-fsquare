@@ -50,6 +50,7 @@ class TransactionHistoryPaymentFragment : BaseFragment<FragmentTransactionHistor
                     putExtra("SELECTED_TAB", MainViewModel.TAB_WALLET)
                 }
                 startActivity(intent)
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
 
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -58,6 +59,7 @@ class TransactionHistoryPaymentFragment : BaseFragment<FragmentTransactionHistor
                     putExtra("SELECTED_TAB", MainViewModel.TAB_WALLET)
                 }
                 startActivity(intent)
+                requireActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
         }
     }

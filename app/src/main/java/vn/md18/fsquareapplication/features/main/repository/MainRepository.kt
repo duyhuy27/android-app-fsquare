@@ -5,6 +5,8 @@ import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
+import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
+import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
@@ -37,5 +39,19 @@ interface MainRepository {
     fun updateQuantityBag(id: String, updateQuantityBagRequest: UpdateQuantityBagRequest) : Flowable<UpdateQuantityBagResponse>
     fun createBag( addBagRequest: AddBagRequest ) : Flowable<AddBagResponse>
 
+    fun deleteBagById( id: String ) : Flowable<DeleteBagResponse>
+
     fun deleteBag( ) : Flowable<DeleteBagResponse>
+
+    fun getCategories(
+        size: Int? = null,
+        page: Int? = null,
+        search: String? = null,
+    ) : Flowable<DataResponse<List<CategoriesResponse>, PaginationResponse>>
+
+    fun getBrands(
+        size: Int? = null,
+        page: Int? = null,
+        search: String? = null,
+    ) : Flowable<DataResponse<List<BrandResponse>, PaginationResponse>>
 }

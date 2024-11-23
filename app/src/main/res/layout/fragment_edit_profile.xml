@@ -21,22 +21,37 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/size_20"
-            android:layout_marginTop="@dimen/permission_dp_15">
+            android:paddingHorizontal="@dimen/size_20"
+            android:layout_marginTop="@dimen/permission_dp_5">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/size_14"
-                android:text="@string/Full_name"
+                android:text="@string/First_Name"
                 android:textColor="@color/black_neutral"
                 android:layout_marginBottom="@dimen/size_5" />
 
             <vn.md18.fsquareapplication.utils.view.CustomEditText
-                android:id="@+id/edt_fullname"
+                android:id="@+id/edt_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20"
+                android:layout_marginBottom="@dimen/permission_dp_10"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Last_Name"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5" />
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_10"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -51,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edt_corner_grey"
                 android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:padding="@dimen/_7sdp">
                 <EditText
                     android:id="@+id/edtBirth"
@@ -87,7 +103,7 @@
                 app:actionIme="actionNone"
                 app:showIconTogglePassword="false"
                 android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20" />
+                android:layout_marginBottom="@dimen/permission_dp_10" />
 
             <!-- Address -->
             <TextView
@@ -105,7 +121,7 @@
                 android:padding="@dimen/_4sdp"
                 android:background="@drawable/bg_edt_corner_grey"
                 android:layout_marginTop="@dimen/permission_dp_5"
-                android:layout_marginBottom="@dimen/permission_dp_20"
+                android:layout_marginBottom="@dimen/permission_dp_10"
                 />
 
             <TextView
@@ -123,27 +139,32 @@
                 android:background="@drawable/bg_edt_corner_grey"
                 android:padding="@dimen/_5sdp"
                 android:orientation="horizontal">
-                <com.ak.ui.CountryCodePicker
-                    android:id="@+id/countryPickerPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:contentColor="@color/neutral_50_"
-                    app:fontFamily="@font/montserrat_medium"
-                    app:showFlag="true"
-                    android:gravity="center"
-                    app:defaultNameCode="vn"
-                    app:showArrowDown="true"
-                    app:showNameCode="false"
-                    app:arrowSize="@dimen/_20sdp"
-                    app:textSize="@dimen/_12ssp"
-                    app:excludedCountries="ad,ae" />
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    >
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/countryPickerPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:contentColor="@color/neutral_50_"
+                        app:fontFamily="@font/montserrat_medium"
+                        app:ccp_showFullName="false"
+                        app:showFlag="true"
+                        android:gravity="center"
+                        app:arrowSize="@dimen/_20sdp"
+                        app:textSize="@dimen/_12ssp"
+                        app:excludedCountries="ad,ae"
+                        />
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/edtNumberPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="40dp"
                     android:inputType="phone"
                     android:background="@null"
+                    android:layout_weight="1"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:maxLength="13"/>
             </LinearLayout>

@@ -18,6 +18,8 @@ data class FavoriteResponse(
     val maxPrice: Int,
     @SerializedName("avgRating")
     val avgRating: Double,
+    @SerializedName("sales")
+    val sales: Int,
     @SerializedName("reviewCount")
     val reviewCount: Int,
 )

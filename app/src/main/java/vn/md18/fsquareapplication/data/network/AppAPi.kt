@@ -23,4 +23,8 @@ object AppAPi {
     const val ORDER_LIST = "api/customer/v1/orders"
 
     const val PROFILE_DATA = "api/customer/v1/customers/profile"
+
+    const val CATEGORIES_LIST = "api/customer/v2/categories"
+
+    const val BRANDS_LIST = "api/customer/v2/brands"
 }

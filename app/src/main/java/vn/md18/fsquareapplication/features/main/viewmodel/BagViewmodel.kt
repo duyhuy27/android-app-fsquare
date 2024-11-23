@@ -33,6 +33,9 @@ class BagViewmodel @Inject constructor(
 
     private val _deleteBagState: MutableLiveData<DataState<DeleteBagResponse>> = MutableLiveData()
     val deleteBagState: LiveData<DataState<DeleteBagResponse>> get() = _deleteBagState
+
+    private val _deleteBagByIdState: MutableLiveData<DataState<DeleteBagResponse>> = MutableLiveData()
+    val deleteBagByIdState: LiveData<DataState<DeleteBagResponse>> get() = _deleteBagByIdState
     override fun onDidBindViewModel() {
 
     }
@@ -123,6 +126,26 @@ class BagViewmodel @Inject constructor(
                             _deleteBagState.postValue(DataState.Success(response))
                         }, { err ->
                             _deleteBagState.postValue(DataState.Error(err))
+                        })
+                )
+            } else {
+                setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun deleteBagById(id: String) {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.deleteBagById(id)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            _deleteBagByIdState.postValue(DataState.Success(response))
+                        }, { err ->
+                            _deleteBagByIdState.postValue(DataState.Error(err))
                         })
                 )
             } else {
