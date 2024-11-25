@@ -13,6 +13,7 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentHomeBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
+import vn.md18.fsquareapplication.features.main.ui.SearchActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 
 @AndroidEntryPoint
@@ -35,9 +36,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>() {
         binding.buttonActionFirst.setOnClickListener {
             val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
                 putExtra("typeFavNew", "Fav")
-
             }
             startActivity(intent)
+        }
+        binding.buttonActionSearch.setOnClickListener {
+            openActivity(SearchActivity::class.java)
         }
     }
 

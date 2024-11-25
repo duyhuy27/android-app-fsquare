@@ -119,7 +119,14 @@ abstract class BaseActivity<viewBinding : ViewBinding, VM : BaseViewModel> : Fra
         addViewListener()
         addDataObserver()
     }
-
+    fun openActivity(cla: Class<*>, data: Bundle, vararg flags: Int) {
+        val intent = Intent(this, cla)
+        intent.putExtra(Constant.KEY_BUNDLE, data)
+        for (flag in flags) {
+            intent.addFlags(flag)
+        }
+        startActivity(intent)
+    }
 
     /**
      * Add observer view -> ViewModel

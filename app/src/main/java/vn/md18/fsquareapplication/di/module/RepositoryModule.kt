@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepositoryImpl
+import vn.md18.fsquareapplication.features.detail.repository.DetailProductRepository
+import vn.md18.fsquareapplication.features.detail.repository.DetailProductRepositoryImpl
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.features.main.repository.MainRepositoryImpl
 import vn.md18.fsquareapplication.features.main.repository.OrderRepository
@@ -52,4 +54,7 @@ interface RepositoryModule {
 
     @Binds
     fun profileRepository(editProfileRepositoryImpl: EditProfileRepositoryImpl) :EditProfileRepository
+
+    @Binds
+    fun provideDetailRepository(detailProductRepositoryImpl: DetailProductRepositoryImpl) : DetailProductRepository
 }

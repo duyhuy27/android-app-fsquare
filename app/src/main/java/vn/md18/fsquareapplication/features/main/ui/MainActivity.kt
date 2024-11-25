@@ -9,6 +9,7 @@ import vn.md18.fsquareapplication.core.base.BaseActivity
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.databinding.ActivityMainBinding
 import vn.md18.fsquareapplication.databinding.LayoutTitleTabBinding
+import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.main.adapter.MainPagerAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel.Companion.TAB_CARD_CONTEXT
@@ -31,7 +32,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onViewLoaded() {
-
         binding.pagerMain.adapter = mPagerAdapter
         TabLayoutMediator(binding.tabMain, binding.pagerMain) { tab, position ->
             when (position) {
@@ -75,7 +75,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
         val selectedTab = intent.getIntExtra("SELECTED_TAB", TAB_DASHBOARD_PAGE)
         when(selectedTab){
             TAB_WALLET -> binding.pagerMain.setCurrentItem(TAB_WALLET, false)
-            TAB_PROFILE -> binding.pagerMain.setCurrentItem(TAB_PROFILE, false)
+            TAB_PROFILE -> {
+                viewModel.checkTokenIfNeeded {
+                    if (it) {
+                        binding.pagerMain.setCurrentItem(TAB_PROFILE, false)
+                    } else {
+                        openActivity(AuthActivity::class.java)
+                    }
+                }
+            }
             TAB_ORDERS -> binding.pagerMain.setCurrentItem(TAB_ORDERS, false)
             TAB_CARD_CONTEXT -> binding.pagerMain.setCurrentItem(TAB_CARD_CONTEXT, false)
             TAB_DASHBOARD_PAGE -> binding.pagerMain.setCurrentItem(TAB_DASHBOARD_PAGE, false)

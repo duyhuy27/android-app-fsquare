@@ -34,6 +34,7 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     override fun onViewLoaded() {
         checkInternetAndNavigate()
         FSLogger.e("Get token: ${dataManager.getToken()}")
+
     }
 
     override fun addViewListener() {
@@ -46,11 +47,11 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
 
     private fun checkInternetAndNavigate() {
         lifecycleScope.launch {
-            if (dataManager.getToken() != null) {
-                openActivity(MainActivity::class.java)
-            } else {
+            if (dataManager.getToken().isNullOrEmpty()) {
                 delay(3000)
                 navigateToLoadingFragment()
+            } else {
+                openActivity(MainActivity::class.java)
             }
         }
     }

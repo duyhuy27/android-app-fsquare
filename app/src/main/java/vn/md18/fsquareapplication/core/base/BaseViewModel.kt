@@ -68,4 +68,13 @@ abstract class BaseViewModel : ViewModel() {
     fun setErrorStringId(errorMessageId: Int) {
         errorMessage.value = errorMessageId
     }
+
+    fun checkTokenIfNeeded(callBackNavigation: (Boolean) -> Unit) {
+        if (dataManager.getToken().isNullOrEmpty()) {
+            callBackNavigation(false)
+        }
+        else {
+            callBackNavigation(true)
+        }
+    }
 }
