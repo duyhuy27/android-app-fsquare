@@ -3,7 +3,9 @@ package vn.md18.fsquareapplication.data.network
 object AppAPi {
     //Define API
     const val AUTH_SIGNUP = "/auth/customer/v1/registrations"
+
     const val AUTH_LOGIN = "/auth/customer/v1/authentications"
+
     const val AUTH_VERIFY_OTP = "/auth/customer/v1/verifications"
 
     const val PRODUCT_LIST = "/api/customer/v2/shoes"
@@ -30,4 +32,5 @@ object AppAPi {
     const val BRANDS_LIST = "api/customer/v2/brands"
 
     const val ORDER_FEE = "api/customer/v1/orders/fee"
+    const val PRODUCT_DETAIL = "api/customer/v2/shoes/"
 }

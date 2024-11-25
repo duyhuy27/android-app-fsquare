@@ -235,8 +235,6 @@ fun ImageView.loadImageDrawableNoCache(drawable: Drawable?) {
     }
 }
 
-
-
 /**
  * ImageView Loading Image By Uri
  */
@@ -273,24 +271,23 @@ fun ImageView.loadImageUri(uri: Uri?) {
 ///**
 // * ImageView Loading Image By URL and diskCacheStrategy
 // */
-//fun ImageView.loadImageUrlDiskCacheStrategy(url: String?, drawable: Int? = null) {
-//    if (url.isNullOrEmpty() or (url == "null")) {
-//        this.setImageResource(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
-//        return
-//    }
-//    val apiLink = CryptoAES.decrypt3DES(BuildConfig.PHP_SERVER)
-//    if (drawable != null) {
-//        Glide.with(this.context).load("${apiLink}/$url").placeholder(drawable)
-//            .diskCacheStrategy(DiskCacheStrategy.NONE)
-//            .skipMemoryCache(true)
-//            .into(this)
-//    } else {
-//        Glide.with(this.context).load("${apiLink}/$url")
-//            .diskCacheStrategy(DiskCacheStrategy.NONE)
-//            .skipMemoryCache(true)
-//            .into(this)
-//    }
-//}
+fun ImageView.loadImageUrlDiskCacheStrategy(url: String?, drawable: Int? = null) {
+    if (url.isNullOrEmpty() or (url == "null")) {
+        this.setImageResource(drawable ?: R.drawable.shape_bg_grey_radius_13dp)
+        return
+    }
+    if (drawable != null) {
+        Glide.with(this.context).load(url).placeholder(drawable)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(this)
+    } else {
+        Glide.with(this.context).load(url)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(this)
+    }
+}
 //
 ///**
 // * ImageView Loading Image By URL

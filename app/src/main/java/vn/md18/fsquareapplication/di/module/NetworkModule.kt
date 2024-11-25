@@ -37,6 +37,7 @@ class NetworkModule {
         val cacheSize = 10 * 1024 * 1024 //10MB
         return Cache(context.cacheDir, cacheSize.toLong())
     }
+
     @Provides
     fun providerAuthInterceptor(
         appPreference: AppPreference

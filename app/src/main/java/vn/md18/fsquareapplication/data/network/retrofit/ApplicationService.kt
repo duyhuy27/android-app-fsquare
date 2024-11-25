@@ -191,6 +191,11 @@ interface ApplicationService {
         @Body updateProfileRequest: UpdateProfileRequest
     ) : Flowable<UpdateProfileResponse>
 
+    @GET(AppAPi.PRODUCT_DETAIL + "{id}")
+    fun getProductDetail(
+        @Path("id") id: String
+    ) : Flowable<DataResponse<ProductResponse, PaginationResponse>>
+
     @GET(AppAPi.CATEGORIES_LIST)
     fun getCategories(
         @Query("size") size: Int,

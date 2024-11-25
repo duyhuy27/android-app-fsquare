@@ -44,6 +44,14 @@ class AuthViewModel @Inject constructor(
         setLoading(true)
     }
 
+
+
+    fun checkTokenToNavigate(callBack: () -> Unit) {
+        if (!dataManager.getToken().isNullOrEmpty()) {
+            callBack()
+        }
+    }
+
     fun signUp(email: String) {
         val signUpRequest = SignUpRequest(email = email)
         setLoading(true)
@@ -113,8 +121,6 @@ class AuthViewModel @Inject constructor(
                         .subscribe({ response ->
                             response.data?.let { data ->
                                 setLoading(false)
-                                FSLogger.e("Huynd: data == $data")
-                                dataManager.setToken(data)
                                 _verifyState.value = DataState.Success(response)
                             } ?: run {
                                 setLoading(false)

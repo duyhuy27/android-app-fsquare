@@ -34,6 +34,7 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
     override fun onViewLoaded() {
         checkInternetAndNavigate()
         FSLogger.e("Get token: ${dataManager.getToken()}")
+
     }
 
     override fun addViewListener() {
@@ -51,7 +52,6 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
             } else {
                 delay(3000)
                 navigateToLoadingFragment()
-            }
         }
     }
 
