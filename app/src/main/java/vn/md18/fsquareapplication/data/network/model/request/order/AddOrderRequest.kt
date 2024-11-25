@@ -12,7 +12,7 @@ data class Order(
     @SerializedName("shippingAddress") val shippingAddress: ShippingAddress,
     @SerializedName("weight") val weight: Double,
     @SerializedName("codAmount") val codAmount: Double,
-    @SerializedName("shippingFee") val shippingFee: Double,
+    @SerializedName("shippingFee") val shippingFee: Double?,
     @SerializedName("content") val content: String,
     @SerializedName("isFreeShip") val isFreeShip: Boolean,
     @SerializedName("isPayment") val isPayment: Boolean,

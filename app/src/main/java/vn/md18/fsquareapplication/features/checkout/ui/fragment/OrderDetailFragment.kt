@@ -24,6 +24,8 @@ import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.ui.fragment.CardFragment
 import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
+import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -70,6 +72,37 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
             itemCheckoutAddress.txtEditAddressCheckout.setOnClickListener {
                 navigationToUpdateAddressFragment()
             }
+
+            btnContinue.setOnClickListener {
+                val location = viewModel.defaultLocation.value
+                val orderFeeState = viewModel.getOrderFeeState.value
+                if (location != null && orderFeeState is DataState.Success) {
+                    val shippingFee = orderFeeState.data.data
+                    val codAmount = 100000.0
+
+                    if (shippingFee != null) {
+                        viewModel.createOrder(
+                            toName = "phuc",
+                            toPhone = "0388474968",
+                            toAddress = location.address,
+                            toWardName = location.wardName,
+                            toDistrictName = location.districtName,
+                            toProvinceName = location.provinceName,
+                            clientOrderCode = "ORD123456",
+                            weight = 1.0,
+                            codAmount = codAmount,
+                            shippingFee = shippingFee,
+                            content = "Nội dung đơn hàng",
+                            isFreeShip = false,
+                            isPayment = false,
+                            note = "Đơn hàng gấp"
+                        )
+                    }
+                } else {
+
+                }
+            }
+
         }
 
         binding.toolbarCheckout.onClickBackPress = {
@@ -111,10 +144,18 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
             if(it is DataState.Success){
                 binding.apply {
                     txtAmuontCheckout.text = it.data.data.toString() + " VND"
-                    txtTotalCheckout.text = it.data.data + " VND"
+                    txtTotalCheckout.text = "${it.data.data} VND"
                 }
             }else{
 
+            }
+        }
+
+        viewModel.createOrderState.observe(this@OrderDetailFragment) {
+            if(it is DataState.Success){
+                activity?.showCustomToast("them order thanh cong")
+            }else{
+                activity?.showCustomToast("them order that bai")
             }
         }
     }

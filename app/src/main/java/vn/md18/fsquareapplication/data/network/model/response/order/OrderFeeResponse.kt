@@ -10,5 +10,5 @@ data class OrderFeeResponse(
     var message: String,
 
     @SerializedName("data")
-    var data: String?
+    var data: Double?
 )

@@ -176,6 +176,7 @@ class CheckoutViewmodel @Inject constructor(
                         }, { err ->
                             setLoading(false)
                             _createOrderState.value = DataState.Error(err)
+                            FSLogger.d("loi khi them order $err")
                         })
                 )
             } else {
