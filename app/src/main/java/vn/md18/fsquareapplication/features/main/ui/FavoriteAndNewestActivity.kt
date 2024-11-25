@@ -35,17 +35,48 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
     @Inject
     lateinit var favoriteAdapter: FavoriteAdapter
 
+    @Inject
+    lateinit var productAdapter: ProductAdapter
+
+    private lateinit var type: String
+
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityFavoriteBinding = ActivityFavoriteBinding.inflate(layoutInflater)
 
     override fun onViewLoaded() {
-        viewModel.getFavoriteList()
-        favoriteAdapter.setFavoriteActionListener(this)
-
-        binding.apply {
-            grdProduct.apply {
-                adapter = favoriteAdapter
+        type = intent.getStringExtra("typeFavNew").toString()
+        when(type){
+            "New" -> {
+                viewModel.getProductV1()
+                binding.apply {
+                    txtTitle.text = getString(R.string.Newest)
+                    grdProduct.apply {
+                        adapter = productAdapter
+                    }
+                }
+            }
+            "Fav" -> {
+                viewModel.getFavoriteList()
+                binding.apply {
+                    txtTitle.text = getString(R.string.Favorite)
+                    grdProduct.apply {
+                        adapter = favoriteAdapter
+                    }
+                }
+            }
+            null -> {
+                viewModel.getFavoriteList()
+                binding.apply {
+                    txtTitle.text = getString(R.string.Favorite)
+                    grdProduct.apply {
+                        adapter = favoriteAdapter
+                    }
+                }
             }
         }
+
+        favoriteAdapter.setFavoriteActionListener(this)
+
+
     }
 
     override fun addViewListener() {
@@ -62,6 +93,13 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
                 favoriteAdapter.updateProducts(it)
             }
         }
+
+        viewModel.listProduct.observe(this@FavoriteAndNewestActivity) {
+            binding.apply {
+                productAdapter.updateProducts(it)
+            }
+        }
+
         viewModel.deleteFavoriteState.observe(this@FavoriteAndNewestActivity) { data ->
             when (data) {
                 is DataState.Error -> {

@@ -23,9 +23,9 @@ data class Product(
     @SerializedName("color")
     val color: String,
     @SerializedName("price")
-    val price: Int,
+    val price: Double,
     @SerializedName("quantity")
     val quantity: Int,
     @SerializedName("thumbnail")
-    val thumbnail: String
+    val thumbnail: String?
 )

@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
+import vn.md18.fsquareapplication.features.auth.ui.fragment.LoginFragment
 import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
 import vn.md18.fsquareapplication.utils.Constant
@@ -41,7 +42,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         binding.btnSecurity.setOnClickListener{ navigation(Constant.KEY_SECURITY) }
         binding.btnLanguage.setOnClickListener{ navigation(Constant.KEY_LANGUAGE) }
         binding.btnPrivacy.setOnClickListener{ navigation(Constant.KEY_POLICY) }
-        binding.btnLogout.setOnClickListener{ navigation(Constant.KEY_EDIT_PROFILE) }
+        binding.btnLogout.setOnClickListener{ logout() }
     }
 
     override fun addDataObserver() {
@@ -51,6 +52,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
         intent.putExtra("STATUS_KEY", status)
         startActivity(intent)
-        Toast.makeText(context, "hihi", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun logout(){
+        dataManager.setToken("")
+        val intent = Intent(requireContext(), LoginFragment::class.java)
+        startActivity(intent)
     }
 }

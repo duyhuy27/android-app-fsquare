@@ -6,7 +6,7 @@ data class BrandResponse(
     @SerializedName("_id")
     val _id: String,
     @SerializedName("thumbnail")
-    val thumbnail: String,
+    val thumbnail: Thumbnail?,
     @SerializedName("name")
     val name: String
 )

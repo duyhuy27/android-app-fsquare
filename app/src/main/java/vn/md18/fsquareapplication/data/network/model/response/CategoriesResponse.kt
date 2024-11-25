@@ -6,7 +6,7 @@ data class CategoriesResponse(
     @SerializedName("_id")
     var _id: String,
     @SerializedName("thumbnail")
-    var thumbnail: String,
+    var thumbnail: Thumbnail?,
     @SerializedName("name")
     var name: String
 )

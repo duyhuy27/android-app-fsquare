@@ -64,18 +64,24 @@ class ProductAdapter @Inject constructor(
             txtProductName.text = product.name
             txtRating.text = "${product.rating}"
             txtSale.text = "${product.sales} sold"
-            imgProduct.loadImageURL(product.thumbnail.url)
+            imgProduct.apply {
+                val thumbnailUrl = product.thumbnail?.url
+                if (!thumbnailUrl.isNullOrEmpty()) {
+                    loadImageURL(thumbnailUrl)
+                } else {
+                    setImageResource(R.drawable.null_shoes)
+                }
+            }
             imgAddToFav.setImageResource(
-                if (product.isFavorite) R.drawable.add_to_fav else R.drawable.add
+                if (product.isFavorite) R.drawable.add_to_fav else R.drawable.add_fav
             )
             imgAddToFav.setOnClickListener {
                 val isAdding = !product.isFavorite
                 product.isFavorite = isAdding
                 imgAddToFav.setImageResource(
-                    if (isAdding) R.drawable.add_to_fav else R.drawable.add
+                    if (isAdding) R.drawable.add_to_fav else R.drawable.add_fav
                 )
                 viewModel.createFavorite(product._id, isAdding)
-                viewModel.createBag("6123456789abcdef01234567", 2)
             }
 
         }

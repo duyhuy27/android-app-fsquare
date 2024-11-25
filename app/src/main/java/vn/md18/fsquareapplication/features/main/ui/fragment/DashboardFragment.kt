@@ -17,12 +17,14 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.features.main.adapter.BrandAdapter
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.features.detail.ui.DetailProductActivity
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,7 +44,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     lateinit var bannerAdapter: ProductBannerAdapter
 
     @Inject
+    lateinit var brandAdapter: BrandAdapter
+
+    @Inject
     lateinit var productAdapter: ProductAdapter
+
+
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentDashboardBinding =
         FragmentDashboardBinding.inflate(layoutInflater)
@@ -53,7 +60,13 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
         productAdapter.setProductCallback(this)
         productAdapter.setViewModel(viewModel)
         viewModel.getProductBanner()
-        viewModel.getProduct()
+        viewModel.getBrands()
+
+        if(dataManager.getToken() != null && dataManager.getToken() != ""){
+            viewModel.getProductV1()
+        }else{
+            viewModel.getProduct()
+        }
 
 
         binding.apply {
@@ -64,6 +77,9 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
             }
             grdProduct.apply {
                 grdProduct.adapter = productAdapter
+            }
+            grdBrand.apply {
+                grdBrand.adapter = brandAdapter
             }
         }
 
@@ -91,6 +107,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
                 productAdapter.updateProducts(it)
             }
         }
+        viewModel.listBrands.observe(this@DashboardFragment) {
+            binding.apply {
+                brandAdapter.updateProducts(it)
+            }
+        }
+
         viewModel.favoriteState.observe(this@DashboardFragment) { data ->
             when (data) {
                 is DataState.Error -> {

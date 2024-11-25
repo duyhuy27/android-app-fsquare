@@ -5,6 +5,7 @@ import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
+import vn.md18.fsquareapplication.data.network.model.request.order.OrderFeeRequest
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
 import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
@@ -16,6 +17,7 @@ import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.OrderFeeResponse
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import javax.inject.Inject
@@ -33,6 +35,16 @@ class MainRepositoryImpl @Inject constructor(
         category: String?
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
         return applicationServices.getProduct(size = size!!, page = page!!)
+    }
+
+    override fun getProductListV1(
+        size: Int?,
+        page: Int?,
+        search: String?,
+        brand: String?,
+        category: String?
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
+        return applicationServices.getProductV1(size = size!!, page = page!!)
     }
 
     override fun getFavoriteList(): Flowable<DataResponse<List<FavoriteResponse>, PaginationResponse>> {
@@ -84,5 +96,9 @@ class MainRepositoryImpl @Inject constructor(
         search: String?
     ): Flowable<DataResponse<List<BrandResponse>, PaginationResponse>> {
         return applicationServices.getBrands(size = size!!, page = page!!)
+    }
+
+    override fun getOrderFee(orderFeeRequest: OrderFeeRequest): Flowable<OrderFeeResponse> {
+        return applicationServices.getFeeOrder(orderFeeRequest)
     }
 }

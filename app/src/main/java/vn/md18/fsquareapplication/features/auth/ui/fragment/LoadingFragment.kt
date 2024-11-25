@@ -47,12 +47,11 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
 
     private fun checkInternetAndNavigate() {
         lifecycleScope.launch {
-            if (dataManager.getToken().isNullOrEmpty()) {
+            if (dataManager.getToken() != null && dataManager.getToken() != "") {
+                openActivity(MainActivity::class.java)
+            } else {
                 delay(3000)
                 navigateToLoadingFragment()
-            } else {
-                openActivity(MainActivity::class.java)
-            }
         }
     }
 

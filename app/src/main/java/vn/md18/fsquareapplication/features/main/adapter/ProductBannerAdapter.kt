@@ -42,7 +42,7 @@ class ProductBannerAdapter @Inject constructor() : BaseRecycleAdapter<ProductRes
             binding.apply {
                 tvPrice.text = product.maxPrice.toString() + " VND"
                 tvTitle.text = product.name
-                imgProduct.loadImageURL(product.thumbnail.url)
+                imgProduct.loadImageURL(product.thumbnail?.url)
             }
         }
 

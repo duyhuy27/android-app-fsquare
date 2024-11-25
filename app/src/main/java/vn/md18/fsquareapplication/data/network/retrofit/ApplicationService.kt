@@ -21,6 +21,7 @@ import vn.md18.fsquareapplication.data.network.model.request.location.AddLocatio
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateLocationCustomerRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
+import vn.md18.fsquareapplication.data.network.model.request.order.OrderFeeRequest
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
 import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
@@ -47,6 +48,7 @@ import vn.md18.fsquareapplication.data.network.model.response.location.UpdateLoc
 import vn.md18.fsquareapplication.data.network.model.response.order.AddOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.OrderFeeResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.profile.GetProfileResponse
 
@@ -72,6 +74,15 @@ interface ApplicationService {
 
     @GET(AppAPi.PRODUCT_LIST)
     fun getProduct(
+        @Query("size") size: Int,
+        @Query("page") page: Int,
+        @Query("search") search: String? = null,
+        @Query("brand") brand: String? = null,
+        @Query("category") category: String? = null
+    ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
+    @GET(AppAPi.PRODUCT_LIST_V1)
+    fun getProductV1(
         @Query("size") size: Int,
         @Query("page") page: Int,
         @Query("search") search: String? = null,
@@ -198,4 +209,9 @@ interface ApplicationService {
         @Query("page") page: Int,
         @Query("search") search: String? = null,
     ) : Flowable<DataResponse<List<BrandResponse>, PaginationResponse>>
+
+    @POST(AppAPi.ORDER_FEE)
+    fun getFeeOrder(
+        @Body orderFeeRequest: OrderFeeRequest
+    ) : Flowable<OrderFeeResponse>
 }

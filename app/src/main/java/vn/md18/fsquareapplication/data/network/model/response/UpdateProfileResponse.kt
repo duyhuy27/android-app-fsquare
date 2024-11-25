@@ -8,7 +8,7 @@ data class UpdateProfileResponse (
     @SerializedName("lastName")
     val lastName: String,
     @SerializedName("avatar")
-    val avatar: String,
+    val avatar: String?,
     @SerializedName("birthDay")
     val birthDay: String,
     @SerializedName("phone")

@@ -44,7 +44,7 @@ class CheckoutAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>
                 txtProductPriceOrderList.text = "$ " + product.price.toString()
                 txtProductSizeOrderList.text = product.size
                 txtProductQuantityOrderList.text = product.quantity.toString()
-                imgCart.loadImageURL(product.thumbnail)
+                imgCart.loadImageURL(product.thumbnail?.url)
             }
         }
 

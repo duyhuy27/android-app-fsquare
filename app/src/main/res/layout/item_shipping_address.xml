@@ -5,8 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="@dimen/_10sdp"
     app:cardCornerRadius="@dimen/_12sdp"
-    app:cardElevation="@dimen/_5sdp"
-    android:layout_marginVertical="@dimen/_10sdp">
+    app:cardElevation="0dp"
+    android:background="#fff"
+    android:layout_marginTop="@dimen/_10sdp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +62,7 @@
                 android:textColor="@android:color/black"
                 android:gravity="start"
                 android:fontFamily="@font/opensans_regular"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:layout_marginLeft="@dimen/_10sdp"/>
         </LinearLayout>
         <RadioButton
