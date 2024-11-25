@@ -18,6 +18,7 @@ import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -133,6 +134,35 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun getProductV1() {
+        setLoading(true)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.getProductListV1(size = 10, page = 1)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            setLoading(false)
+                            response.data.let {
+                                _listProduct.value = it
+                                setErrorString(response.message.toString())
+                            }
+                        },
+                            { throwable ->
+                                setLoading(false)
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            }
+            else {
+                setLoading(false)
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
     fun getBrands() {
         setLoading(true)
         networkExtensions.checkInternet { isConnect ->
@@ -146,7 +176,6 @@ class MainViewModel @Inject constructor(
                             setLoading(false)
                             response.data.let {
                                 _listBrands.value = it
-                                setErrorString(response.message.toString())
                             }
                         },
                             { throwable ->

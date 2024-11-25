@@ -7,6 +7,7 @@ object AppAPi {
     const val AUTH_VERIFY_OTP = "/auth/customer/v1/verifications"
 
     const val PRODUCT_LIST = "/api/customer/v2/shoes"
+    const val PRODUCT_LIST_V1 = "/api/customer/v1/shoes"
 
     const val FAVORITE_LIST = "/api/customer/v1/favorites"
 
@@ -27,4 +28,6 @@ object AppAPi {
     const val CATEGORIES_LIST = "api/customer/v2/categories"
 
     const val BRANDS_LIST = "api/customer/v2/brands"
+
+    const val ORDER_FEE = "api/customer/v1/orders/fee"
 }

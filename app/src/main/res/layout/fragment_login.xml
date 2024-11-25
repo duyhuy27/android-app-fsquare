@@ -98,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sinup"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/primary"
                 android:textSize="14dp" />
         </LinearLayout>

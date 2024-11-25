@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#fff"
     android:layout_marginHorizontal="@dimen/_10sdp"
     app:cardCornerRadius="@dimen/_12sdp"
-    app:cardElevation="@dimen/_5sdp"
+    app:cardElevation="0dp"
     android:layout_marginTop="@dimen/_10sdp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,11 +92,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="15dp">
                 <TextView
                     android:id="@+id/txt_product_price_cart"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="$126.99"
                     android:textSize="16dp"
                     android:textColor="@color/primary"
@@ -107,15 +110,15 @@
                     android:layout_gravity="end">
                     <ImageView
                         android:id="@+id/btn_product_minus_cart"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="5dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="10dp"
                         android:src="@drawable/minus"
                         android:background="@drawable/image_cart_button_bg"/>
                 <TextView
                     android:id="@+id/txt_product_quantity_cart"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="1"
                     android:textSize="18sp"
                     android:gravity="center"
@@ -125,9 +128,9 @@
                     android:fontFamily="@font/opensans_bold"/>
                     <ImageView
                         android:id="@+id/btn_product_plus_cart"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="5dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="10dp"
                         android:src="@drawable/plus"
                         android:background="@drawable/image_cart_button_bg"/>
             </LinearLayout>
@@ -135,5 +138,4 @@
         </LinearLayout>
         
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

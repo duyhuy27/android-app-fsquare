@@ -15,7 +15,7 @@ import javax.inject.Inject
 class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
 
     interface OnBagActionListener {
-        fun onRemoveBag()
+        fun onRemoveBag(productId: String)
         fun onUpdateQuantityBag(productId: String, action: String)
     }
 
@@ -57,13 +57,17 @@ class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
                 txtProductPriceCart.text = "$ " + product.price.toString()
                 txtProductSizeCart.text = product.size
                 txtProductQuantityCart.text = product.quantity.toString()
-                imgCart.loadImageURL(product.thumbnail)
+                imgCart.loadImageURL(product.thumbnail?.url)
 
                 btnProductPlusCart.setOnClickListener {
                     bagActionListener?.onUpdateQuantityBag(product._id, "increase")
                 }
-                btnProductPlusCart.setOnClickListener {
+                btnProductMinusCart.setOnClickListener {
                     bagActionListener?.onUpdateQuantityBag(product._id, "decrease")
+                }
+
+                btnProductDeleteCart.setOnClickListener {
+                    bagActionListener?.onRemoveBag(product._id)
                 }
             }
         }

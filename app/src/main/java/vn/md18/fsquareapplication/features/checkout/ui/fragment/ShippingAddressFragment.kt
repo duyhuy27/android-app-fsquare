@@ -14,8 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.databinding.FragmentAddressBinding
 import vn.md18.fsquareapplication.databinding.FragmentShippingAddressBinding
+import vn.md18.fsquareapplication.features.checkout.adapter.ShippingAddressAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.LocationCustomerAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
 import vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.NewAddressFragment
@@ -29,7 +31,10 @@ class ShippingAddressFragment : BaseFragment<FragmentShippingAddressBinding, Loc
     override val viewModel: LocationViewModel by viewModels()
 
     @Inject
-    lateinit var locationCustomerAdapter: LocationCustomerAdapter
+    lateinit var shippingAddressAdapter: ShippingAddressAdapter
+
+    private var selectedLocation: GetLocationCustomerResponse? = null
+
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentShippingAddressBinding = FragmentShippingAddressBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = ShippingAddressFragment::class.java.simpleName
@@ -40,7 +45,7 @@ class ShippingAddressFragment : BaseFragment<FragmentShippingAddressBinding, Loc
             rcvAddress.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 setHasFixedSize(true)
-                adapter = locationCustomerAdapter
+                adapter = shippingAddressAdapter
             }
         }
     }
@@ -48,23 +53,29 @@ class ShippingAddressFragment : BaseFragment<FragmentShippingAddressBinding, Loc
     override fun addViewListener() {
         binding.apply {
             btnAddAddress.setOnClickListener{
-                navigation(Constant.KEY_NEW_ADDRESS)
+                val bundle = Bundle()
+                navigation(Constant.KEY_NEW_ADDRESS, bundle, "shippingAddress")
             }
-            locationCustomerAdapter.setOnItemClickListener { location ->
-                val bundle = Bundle().apply {
-                    putSerializable("location", location)
+            shippingAddressAdapter.setOnItemClickListener { location ->
+                selectedLocation = location
+            }
+            btnApply.setOnClickListener {
+                selectedLocation?.let {
+                    val bundle = Bundle().apply {
+                        putSerializable("SELECTED_LOCATION", it)
+                    }
+                    parentFragmentManager.setFragmentResult("REQUEST_KEY_LOCATION", bundle)
+                    findNavController().popBackStack()
                 }
-                findNavController().navigate(R.id.action_addressFragment_to_newAddressFragment, bundle)
             }
-
         }
     }
 
     override fun addDataObserver() {
         viewModel.listLocationCustomer.observe(this@ShippingAddressFragment) {
             binding.apply {
-                locationCustomerAdapter.submitList(it)
-                locationCustomerAdapter.notifyDataSetChanged()
+                shippingAddressAdapter.submitList(it)
+                shippingAddressAdapter.notifyDataSetChanged()
             }
         }
 
@@ -75,9 +86,12 @@ class ShippingAddressFragment : BaseFragment<FragmentShippingAddressBinding, Loc
         }
     }
 
-    private fun navigation(status: String){
-        val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
-        intent.putExtra("STATUS_KEY", status)
+    private fun navigation(status: String, bundle: Bundle? = null, option: String) {
+        val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java).apply {
+            putExtra("STATUS_KEY", status)
+            bundle?.let { putExtra("DATA_BUNDLE", it)
+            }
+        }
         startActivity(intent)
     }
 }

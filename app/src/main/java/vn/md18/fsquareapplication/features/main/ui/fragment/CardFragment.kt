@@ -1,15 +1,21 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
+import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentCardBinding
+import vn.md18.fsquareapplication.features.checkout.ui.CheckoutActivity
 import vn.md18.fsquareapplication.features.main.adapter.BagAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
+import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,6 +30,7 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
 
     override fun onViewLoaded() {
         bagAdapter.setBagActionListener(this)
+        viewModel.getBagList()
 
         binding.apply {
             rcvProductCart.apply {
@@ -35,7 +42,12 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
     }
 
     override fun addViewListener() {
-        viewModel.getBagList()
+        binding.apply {
+            btnCheckout.setOnClickListener {
+                val intent = Intent(requireContext(), CheckoutActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun addDataObserver() {
@@ -50,14 +62,28 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
                 binding.btnCheckout.text = "0 VND ${getString(R.string.Checkuot)}"
             }
         }
+        viewModel.updateQuantityState.observe(this@CardFragment){
+            if(it is DataState.Success){
+                viewModel.getBagList()
+            }
+        }
+
+        viewModel.deleteBagByIdState.observe(this@CardFragment){
+            if(it is DataState.Success){
+                viewModel.getBagList()
+                activity?.showCustomToast("Xóa sản phẩm thành công", Constant.ToastStatus.SUCCESS)
+            }else{
+                activity?.showCustomToast("Xóa sản phẩm thất bại", Constant.ToastStatus.SUCCESS)
+            }
+        }
     }
     companion object {
         @JvmStatic
         fun newInstance() = CardFragment()
     }
 
-    override fun onRemoveBag() {
-
+    override fun onRemoveBag(productId: String) {
+        viewModel.deleteBagById(productId)
     }
 
     override fun onUpdateQuantityBag(productId: String, action: String) {

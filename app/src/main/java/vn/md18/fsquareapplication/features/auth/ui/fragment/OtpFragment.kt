@@ -86,7 +86,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                     }
                     is DataState.Success -> {
                         data.data?.let { token ->
-                            dataManager.setToken(token.toString())
+                            dataManager.setToken(token.data.toString())
                         }
                         if(type.equals(Constant.KEY_SIGNUP, ignoreCase = true)){
                             navigateToPolicySignupFragment()

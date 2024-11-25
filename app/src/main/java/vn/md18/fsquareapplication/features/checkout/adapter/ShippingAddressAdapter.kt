@@ -10,19 +10,17 @@ import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 
-class ShippingAddressAdapter @Inject constructor() : BaseRecycleAdapter<GetLocationCustomerResponse>(){
+class ShippingAddressAdapter @Inject constructor() : BaseRecycleAdapter<GetLocationCustomerResponse>() {
+    private var selectedPosition: Int = 0
+
     private var onItemClickListener: ((GetLocationCustomerResponse) -> Unit)? = null
     fun setOnItemClickListener(listener: (GetLocationCustomerResponse) -> Unit) {
         onItemClickListener = listener
     }
 
-    override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
-    }
-
-    override fun setEmptyViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
-    }
+    override fun setLoadingViewHolder(parent: ViewGroup): BaseViewHolder<*>? = null
+    override fun setEmptyViewHolder(parent: ViewGroup): BaseViewHolder<*>? = null
+    override fun setErrorViewHolder(parent: ViewGroup): BaseViewHolder<*>? = null
 
     override fun setNormalViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
         return NormalViewHolder(
@@ -34,10 +32,6 @@ class ShippingAddressAdapter @Inject constructor() : BaseRecycleAdapter<GetLocat
         )
     }
 
-    override fun setErrorViewHolder(parent: ViewGroup): BaseViewHolder<*>? {
-        return null
-    }
-
     inner class NormalViewHolder(binding: ItemShippingAddressBinding) :
         BaseViewHolder<ItemShippingAddressBinding>(binding) {
 
@@ -46,14 +40,21 @@ class ShippingAddressAdapter @Inject constructor() : BaseRecycleAdapter<GetLocat
             val location: GetLocationCustomerResponse = itemList[position]
             binding.apply {
                 txtHome.text = location.title
-                txtAddress.text = location.address + ", " + location.wardName + ", " + location.districtName + ", " + location.provinceName
-                if(location.isDefault){
-                    txtDefault.text = "mac dinh"
-                }else{
+                txtAddress.text = "${location.address}, ${location.wardName}, ${location.districtName}, ${location.provinceName}"
+                if (location.isDefault) {
+                    txtDefault.text = "mặc định"
+                } else {
                     txtDefault.text = null
                 }
+                chkIsChoose.isChecked = position == selectedPosition
                 chkIsChoose.setOnClickListener {
-                    onItemClickListener?.invoke(location)
+                    if (position != selectedPosition) {
+                        val previousPosition = selectedPosition
+                        selectedPosition = position
+                        notifyItemChanged(previousPosition)
+                        notifyItemChanged(selectedPosition)
+                        onItemClickListener?.invoke(location)
+                    }
                 }
             }
         }

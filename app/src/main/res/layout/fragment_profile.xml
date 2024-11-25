@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#f6f6f6"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.main.ui.fragment.ProfileFragment">
     <ScrollView
@@ -94,8 +94,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:layout_marginHorizontal="@dimen/permission_dp_20"
             android:layout_marginTop="@dimen/permission_dp_30"
+            app:cardElevation="0dp"
             app:cardCornerRadius="@dimen/_16sdp"
 
             android:layout_marginBottom="20dp">

@@ -8,11 +8,11 @@ data class ProductResponse(
     @SerializedName("name")
     val name: String,
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail,
+    val thumbnail: Thumbnail?,
     @SerializedName("minPrice")
-    val minPrice: Int,
+    val minPrice: Double,
     @SerializedName("maxPrice")
-    val maxPrice: Int,
+    val maxPrice: Double,
     @SerializedName("rating")
     val rating: Double,
     @SerializedName("reviewCount")

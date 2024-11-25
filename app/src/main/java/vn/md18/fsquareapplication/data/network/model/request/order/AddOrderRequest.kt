@@ -8,10 +8,11 @@ data class AddOrderRequest(
 )
 
 data class Order(
+    @SerializedName("clientOrderCode") val clientOrderCode: String,
     @SerializedName("shippingAddress") val shippingAddress: ShippingAddress,
     @SerializedName("weight") val weight: Double,
-    @SerializedName("codAmount") val codAmount: Int,
-    @SerializedName("shippingFee") val shippingFee: Int,
+    @SerializedName("codAmount") val codAmount: Double,
+    @SerializedName("shippingFee") val shippingFee: Double,
     @SerializedName("content") val content: String,
     @SerializedName("isFreeShip") val isFreeShip: Boolean,
     @SerializedName("isPayment") val isPayment: Boolean,
@@ -31,5 +32,5 @@ data class OrderItem(
     @SerializedName("size") val size: String,
     @SerializedName("shoes") val shoes: String,
     @SerializedName("quantity") val quantity: Int,
-    @SerializedName("price") val price: Int
+    @SerializedName("price") val price: Double
 )

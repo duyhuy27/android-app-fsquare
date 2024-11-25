@@ -1,5 +1,7 @@
 package vn.md18.fsquareapplication.features.main.ui
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,6 +26,8 @@ import javax.inject.Inject
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
     override val viewModel: MainViewModel  by viewModels()
+
+    private var isBackPressedOnce = false
 
     @Inject
     lateinit var mPagerAdapter: MainPagerAdapter
@@ -90,6 +94,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
     override fun addDataObserver() {
         super.addDataObserver()
 
+    }
+
+    override fun onBackPressed() {
+        if (isBackPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        isBackPressedOnce = true
+        showCustomToast("Press again to exit") // Show a toast or any message
+
+        // Reset the flag after 2 seconds (you can change this duration)
+        Handler(Looper.getMainLooper()).postDelayed({ isBackPressedOnce = false }, 2000)
     }
 
 }

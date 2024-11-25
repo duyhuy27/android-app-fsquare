@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.data.network.model.response.bag
 
 import com.google.gson.annotations.SerializedName
+import vn.md18.fsquareapplication.data.network.model.response.Thumbnail
 
 data class GetBagResponse(
     @SerializedName("_id")
@@ -8,7 +9,7 @@ data class GetBagResponse(
     @SerializedName("shoes")
     val shoes: String,
     @SerializedName("thumbnail")
-    val thumbnail: String,
+    val thumbnail: Thumbnail?,
     @SerializedName("color")
     val color: String,
     @SerializedName("size")

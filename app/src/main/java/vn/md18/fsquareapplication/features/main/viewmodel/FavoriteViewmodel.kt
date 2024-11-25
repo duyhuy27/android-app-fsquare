@@ -7,6 +7,7 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
+import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.DeleteFavoriteRespone
 import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteResponse
@@ -28,6 +29,9 @@ class FavoriteViewmodel @Inject constructor(
 
     private val _deleteFavoriteState: MutableLiveData<DataState<DeleteFavoriteRespone>> = MutableLiveData()
     val deleteFavoriteState: LiveData<DataState<DeleteFavoriteRespone>> get() = _deleteFavoriteState
+
+    private val _listProduct = MutableLiveData<List<ProductResponse>>()
+    val listProduct: LiveData<List<ProductResponse>> = _listProduct
     override fun onDidBindViewModel() {
 
     }
@@ -45,6 +49,35 @@ class FavoriteViewmodel @Inject constructor(
                             response.data.let {
                                 setLoading(false)
                                 _listFavorite.value = it
+                            }
+                        },
+                            { throwable ->
+                                setLoading(false)
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            }
+            else {
+                setLoading(false)
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
+    fun getProductV1() {
+        setLoading(true)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.getProductListV1(size = 10, page = 1)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            setLoading(false)
+                            response.data.let {
+                                _listProduct.value = it
+                                setErrorString(response.message.toString())
                             }
                         },
                             { throwable ->

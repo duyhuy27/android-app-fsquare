@@ -24,8 +24,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>() {
 
     override fun onViewLoaded() {
         val dashboardFragment = DashboardFragment()
-
-        // Thêm DashboardFragment vào dashboard_fragment_container
         childFragmentManager.beginTransaction()
             .replace(R.id.dashboard_fragment_container, dashboardFragment)
             .commit()

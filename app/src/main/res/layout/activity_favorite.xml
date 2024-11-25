@@ -48,5 +48,7 @@
         android:verticalSpacing="15dp"
         android:horizontalSpacing="15dp"
         tools:listitem="@layout/item_product"
+        android:scrollbars="none"
+        android:gravity="center"
         />
 </LinearLayout>
