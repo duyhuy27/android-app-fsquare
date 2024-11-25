@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import vn.md18.fsquareapplication.features.detail.ui.DetailProductActivity
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.utils.Constant
@@ -23,7 +26,7 @@ import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>() {
+class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(), ProductAdapter.ProductCallback {
     companion object {
         @JvmStatic
         fun newInstance() = DashboardFragment()
@@ -47,10 +50,11 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     override fun getTagFragment(): String = DashboardFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-
+        productAdapter.setProductCallback(this)
         productAdapter.setViewModel(viewModel)
         viewModel.getProductBanner()
         viewModel.getProduct()
+
 
         binding.apply {
             rcvBanner.apply {
@@ -124,5 +128,12 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
 
     private fun stopAutoScroll() {
         handler?.removeCallbacks(autoScrollRunnable!!)
+    }
+
+    override fun onProductClick(product: ProductResponse) {
+        val data = Bundle().apply {
+            putString(Constant.KEY_PRODUCT, product._id)
+        }
+        openActivity(DetailProductActivity::class.java, data)
     }
 }

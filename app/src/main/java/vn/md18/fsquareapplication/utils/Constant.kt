@@ -31,6 +31,9 @@ object Constant {
     const val VISA = "VISA"
     const val PAYMENT_METHOD = "PAYMENT_METHOD"
 
+    const val KEY_BUNDLE = "KEY_BUNDLE"
+    const val KEY_PRODUCT = "KEY_PRODUCT"
+
 
     const val REQUEST_CODE_WRITE_EXTERNAL_PERMISSION = 11
     const val REQUEST_CODE_ACCESS_FINE_LOCATION_AP_MODE = 15

@@ -7,6 +7,14 @@ data class ProductResponse(
     val _id: String,
     @SerializedName("name")
     val name: String,
+    @SerializedName("brand")
+    val brand: String,
+    @SerializedName("category")
+    val category: String,
+    @SerializedName("describe")
+    val describe: String,
+    @SerializedName("description")
+    val description: String,
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail,
     @SerializedName("minPrice")

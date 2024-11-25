@@ -24,9 +24,17 @@ class ProductAdapter @Inject constructor(
 
     private lateinit var viewModel: MainViewModel
     private var productList: List<ProductResponse> = listOf()
-
+    private var productCallback: ProductCallback? = null
     fun setViewModel(viewModel: MainViewModel) {
         this.viewModel = viewModel
+    }
+
+    interface ProductCallback {
+        fun onProductClick(product: ProductResponse)
+    }
+
+    fun setProductCallback(callback: ProductCallback) {
+        this.productCallback = callback
     }
 
     override fun getCount(): Int = productList.size
@@ -69,7 +77,9 @@ class ProductAdapter @Inject constructor(
                 viewModel.createFavorite(product._id, isAdding)
                 viewModel.createBag("6123456789abcdef01234567", 2)
             }
+
         }
+
 
         return view
     }
