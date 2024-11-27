@@ -24,6 +24,9 @@ import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderReque
 import vn.md18.fsquareapplication.data.network.model.request.order.OrderFeeRequest
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
 import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
+import vn.md18.fsquareapplication.data.network.model.response.Classification
+import vn.md18.fsquareapplication.data.network.model.response.ClassificationShoes
+import vn.md18.fsquareapplication.data.network.model.response.GetClassificationResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
@@ -159,7 +162,9 @@ interface ApplicationService {
     ) : Flowable<DeleteLocationCustomerResponse>
 
     @GET(AppAPi.ORDER_LIST)
-    fun getOrder() : Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>>
+    fun getOrder(
+        @Query("status") status: String
+    ) : Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>>
 
     @GET(AppAPi.ORDER_LIST + "/{id}")
     fun getOrderById(
@@ -214,4 +219,19 @@ interface ApplicationService {
     fun getFeeOrder(
         @Body orderFeeRequest: OrderFeeRequest
     ) : Flowable<OrderFeeResponse>
+
+    @GET(AppAPi.CLASSIFICATION_SHOES + "/{id}")
+    fun getColor(
+        @Path("id") id: String
+    ) : Flowable<DataResponse<List<GetClassificationResponse>, PaginationResponse>>
+
+    @GET(AppAPi.CLASSIFICATION + "/{id}")
+    fun getClassification(
+        @Path("id") id: String
+    ) : Flowable<DataResponse<Classification, PaginationResponse>>
+
+    @GET(AppAPi.SIZE + "/{id}")
+    fun getSize(
+        @Path("id") id: String
+    ) : Flowable<DataResponse<List<ClassificationShoes>, PaginationResponse>>
 }

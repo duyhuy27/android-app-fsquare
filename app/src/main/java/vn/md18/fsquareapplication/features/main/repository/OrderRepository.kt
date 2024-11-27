@@ -17,7 +17,9 @@ import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDeta
 import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
 
 interface OrderRepository {
-    fun getOrderList() : Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>>
+    fun getOrderList(
+        status: String? = null
+    ) : Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>>
 
     fun getOrderDetail(id: String) : Flowable<GetOrderDetailResponse>
 

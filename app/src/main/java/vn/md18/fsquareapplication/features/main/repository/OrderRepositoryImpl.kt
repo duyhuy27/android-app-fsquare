@@ -16,8 +16,8 @@ import javax.inject.Inject
 class OrderRepositoryImpl @Inject constructor(
     private var applicationService: ApplicationService
 ) : OrderRepository {
-    override fun getOrderList(): Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>> {
-        return applicationService.getOrder()
+    override fun getOrderList(status: String?): Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>> {
+        return applicationService.getOrder(status=status!!)
     }
 
     override fun getOrderDetail(id: String): Flowable<GetOrderDetailResponse> {

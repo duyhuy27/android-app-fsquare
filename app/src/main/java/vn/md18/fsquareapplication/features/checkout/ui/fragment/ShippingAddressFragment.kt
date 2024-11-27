@@ -52,10 +52,6 @@ class ShippingAddressFragment : BaseFragment<FragmentShippingAddressBinding, Loc
 
     override fun addViewListener() {
         binding.apply {
-            btnAddAddress.setOnClickListener{
-                val bundle = Bundle()
-                navigation(Constant.KEY_NEW_ADDRESS, bundle, "shippingAddress")
-            }
             shippingAddressAdapter.setOnItemClickListener { location ->
                 selectedLocation = location
             }

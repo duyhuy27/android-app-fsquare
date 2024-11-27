@@ -134,8 +134,8 @@ class CheckoutViewmodel @Inject constructor(
         )
         val orderItems = _listBag.value?.map { bagItem ->
             OrderItem(
-                size = bagItem.size,
-                shoes = bagItem.shoes,
+                size = bagItem.size._id,
+                shoes = bagItem.shoes._id,
                 quantity = bagItem.quantity,
                 price = bagItem.price
             )

@@ -13,6 +13,7 @@ import vn.md18.fsquareapplication.features.main.adapter.ProductBannerAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import vn.md18.fsquareapplication.R
@@ -97,6 +98,23 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     }
 
     override fun addDataObserver() {
+        viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.shimmerLayoutBanner.startShimmer()
+                binding.shimmerLayoutBanner.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+                binding.shimmerLayout.startShimmer()
+                binding.rcvBanner.visibility = View.GONE
+                binding.grdProduct.visibility = View.GONE
+            } else {
+                binding.shimmerLayout.stopShimmer()
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayoutBanner.visibility = View.GONE
+                binding.rcvBanner.visibility = View.VISIBLE
+                binding.grdProduct.visibility= View.VISIBLE
+            }
+        }
+
         viewModel.listProductBanner.observe(this@DashboardFragment) {
             binding.apply {
                 bannerAdapter.submitList(it)

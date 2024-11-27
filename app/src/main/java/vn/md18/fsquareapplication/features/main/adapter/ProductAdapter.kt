@@ -84,6 +84,10 @@ class ProductAdapter @Inject constructor(
                 viewModel.createFavorite(product._id, isAdding)
             }
 
+            root.setOnClickListener {
+                productCallback?.onProductClick(product)
+            }
+
         }
 
 

@@ -182,15 +182,15 @@
     <string name="Special">Đặc biệt</string>
     <string name="Rating">Xếp hạng</string>
 
-    <string name="no_internet_connection">Khong co internet</string>
+    <string name="no_internet_connection">không có kết nối internet</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tab_home_label">Home</string>
-    <string name="main_tab_auto_scene_label">Cart</string>
-    <string name="Orders">Orders</string>
-    <string name="wallet">Wallet</string>
-    <string name="profile">Profile</string>
-    <string name="popular">Popular</string>
-    <string name="see_more">See more</string>
+    <string name="tab_home_label">Trang chủ</string>
+    <string name="main_tab_auto_scene_label">Giỏ hàng</string>
+    <string name="Orders">Đơn hàng</string>
+    <string name="wallet">Ví</string>
+    <string name="profile">Cá nhân</string>
+    <string name="popular">Phổ biến</string>
+    <string name="see_more">Xem thêm</string>
     <string name="todo">TODO</string>
 </resources>

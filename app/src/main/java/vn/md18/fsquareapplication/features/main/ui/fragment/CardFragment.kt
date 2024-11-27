@@ -16,6 +16,7 @@ import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,6 +55,7 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
         viewModel.listBag.observe(this@CardFragment) {
             binding.apply {
                 bagAdapter.submitList(it)
+                FSLogger.e("cart enum : $it")
             }
             if (!it.isNullOrEmpty()) {
                 val totalPrice = it.sumOf { item -> item.price * item.quantity }

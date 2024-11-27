@@ -52,10 +52,10 @@ class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
         override fun bindData(position: Int) {
             val product: GetBagResponse = itemList[position]
             binding.apply {
-                txtProductNameCart.text = product.shoes
+                txtProductNameCart.text = product.shoes.name
                 txtProductColorCart.text = product.color
-                txtProductPriceCart.text = "$ " + product.price.toString()
-                txtProductSizeCart.text = product.size
+                txtProductPriceCart.text = product.price.toString() + " VND"
+                txtProductSizeCart.text = product.size.sizeNumber
                 txtProductQuantityCart.text = product.quantity.toString()
                 imgCart.loadImageURL(product.thumbnail?.url)
 

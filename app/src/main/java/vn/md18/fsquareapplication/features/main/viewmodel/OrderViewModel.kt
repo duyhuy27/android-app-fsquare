@@ -14,6 +14,7 @@ import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderR
 import vn.md18.fsquareapplication.features.main.repository.OrderRepository
 import vn.md18.fsquareapplication.utils.OrderStatus
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,12 +35,14 @@ class OrderViewModel @Inject constructor(
     private val _deleteOrderState: MutableLiveData<DataState<DeleteOrderResponse>> = MutableLiveData()
     val deleteOrderState: LiveData<DataState<DeleteOrderResponse>> get() = _deleteOrderState
 
+    var currentStatus: OrderStatus? = null
+
     fun getOrderList(status: OrderStatus? = null) {
         setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
-                    orderRepository.getOrderList()
+                    orderRepository.getOrderList(status?.status.toString())
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
@@ -47,14 +50,12 @@ class OrderViewModel @Inject constructor(
                             response.data?.let {
                                 if (status != null) {
                                     setLoading(false)
-                                    _listOrder.value = it.filter { order ->
-                                        order.status == status.status
-                                    }
+                                    _listOrder.value = it
                                 } else {
                                     setLoading(false)
                                     _listOrder.value = it
+
                                 }
-                                setErrorString(response.message.toString())
                             }
                         }, { throwable ->
                             setLoading(false)
@@ -62,7 +63,6 @@ class OrderViewModel @Inject constructor(
                         })
                 )
             } else {
-                setLoading(false)
                 setErrorStringId(R.string.error_have_no_internet)
             }
         }
@@ -84,11 +84,11 @@ class OrderViewModel @Inject constructor(
                             _updateOrderState.value = DataState.Success(response)
                         }, { err ->
                             setLoading(false)
+                            FSLogger.e("loi order: $err")
                             _updateOrderState.value = DataState.Error(err)
                         })
                 )
             } else {
-                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }
@@ -112,7 +112,6 @@ class OrderViewModel @Inject constructor(
                         })
                 )
             } else {
-                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }

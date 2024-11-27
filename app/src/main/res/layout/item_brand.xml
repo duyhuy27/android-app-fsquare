@@ -18,6 +18,7 @@
                 android:id="@+id/imgBrandImage"
                 android:layout_width="@dimen/_36sdp"
                 android:layout_height="@dimen/_36sdp"
+                android:padding="5dp"
                 android:src="@drawable/logo_adidas"
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
