@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import vn.md18.fsquareapplication.R
+import vn.md18.fsquareapplication.data.network.model.request.order.Order
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.databinding.ItemProductOrderBinding
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
@@ -23,6 +24,13 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
     }
 
     private var orderActionListener: OnOrderActionListener? = null
+    private var loading: Boolean = false
+
+    // Cập nhật trạng thái loading
+    fun setLoading(isLoading: Boolean) {
+        loading = isLoading
+        notifyDataSetChanged() // Refresh RecyclerView
+    }
 
     fun setOrderActionListener(listener: OnOrderActionListener) {
         orderActionListener = listener
@@ -59,7 +67,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
             binding.apply {
 
                 when (order.status) {
-                    "Pending", "Processing" -> {
+                    "pending", "processing" -> {
                         btnVerify.text = "Cancel"
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
@@ -68,10 +76,10 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                             showCancelDialog(order)
                         }
                     }
-                    "Shipped", "Canceled" -> {
+                    "shipped", "canceled" -> {
                         btnVerify.visibility = View.GONE
                     }
-                    "Delivered" -> {
+                    "delivered" -> {
                         btnVerify.text = "Review"
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
@@ -85,6 +93,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
 
                 txtProductNameCart.text = order.firstProduct.name
                 txtProductPriceCart.text = "${order.firstProduct.price} VND"
+                imgCart.loadImageURL(order.firstProduct.thumbnail?.url)
             }
         }
 
@@ -103,4 +112,10 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                 .show()
         }
     }
+
+    fun clearData() {
+        itemList.clear()
+        notifyDataSetChanged()
+    }
+
 }

@@ -52,6 +52,7 @@ class LoadingFragment() : BaseFragment<FragmentLoadingBinding, AuthViewModel>() 
             } else {
                 delay(3000)
                 navigateToLoadingFragment()
+            }
         }
     }
 

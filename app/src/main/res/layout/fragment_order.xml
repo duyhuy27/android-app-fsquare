@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#f6f6f6"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.main.ui.fragment.OrderFragment">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,28 +17,36 @@
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:layout_marginBottom="10dp"
+            android:background="#fff"
+            android:paddingTop="10dp"
+            android:paddingHorizontal="15dp"
+            >
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/llTabsContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp">
-
-
+                android:orientation="horizontal" >
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- ViewPager2 chứa các trang đơn hàng -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvOrder"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_product_order"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
 
+        <ImageView
+            android:id="@+id/imgNoOrders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="140dp"
+            android:src="@drawable/ic_no_order"
+            android:visibility="gone"
+            />
+    </LinearLayout>
 </FrameLayout>

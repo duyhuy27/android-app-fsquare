@@ -36,6 +36,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun getProfile() {
+        setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
@@ -45,7 +46,7 @@ class ProfileViewModel @Inject constructor(
                         .toObservable()
                         .subscribe({ response ->
                             response.data?.let {
-                                setLoading(false)
+//                                setLoading(false)
                                 _getProfile.value = DataState.Success(it) // Gói response.data vào DataState.Success
                             }
                         }, { err ->

@@ -39,10 +39,10 @@ class CheckoutAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>
         override fun bindData(position: Int) {
             val product: GetBagResponse = itemList[position]
             binding.apply {
-                txtProductNameOrderList.text = product.shoes
+                txtProductNameOrderList.text = product.shoes.name
                 txtProductColorOrderList.text = product.color
                 txtProductPriceOrderList.text = "$ " + product.price.toString()
-                txtProductSizeOrderList.text = product.size
+                txtProductSizeOrderList.text = product.size.sizeNumber
                 txtProductQuantityOrderList.text = product.quantity.toString()
                 imgCart.loadImageURL(product.thumbnail?.url)
             }

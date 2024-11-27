@@ -2,23 +2,37 @@ package vn.md18.fsquareapplication.features.main.ui.fragment
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
+import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
+import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
+import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.adapter.OrderPagerAdapter
+import vn.md18.fsquareapplication.features.main.ui.fragment.fragment_enum_order.EnumOrderFragment
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
+import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.OrderStatus
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 
 @AndroidEntryPoint
-class OrderFragment : BaseFragment<FragmentOrderBinding, MainViewModel>() {
+class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), OrderAdapter.OnOrderActionListener {
 
-    override val viewModel: MainViewModel by activityViewModels()
+    override val viewModel: OrderViewModel by activityViewModels()
+
+    private lateinit var orderAdapter: OrderAdapter
+    private val tabTitles = listOf("Pending", "Processing", "Shipped", "Delivered", "Canceled")
+    private var selectedStatus: OrderStatus = OrderStatus.PENDING
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentOrderBinding =
         FragmentOrderBinding.inflate(layoutInflater)
@@ -26,27 +40,33 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, MainViewModel>() {
     override fun getTagFragment(): String = OrderFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        val tabTitles = listOf("Pending", "Processing", "Shipped", "Delivered", "Canceled")
+        setupTabs()
+        setupRecyclerView()
+        fetchOrdersByStatus(selectedStatus)
+        orderAdapter.setOrderActionListener(this)
+    }
 
-        val adapter = OrderPagerAdapter(this)
-        binding.viewPager.adapter = adapter
+    override fun addViewListener() {
 
-        val tabLayout = binding.horizontalScrollView.getChildAt(0) as LinearLayout
-        for (i in tabTitles.indices) {
+    }
+
+    private fun setupTabs() {
+        val tabsContainer = binding.llTabsContainer
+
+        for ((index, title) in tabTitles.withIndex()) {
             val tabTextView = TextView(context).apply {
-                text = tabTitles[i]
+                text = title
                 setPadding(16, 16, 16, 16)
-                setTextColor(Color.BLACK)
+                gravity = Gravity.CENTER
                 textSize = 18f
+                width = 500
+                setTextColor(Color.BLACK)
                 setTypeface(null, Typeface.NORMAL)
-
-                val params = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-                params.width = 500
-                layoutParams = params
-                gravity = android.view.Gravity.CENTER
+                setOnClickListener {
+                    updateSelectedTab(index)
+                    selectedStatus = OrderStatus.values()[index]
+                    fetchOrdersByStatus(selectedStatus)
+                }
             }
 
             val underlineView = View(context).apply {
@@ -54,36 +74,29 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, MainViewModel>() {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     9
                 )
-                params.setMargins(0, 15, 0, 0)
+                params.setMargins(0, 10, 0, 0)
                 layoutParams = params
-                setBackgroundColor(Color.parseColor("#ebe6ef"))
+                setBackgroundColor(Color.parseColor("#f0f0f0"))
             }
-
 
             val tabContainer = LinearLayout(context).apply {
                 orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER
                 addView(tabTextView)
                 addView(underlineView)
             }
 
-            tabLayout.addView(tabContainer)
-            tabTextView.setOnClickListener {
-                binding.viewPager.currentItem = i
-            }
+            tabsContainer.addView(tabContainer)
         }
-
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                highlightTab(position)
-            }
-        })
+        updateSelectedTab(0)
     }
 
-    private fun highlightTab(position: Int) {
-        val tabLayout = binding.horizontalScrollView.getChildAt(0) as LinearLayout
-        for (i in 0 until tabLayout.childCount) {
-            val tabContainer = tabLayout.getChildAt(i) as LinearLayout
+
+    private fun updateSelectedTab(selectedIndex: Int) {
+        val tabsContainer = binding.llTabsContainer
+
+        for (i in 0 until tabsContainer.childCount) {
+            val tabContainer = tabsContainer.getChildAt(i) as LinearLayout
             val tabTextView = tabContainer.getChildAt(0) as TextView
             val underlineView = tabContainer.getChildAt(1) as View
 
@@ -93,7 +106,8 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, MainViewModel>() {
             underlineView.layoutParams.height = 9
         }
 
-        val selectedTabContainer = tabLayout.getChildAt(position) as LinearLayout
+        // Thiết lập trạng thái cho tab được chọn
+        val selectedTabContainer = tabsContainer.getChildAt(selectedIndex) as LinearLayout
         val selectedTabTextView = selectedTabContainer.getChildAt(0) as TextView
         val selectedUnderlineView = selectedTabContainer.getChildAt(1) as View
 
@@ -103,13 +117,43 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, MainViewModel>() {
         selectedUnderlineView.layoutParams.height = 12
     }
 
-    override fun addViewListener() {}
 
-    override fun addDataObserver() {}
+    private fun setupRecyclerView() {
+        orderAdapter = OrderAdapter()
+        binding.rcvOrder.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = orderAdapter
+        }
+    }
+
+    private fun fetchOrdersByStatus(status: OrderStatus) {
+        viewModel.getOrderList(status)
+        viewModel.listOrder.observe(this@OrderFragment) { orders ->
+            val filteredOrders = orders.filter { it.status == status.status }
+            if (filteredOrders.isEmpty()) {
+                binding.rcvOrder.visibility = View.GONE
+                binding.imgNoOrders.visibility = View.VISIBLE
+            } else {
+                binding.rcvOrder.visibility = View.VISIBLE
+                binding.imgNoOrders.visibility = View.GONE
+                orderAdapter.submitList(filteredOrders)
+            }
+        }
+        viewModel.updateOrderState.observe(this@OrderFragment){
+            if(it is DataState.Success){
+                viewModel.getOrderList(status)
+            }else{
+                activity?.showCustomToast("huy don hang that bai ", Constant.ToastStatus.FAILURE)
+            }
+        }
+    }
 
     companion object {
         @JvmStatic
         fun newInstance() = OrderFragment()
     }
-}
 
+    override fun onUpdateOrder(id: String, status: OrderStatus) {
+        viewModel.updateOrder(id, status)
+    }
+}

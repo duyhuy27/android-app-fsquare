@@ -33,4 +33,8 @@ object AppAPi {
 
     const val ORDER_FEE = "api/customer/v1/orders/fee"
     const val PRODUCT_DETAIL = "api/customer/v2/shoes/"
+
+    const val CLASSIFICATION_SHOES = "api/customer/v2/classifications/shoes"
+    const val CLASSIFICATION = "api/customer/v2/classifications"
+    const val SIZE = "api/customer/v2/sizes/classification"
 }

@@ -9,14 +9,14 @@ data class GetOrderRespose(
     val value: Int,
     @SerializedName("status")
     val status: String,
-    @SerializedName("createAt")
+    @SerializedName("createdAt")
     val createdAt: String,
-    @SerializedName("firstProduct")
+    @SerializedName("firstOrderItem")
     val firstProduct: Product
 )
 
 data class Product(
-    @SerializedName("name")
+    @SerializedName("shoes")
     val name: String,
     @SerializedName("size")
     val size: String,
@@ -27,5 +27,5 @@ data class Product(
     @SerializedName("quantity")
     val quantity: Int,
     @SerializedName("thumbnail")
-    val thumbnail: String?
+    val thumbnail: Thumbnail?
 )

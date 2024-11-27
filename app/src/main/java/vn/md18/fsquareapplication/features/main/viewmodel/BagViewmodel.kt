@@ -64,7 +64,6 @@ class BagViewmodel @Inject constructor(
                 )
             }
             else {
-                setLoading(false)
                 setErrorStringId(R.string.error_have_no_internet)
             }
         }

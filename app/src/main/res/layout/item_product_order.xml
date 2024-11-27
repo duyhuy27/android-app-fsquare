@@ -98,11 +98,11 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnVerify"
                 android:layout_width="100dp"
-                android:layout_height="@dimen/size_40"
+                android:layout_height="@dimen/size_30"
                 android:text="@string/Cancel"
                 android:background="@drawable/bg_button_cancel"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_gravity="end"
                 />
         </LinearLayout>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.databinding.FragmentTransactionHistoryPaymentBinding
+import vn.md18.fsquareapplication.features.checkout.adapter.TransactionHistoryAdapter
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
@@ -19,20 +20,21 @@ import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.adapter.ProvinceAdapter
 import vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.NewAddressFragment
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.LocationViewModel
+import vn.md18.fsquareapplication.utils.OrderStatus
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class TransactionHistoryPaymentFragment : BaseFragment<FragmentTransactionHistoryPaymentBinding, OrderViewModel>() {
     override val viewModel: OrderViewModel by viewModels()
     @Inject
-    lateinit var orderAdapter: OrderAdapter
+    lateinit var orderAdapter: TransactionHistoryAdapter
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentTransactionHistoryPaymentBinding = FragmentTransactionHistoryPaymentBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = TransactionHistoryPaymentFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        viewModel.getOrderList()
+        viewModel.getOrderList(OrderStatus.PENDING)
         binding.apply {
             rcvTransactionHistory.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

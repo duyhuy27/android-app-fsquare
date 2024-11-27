@@ -66,6 +66,6 @@
         android:id="@+id/rcvProduct"
         android:padding="15dp"
         android:scrollbars="vertical"
-        tools:listitem="@layout/item_search_product"
+        tools:listitem="@layout/item_search_product"/>
 
 </LinearLayout>
