@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -30,7 +30,8 @@
                 android:fontFamily="@font/opensans_regular"
                 android:textColor="#282C36"
                 android:layout_marginVertical="@dimen/_10sdp"/>
-            <LinearLayout
+            <RadioGroup
+                android:id="@+id/radio_group"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -41,6 +42,7 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center">
                     <RadioButton
+                        android:id="@+id/chkOp1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/primary" />
@@ -60,6 +62,7 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center">
                     <RadioButton
+                        android:id="@+id/chkOp2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/primary" />
@@ -77,13 +80,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_gravity="center">
+                    >
                     <RadioButton
+                        android:id="@+id/chkOp3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:buttonTint="@color/primary" />
                     <TextView
-                        android:gravity="center_vertical"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -98,6 +101,7 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center">
                     <RadioButton
+                        android:id="@+id/chkOp4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/primary" />
@@ -111,11 +115,12 @@
                         android:fontFamily="@font/opensans_regular"
                         android:textColor="#282C36"/>
                 </RadioGroup>
-            </LinearLayout>
+            </RadioGroup>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="13dp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp">
 

@@ -1,5 +1,7 @@
 package vn.md18.fsquareapplication.features.detail.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -15,6 +17,7 @@ import vn.md18.fsquareapplication.databinding.ActivityDetailProductBinding
 import vn.md18.fsquareapplication.features.detail.adapter.ColorDetailAdapter
 import vn.md18.fsquareapplication.features.detail.adapter.SizeDetailAdapter
 import vn.md18.fsquareapplication.features.detail.viewmodel.DetailProductViewModel
+import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageUrlDiskCacheStrategy
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
@@ -33,6 +36,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
     var quantity = 0
     var sizeId = ""
+    var productId = ""
     var productPrice: Double = 0.0
 
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityDetailProductBinding =
@@ -73,10 +77,15 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
     }
 
     override fun onViewLoaded() {
+
         intent?.getBundleExtra(Constant.KEY_BUNDLE)?.apply {
             getString(Constant.KEY_PRODUCT)?.let {
-                FSLogger.e("Huynd: $it")
-                viewModel.callApiGetDetailProduct(it)
+                productId = it
+                if(dataManager.getToken() != null && dataManager.getToken() != ""){
+                    viewModel.callApiGetDetailProductV1(it)
+                }else{
+                    viewModel.callApiGetDetailProduct(it)
+                }
                 viewModel.getColorList(it)
             }
         }
@@ -119,8 +128,13 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
         viewModel.addBagState.observe(this@DetailProductActivity) {
             if (it is DataState.Success) {
-                viewModel.getBagList()
                 Toast.makeText(this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.favoriteState.observe(this@DetailProductActivity){
+            if(it is DataState.Success){
+                viewModel.callApiGetDetailProductV1(productId)
             }
         }
     }
@@ -135,8 +149,19 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
             binding.txtPriceDetailProduct.text = it.maxPrice.toString() + " - " + it.minPrice.toString()
             binding.txtRatingDetailProduct.text = it.rating.toString()
             binding.imgDetailProduct.loadImageUrlDiskCacheStrategy(it.thumbnail?.url, R.drawable.null_shoes)
+            var idShoes = it._id
+            var isAdding = false
+            if(it.isFavorite){
+                isAdding = true
+                binding.imgFav.setImageResource(R.drawable.add_to_fav)
+            }else{
+                isAdding = false
+                binding.imgFav.setImageResource(R.drawable.add_fav)
+            }
 
-            // Cập nhật tổng giá ngay khi tải dữ liệu sản phẩm
+            binding.imgFav.setOnClickListener {
+                viewModel.createFavorite(idShoes, isAdding)
+            }
             updateTotalPrice(productPrice)
         }
     }
@@ -151,7 +176,6 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
     }
 
     private fun updateTotalPrice(price: Double) {
-        // Tính tổng giá
         val totalPrice = quantity * price
         binding.txtPriceDetailProduct.text = "${totalPrice} VND"
     }

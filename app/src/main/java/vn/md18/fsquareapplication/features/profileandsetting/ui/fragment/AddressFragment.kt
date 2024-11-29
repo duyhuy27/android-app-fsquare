@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.databinding.FragmentAddressBinding
 import vn.md18.fsquareapplication.databinding.FragmentHomeBinding
 import vn.md18.fsquareapplication.databinding.FragmentNewAddressBinding
@@ -45,13 +46,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
 
     override fun onViewLoaded() {
         viewModel.getLocationCustomerList()
-        setFragmentResultListener(Constant.KEY_REQUEST) { _, bundle ->
-            val updateResult = bundle.getBoolean(Constant.KEY_UPDATE_SUCCESS)
-            val addResult = bundle.getBoolean(Constant.KEY_ADD_SUCCESS)
-            if (updateResult || addResult) {
-                viewModel.getLocationCustomerList()
-            }
-        }
+
         binding.apply {
             rcvAddress.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -114,6 +109,10 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, LocationViewModel>(
                 viewModel.getLocationCustomerList()
             }
         }
+    }
+
+    private fun reloadList(){
+        viewModel.getLocationList()
     }
 
 }

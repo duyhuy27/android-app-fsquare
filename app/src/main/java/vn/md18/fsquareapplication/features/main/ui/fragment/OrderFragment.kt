@@ -1,4 +1,5 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
+import BottomDialogLoggoutFragment
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,6 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
+import vn.md18.fsquareapplication.databinding.DialogCancelOrderBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.adapter.OrderPagerAdapter
@@ -155,5 +159,50 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
 
     override fun onUpdateOrder(id: String, status: OrderStatus) {
         viewModel.updateOrder(id, status)
+    }
+
+    override fun showDialog(order: GetOrderRespose) {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_cancel_order, null)
+        val binding = DialogCancelOrderBinding.bind(dialogView)
+
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+            btnConfirm.setOnClickListener {
+                viewModel.updateOrder(order.id, OrderStatus.CANCELED)
+                alertDialog.dismiss()
+            }
+            chkOp1.setOnClickListener {
+                chkOp4.isChecked = false
+                chkOp3.isChecked = false
+                chkOp2.isChecked = false
+                chkOp1.isChecked = true
+            }
+            chkOp2.setOnClickListener {
+                chkOp4.isChecked = false
+                chkOp3.isChecked = false
+                chkOp2.isChecked = true
+                chkOp1.isChecked = false
+            }
+            chkOp3.setOnClickListener {
+                chkOp4.isChecked = false
+                chkOp3.isChecked = true
+                chkOp2.isChecked = false
+                chkOp1.isChecked = false
+            }
+            chkOp4.setOnClickListener {
+                chkOp4.isChecked = true
+                chkOp3.isChecked = false
+                chkOp2.isChecked = false
+                chkOp1.isChecked = false
+            }
+        }
+
+        alertDialog.show()
     }
 }

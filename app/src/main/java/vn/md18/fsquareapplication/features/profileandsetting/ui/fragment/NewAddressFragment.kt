@@ -3,6 +3,7 @@ package vn.md18.fsquareapplication.features.profileandsetting.ui.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.core.os.bundleOf
@@ -125,9 +126,12 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
             addLocationState.observe(viewLifecycleOwner) { dataState ->
                 when (dataState) {
                     is DataState.Success -> {
-                        setFragmentResult(Constant.KEY_REQUEST, bundleOf(Constant.KEY_ADD_SUCCESS to true))
-                        activity?.showCustomToast("Thêm địa chỉ thành công!", Constant.ToastStatus.SUCCESS)
-                        findNavController().popBackStack()
+                        val bundle = Bundle().apply {
+                            putBoolean("AddAddress", true)
+                        }
+                        activity?.showCustomToast("Add địa chỉ thành công!", Constant.ToastStatus.SUCCESS)
+                        parentFragmentManager.setFragmentResult("AddAddress", bundle)
+                        findNavController().navigate(R.id.action_newAddressFragment_to_addressFragment)
                     }
                     is DataState.Error -> {
                         activity?.showCustomToast("Có lỗi xảy ra", Constant.ToastStatus.FAILURE)
@@ -140,9 +144,8 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
             updateLocationState.observe(viewLifecycleOwner) { dataState ->
                 when (dataState) {
                     is DataState.Success -> {
-                        setFragmentResult(Constant.KEY_REQUEST, bundleOf(Constant.KEY_UPDATE_SUCCESS to true))
                         activity?.showCustomToast("Update địa chỉ thành công!", Constant.ToastStatus.SUCCESS)
-                        findNavController().popBackStack()
+                        findNavController().navigate(R.id.action_newAddressFragment_to_addressFragment)
                     }
                     is DataState.Error -> {
                         activity?.showCustomToast("Có lỗi xảy ra", Constant.ToastStatus.FAILURE)

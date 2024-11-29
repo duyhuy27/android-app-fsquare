@@ -16,6 +16,10 @@ class DetailProductRepositoryImpl @Inject constructor(private val applicationSer
         return applicationService.getProductDetail(id)
     }
 
+    override fun getProductDetailV1(id: String): Flowable<DataResponse<ProductResponse, PaginationResponse>> {
+        return applicationService.getProductDetailV1(id)
+    }
+
     override fun getColor(id: String): Flowable<DataResponse<List<GetClassificationResponse>, PaginationResponse>> {
         return applicationService.getColor(id)
     }

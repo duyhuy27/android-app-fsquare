@@ -97,6 +97,8 @@
     <string name="Delete_Favorite">Xóa yêu thích</string>
     <string name="Text_confirm_delete_fav">Bạn có chắc muốn xoas sản phẩm này khỏi danh sách yêu thích ?</string>
     <string name="Confirm_delete">Đồng ý</string>
+    <string name="Delete_Cart">Xóa giỏ hàng</string>
+    <string name="Text_confirm_delete_cart">Bạn có chắc muốn xoas sản phẩm này khỏi danh sách giỏ hàng ?</string>
 
 
     <!--Cancel order view strings -->
@@ -107,7 +109,7 @@
     <string name="Change_product_order_information_quantity_color_size">Thay đổi thông tin sản phẩm đặt hàng (số lượng, màu sắc, kích thước,...)</string>
     <string name="Other_reasons">Lý do khác</string>
     <string name="Cancel">Hủy</string>
-    <string name="Order">Đặt hàng</string>
+    <string name="Order">Xác nhận</string>
     <string name="Note">Lưu ý:</string>
     <string name="Promotional_gifts_may_vary_depending_on_the_time_of_order">- Quà khuyến mãi có thể thay đổi theo thời điểm đặt hàng</string>
 

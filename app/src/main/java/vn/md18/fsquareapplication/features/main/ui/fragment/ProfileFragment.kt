@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import BottomDialogLoggoutFragment
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -79,7 +80,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         startActivity(intent)
     }
 
-    private fun logout(){
+    fun logout(){
+        val bottomSheetDialog = BottomDialogLoggoutFragment()
+        bottomSheetDialog.show(childFragmentManager, bottomSheetDialog.tag)
         dataManager.setToken("")
         FSLogger.d("Phuczk", "token: ${dataManager.getToken()}")
         val intent = Intent(requireContext(), AuthActivity::class.java)

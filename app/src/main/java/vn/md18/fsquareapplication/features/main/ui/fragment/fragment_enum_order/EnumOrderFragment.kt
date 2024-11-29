@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.databinding.FragmentEnumOrderBinding
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
@@ -121,6 +122,10 @@ class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>
 
     override fun onUpdateOrder(id: String, status: OrderStatus) {
         viewModel.updateOrder(id, status)
+    }
+
+    override fun showDialog(order: GetOrderRespose) {
+
     }
 
 }

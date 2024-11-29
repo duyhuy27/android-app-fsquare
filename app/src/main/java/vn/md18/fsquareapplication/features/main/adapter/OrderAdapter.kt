@@ -6,9 +6,11 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.network.model.request.order.Order
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
+import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.ItemProductOrderBinding
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.OrderStatus
@@ -21,15 +23,14 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
 
     interface OnOrderActionListener{
         fun onUpdateOrder(id: String, status: OrderStatus)
+        fun showDialog(order: GetOrderRespose)
     }
 
     private var orderActionListener: OnOrderActionListener? = null
     private var loading: Boolean = false
-
-    // Cập nhật trạng thái loading
     fun setLoading(isLoading: Boolean) {
         loading = isLoading
-        notifyDataSetChanged() // Refresh RecyclerView
+        notifyDataSetChanged()
     }
 
     fun setOrderActionListener(listener: OnOrderActionListener) {
@@ -73,7 +74,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                         btnVerify.setTextColor(Color.WHITE)
                         btnVerify.visibility = View.VISIBLE
                         btnVerify.setOnClickListener {
-                            showCancelDialog(order)
+                            orderActionListener?.showDialog(order)
                         }
                     }
                     "shipped", "canceled" -> {
@@ -97,20 +98,40 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
             }
         }
 
-        private fun showCancelDialog(order: GetOrderRespose) {
-            val context = binding.root.context
-            val builder = AlertDialog.Builder(context)
-            builder.setTitle("Cancel Order")
-                .setMessage("Are you sure you want to cancel this order?")
-                .setPositiveButton("OK") { _, _ ->
-                    orderActionListener?.onUpdateOrder(order.id, OrderStatus.CANCELED)
-                }
-                .setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .create()
-                .show()
-        }
+//        private fun showCancelDialog(order: GetOrderRespose) {
+//            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_delete_fav, null)
+//            val binding = DialogConfirmDeleteFavBinding.bind(dialogView)
+//
+//            val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+//                .setView(dialogView)
+//                .create()
+//
+//            binding.txtTitle.text = getString(R.string.Delete_Cart)
+//            binding.txtContent.text = getString(R.string.Text_confirm_delete_cart)
+//
+//            binding.btnCancel.setOnClickListener {
+//                alertDialog.dismiss()
+//            }
+//
+//            binding.btnConfirm.setOnClickListener {
+//                viewModel.deleteBagById(productId)
+//                alertDialog.dismiss()
+//            }
+//
+//            alertDialog.show()
+//            val context = binding.root.context
+//            val builder = AlertDialog.Builder(context)
+//            builder.setTitle("Cancel Order")
+//                .setMessage("Are you sure you want to cancel this order?")
+//                .setPositiveButton("OK") { _, _ ->
+//                    orderActionListener?.onUpdateOrder(order.id, OrderStatus.CANCELED)
+//                }
+//                .setNegativeButton("Cancel") { dialog, _ ->
+//                    dialog.dismiss()
+//                }
+//                .create()
+//                .show()
+//        }
     }
 
     fun clearData() {
