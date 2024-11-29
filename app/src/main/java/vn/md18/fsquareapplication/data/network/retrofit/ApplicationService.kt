@@ -201,6 +201,11 @@ interface ApplicationService {
         @Path("id") id: String
     ) : Flowable<DataResponse<ProductResponse, PaginationResponse>>
 
+    @GET(AppAPi.PRODUCT_LIST_V1 + "/{id}")
+    fun getProductDetailV1(
+        @Path("id") id: String
+    ) : Flowable<DataResponse<ProductResponse, PaginationResponse>>
+
     @GET(AppAPi.CATEGORIES_LIST)
     fun getCategories(
         @Query("size") size: Int,

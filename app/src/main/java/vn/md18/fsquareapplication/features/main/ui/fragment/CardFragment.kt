@@ -1,15 +1,22 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.FragmentCardBinding
 import vn.md18.fsquareapplication.features.checkout.ui.CheckoutActivity
+import vn.md18.fsquareapplication.features.detail.ui.DetailProductActivity
 import vn.md18.fsquareapplication.features.main.adapter.BagAdapter
 import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
@@ -25,6 +32,7 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
     @Inject
     lateinit var bagAdapter: BagAdapter
     override val viewModel: BagViewmodel by  activityViewModels()
+    private lateinit var launcher: ActivityResultLauncher<Intent>
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentCardBinding  = FragmentCardBinding.inflate(layoutInflater)
 
     override fun getTagFragment(): String = CardFragment::class.java.simpleName
@@ -78,6 +86,14 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
                 activity?.showCustomToast("Xóa sản phẩm thất bại", Constant.ToastStatus.SUCCESS)
             }
         }
+
+        viewModel.shouldReloadCart.observe(this) { shouldReload ->
+            if (shouldReload == true) {
+                viewModel.getBagList()
+                viewModel.shouldReloadCart.value = false
+            }
+        }
+
     }
     companion object {
         @JvmStatic
@@ -85,7 +101,26 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
     }
 
     override fun onRemoveBag(productId: String) {
-        viewModel.deleteBagById(productId)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_delete_fav, null)
+        val binding = DialogConfirmDeleteFavBinding.bind(dialogView)
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.txtTitle.text = getString(R.string.Delete_Cart)
+        binding.txtContent.text = getString(R.string.Text_confirm_delete_cart)
+
+        binding.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        binding.btnConfirm.setOnClickListener {
+            viewModel.deleteBagById(productId)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     override fun onUpdateQuantityBag(productId: String, action: String) {

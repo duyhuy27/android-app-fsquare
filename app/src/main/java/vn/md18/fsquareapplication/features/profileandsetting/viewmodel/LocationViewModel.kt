@@ -188,6 +188,33 @@ class LocationViewModel @Inject constructor(
         }
     }
 
+    fun getLocationList() {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                setLoading(true)
+                compositeDisposable.add(
+                    locationCustomerRepository.getLocationList()
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            response.data.let {
+                                setLoading(false)
+                                _listLocationCustomer.value = it
+                            }
+                        },
+                            { throwable ->
+                                setLoading(false)
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            }
+            else {
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
     fun updateLocationCustomerList(id: String, title: String, address: String, wardName: String, districtName: String, provinceName: String, isDefault: Boolean) {
         val updateLocationCustomerRequest = UpdateLocationCustomerRequest(title, address, wardName, districtName, provinceName, isDefault )
         networkExtensions.checkInternet { isConnect ->

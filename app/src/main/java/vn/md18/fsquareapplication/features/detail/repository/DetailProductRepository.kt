@@ -10,6 +10,8 @@ import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 
 interface DetailProductRepository {
     fun getProductDetail(id: String): Flowable<DataResponse<ProductResponse, PaginationResponse>>
+
+    fun getProductDetailV1(id: String): Flowable<DataResponse<ProductResponse, PaginationResponse>>
     fun getColor(id: String) : Flowable<DataResponse<List<GetClassificationResponse>, PaginationResponse>>
 
     fun getClassification(id: String) : Flowable<DataResponse<Classification, PaginationResponse>>

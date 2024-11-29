@@ -24,6 +24,7 @@ class BagViewmodel @Inject constructor(
     private val mainRepository: MainRepository,
     private val networkExtensions: NetworkExtensions
 ) : BaseViewModel() {
+    val shouldReloadCart = MutableLiveData<Boolean>()
     private val _listBag = MutableLiveData<List<GetBagResponse>>()
     val listBag: LiveData<List<GetBagResponse>> = _listBag
 

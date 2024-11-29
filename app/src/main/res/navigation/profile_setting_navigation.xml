@@ -24,7 +24,11 @@
         android:id="@+id/newAddressFragment"
         android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.NewAddressFragment"
         android:label="fragment_new_address"
-        tools:layout="@layout/fragment_new_address" />
+        tools:layout="@layout/fragment_new_address" >
+        <action
+            android:id="@+id/action_newAddressFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="vn.md18.fsquareapplication.features.profileandsetting.ui.fragment.NotificationFragment"

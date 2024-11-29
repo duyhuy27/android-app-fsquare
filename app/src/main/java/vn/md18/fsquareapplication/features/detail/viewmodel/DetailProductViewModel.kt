@@ -7,6 +7,7 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
+import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.response.Classification
 import vn.md18.fsquareapplication.data.network.model.response.ClassificationShoes
 import vn.md18.fsquareapplication.data.network.model.response.GetClassificationResponse
@@ -27,8 +28,7 @@ class DetailProductViewModel @Inject constructor(
     private val networkExtensions: NetworkExtensions,
 ) : BaseViewModel() {
     var _product = MutableLiveData<ProductResponse>()
-    val product: MutableLiveData<ProductResponse>
-        get() = _product
+    val product: MutableLiveData<ProductResponse> get() = _product
 
     private val _listColor = MutableLiveData<List<GetClassificationResponse>>()
     val listColor: LiveData<List<GetClassificationResponse>> = _listColor
@@ -41,8 +41,8 @@ class DetailProductViewModel @Inject constructor(
     private val _addBagState: MutableLiveData<DataState<AddBagResponse>> = MutableLiveData()
     val addBagState: LiveData<DataState<AddBagResponse>> get() = _addBagState
 
-    private val _listBag = MutableLiveData<List<GetBagResponse>>()
-    val listBag: LiveData<List<GetBagResponse>> = _listBag
+    private val _favoriteState: MutableLiveData<DataState<Boolean>> = MutableLiveData()
+    val favoriteState: LiveData<DataState<Boolean>> get() = _favoriteState
 
     override fun onDidBindViewModel() {
     }
@@ -53,6 +53,33 @@ class DetailProductViewModel @Inject constructor(
                 setLoading(true)
                 compositeDisposable.add(
                     detailProductRepository.getProductDetail(productId)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            response.data.let {
+                                setLoading(false)
+                                _product.value = it
+                            }
+                        },
+                            { throwable ->
+                                setLoading(false)
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            } else {
+                setLoading(false)
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
+    fun callApiGetDetailProductV1(productId: String) {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                setLoading(true)
+                compositeDisposable.add(
+                    detailProductRepository.getProductDetailV1(productId)
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
@@ -164,30 +191,27 @@ class DetailProductViewModel @Inject constructor(
         }
     }
 
-    fun getBagList() {
+    fun createFavorite(productId: String, isAdding: Boolean) {
+        val favoriteRequest = FavoriteRequest(shoes = productId)
         setLoading(true)
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
-                    mainRepository.getBagList()
+                    mainRepository.createFavorite(favoriteRequest)
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
-                        .subscribe({ response ->
+                        .subscribe({ _ ->
                             setLoading(false)
-                            response.data.let {
-                                _listBag.value = it
-                            }
-                        },
-                            { throwable ->
-                                setLoading(false)
-                                setErrorString(throwable.message.toString())
-                            })
+                            _favoriteState.value = DataState.Success(isAdding)
+                        }, { error ->
+                            setLoading(false)
+                            _favoriteState.value = DataState.Error(error)
+                        })
                 )
-            }
-            else {
+            } else {
                 setLoading(false)
-                setErrorStringId(R.string.error_have_no_internet)
+                setErrorStringId(R.string.no_internet_connection)
             }
         }
     }
