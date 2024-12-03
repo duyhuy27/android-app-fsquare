@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment_navigation"
+    app:startDestination="@id/paymentWalletFragment">
+
+    <fragment
+        android:id="@+id/topUpWalletFragment"
+        android:name="vn.md18.fsquareapplication.features.payment.fragment.TopUpWalletFragment"
+        android:label="fragment_top_up_wallet"
+        tools:layout="@layout/fragment_top_up_wallet" >
+        <action
+            android:id="@+id/action_topUpWalletFragment_to_OTPPaymentFragment"
+            app:destination="@id/OTPPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentWalletFragment"
+        android:name="vn.md18.fsquareapplication.features.payment.fragment.PaymentWalletFragment"
+        android:label="fragment_payment_wallet"
+        tools:layout="@layout/fragment_payment_wallet" >
+        <action
+            android:id="@+id/action_paymentWalletFragment_to_topUpWalletFragment"
+            app:destination="@id/topUpWalletFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OTPPaymentFragment"
+        android:name="vn.md18.fsquareapplication.features.payment.fragment.OTPPaymentFragment"
+        android:label="fragment_o_t_p_payment"
+        tools:layout="@layout/fragment_o_t_p_payment" >
+        <action
+            android:id="@+id/action_OTPPaymentFragment_to_transactionHistoryPaymentFragment"
+            app:destination="@id/transactionHistoryPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionHistoryPaymentFragment"
+        android:name="vn.md18.fsquareapplication.features.payment.fragment.TransactionHistoryPaymentFragment"
+        android:label="fragment_transaction_history_payment"
+        tools:layout="@layout/fragment_transaction_history_payment" >
+        <action
+            android:id="@+id/action_transactionHistoryPaymentFragment_to_paymentReviewFragment"
+            app:destination="@id/paymentReviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentReviewFragment"
+        android:name="vn.md18.fsquareapplication.features.payment.fragment.PaymentReviewFragment"
+        android:label="fragment_payment_review"
+        tools:layout="@layout/fragment_payment_review" />
+</navigation>

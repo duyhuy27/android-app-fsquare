@@ -10,6 +10,8 @@ import androidx.viewbinding.ViewBinding
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
 import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
+import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -52,6 +54,7 @@ abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragm
         onViewLoaded()
         addViewListener()
         addDataObserver()
+
     }
 
 
@@ -83,6 +86,15 @@ abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragm
 
     fun openActivity(cla: Class<*>, dataSend: HashMap<String, Any>, vararg flags: Int) {
         val intent = Intent(activity, cla)
+        for (flag in flags) {
+            intent.addFlags(flag)
+        }
+        startActivity(intent)
+    }
+
+    fun openActivity(cla: Class<*>, data: Bundle, vararg flags: Int) {
+        val intent = Intent(activity, cla)
+        intent.putExtra(Constant.KEY_BUNDLE, data)
         for (flag in flags) {
             intent.addFlags(flag)
         }
@@ -130,6 +142,20 @@ abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragm
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.compositeDisposable.dispose()
+    }
+
+    override fun addDataObserver() {
+        activity?.let { activity ->
+            viewModel.apply {
+                errorState.observe(activity) {
+                    FSLogger.e("huynd: base fragment == $it")
+                    onError(it)
+                }
+                loadingState.observe(activity) {
+                    onLoading(it)
+                }
+            }
+        }
     }
 
 }

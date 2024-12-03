@@ -53,19 +53,37 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="r">
         <activity
-            android:name=".features.auth.ui.AuthActivity"
+            android:name=".features.main.ui.DetailOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.payment.ui.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.main.ui.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.main.ui.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.main.ui.FavoriteAndNewestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.detail.ui.DetailProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.checkout.ui.CheckoutActivity"
             android:exported="false" />
         <activity
             android:name=".features.auth.ui.SignUpActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
+        <activity
+            android:name=".features.profileandsetting.ui.ProfileAndSettingActivity"
+            android:exported="false" />
         <activity
             android:name=".features.main.ui.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.auth.ui.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

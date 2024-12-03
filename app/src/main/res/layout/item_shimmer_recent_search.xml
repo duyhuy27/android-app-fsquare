@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:orientation="horizontal"
+    android:padding="15dp"
+    android:background="#E0E0E0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Shimmer cho ảnh sản phẩm -->
+        <View
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:background="@drawable/image_cart_custom"
+            android:padding="7dp"/>
+
+        <!-- Shimmer cho tên sản phẩm -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="#CCCCCC"/>
+
+        <!-- Shimmer cho nút hủy tìm kiếm -->
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="15dp"
+            android:background="#CCCCCC"/>
+    </LinearLayout>
+</com.facebook.shimmer.ShimmerFrameLayout>

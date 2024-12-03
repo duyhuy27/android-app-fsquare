@@ -17,7 +17,6 @@ if (versionPropsFile.exists()) {
 def versionMajor = versionProps['version.major'].toInteger()
 def versionMinor = versionProps['version.minor'].toInteger()
 def versionPatch = versionProps['version.patch'].toInteger()
-def versionBuild = versionProps['version.build'].toInteger()
 
 android {
     namespace 'vn.md18.fsquareapplication'
@@ -39,8 +38,8 @@ android {
         applicationId "vn.md18.fsquareapplication"
         minSdk 24
         targetSdk 34
-        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 10 + versionBuild
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 10
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -133,11 +132,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     kapt {
         generateStubs = true
@@ -180,12 +179,13 @@ dependencies {
     def appCenterSdkVersion = '5.0.4'
     implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
     implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
-
-
+    implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation 'com.github.sung2063:AndroidSliderViewsLibrary:1.8'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation(rootProject.ext.dependencies["recyclerview-v7"]) {
         exclude module: 'support-annotations'
     }
-
+    implementation rootProject.ext.dependencies["shimmer"]
     // edtText OTP lib
     implementation rootProject.ext.dependencies["otp_view"]
     implementation rootProject.ext.dependencies["date_picker"]
@@ -250,6 +250,14 @@ dependencies {
 
     implementation 'com.elvishew:xlog:1.11.0'
     implementation 'com.elvishew:xlog-libcat:1.0.0'
+
+    implementation 'com.github.Ajinkrishnak:CountryCodePicker:1.0.2'
+    implementation 'com.hbb20:android-country-picker:0.0.7'
+
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.hbb20:ccp:2.5.2'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
 
 static def getCurrentDayTime() {

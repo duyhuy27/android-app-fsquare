@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/shimmerFrameLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    app:shimmer_auto_start="false"
+    android:padding="8dp"
+    app:shimmer_duration="1000">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginHorizontal="6dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            app:cardBackgroundColor="#606060"
+            app:cardCornerRadius="@dimen/_20sdp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            >
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/txtBrandName"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="7dp"
+            app:cardBackgroundColor="@color/dark_gray"
+            />
+    </LinearLayout>
+</com.facebook.shimmer.ShimmerFrameLayout>

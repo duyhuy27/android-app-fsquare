@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/img_item_wallet"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:padding="10dp"
+            android:src="@drawable/img_main_home"
+            android:background="@drawable/image_transaction_custom"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:id="@+id/txt_product_name_wallet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="NIKE Run Swift 2"
+                    android:textSize="14dp"
+                    android:textColor="#040207"
+                    android:maxLines="1"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/txt_product_price_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$126.99"
+                    android:textSize="16dp"
+                    android:textColor="#333333"
+                    android:fontFamily="@font/opensans_semi_bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txt_product_date_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="May 18, 2024"
+                    android:textSize="12dp"
+                    android:textColor="#676767"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/opensans_semi_bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textSize="16dp"
+                    android:textColor="#676767"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"/>
+                <TextView
+                    android:id="@+id/txt_product_time_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:45 AM"
+                    android:textSize="12dp"
+                    android:textColor="#676767"
+                    android:fontFamily="@font/opensans_semi_bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

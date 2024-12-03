@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/succesfully1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Order_Successful"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="24sp"
+            android:textColor="#040307"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/You_have_successfully_made_order"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="16sp"
+            android:textColor="#676767"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_view_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/View_Order"
+            android:layout_marginBottom="@dimen/permission_dp_20"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            android:layout_marginTop="50dp"
+            style="@style/ButtonApp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

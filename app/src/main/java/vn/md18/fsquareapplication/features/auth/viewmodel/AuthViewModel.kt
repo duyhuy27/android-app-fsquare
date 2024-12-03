@@ -1,6 +1,5 @@
 package vn.md18.fsquareapplication.features.auth.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,11 +10,12 @@ import vn.md18.fsquareapplication.data.model.ErrorResponse
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
 import vn.md18.fsquareapplication.data.network.model.request.VerifyRequest
-import vn.md18.fsquareapplication.data.network.model.response.LoginResponse
-import vn.md18.fsquareapplication.data.network.model.response.SignUpResponse
-import vn.md18.fsquareapplication.data.network.model.response.VerifyResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.SignUpResponse
+import vn.md18.fsquareapplication.data.network.model.response.auth.VerifyResponse
 import vn.md18.fsquareapplication.features.auth.repository.AuthRepository
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 
@@ -38,15 +38,23 @@ class AuthViewModel @Inject constructor(
 
 
     override fun onDidBindViewModel() {
-        Log.e("Huynd", "Nhay vao day")
     }
 
     fun test () {
         setLoading(true)
     }
 
+
+
+    fun checkTokenToNavigate(callBack: () -> Unit) {
+        if (!dataManager.getToken().isNullOrEmpty()) {
+            callBack()
+        }
+    }
+
     fun signUp(email: String) {
         val signUpRequest = SignUpRequest(email = email)
+        setLoading(true)
         networkExtension.checkInternet {
             isConnect ->
             if (isConnect) {
@@ -56,9 +64,11 @@ class AuthViewModel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe ({ response ->
+                            setLoading(false)
                             _signUpState.value = DataState.Success(response)
                         },{
                             err ->
+                            setLoading(false)
                             _signUpState.value = DataState.Error(err)
                         })
                 )
@@ -71,6 +81,7 @@ class AuthViewModel @Inject constructor(
 
     fun login(email: String) {
         val loginRequest = LoginRequest(email = email)
+        setLoading(true)
         networkExtension.checkInternet {
                 isConnect ->
             if (isConnect) {
@@ -80,14 +91,17 @@ class AuthViewModel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe ({ response ->
+                            setLoading(false)
                             _loginState.value = DataState.Success(response)
                         },{
                             err ->
+                            setLoading(false)
                             _loginState.value = DataState.Error(err)
                         })
                 )
             }
             else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }
@@ -95,9 +109,10 @@ class AuthViewModel @Inject constructor(
 
     fun verify(otp: String, email: String, type: String, fcmToken: String) {
         val verifyRequest = VerifyRequest(otp = otp, email = email, type = type, fcmToken = fcmToken)
+        setLoading(true)
         networkExtension.checkInternet { isConnect ->
             if (isConnect) {
-                _verifyState.value = DataState.Loading // Đặt trạng thái Loading
+                _verifyState.value = DataState.Loading
                 compositeDisposable.add(
                     authRepository.verify(verifyRequest = verifyRequest)
                         .subscribeOn(schedulerProvider.io())
@@ -105,16 +120,19 @@ class AuthViewModel @Inject constructor(
                         .toObservable()
                         .subscribe({ response ->
                             response.data?.let { data ->
-                                dataManager.setToken(data)
+                                setLoading(false)
                                 _verifyState.value = DataState.Success(response)
                             } ?: run {
+                                setLoading(false)
                                 _verifyState.value = DataState.Error(Exception("No data received"))
                             }
                         }, { error ->
+                            setLoading(false)
                             _verifyState.value = DataState.Error(error)
                         })
                 )
             } else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }

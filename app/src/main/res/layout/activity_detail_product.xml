@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".features.detail.ui.DetailProductActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:textStyle="bold"
+            app:titleToolbar="" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#F8F8F8">
+
+            <ImageView
+                android:id="@+id/img_detail_product"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_name_detail_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="Nike Air Presto"
+                    android:textColor="#040207"
+                    android:textSize="24sp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/half_star" />
+                    <TextView
+                        android:id="@+id/txt_rating_detail_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:text="4.5"
+                        android:textColor="#676767"
+                        android:textSize="@dimen/_12sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:text="|"
+                        android:textColor="#676767"
+                        android:textSize="@dimen/_15sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/_5sdp"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:text="1,379 sold"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_fav"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/button_fav" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/Description"
+            android:textColor="#040207"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txt_description_detail_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convallis lectus est leo vitae"
+            android:textColor="#676767"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/Color"
+            android:textColor="#040207"
+            android:textSize="15sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_color_detail_produc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_color_datail_produx"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/Size"
+            android:textColor="#040207"
+            android:textSize="15sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_size_datail_produc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_size_datail_produx"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/Product_description"
+            android:textColor="#040207"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/txt_product_description_detail_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="- Style: hot trend of this year.\n- Size: 38 - 45.\n- Material: PU leather- Sole material: Molded solid rubber, good friction resistance, light, smooth, balanced and breathable.\n- Sole type: High"
+            android:textColor="#676767"
+            android:textSize="13sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="@string/Price"
+                android:textColor="#676767"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/txt_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="@string/Price"
+                android:textColor="#676767"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp">
+            <TextView
+                android:id="@+id/txt_price_detail_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$132.99"
+                android:textColor="#333333"
+                android:textSize="24sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/btn_product_minus_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_minus"
+                    android:background="@drawable/image_cart_button_bg"/>
+                <TextView
+                    android:id="@+id/txt_product_quantity_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="#333333"
+                    android:fontFamily="@font/opensans_bold"/>
+                <ImageView
+                    android:id="@+id/btn_product_plus_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_plus"
+                    android:background="@drawable/image_cart_button_bg"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_button_corner_30_primary"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            android:padding="10dp">
+        <ImageView
+            android:id="@+id/icon_cart"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/add_to_cart" />
+        <TextView
+            android:id="@+id/text_add_to_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Add_to_Cart"
+            android:layout_marginStart="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.profileandsetting.ui.fragment.EditProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:id="@+id/toolbarEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Edit Profile"
+            app:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size_20"
+            android:layout_marginTop="@dimen/permission_dp_5">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/First_Name"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5" />
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_10"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Last_Name"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5" />
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_10"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Birth_Date"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+            <LinearLayout
+                android:id="@+id/edt_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt_corner_grey"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:padding="@dimen/_7sdp">
+                <EditText
+                    android:id="@+id/edtBirth"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="phone"
+                    android:background="@null"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:maxLength="13"/>
+                <ImageView
+                    android:id="@+id/btnDatePicker"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="8dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/date"/>
+            </LinearLayout>
+            <!-- Email -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Email"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                app:iconEnd="@drawable/email"
+                app:actionIme="actionNone"
+                app:showIconTogglePassword="false"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_10" />
+
+            <!-- Address -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Country"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <com.hbb20.CountryPickerView
+                android:id="@+id/countryPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_4sdp"
+                android:background="@drawable/bg_edt_corner_grey"
+                android:layout_marginTop="@dimen/permission_dp_5"
+                android:layout_marginBottom="@dimen/permission_dp_10"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_14"
+                android:text="@string/Phone"
+                android:textColor="@color/black_neutral"
+                android:layout_marginBottom="@dimen/size_5"/>
+
+            <LinearLayout
+                android:id="@+id/countryPickerPhoneLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt_corner_grey"
+                android:padding="@dimen/_5sdp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    >
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/countryPickerPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:contentColor="@color/neutral_50_"
+                        app:fontFamily="@font/montserrat_medium"
+                        app:ccp_showFullName="false"
+                        app:showFlag="true"
+                        android:gravity="center"
+                        app:arrowSize="@dimen/_20sdp"
+                        app:textSize="@dimen/_12ssp"
+                        app:excludedCountries="ad,ae"
+                        />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edtNumberPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="phone"
+                    android:background="@null"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:maxLength="13"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Update"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            style="@style/ButtonApp"/>
+    </LinearLayout>
+
+</FrameLayout>

@@ -8,16 +8,11 @@ pipeline {
         KEYSTORE_PASSWORD = credentials('KEYSTORE_PASSWORD')
         KEY_ALIAS = credentials('KEY_ALIAS')
         KEY_PASSWORD = credentials('KEY_PASSWORD')
+        TELEGRAM_TOKEN = credentials('TELEGRAM_TOKEN')
+        TELEGRAM_CHAT_ID = credentials('TELEGRAM_CHAT_ID')
     }
 
     stages {
-
-        stage('Update Version') {
-            steps {
-                sh './update_version.sh'
-            }
-        }
-
         stage('Create local.properties') {
             steps {
                 sh '''
@@ -55,7 +50,7 @@ pipeline {
                 script {
                     def apkPath = sh(script: 'find ./app/build/outputs/apk/dev/debug/ -name "*.apk"', returnStdout: true).trim()
                     if (apkPath) {
-                        echo "APK path: ${apkPath}"  // Kiểm tra đường dẫn APK
+                        echo "APK path: ${apkPath}"
                         sh """
                             appcenter distribute release \
                             --app huy.mobcontact-gmail.com/FSquare-Android-Application \
@@ -77,9 +72,22 @@ pipeline {
         }
         success {
             echo 'Build and upload to AppCenter succeeded!'
+            // Gửi tin nhắn Telegram
+            sh """
+                curl -s -X POST https://api.telegram.org/bot\$TELEGRAM_TOKEN/sendMessage \
+                -d chat_id=\$TELEGRAM_CHAT_ID \
+                -d text='🎉 **FSquare Build Notification** 🎉\n\nChúng tôi vui mừng thông báo rằng bản build mới của ứng dụng FSquare đã thành công! \n\n✅ **Phiên bản mới nhất đã được tải lên** và sẵn sàng để bạn trải nghiệm.\n\n🔗 **Tải ngay APK tại đây:** [FSquare - Download](https://install.appcenter.ms/users/huy.mobcontact-gmail.com/apps/fsquare-android-application/distribution_groups/testers)\n\nCảm ơn bạn đã đồng hành cùng chúng tôi! Hãy cùng khám phá những tính năng mới và cải tiến trong ứng dụng FSquare.' \
+                -d parse_mode='Markdown'
+            """
         }
         failure {
             echo 'Build or upload to AppCenter failed.'
+            // Gửi tin nhắn Telegram khi build thất bại
+            sh """
+                curl -s -X POST https://api.telegram.org/bot\$TELEGRAM_TOKEN/sendMessage \
+                -d chat_id=\$TELEGRAM_CHAT_ID \
+                -d text='Build failed. Please check the logs.'
+            """
         }
     }
 }

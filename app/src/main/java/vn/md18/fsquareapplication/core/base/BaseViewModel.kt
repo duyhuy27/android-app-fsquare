@@ -8,6 +8,8 @@ import vn.md18.fsquareapplication.data.model.ErrorResponse
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
 import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
+import vn.md18.fsquareapplication.utils.SingleLiveEvent
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -16,9 +18,9 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var resourcesService: ResourcesService
     lateinit var dataManager: DataManager
 
-    open val errorState = MutableLiveData<String>()
-    open val loadingState = MutableLiveData<Boolean>()
-    open val errorMessage = MutableLiveData<Int>()
+    open val errorState = SingleLiveEvent<String>()
+    open val loadingState = SingleLiveEvent<Boolean>()
+    open val errorMessage = SingleLiveEvent<Int>()
 
 
 
@@ -65,5 +67,14 @@ abstract class BaseViewModel : ViewModel() {
 
     fun setErrorStringId(errorMessageId: Int) {
         errorMessage.value = errorMessageId
+    }
+
+    fun checkTokenIfNeeded(callBackNavigation: (Boolean) -> Unit) {
+        if (dataManager.getToken().isNullOrEmpty()) {
+            callBackNavigation(false)
+        }
+        else {
+            callBackNavigation(true)
+        }
     }
 }

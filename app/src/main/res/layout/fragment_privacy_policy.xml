@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".features.profileandsetting.ui.fragment.PrivacyPolicyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Custom toolbar -->
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:id="@+id/toolbarPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Privacy  Policy"
+            app:textStyle="bold"/>
+
+        <!-- Bọc nội dung bên trong ScrollView -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/permission_dp_20">
+
+                <!-- Nội dung văn bản -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam egestas id ultrices morbi ullamcorper malesuada in. Cursus euismod augue mi felis maecenas. Aliquet aliquam neque, nunc sed dictum. Amet, augue amet, lacus vestibulum vehicula pharetra hendrerit dui."
+                    android:textColor="#676767"
+                    android:textSize="@dimen/size_14" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:text="Venenatis, ut ridiculus iaculis diam. Ac, vestibulum sed gravida dolor. Commodo tellus tristique sit in risus elit vulputate malesuada. Tortor sit aliquet vitae nunc adipiscing laoreet turpis amet. Enim gravida ut integer enim blandit. Sit tincidunt cras non nisl in ornare facilisis volutpat. Libero vestibulum, euismod ullamcorper etiam."
+                    android:textColor="#676767"
+                    android:textSize="@dimen/size_14"
+                    android:layout_marginTop="@dimen/permission_dp_20"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:text="Volutpat lectus et, libero pellentesque pharetra neque, elit aliquet facilisis. Sit morbi nulla in libero, congue pellentesque fermentum at. Porttitor neque nec, faucibus fames. Est ligula vitae magna nam vulputate amet, mauris. Suscipit fringilla habitant bibendum tempor, quis convallis scelerisque tellus. Dui purus sapien ac malesuada suscipit. Mi, massa proin sed nullam purus, vivamus sapien convallis massa. Ipsum vitae maecenas dui eu."
+                    android:textColor="#676767"
+                    android:textSize="@dimen/size_14"
+                    android:layout_marginTop="@dimen/permission_dp_20"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:text="Felis est, a sed risus ut sed. Amet, nisi, vitae scelerisque leo dolor velit odio orci. Ut mauris pellentesque porttitor molestie orci facilisis sed a. In eu, augue ullamcorper egestas eget commodo neque laoreet. Leo faucibus urna posuere cursus viverra rhoncus, morbi ultrices sit."
+                    android:textColor="#676767"
+                    android:textSize="@dimen/size_14"
+                    android:layout_marginTop="@dimen/permission_dp_20"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

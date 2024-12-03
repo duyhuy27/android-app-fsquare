@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#f6f6f6"
+    tools:context=".features.checkout.ui.fragment.ShippingAddressFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <vn.md18.fsquareapplication.utils.view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleToolbar="Address"
+            app:textStyle="bold"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_shipping_address" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_apply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Apply"
+            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginLeft="@dimen/permission_dp_20"
+            android:layout_marginRight="@dimen/permission_dp_20"
+            android:elevation="0dp"
+            style="@style/ButtonApp"/>
+
+    </LinearLayout>
+
+</FrameLayout>
