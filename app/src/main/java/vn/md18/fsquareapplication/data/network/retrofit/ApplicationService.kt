@@ -12,7 +12,11 @@ import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.AppAPi
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
+import vn.md18.fsquareapplication.data.network.model.request.GetPaymentDetailRequest
+
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
+import vn.md18.fsquareapplication.data.network.model.request.PostPaymentRequest
+import vn.md18.fsquareapplication.data.network.model.request.PostReviewRequest
 import vn.md18.fsquareapplication.data.network.model.request.SignUpRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateProfileRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
@@ -35,11 +39,17 @@ import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteR
 import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetDistrictsResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
+import vn.md18.fsquareapplication.data.network.model.response.GetPaymentDetailResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetPaymentResponse
+
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
 import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
+import vn.md18.fsquareapplication.data.network.model.response.PostPaymentResponse
+import vn.md18.fsquareapplication.data.network.model.response.PostReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import vn.md18.fsquareapplication.data.network.model.response.ReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.UpdateProfileResponse
 import vn.md18.fsquareapplication.data.network.model.response.auth.SignUpResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
@@ -169,7 +179,7 @@ interface ApplicationService {
     @GET(AppAPi.ORDER_LIST + "/{id}")
     fun getOrderById(
         @Path("id") id: String,
-    ) : Flowable<GetOrderDetailResponse>
+    ) : Flowable<DataResponse<GetOrderDetailResponse, PaginationResponse>>
 
     @POST(AppAPi.ORDER_LIST)
     fun createOrder(
@@ -239,4 +249,29 @@ interface ApplicationService {
     fun getSize(
         @Path("id") id: String
     ) : Flowable<DataResponse<List<ClassificationShoes>, PaginationResponse>>
+
+    @POST(AppAPi.PAYMENT)
+    fun addPayment(
+        @Body postPaymentRequest: PostPaymentRequest
+    ) : Flowable<DataResponse<PostPaymentResponse, PaginationResponse>>
+
+    @GET(AppAPi.PAYMENT)
+    fun getPayments(
+
+    ) : Flowable<DataResponse<List<GetPaymentResponse>, PaginationResponse>>
+
+    @POST(AppAPi.PAYMENT)
+    fun getPaymentDetail(
+        @Body getPaymentDetailRequest: GetPaymentDetailRequest
+    ) : Flowable<DataResponse<GetPaymentDetailResponse, PaginationResponse>>
+
+    @POST(AppAPi.REVIEWS)
+    fun postReview(
+        @Body postReviewRequest: PostReviewRequest
+    ) : Flowable<PostReviewResponse>
+
+    @GET(AppAPi.REVIEWS + "/shoes/{id}")
+    fun getReview(
+        @Path("_id") id: String
+    ) : Flowable<DataResponse<List<ReviewResponse>, PaginationResponse>>
 }

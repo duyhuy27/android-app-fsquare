@@ -6,7 +6,7 @@
     android:background="#535861">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:background="@drawable/bg_cardview_top_corner_radius">
         <LinearLayout
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Review"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_23sdp"
                 android:gravity="center_horizontal"
                 android:fontFamily="@font/opensans_semi_bold"
                 android:textColor="@color/black"
@@ -57,11 +57,13 @@
                         android:orientation="vertical"
                         android:layout_marginHorizontal="@dimen/_10sdp">
                         <TextView
+                            android:id="@+id/txtProductName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Adidas Yeezy Boost 700"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp"
+                            android:maxLines="2"
                             android:fontFamily="@font/opensans_semi_bold"
                             />
                         <LinearLayout
@@ -85,6 +87,7 @@
                                 android:textColor="#676767"
                                 android:layout_marginHorizontal="@dimen/_3sdp"/>
                             <TextView
+                                android:id="@+id/txtSize"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Size = 42"
@@ -100,6 +103,7 @@
                                 android:textColor="#676767"
                                 android:layout_marginHorizontal="@dimen/_3sdp"/>
                             <TextView
+                                android:id="@+id/txtQuantity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Qty = 1"
@@ -108,6 +112,7 @@
                                 android:textColor="#676767"/>
                         </LinearLayout>
                         <TextView
+                            android:id="@+id/txtPrice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="$149.99"
@@ -125,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/How_is_your_order"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_22sdp"
+                android:textSize="@dimen/_20sdp"
                 android:fontFamily="@font/opensans_semi_bold"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="@dimen/_10sdp"
@@ -135,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Please_give_your_rating_and_also_your_review"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/opensans_semi_bold"
                 android:textColor="#676767"
                 android:gravity="center_horizontal"/>
@@ -145,26 +150,36 @@
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:gravity="center_horizontal"
-                android:layout_marginVertical="@dimen/_10sdp">
+                android:layout_marginVertical="@dimen/_5sdp">
                 <ImageView
+                    android:id="@+id/btnStar1"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
+                    android:padding="5dp"
                     android:src="@drawable/outline_star"/>
                 <ImageView
+                    android:id="@+id/btnStar2"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
+                    android:padding="5dp"
                     android:src="@drawable/outline_star"/>
                 <ImageView
+                    android:id="@+id/btnStar3"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
+                    android:padding="5dp"
                     android:src="@drawable/outline_star"/>
                 <ImageView
+                    android:id="@+id/btnStar4"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
+                    android:padding="5dp"
                     android:src="@drawable/outline_star"/>
                 <ImageView
+                    android:id="@+id/btnStar5"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
+                    android:padding="5dp"
                     android:src="@drawable/outline_star"/>
             </LinearLayout>
             <LinearLayout
@@ -175,8 +190,9 @@
                 android:layout_marginBottom="@dimen/_10sdp">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddImage"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="85dp"
                     android:text="@string/Add_image"
                     android:textSize="@dimen/_16sdp"
                     style="@style/ButtonBorderOrange"
@@ -185,8 +201,9 @@
                     android:layout_weight="1"/>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddVideo"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="85dp"
                     android:text="@string/Add_video"
                     android:textSize="@dimen/_16sdp"
                     style="@style/ButtonBorderOrange"
@@ -196,7 +213,17 @@
                     android:layout_marginStart="10dp" />
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="100dp"
+                android:layout_marginLeft="15dp"
+                android:adjustViewBounds="true"
+                />
+
             <vn.md18.fsquareapplication.utils.view.CustomEditText
+                android:id="@+id/txtComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_10sdp"
@@ -218,6 +245,7 @@
                 android:layout_marginBottom="@dimen/_10sdp">
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCancel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/Reset"
@@ -226,6 +254,7 @@
                     android:layout_weight="1"/>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnApply"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/Apply"

@@ -6,15 +6,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.request.PostReviewRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
+import vn.md18.fsquareapplication.data.network.model.response.PostReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.AddOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderResponse
+import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
 import vn.md18.fsquareapplication.features.main.repository.OrderRepository
 import vn.md18.fsquareapplication.utils.OrderStatus
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,6 +38,12 @@ class OrderViewModel @Inject constructor(
 
     private val _deleteOrderState: MutableLiveData<DataState<DeleteOrderResponse>> = MutableLiveData()
     val deleteOrderState: LiveData<DataState<DeleteOrderResponse>> get() = _deleteOrderState
+
+    private val _getDetailOrderState: MutableLiveData<GetOrderDetailResponse> = MutableLiveData()
+    val getDetailOrderState: MutableLiveData<GetOrderDetailResponse> get() = _getDetailOrderState
+
+    private val _addReviewState: MutableLiveData<DataState<PostReviewResponse>> = MutableLiveData()
+    val addReviewState: LiveData<DataState<PostReviewResponse>> get() = _addReviewState
 
     var currentStatus: OrderStatus? = null
 
@@ -112,6 +122,57 @@ class OrderViewModel @Inject constructor(
                         })
                 )
             } else {
+                setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun getOrderById(id: String) {
+        setLoading(true)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    orderRepository.getOrderDetail(id)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            response.data.let {
+                                setLoading(false)
+                                _getDetailOrderState.value = it
+                            }
+                        }, { err ->
+                            setLoading(false)
+                            FSLogger.e("Phuczk","$err")
+                            setErrorString("$err")
+                        })
+                )
+            } else {
+                setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun createReviews(files: List<File>, order: String, rating: Int, content: String) {
+        val postReviewRequest = PostReviewRequest(files, order, rating, content)
+        setLoading(true)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    orderRepository.postReviews(postReviewRequest)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            setLoading(false)
+                            _addReviewState.value = DataState.Success(response)
+                        }, { error ->
+                            setLoading(false)
+                            _addReviewState.value = DataState.Error(error)
+                        })
+                )
+            } else {
+                setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
             }
         }

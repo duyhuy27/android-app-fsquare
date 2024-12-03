@@ -25,10 +25,10 @@
                android:fontFamily="@font/opensans_semi_bold"
                android:layout_weight="1"/>
            <ImageView
-               android:id="@+id/img_search"
+               android:id="@+id/img_delete_list"
                android:layout_width="@dimen/size_25"
                android:layout_height="@dimen/size_35"
-               android:src="@drawable/search"
+               android:src="@drawable/delete_list"
                android:layout_gravity="center"/>
        </LinearLayout>
 

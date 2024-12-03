@@ -150,11 +150,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.090" />
+                    app:layout_constraintGuide_percent="0.135" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="2260dp"
+                    android:layout_height="1490dp"
                     app:cardBackgroundColor="@color/light_background"
                     app:cardCornerRadius="@dimen/size_20"
                     app:cardElevation="0dp"

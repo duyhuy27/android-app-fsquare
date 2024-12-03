@@ -9,6 +9,7 @@ import androidx.core.net.toUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
+import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteResponse
 import vn.md18.fsquareapplication.databinding.ItemBrandBinding
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
@@ -23,7 +24,7 @@ class BrandAdapter @Inject constructor(
     private var productBrand: List<BrandResponse> = listOf()
 
     interface OnBrandActionListener {
-
+        fun onBrandClick(brand: BrandResponse)  // Thêm tham số để gửi brand
     }
 
     private var brandActionListener: OnBrandActionListener? = null
@@ -65,14 +66,13 @@ class BrandAdapter @Inject constructor(
                 }
             }
 
-            // root.setOnClickListener {
-            //     brandActionListener?.onRemoveFavorite(product._id)
-            // }
+            root.setOnClickListener {
+                brandActionListener?.onBrandClick(product)  // Gọi hàm xử lý click với brand
+            }
         }
 
         return view
     }
-
 
     fun updateProducts(newProducts: List<BrandResponse>) {
         productBrand = newProducts

@@ -1,46 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".features.checkout.ui.fragment.VNPFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <LinearLayout
+   <!-- Shimmer layout -->
+   <com.facebook.shimmer.ShimmerFrameLayout
+       android:id="@+id/shimmerFrameLayout"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical">
-       <vn.md18.fsquareapplication.utils.view.CustomToolbar
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           app:titleToolbar="MOBILE BANKING"
-           app:textStyle="bold"/>
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="QR PAY"
-           android:textSize="40dp"
-           android:fontFamily="@font/montserrat_semi_bold"
-           android:textColor="#254AA5"
-           android:layout_gravity="center"
-           android:layout_marginTop="50dp"/>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="Đưa mã QR vào trung tâm camera,tiến trình quét mã sẽ diễn ra tự động"
-           android:textSize="15sp"
-           android:textColor="#254AA5"
-           android:layout_marginTop="10dp"
-           android:layout_marginLeft="50dp"
-           android:layout_marginRight="50dp"
-           android:gravity="center"/>
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/image_qr"
-           android:layout_gravity="center"
-           android:layout_marginTop="40dp"/>
+       android:layout_height="match_parent"
+       android:background="@android:color/white"
+       app:shimmer_auto_start="true"
+       app:shimmer_duration="1000">
 
-   </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="80dp"
+             app:cardBackgroundColor="@color/blue_grey_light"
+             android:layout_marginBottom="80dp" />
+
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             app:cardBackgroundColor="@color/blue_grey_light"
+             android:layout_marginBottom="20dp"
+             android:layout_marginHorizontal="10dp"
+             app:cardCornerRadius="10dp" />
+
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             app:cardBackgroundColor="@color/blue_grey_light"
+             android:layout_marginBottom="20dp"
+             android:layout_marginHorizontal="10dp"
+             app:cardCornerRadius="10dp" />
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             app:cardBackgroundColor="@color/blue_grey_light"
+             android:layout_marginBottom="20dp"
+             android:layout_marginHorizontal="10dp"
+             app:cardCornerRadius="10dp" />
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             app:cardBackgroundColor="@color/blue_grey_light"
+             android:layout_marginBottom="20dp"
+             android:layout_marginHorizontal="10dp"
+             app:cardCornerRadius="10dp" />
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             app:cardBackgroundColor="@color/blue_grey_light"
+             android:layout_marginBottom="20dp"
+             android:layout_marginHorizontal="10dp"
+             app:cardCornerRadius="10dp" />
+
+
+      </LinearLayout>
+   </com.facebook.shimmer.ShimmerFrameLayout>
+
+   <!-- WebView -->
+   <WebView
+       android:id="@+id/webview"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:visibility="gone" />
 
 </FrameLayout>

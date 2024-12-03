@@ -1,18 +1,13 @@
 package vn.md18.fsquareapplication.features.main.adapter
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import vn.md18.fsquareapplication.R
-import vn.md18.fsquareapplication.data.network.model.request.order.Order
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
-import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.ItemProductOrderBinding
-import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.OrderStatus
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
@@ -24,6 +19,12 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
     interface OnOrderActionListener{
         fun onUpdateOrder(id: String, status: OrderStatus)
         fun showDialog(order: GetOrderRespose)
+
+        fun showDialogConfirm(order: GetOrderRespose)
+
+        fun navigate(id: String, status: String)
+
+        fun review(order: GetOrderRespose)
     }
 
     private var orderActionListener: OnOrderActionListener? = null
@@ -67,8 +68,11 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
             val order: GetOrderRespose = itemList[position]
             binding.apply {
 
+                root.setOnClickListener {
+                    orderActionListener?.navigate(order.id, order.status)
+                }
                 when (order.status) {
-                    "pending", "processing" -> {
+                    "pending" -> {
                         btnVerify.text = "Cancel"
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
@@ -77,15 +81,26 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                             orderActionListener?.showDialog(order)
                         }
                     }
-                    "shipped", "canceled" -> {
+                    "shipped", "canceled", "processing" -> {
                         btnVerify.visibility = View.GONE
                     }
                     "delivered" -> {
-                        btnVerify.text = "Review"
+                        btnVerify.text = "Đã nhận"
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
                         btnVerify.visibility = View.VISIBLE
-                        btnVerify.setOnClickListener { }
+                        btnVerify.setOnClickListener {
+                            orderActionListener?.showDialogConfirm(order)
+                        }
+                    }
+                    "confirmed" -> {
+                        btnVerify.text = "Đánh giá"
+                        btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
+                        btnVerify.setTextColor(Color.WHITE)
+                        btnVerify.visibility = View.VISIBLE
+                        btnVerify.setOnClickListener {
+                            orderActionListener?.review(order)
+                        }
                     }
                     else -> {
                         btnVerify.visibility = View.GONE
@@ -97,41 +112,6 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                 imgCart.loadImageURL(order.firstProduct.thumbnail?.url)
             }
         }
-
-//        private fun showCancelDialog(order: GetOrderRespose) {
-//            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_delete_fav, null)
-//            val binding = DialogConfirmDeleteFavBinding.bind(dialogView)
-//
-//            val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-//                .setView(dialogView)
-//                .create()
-//
-//            binding.txtTitle.text = getString(R.string.Delete_Cart)
-//            binding.txtContent.text = getString(R.string.Text_confirm_delete_cart)
-//
-//            binding.btnCancel.setOnClickListener {
-//                alertDialog.dismiss()
-//            }
-//
-//            binding.btnConfirm.setOnClickListener {
-//                viewModel.deleteBagById(productId)
-//                alertDialog.dismiss()
-//            }
-//
-//            alertDialog.show()
-//            val context = binding.root.context
-//            val builder = AlertDialog.Builder(context)
-//            builder.setTitle("Cancel Order")
-//                .setMessage("Are you sure you want to cancel this order?")
-//                .setPositiveButton("OK") { _, _ ->
-//                    orderActionListener?.onUpdateOrder(order.id, OrderStatus.CANCELED)
-//                }
-//                .setNegativeButton("Cancel") { dialog, _ ->
-//                    dialog.dismiss()
-//                }
-//                .create()
-//                .show()
-//        }
     }
 
     fun clearData() {

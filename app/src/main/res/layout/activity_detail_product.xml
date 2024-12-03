@@ -177,15 +177,31 @@
             android:text="- Style: hot trend of this year.\n- Size: 38 - 45.\n- Material: PU leather- Sole material: Molded solid rubber, good friction resistance, light, smooth, balanced and breathable.\n- Sole type: High"
             android:textColor="#676767"
             android:textSize="13sp" />
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:text="@string/Price"
-            android:textColor="#676767"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="@string/Price"
+                android:textColor="#676767"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/txt_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="@string/Price"
+                android:textColor="#676767"
+                android:textSize="16sp" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

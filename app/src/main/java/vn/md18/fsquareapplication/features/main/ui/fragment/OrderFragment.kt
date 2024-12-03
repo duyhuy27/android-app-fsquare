@@ -1,5 +1,4 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
-import BottomDialogLoggoutFragment
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.ViewFlipper
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
@@ -21,9 +18,7 @@ import vn.md18.fsquareapplication.databinding.DialogCancelOrderBinding
 import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
-import vn.md18.fsquareapplication.features.main.adapter.OrderPagerAdapter
-import vn.md18.fsquareapplication.features.main.ui.fragment.fragment_enum_order.EnumOrderFragment
-import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
+import vn.md18.fsquareapplication.features.main.ui.DetailOrderActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.OrderStatus
@@ -35,7 +30,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
     override val viewModel: OrderViewModel by activityViewModels()
 
     private lateinit var orderAdapter: OrderAdapter
-    private val tabTitles = listOf("Pending", "Processing", "Shipped", "Delivered", "Canceled")
+    private val tabTitles = listOf("Chờ xác nhận", "Chờ lấy hàng", "Đang vận chuyển", "Đang giao tới", "Đã nhận", "Đã hủy")
     private var selectedStatus: OrderStatus = OrderStatus.PENDING
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentOrderBinding =
@@ -51,7 +46,9 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
     }
 
     override fun addViewListener() {
+        binding.apply {
 
+        }
     }
 
     private fun setupTabs() {
@@ -60,10 +57,9 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
         for ((index, title) in tabTitles.withIndex()) {
             val tabTextView = TextView(context).apply {
                 text = title
-                setPadding(16, 16, 16, 16)
+                setPadding(70, 16, 70, 16)
                 gravity = Gravity.CENTER
                 textSize = 18f
-                width = 500
                 setTextColor(Color.BLACK)
                 setTypeface(null, Typeface.NORMAL)
                 setOnClickListener {
@@ -110,7 +106,6 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
             underlineView.layoutParams.height = 9
         }
 
-        // Thiết lập trạng thái cho tab được chọn
         val selectedTabContainer = tabsContainer.getChildAt(selectedIndex) as LinearLayout
         val selectedTabTextView = selectedTabContainer.getChildAt(0) as TextView
         val selectedUnderlineView = selectedTabContainer.getChildAt(1) as View
@@ -177,32 +172,52 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
                 viewModel.updateOrder(order.id, OrderStatus.CANCELED)
                 alertDialog.dismiss()
             }
-            chkOp1.setOnClickListener {
-                chkOp4.isChecked = false
-                chkOp3.isChecked = false
-                chkOp2.isChecked = false
-                chkOp1.isChecked = true
+
+        }
+
+        alertDialog.show()
+    }
+
+    override fun showDialogConfirm(order: GetOrderRespose) {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_delete_fav, null)
+        val binding = DialogConfirmDeleteFavBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            txtTitle.text = "Xác nhận đã nhận hàng"
+            txtContent.text = "Bạn đã nhận được hàng giao đến ?"
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
             }
-            chkOp2.setOnClickListener {
-                chkOp4.isChecked = false
-                chkOp3.isChecked = false
-                chkOp2.isChecked = true
-                chkOp1.isChecked = false
-            }
-            chkOp3.setOnClickListener {
-                chkOp4.isChecked = false
-                chkOp3.isChecked = true
-                chkOp2.isChecked = false
-                chkOp1.isChecked = false
-            }
-            chkOp4.setOnClickListener {
-                chkOp4.isChecked = true
-                chkOp3.isChecked = false
-                chkOp2.isChecked = false
-                chkOp1.isChecked = false
+            btnConfirm.setOnClickListener {
+                viewModel.updateOrder(order.id, OrderStatus.CONFIRMED)
+                alertDialog.dismiss()
             }
         }
 
         alertDialog.show()
+    }
+
+    override fun navigate(id: String, status: String) {
+        val data = Bundle().apply {
+            putString(Constant.KEY_PRODUCT, id)
+            putString("Status", status)
+        }
+        openActivity(DetailOrderActivity::class.java, data)
+    }
+
+    override fun review(order: GetOrderRespose) {
+        val orderId = order.id
+        val bottomSheet = MyBottomSheetDialog.newInstance(orderId)
+
+
+        bottomSheet.setOnReviewSubmitListener { rating, comment, files ->
+
+            viewModel.createReviews(files, orderId, rating, comment)
+        }
+
+        bottomSheet.show(childFragmentManager, bottomSheet.tag)
     }
 }

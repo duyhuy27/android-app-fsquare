@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
 import vn.md18.fsquareapplication.features.main.adapter.BrandAdapter
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.features.detail.ui.DetailProductActivity
@@ -29,7 +30,7 @@ import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(), ProductAdapter.ProductCallback {
+class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(), ProductAdapter.ProductCallback, BrandAdapter.OnBrandActionListener {
     companion object {
         @JvmStatic
         fun newInstance() = DashboardFragment()
@@ -59,6 +60,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
 
     override fun onViewLoaded() {
         productAdapter.setProductCallback(this)
+        brandAdapter.setBrandActionListener(this)
         productAdapter.setViewModel(viewModel)
         viewModel.getProductBanner()
         viewModel.getBrands()
@@ -175,5 +177,21 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
             putString(Constant.KEY_PRODUCT, product._id)
         }
         openActivity(DetailProductActivity::class.java, data)
+    }
+
+    override fun createFavorite(id: String, isAdding: Boolean) {
+        if(dataManager.getToken().isNullOrEmpty()){
+            viewModel.createFavorite(id, isAdding)
+        }else{
+            activity?.showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
+        }
+    }
+
+    override fun onBrandClick(brand: BrandResponse) {
+        val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
+            putExtra("typeFavNew", "Brand")
+            putExtra("brandId", brand._id)
+        }
+        startActivity(intent)
     }
 }

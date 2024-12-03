@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
@@ -17,9 +19,12 @@ import vn.md18.fsquareapplication.databinding.ActivityDetailProductBinding
 import vn.md18.fsquareapplication.features.detail.adapter.ColorDetailAdapter
 import vn.md18.fsquareapplication.features.detail.adapter.SizeDetailAdapter
 import vn.md18.fsquareapplication.features.detail.viewmodel.DetailProductViewModel
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
+import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageUrlDiskCacheStrategy
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
@@ -43,7 +48,16 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
         ActivityDetailProductBinding.inflate(layoutInflater)
 
     override fun addViewListener() {
-        binding.toolbar.onClickBackPress = this::onBackPressed
+        binding.apply {
+            toolbar.onClickBackPress = {
+                val intent = Intent(this@DetailProductActivity, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra("SELECTED_TAB", MainViewModel.TAB_DASHBOARD_PAGE)
+                }
+                startActivity(intent)
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            }
+        }
 
         colorDetailAdapter.setOnColorClickListener { response ->
             val colorId = response._id
@@ -57,6 +71,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
         sizeDetailAdapter.setOnSizeClickListener {
             sizeId = it.id
+            binding.txtQuantity.text = "Số lượng ${it.quantity}"
         }
 
         binding.apply {
@@ -71,7 +86,11 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 updateTotalPrice(productPrice)
             }
             btnAddToCart.setOnClickListener {
-                viewModel.createBag(sizeId, quantity)
+                if(dataManager.getToken().isNullOrEmpty()){
+                    viewModel.createBag(sizeId, quantity)
+                }else{
+                    showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
+                }
             }
         }
     }
@@ -124,6 +143,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
         viewModel.listSize.observe(this@DetailProductActivity) {
             sizeDetailAdapter.submitList(it)
+
         }
 
         viewModel.addBagState.observe(this@DetailProductActivity) {
@@ -138,6 +158,17 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
             }
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra("SELECTED_TAB", MainViewModel.TAB_DASHBOARD_PAGE)
+        }
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+    }
+
 
     private fun setViewData(productResponse: ProductResponse?) {
         productResponse?.let {

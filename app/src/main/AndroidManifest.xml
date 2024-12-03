@@ -53,6 +53,9 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="r">
         <activity
+            android:name=".features.main.ui.DetailOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.payment.ui.PaymentActivity"
             android:exported="false" />
         <activity

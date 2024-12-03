@@ -11,6 +11,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ItemProductBinding
+import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
@@ -31,6 +32,7 @@ class ProductAdapter @Inject constructor(
 
     interface ProductCallback {
         fun onProductClick(product: ProductResponse)
+        fun createFavorite(id:String, isAdding: Boolean)
     }
 
     fun setProductCallback(callback: ProductCallback) {
@@ -81,7 +83,7 @@ class ProductAdapter @Inject constructor(
                 imgAddToFav.setImageResource(
                     if (isAdding) R.drawable.add_to_fav else R.drawable.add_fav
                 )
-                viewModel.createFavorite(product._id, isAdding)
+                productCallback?.createFavorite(product._id, isAdding)
             }
 
             root.setOnClickListener {
