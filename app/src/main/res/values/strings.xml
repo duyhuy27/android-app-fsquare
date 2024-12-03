@@ -44,6 +44,7 @@
 
     <string name="Newest">Sản phẩm mới nhất</string>
     <string name="Favorite">Sản phẩm yêu thích</string>
+    <string name="Brand">Sản phẩm yêu thích</string>
 
     <!-- Setting profile strings -->
     <string name="First_Name">Tên</string>
@@ -95,10 +96,12 @@
     <string name="Title_Address">Kiểu địa chỉ</string>
 
     <string name="Delete_Favorite">Xóa yêu thích</string>
-    <string name="Text_confirm_delete_fav">Bạn có chắc muốn xoas sản phẩm này khỏi danh sách yêu thích ?</string>
+    <string name="Text_confirm_delete_fav">Bạn có chắc muốn  sản phẩm này khỏi danh sách yêu thích ?</string>
     <string name="Confirm_delete">Đồng ý</string>
     <string name="Delete_Cart">Xóa giỏ hàng</string>
-    <string name="Text_confirm_delete_cart">Bạn có chắc muốn xoas sản phẩm này khỏi danh sách giỏ hàng ?</string>
+    <string name="Loggout">Đăng xuất</string>
+    <string name="Text_confirm_loggout">Bạn có chắc muốn đăng xuất khỏi tài khoản này ?</string>
+    <string name="Text_confirm_delete_cart">Bạn có chắc muốn xóa sản phẩm này khỏi danh sách giỏ hàng ?</string>
 
 
     <!--Cancel order view strings -->
@@ -140,7 +143,7 @@
     <string name="Enter_Promo_Code">Nhập mã khuyến mãi</string>
     <string name="Order_Successful">Đặt hàng thành công</string>
     <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
-    <string name="View_Order">Xem đơn hàng</string>
+    <string name="View_Order">Quay lại giỏ hàng</string>
     <string name="View_E_Receipt">Xem biên nhận điện tử</string>
     <string name="Description">Mô tả</string>
     <string name="Size">Kích thước</string>

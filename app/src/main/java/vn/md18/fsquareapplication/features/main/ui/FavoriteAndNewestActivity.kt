@@ -63,6 +63,15 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
                     }
                 }
             }
+            "Brand" -> {
+                viewModel.getProductV1()
+                binding.apply {
+                    txtTitle.text = getString(R.string.Favorite)
+                    grdProduct.apply {
+                        adapter = favoriteAdapter
+                    }
+                }
+            }
             null -> {
                 viewModel.getFavoriteList()
                 binding.apply {

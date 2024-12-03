@@ -88,7 +88,6 @@ class NewAddressFragment : BaseFragment<FragmentNewAddressBinding, LocationViewM
                     val districtName = edtDistrict.text.toString()
                     val wardName = edtSupDistrict.text.toString()
 
-                    // Kiểm tra và xử lý cập nhật các trường, set giá trị rỗng cho các trường không thay đổi
                     viewModel.updateLocationCustomerList(
                         id = location!!.id,
                         title = edtTitle.text.toString(),

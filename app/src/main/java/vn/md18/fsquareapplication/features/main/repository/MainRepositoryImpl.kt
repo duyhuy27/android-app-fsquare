@@ -4,10 +4,14 @@ import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
+import vn.md18.fsquareapplication.data.network.model.request.GetPaymentDetailRequest
+import vn.md18.fsquareapplication.data.network.model.request.PostPaymentRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.OrderFeeRequest
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
 import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetPaymentDetailResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetPaymentResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.DeleteBagResponse
@@ -15,6 +19,8 @@ import vn.md18.fsquareapplication.data.network.model.response.favorite.DeleteFav
 import vn.md18.fsquareapplication.data.network.model.response.favorite.FavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
+import vn.md18.fsquareapplication.data.network.model.response.PostPaymentResponse
+import vn.md18.fsquareapplication.data.network.model.response.PostReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.OrderFeeResponse
@@ -100,5 +106,17 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getOrderFee(orderFeeRequest: OrderFeeRequest): Flowable<OrderFeeResponse> {
         return applicationServices.getFeeOrder(orderFeeRequest)
+    }
+
+    override fun getPayments(): Flowable<DataResponse<List<GetPaymentResponse>, PaginationResponse>> {
+        return applicationServices.getPayments()
+    }
+
+    override fun postPayments(postPaymentRequest: PostPaymentRequest): Flowable<DataResponse<PostPaymentResponse, PaginationResponse>> {
+        return applicationServices.addPayment(postPaymentRequest)
+    }
+
+    override fun getDetailPayment(getPaymentDetailRequest: GetPaymentDetailRequest): Flowable<DataResponse<GetPaymentDetailResponse, PaginationResponse>> {
+        return applicationServices.getPaymentDetail(getPaymentDetailRequest)
     }
 }

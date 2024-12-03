@@ -60,13 +60,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
                     tab.customView = tabNotification.root
                 }
 
-                TAB_WALLET -> {
-                    val tabNotification = LayoutTitleTabBinding.inflate(LayoutInflater.from(applicationContext))
-                    tabNotification.ivIcon.setImageResource(R.drawable.bg_tab_wallet)
-                    tabNotification.tvTitle.text = getString(R.string.wallet)
-                    tab.customView = tabNotification.root
-                }
-
                 TAB_PROFILE -> {
                     val tabNotification = LayoutTitleTabBinding.inflate(LayoutInflater.from(applicationContext))
                     tabNotification.ivIcon.setImageResource(R.drawable.bg_tab_profile)
@@ -78,7 +71,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
         val selectedTab = intent.getIntExtra("SELECTED_TAB", TAB_DASHBOARD_PAGE)
         when(selectedTab){
-            TAB_WALLET -> binding.pagerMain.setCurrentItem(TAB_WALLET, false)
             TAB_PROFILE -> {
                 viewModel.checkTokenIfNeeded {
                     if (it) {

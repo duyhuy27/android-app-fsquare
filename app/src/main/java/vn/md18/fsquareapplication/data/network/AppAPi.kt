@@ -37,4 +37,10 @@ object AppAPi {
     const val CLASSIFICATION_SHOES = "api/customer/v2/classifications/shoes"
     const val CLASSIFICATION = "api/customer/v2/classifications"
     const val SIZE = "api/customer/v2/sizes/classification"
+
+    const val PAYMENT = "api/customer/v1/payments"
+
+    const val REVIEWS = "api/customer/v1/reviews"
+
+    const val POPULAR = "api/customer/v2/statistical"
 }

@@ -1,6 +1,7 @@
 package vn.md18.fsquareapplication.data.network.model.response.order
 
 import com.google.gson.annotations.SerializedName
+import vn.md18.fsquareapplication.data.network.model.response.Thumbnail
 
 data class AddOrderResponse(
     @SerializedName("customer") val customer: String,
@@ -29,5 +30,7 @@ data class OrderItem(
     @SerializedName("size") val size: String,
     @SerializedName("shoes") val shoes: String,
     @SerializedName("quantity") val quantity: Int,
-    @SerializedName("price") val price: Int
+    @SerializedName("price") val price: Double,
+    @SerializedName("color") val color: String,
+    @SerializedName("thumbnail") val thumbnail: Thumbnail?
 )

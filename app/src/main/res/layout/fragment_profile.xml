@@ -47,7 +47,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar"
                     android:layout_width="@dimen/_88sdp"
                     android:layout_height="@dimen/_88sdp"
@@ -202,37 +202,6 @@
                     android:background="@android:color/darker_gray"
                     android:layout_marginVertical="8dp"/>
                 <LinearLayout
-                    android:id="@+id/btn_wallet"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginVertical="@dimen/_6sdp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:src="@drawable/wallet"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/My_Wallete"
-                        android:textSize="@dimen/_15sdp"
-                        android:textColor="@android:color/black"
-                        android:gravity="start"
-                        android:fontFamily="sans-serif-medium"
-                        android:layout_marginLeft="@dimen/_10sdp"/>
-                    <ImageView
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:src="@drawable/right"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_marginVertical="8dp"/>
-                <LinearLayout
                     android:id="@+id/btn_security"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,37 +217,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/Security"
-                        android:textSize="@dimen/_15sdp"
-                        android:textColor="@android:color/black"
-                        android:gravity="start"
-                        android:fontFamily="sans-serif-medium"
-                        android:layout_marginLeft="@dimen/_10sdp"/>
-                    <ImageView
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:src="@drawable/right"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_marginVertical="8dp"/>
-                <LinearLayout
-                    android:id="@+id/btn_language"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginVertical="@dimen/_6sdp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:src="@drawable/laguage"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Language"
                         android:textSize="@dimen/_15sdp"
                         android:textColor="@android:color/black"
                         android:gravity="start"

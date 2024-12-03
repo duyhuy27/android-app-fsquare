@@ -2,10 +2,12 @@ package vn.md18.fsquareapplication.features.main.repository
 
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
+import vn.md18.fsquareapplication.data.network.model.request.PostReviewRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
+import vn.md18.fsquareapplication.data.network.model.response.PostReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.AddOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
@@ -20,7 +22,7 @@ class OrderRepositoryImpl @Inject constructor(
         return applicationService.getOrder(status=status!!)
     }
 
-    override fun getOrderDetail(id: String): Flowable<GetOrderDetailResponse> {
+    override fun getOrderDetail(id: String): Flowable<DataResponse<GetOrderDetailResponse, PaginationResponse>> {
         return applicationService.getOrderById(id)
     }
 
@@ -37,6 +39,10 @@ class OrderRepositoryImpl @Inject constructor(
 
     override fun deleteOrder(id: String): Flowable<DeleteOrderResponse> {
         return applicationService.deleteOrder(id)
+    }
+
+    override fun postReviews(postReviewRequest: PostReviewRequest): Flowable<PostReviewResponse> {
+        return applicationService.postReview(postReviewRequest)
     }
 
 }

@@ -19,7 +19,7 @@ import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>(), OrderAdapter.OnOrderActionListener {
+class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>() {
     @Inject
     lateinit var orderAdapter: OrderAdapter
     override val viewModel: OrderViewModel by activityViewModels()
@@ -39,7 +39,6 @@ class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>
         binding.rcvOrder.adapter = orderAdapter
         fetchOrderList(status)
 
-        orderAdapter.setOrderActionListener(this)
     }
 
     override fun addViewListener() {
@@ -120,12 +119,6 @@ class EnumOrderFragment : BaseFragment<FragmentEnumOrderBinding, OrderViewModel>
             }
     }
 
-    override fun onUpdateOrder(id: String, status: OrderStatus) {
-        viewModel.updateOrder(id, status)
-    }
 
-    override fun showDialog(order: GetOrderRespose) {
-
-    }
 
 }

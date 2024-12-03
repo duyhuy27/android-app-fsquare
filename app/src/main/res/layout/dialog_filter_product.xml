@@ -271,55 +271,7 @@
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/All"
-                        android:textSize="@dimen/_14sdp"
-                        android:drawableStart="@drawable/star"
-                        android:drawablePadding="@dimen/_5sdp"
-                        style="@style/ButtonFilter"
-                        android:layout_marginRight="@dimen/_5sdp"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5"
-                        android:textSize="@dimen/_14sdp"
-                        android:drawableStart="@drawable/star"
-                        style="@style/ButtonFilter"
-                        android:layout_marginRight="@dimen/_5sdp"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4"
-                        android:textSize="@dimen/_14sdp"
-                        android:drawableStart="@drawable/star"
-                        style="@style/ButtonFilter"
-                        android:layout_marginRight="@dimen/_5sdp"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3"
-                        android:textSize="@dimen/_14sdp"
-                        android:drawableStart="@drawable/star"
-                        style="@style/ButtonFilter"
-                        android:layout_marginRight="@dimen/_5sdp"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2"
-                        android:textSize="@dimen/_14sdp"
-                        android:drawableStart="@drawable/star"
-                        style="@style/ButtonFilter"
-                        android:layout_marginRight="@dimen/_5sdp"/>
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textSize="@dimen/_14sdp"
-                        android:drawableStart="@drawable/star"
-                        style="@style/ButtonFilter"
-                        android:layout_marginRight="@dimen/_5sdp"/>
+
                 </LinearLayout>
             </HorizontalScrollView>
 

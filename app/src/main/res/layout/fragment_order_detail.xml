@@ -94,16 +94,53 @@
                     android:layout_marginLeft="30dp"
                     android:layout_weight="1"
                     />
-                   <ImageButton
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/right_arrow_primari"
-                       android:background="#FFFFFF"
-                       android:layout_marginTop="5dp"
-                       />
                </LinearLayout>
 
-
+               <RadioGroup
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginLeft="20dp"
+                       android:layout_marginRight="20dp">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Thanh toán khi nhận hàng"
+                           android:textSize="18sp"
+                           android:textColor="#333333"
+                           android:layout_weight="1"
+                           />
+                       <RadioButton
+                           android:id="@+id/rdoCash"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:buttonTint="@color/primary"/>
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginLeft="20dp"
+                       android:layout_marginRight="20dp"
+                       android:layout_marginBottom="10dp">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Thanh toán qua Baokim"
+                           android:textSize="18sp"
+                           android:textColor="#333333"
+                           android:layout_weight="1"
+                           />
+                       <RadioButton
+                           android:id="@+id/rdoBaokim"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:buttonTint="@color/primary"/>
+                   </LinearLayout>
+               </RadioGroup>
                <androidx.cardview.widget.CardView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -125,6 +162,7 @@
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:orientation="horizontal"
+                           android:paddingVertical="10dp"
                            >
                            <TextView
                                android:layout_width="0dp"
@@ -145,6 +183,7 @@
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:orientation="horizontal"
+                           android:paddingVertical="10dp"
                            >
                            <TextView
                                android:layout_width="0dp"
@@ -171,6 +210,7 @@
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:orientation="horizontal"
+                           android:paddingVertical="10dp"
                            >
                            <TextView
                                android:layout_width="0dp"

@@ -56,6 +56,10 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
                 val intent = Intent(requireContext(), CheckoutActivity::class.java)
                 startActivity(intent)
             }
+
+            imgDeleteList.setOnClickListener {
+                viewModel.deleteBag()
+            }
         }
     }
 
@@ -84,6 +88,13 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
                 activity?.showCustomToast("Xóa sản phẩm thành công", Constant.ToastStatus.SUCCESS)
             }else{
                 activity?.showCustomToast("Xóa sản phẩm thất bại", Constant.ToastStatus.SUCCESS)
+            }
+        }
+
+        viewModel.deleteBagState.observe(this@CardFragment){
+            if(it is DataState.Success){
+                activity?.showCustomToast("Xóa sản phẩm thành công", Constant.ToastStatus.SUCCESS)
+                viewModel.getBagList()
             }
         }
 

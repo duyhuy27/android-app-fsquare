@@ -7,6 +7,7 @@ enum class OrderStatus(val status: String) {
     PROCESSING("processing"),
     SHIPPED("shipped"),
     DELIVERED("delivered"),
+    CONFIRMED("confirmed"),
     CANCELED("cancelled");
 
     companion object {
