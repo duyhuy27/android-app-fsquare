@@ -14,7 +14,7 @@
            android:id="@+id/toolbarSecurity"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           app:titleToolbar="Security"
+           app:titleToolbar="Bảo mật"
            app:textStyle="bold" />
     <LinearLayout
         android:layout_width="match_parent"
