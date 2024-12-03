@@ -8,7 +8,8 @@ enum class OrderStatus(val status: String) {
     SHIPPED("shipped"),
     DELIVERED("delivered"),
     CONFIRMED("confirmed"),
-    CANCELED("cancelled");
+    CANCELED("cancelled"),
+    RETURNED("returned");
 
     companion object {
         fun fromString(value: String): OrderStatus {
