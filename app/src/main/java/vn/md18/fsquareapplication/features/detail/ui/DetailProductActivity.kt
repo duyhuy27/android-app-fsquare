@@ -86,7 +86,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 updateTotalPrice(productPrice)
             }
             btnAddToCart.setOnClickListener {
-                if(dataManager.getToken().isNullOrEmpty()){
+                if(!dataManager.getToken().isNullOrEmpty()){
                     viewModel.createBag(sizeId, quantity)
                 }else{
                     showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
