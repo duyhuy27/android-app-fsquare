@@ -25,6 +25,7 @@ import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -188,12 +189,14 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
         viewModel.getOrderFeeState.observe(this@OrderDetailFragment) { state ->
             when (state) {
                 is DataState.Success -> {
+                    val formatter: DecimalFormat = DecimalFormat("#,###")
                     val fee = state.data.data
-                    binding.txtShippingCheckout.text = "$fee"
+                    binding.txtShippingCheckout.text = formatter.format(fee)
                     viewModel.listBag.value?.let {
                         val totalPrice = it.sumOf { item -> item.price * item.quantity }
-                        binding.txtAmuontCheckout.text = "$totalPrice"
-                        binding.txtTotalCheckout.text = "${totalPrice + fee!!}"
+
+                        binding.txtAmuontCheckout.text = formatter.format(totalPrice)
+                        binding.txtTotalCheckout.text = formatter.format(totalPrice + fee!!)
                     }
                 }
                 is DataState.Error -> {

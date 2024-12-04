@@ -24,6 +24,7 @@ import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettin
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -71,7 +72,8 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
             }
             if (!it.isNullOrEmpty()) {
                 val totalPrice = it.sumOf { item -> item.price * item.quantity }
-                binding.btnCheckout.text = "${totalPrice} ${getString(R.string.Checkuot)}"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                binding.btnCheckout.text = formatter.format(totalPrice) + " ${getString(R.string.Checkuot)}"
             } else {
                 binding.btnCheckout.text = "0 VND ${getString(R.string.Checkuot)}"
             }
@@ -138,7 +140,8 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
         viewModel.updateQuantity(productId, action)
         viewModel.listBag.value?.let {
             val totalPrice = it.sumOf { item -> item.price * item.quantity }
-            binding.btnCheckout.text = "${totalPrice} ${getString(R.string.Checkuot)}"
+            val formatter: DecimalFormat = DecimalFormat("#,###")
+            binding.btnCheckout.text = formatter.format(totalPrice) + " ${getString(R.string.Checkuot)}"
         }
     }
 

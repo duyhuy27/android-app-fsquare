@@ -10,6 +10,7 @@ import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
@@ -54,7 +55,8 @@ class BagAdapter @Inject constructor() : BaseRecycleAdapter<GetBagResponse>(){
             binding.apply {
                 txtProductNameCart.text = product.shoes.name
                 txtProductColorCart.text = product.color
-                txtProductPriceCart.text = product.price.toString() + " VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                txtProductPriceCart.text = formatter.format(product.price)
                 txtProductSizeCart.text = product.size.sizeNumber
                 txtProductQuantityCart.text = product.quantity.toString()
                 imgCart.loadImageURL(product.thumbnail?.url)
