@@ -26,6 +26,7 @@ import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageUrlDiskCacheStrategy
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -201,13 +202,15 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
         classification?.let {
             binding.apply {
                 updateTotalPrice(it.price)
-                txtPriceDetailProduct.text = "${it.price * quantity} VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                binding.txtPriceDetailProduct.text = formatter.format(it.price * quantity)
             }
         }
     }
 
     private fun updateTotalPrice(price: Double) {
         val totalPrice = quantity * price
-        binding.txtPriceDetailProduct.text = "${totalPrice} VND"
+        val formatter: DecimalFormat = DecimalFormat("#,###")
+        binding.txtPriceDetailProduct.text = formatter.format(totalPrice)
     }
 }
