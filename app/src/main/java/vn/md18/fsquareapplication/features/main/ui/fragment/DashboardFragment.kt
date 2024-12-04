@@ -180,7 +180,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     }
 
     override fun createFavorite(id: String, isAdding: Boolean) {
-        if(dataManager.getToken().isNullOrEmpty()){
+        if(!dataManager.getToken().isNullOrEmpty()){
             viewModel.createFavorite(id, isAdding)
         }else{
             activity?.showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
