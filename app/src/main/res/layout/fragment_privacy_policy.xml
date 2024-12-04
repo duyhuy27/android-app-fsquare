@@ -16,7 +16,7 @@
             android:id="@+id/toolbarPolicy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleToolbar="Privacy  Policy"
+            app:titleToolbar="Chính sách &amp; điều khoản"
             app:textStyle="bold"/>
 
         <!-- Bọc nội dung bên trong ScrollView -->

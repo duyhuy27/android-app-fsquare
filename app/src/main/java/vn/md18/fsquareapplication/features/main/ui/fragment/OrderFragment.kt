@@ -30,7 +30,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
     override val viewModel: OrderViewModel by activityViewModels()
 
     private lateinit var orderAdapter: OrderAdapter
-    private val tabTitles = listOf("Chờ xác nhận", "Chờ lấy hàng", "Đang vận chuyển", "Đang giao tới", "Đã nhận", "Đã hủy")
+    private val tabTitles = listOf("Chờ xác nhận", "Chờ lấy hàng", "Đang vận chuyển", "Đang giao tới", "Đã nhận", "Đã hủy", "Trả hàng")
     private var selectedStatus: OrderStatus = OrderStatus.PENDING
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentOrderBinding =

@@ -81,7 +81,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                             orderActionListener?.showDialog(order)
                         }
                     }
-                    "shipped", "canceled", "processing" -> {
+                    "shipped", "canceled", "processing", "returned" -> {
                         btnVerify.visibility = View.GONE
                     }
                     "delivered" -> {

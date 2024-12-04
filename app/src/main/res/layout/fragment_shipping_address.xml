@@ -14,7 +14,7 @@
         <vn.md18.fsquareapplication.utils.view.CustomToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleToolbar="Address"
+            app:titleToolbar="Địa chỉ"
             app:textStyle="bold"/>
 
                 <androidx.recyclerview.widget.RecyclerView
