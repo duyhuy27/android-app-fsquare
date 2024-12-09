@@ -20,12 +20,14 @@
          <androidx.cardview.widget.CardView
              android:layout_width="match_parent"
              android:layout_height="80dp"
+             app:cardElevation="0dp"
              app:cardBackgroundColor="@color/blue_grey_light"
              android:layout_marginBottom="80dp" />
 
          <androidx.cardview.widget.CardView
              android:layout_width="match_parent"
              android:layout_height="60dp"
+             app:cardElevation="0dp"
              app:cardBackgroundColor="@color/blue_grey_light"
              android:layout_marginBottom="20dp"
              android:layout_marginHorizontal="10dp"
@@ -34,6 +36,7 @@
          <androidx.cardview.widget.CardView
              android:layout_width="match_parent"
              android:layout_height="60dp"
+             app:cardElevation="0dp"
              app:cardBackgroundColor="@color/blue_grey_light"
              android:layout_marginBottom="20dp"
              android:layout_marginHorizontal="10dp"
@@ -41,6 +44,7 @@
          <androidx.cardview.widget.CardView
              android:layout_width="match_parent"
              android:layout_height="60dp"
+             app:cardElevation="0dp"
              app:cardBackgroundColor="@color/blue_grey_light"
              android:layout_marginBottom="20dp"
              android:layout_marginHorizontal="10dp"
@@ -48,6 +52,7 @@
          <androidx.cardview.widget.CardView
              android:layout_width="match_parent"
              android:layout_height="60dp"
+             app:cardElevation="0dp"
              app:cardBackgroundColor="@color/blue_grey_light"
              android:layout_marginBottom="20dp"
              android:layout_marginHorizontal="10dp"
@@ -55,6 +60,7 @@
          <androidx.cardview.widget.CardView
              android:layout_width="match_parent"
              android:layout_height="60dp"
+             app:cardElevation="0dp"
              app:cardBackgroundColor="@color/blue_grey_light"
              android:layout_marginBottom="20dp"
              android:layout_marginHorizontal="10dp"

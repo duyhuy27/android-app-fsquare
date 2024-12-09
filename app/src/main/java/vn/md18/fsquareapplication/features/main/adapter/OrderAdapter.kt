@@ -12,6 +12,7 @@ import vn.md18.fsquareapplication.utils.OrderStatus
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>() {
@@ -108,7 +109,8 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                 }
 
                 txtProductNameCart.text = order.firstProduct.name
-                txtProductPriceCart.text = "${order.firstProduct.price} VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                txtProductPriceCart.text = formatter.format(order.firstProduct.price)
                 imgCart.loadImageURL(order.firstProduct.thumbnail?.url)
             }
         }

@@ -9,6 +9,7 @@ import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.md18.fsquareapplication.utils.extensions.loadImageUri
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class ProductBannerAdapter @Inject constructor() : BaseRecycleAdapter<ProductResponse>() {
@@ -40,7 +41,8 @@ class ProductBannerAdapter @Inject constructor() : BaseRecycleAdapter<ProductRes
         override fun bindData(position: Int) {
             val product: ProductResponse = itemList[position]
             binding.apply {
-                tvPrice.text = product.maxPrice.toString() + " VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                tvPrice.text = formatter.format(product.maxPrice) + " VND"
                 tvTitle.text = product.name
                 imgProduct.loadImageURL(product.thumbnail?.url)
             }

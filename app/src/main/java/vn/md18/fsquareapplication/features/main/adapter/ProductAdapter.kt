@@ -16,6 +16,7 @@ import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class ProductAdapter @Inject constructor(
@@ -62,7 +63,8 @@ class ProductAdapter @Inject constructor(
 
         val product = productList[position]
         binding.apply {
-            txtProductPrice.text = "${product.maxPrice} VND"
+            val formatter: DecimalFormat = DecimalFormat("#,###")
+            txtProductPrice.text = formatter.format(product.minPrice)
             txtProductName.text = product.name
             txtRating.text = "${product.rating}"
             txtSale.text = "${product.sales} sold"

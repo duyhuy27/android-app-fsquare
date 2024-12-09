@@ -26,6 +26,7 @@ import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageUrlDiskCacheStrategy
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -86,7 +87,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 updateTotalPrice(productPrice)
             }
             btnAddToCart.setOnClickListener {
-                if(dataManager.getToken().isNullOrEmpty()){
+                if(!dataManager.getToken().isNullOrEmpty()){
                     viewModel.createBag(sizeId, quantity)
                 }else{
                     showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
@@ -201,13 +202,15 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
         classification?.let {
             binding.apply {
                 updateTotalPrice(it.price)
-                txtPriceDetailProduct.text = "${it.price * quantity} VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                binding.txtPriceDetailProduct.text = formatter.format(it.price * quantity)
             }
         }
     }
 
     private fun updateTotalPrice(price: Double) {
         val totalPrice = quantity * price
-        binding.txtPriceDetailProduct.text = "${totalPrice} VND"
+        val formatter: DecimalFormat = DecimalFormat("#,###")
+        binding.txtPriceDetailProduct.text = formatter.format(totalPrice)
     }
 }

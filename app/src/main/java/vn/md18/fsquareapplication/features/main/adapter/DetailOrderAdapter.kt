@@ -11,6 +11,7 @@ import vn.md18.fsquareapplication.databinding.ItemOrderListCheckoutBinding
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class DetailOrderAdapter @Inject constructor() : BaseRecycleAdapter<ProductDetail>(){
@@ -44,7 +45,8 @@ class DetailOrderAdapter @Inject constructor() : BaseRecycleAdapter<ProductDetai
             binding.apply {
                 txtProductNameOrderList.text = product.shoes
                 txtProductColorOrderList.text = product.color
-                txtProductPriceOrderList.text = product.price.toString()
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                txtProductPriceOrderList.text = formatter.format(product.price)
                 txtProductSizeOrderList.text = product.size.toString()
                 txtProductQuantityOrderList.text = product.quantity.toString()
                 imgCart.loadImageURL(product.thumbnail?.url)
