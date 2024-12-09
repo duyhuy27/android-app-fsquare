@@ -16,6 +16,7 @@ import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
 import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.auth.ui.fragment.LoginFragment
 import vn.md18.fsquareapplication.features.auth.ui.fragment.SplashFragment
+import vn.md18.fsquareapplication.features.main.ui.NotificationActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
 import vn.md18.fsquareapplication.features.profileandsetting.ui.ProfileAndSettingActivity
 import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileViewModel
@@ -75,9 +76,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     private fun navigation(status: String){
-        val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
-        intent.putExtra("STATUS_KEY", status)
-        startActivity(intent)
+        openActivity(NotificationActivity::class.java)
     }
 
     fun logout(){

@@ -21,4 +21,12 @@ interface DataManager {
 
     fun setToken(token : String)
 
+    fun saveOrderId(orderId: String)
+
+    fun getOrderId(): String?
+
+    fun saveOrderClientID(orderClientID: String)
+
+    fun getOrderClientID(): String?
+
 }

@@ -3,12 +3,9 @@ package vn.md18.fsquareapplication.features.profileandsetting.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
-import vn.md18.fsquareapplication.databinding.ItemProvinceBinding
 import vn.md18.fsquareapplication.databinding.ItemRecyclerViewAddressBinding
-import vn.md18.fsquareapplication.databinding.ItemShippingAddressBinding
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
+import vn.md18.fsquareapplication.core.recyclerview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 

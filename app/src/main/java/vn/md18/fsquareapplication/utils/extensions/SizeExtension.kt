@@ -11,8 +11,22 @@ import android.net.Uri
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import vn.md18.fsquareapplication.utils.Constant
+
+fun View.setHeight(height: Int) {
+    val params: ViewGroup.LayoutParams = layoutParams
+    params.height = height
+    layoutParams = params
+}
+
+fun View.setWidthHeightToView(width: Int, height: Int) {
+    val params: ViewGroup.LayoutParams = layoutParams
+    params.height = height
+    params.width = width
+    layoutParams = params
+}
 
 fun dpToPx(dp: Float): Int {
     return (dp * Resources.getSystem().displayMetrics.density).toInt()

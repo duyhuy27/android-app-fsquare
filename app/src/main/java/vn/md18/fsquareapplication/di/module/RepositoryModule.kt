@@ -10,8 +10,12 @@ import vn.md18.fsquareapplication.features.detail.repository.DetailProductReposi
 import vn.md18.fsquareapplication.features.detail.repository.DetailProductRepositoryImpl
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
 import vn.md18.fsquareapplication.features.main.repository.MainRepositoryImpl
+import vn.md18.fsquareapplication.features.main.repository.NotificationRepository
+import vn.md18.fsquareapplication.features.main.repository.NotificationRepositoryImpl
 import vn.md18.fsquareapplication.features.main.repository.OrderRepository
 import vn.md18.fsquareapplication.features.main.repository.OrderRepositoryImpl
+import vn.md18.fsquareapplication.features.main.repository.SearchRepository
+import vn.md18.fsquareapplication.features.main.repository.SearchRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.DistrictRepositoryImpl
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepository
@@ -57,4 +61,10 @@ interface RepositoryModule {
 
     @Binds
     fun provideDetailRepository(detailProductRepositoryImpl: DetailProductRepositoryImpl) : DetailProductRepository
+
+    @Binds
+    fun provideSearchRepository(searchRepositoryImpl: SearchRepositoryImpl) : SearchRepository
+
+    @Binds
+    fun provideRepositoryNotification(notificationRepositoryImpl: NotificationRepositoryImpl) : NotificationRepository
 }

@@ -10,6 +10,7 @@ import android.os.SystemClock
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -21,6 +22,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
+import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -138,6 +140,16 @@ inline fun SwitchCompat.checkChangeWithRx(crossinline onChangeState: (Boolean) -
             onChangeState.invoke(it)
         }
 }
+
+fun ImageView.loadImageDrawable(idDrawable: Int) {
+    Glide.with(this.context).load(idDrawable).fitCenter().into(this)
+}
+
+@JvmOverloads
+inline fun <T : ViewBinding> ViewGroup.viewBinding(
+    crossinline bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> T,
+    attachToParent: Boolean = false,
+) = bindingInflater.invoke(LayoutInflater.from(this.context), this, attachToParent)
 
 fun NavController.navigateWithAnimation(
     @IdRes resId: Int,

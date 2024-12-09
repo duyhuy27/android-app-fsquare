@@ -198,4 +198,5 @@
     <string name="popular">Phổ biến</string>
     <string name="see_more">Xem thêm</string>
     <string name="todo">TODO</string>
+    <string name="history_adapter_empty_list">Không có dữ liệu</string>
 </resources>

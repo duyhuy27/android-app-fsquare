@@ -15,6 +15,10 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.navigation.fragment.findNavController
+import org.greenrobot.eventbus.EventBus
+import vn.md18.fsquareapplication.core.eventbus.CheckPaymentStatus
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 
 @AndroidEntryPoint
 class VNPFragment : BaseFragment<FragmentVNPBinding, CheckoutViewmodel>() {
@@ -44,13 +48,17 @@ class VNPFragment : BaseFragment<FragmentVNPBinding, CheckoutViewmodel>() {
     override fun addDataObserver() {
         viewModel.createPaymentState.observe(viewLifecycleOwner) { result ->
             binding.apply {
+                FSLogger.e("Huynd: createPaymentState: $result")
+                dataManager.saveOrderId(result?.orderId ?: "")
                 result?.paymentUrl?.let { url ->
                     shimmerFrameLayout.visibility = View.VISIBLE
                     webview.visibility = View.GONE
 
                     webview.webViewClient = object : WebViewClient() {
                         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                            view?.loadUrl(request?.url.toString())
+                            val url = request?.url.toString()
+                            view?.loadUrl(url)
+                            checkForPaymentSuccess(url)
                             return true
                         }
                     }
@@ -71,4 +79,23 @@ class VNPFragment : BaseFragment<FragmentVNPBinding, CheckoutViewmodel>() {
             }
         }
     }
+
+    private fun checkForPaymentSuccess(url: String) {
+        if (url.startsWith("https://www.baokim.vn/?created_at=")) {
+            // Thanh toán thành công, gửi kết quả về `OrderDetailFragment
+            viewModel.apply {
+                checkPaymentSuccess {
+                    isPaymentSuccess ->
+                    FSLogger.e("Huynd: isPaymentSuccess: $isPaymentSuccess")
+                    parentFragmentManager.setFragmentResult(
+                        "PAYMENT_RESULT",
+                        Bundle().apply { putBoolean("PAYMENT_SUCCESS", isPaymentSuccess) }
+                    )
+                    findNavController().popBackStack()
+                }
+            }
+            // Quay lại `OrderDetailFragment`
+        }
+    }
 }
+

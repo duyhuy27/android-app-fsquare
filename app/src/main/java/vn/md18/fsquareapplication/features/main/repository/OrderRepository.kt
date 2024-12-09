@@ -3,6 +3,7 @@ package vn.md18.fsquareapplication.features.main.repository
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
+import vn.md18.fsquareapplication.data.network.model.request.CheckPaymentRequest
 import vn.md18.fsquareapplication.data.network.model.request.PostReviewRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
@@ -31,4 +32,6 @@ interface OrderRepository {
     fun deleteOrder( id: String ) : Flowable<DeleteOrderResponse>
 
     fun postReviews (postReviewRequest: PostReviewRequest) : Flowable<PostReviewResponse>
+
+    fun getPaymentStatus(checkPaymentRequest: CheckPaymentRequest) : Flowable<Boolean>
 }

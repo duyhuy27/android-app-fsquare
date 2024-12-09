@@ -42,6 +42,7 @@ interface MainRepository {
         brand: String? = null,
         category: String? = null
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
     fun getFavoriteList() : Flowable<DataResponse<List<FavoriteResponse>, PaginationResponse>>
 
     fun createFavorite( favoriteRequest: FavoriteRequest ) : Flowable<CreateFavoriteResponse>

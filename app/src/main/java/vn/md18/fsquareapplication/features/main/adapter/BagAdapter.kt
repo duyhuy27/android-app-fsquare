@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.databinding.ItemProductCartBinding
-import vn.md18.fsquareapplication.features.main.viewmodel.BagViewmodel
-import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
+import vn.md18.fsquareapplication.core.recyclerview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import java.text.DecimalFormat
 import javax.inject.Inject

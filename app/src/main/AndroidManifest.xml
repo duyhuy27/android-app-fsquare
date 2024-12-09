@@ -53,6 +53,12 @@
         tools:replace="android:supportsRtl"
         tools:targetApi="r">
         <activity
+            android:name=".features.main.ui.ResultSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.main.ui.ResultSearchProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.main.ui.DetailOrderActivity"
             android:exported="false" />
         <activity

@@ -4,28 +4,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
+import vn.md18.fsquareapplication.core.eventbus.CheckPaymentStatus
 import vn.md18.fsquareapplication.data.model.DataState
-import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.profile.GetProfileResponse
 import vn.md18.fsquareapplication.databinding.FragmentOrderDetailBinding
 import vn.md18.fsquareapplication.features.checkout.adapter.CheckoutAdapter
 import vn.md18.fsquareapplication.features.checkout.viewmodel.CheckoutViewmodel
-import vn.md18.fsquareapplication.features.detail.ui.DetailProductActivity
-import vn.md18.fsquareapplication.features.main.ui.DetailOrderActivity
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
-import vn.md18.fsquareapplication.utils.Constant
+import vn.md18.fsquareapplication.utils.extensions.delayFunction
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import java.text.DecimalFormat
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,8 +47,25 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
         viewModel.getProfile()
         viewModel.getLocationCustomerList()
         viewModel.getBagList()
+        parentFragmentManager.setFragmentResultListener("PAYMENT_RESULT", viewLifecycleOwner) { _, bundle ->
+            val isPaymentSuccess = bundle.getBoolean("PAYMENT_SUCCESS", false)
+            FSLogger.e("Huynd: FragmentResultListener - isPaymentSuccess: $isPaymentSuccess")
+            if (isPaymentSuccess) {
+                viewModel.checkPaymentSuccess { isSuccess ->
+                    if (isSuccess) {
+                        activity?.showCustomToast("Thanh toán thành công!")
+                        viewModel.deleteBag()
+                    } else {
+                        activity?.showCustomToast("Thanh toán không thành công!")
+                    }
+                }
+            }
+        }
+
+
         parentFragmentManager.setFragmentResultListener("REQUEST_KEY_LOCATION", this) { _, bundle ->
             val location = bundle.getSerializable("SELECTED_LOCATION") as? GetLocationCustomerResponse
+            FSLogger.e("Huynd: dasdsadasdasdasd $location")
             if (location != null) {
                 viewModel.getProfile.value?.let { profileState ->
                     if (profileState is DataState.Success) {
@@ -79,6 +96,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
         }
     }
 
+
     override fun addViewListener() {
         binding.apply {
             itemCheckoutAddress.txtEditAddressCheckout.setOnClickListener {
@@ -106,14 +124,16 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
 
             btnContinue.setOnClickListener {
                 val location = viewModel.defaultLocation.value
+
                 val orderFeeState = viewModel.getOrderFeeState.value
+
+                FSLogger.e("Huynd location: $location --- $orderFeeState")
 
                 if (location != null && orderFeeState is DataState.Success) {
                     val shippingFee = orderFeeState.data.data
                     val totalPrice = viewModel.listBag.value?.sumOf { it.price * it.quantity } ?: 0.0
                     var phone = ""
                     val clientOrderCode = generateOrderCode()
-
                     if(isPayment){
                         viewModel.getProfile.value?.let { profileState ->
                             if (profileState is DataState.Success) {
@@ -122,7 +142,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
                                 activity?.showCustomToast("Không thể lấy thông tin số điện thoại!")
                             }
                         }
-                        navigationToBaokimPayment(generateOrderCode(), totalPrice, phone)
+                        navigationToBaoKimPayment(generateOrderCode(), totalPrice, phone)
 
                     }else{
                         viewModel.getProfile.value?.let { profileState ->
@@ -220,6 +240,29 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
                 DataState.Loading -> {}
             }
         }
+
+        viewModel.paymentSuccess.observe(this@OrderDetailFragment) { isSuccess ->
+            if (isSuccess) {
+                activity?.showCustomToast("Thanh toán thành công!")
+                viewModel.deleteBag()
+            } else {
+                activity?.showCustomToast("Thanh toán không thành công!")
+            }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onCheckPaymentStatus(event: CheckPaymentStatus) {
+        FSLogger.e("Huynd: SubscribeSubscribe onCheckPaymentStatus - status: ${event.status}")
+        viewModel.checkPaymentSuccess(){
+            FSLogger.e("Huynd: SubscribeSubscribe onCheckPaymentStatus - status: $it")
+            if (it) {
+                activity?.showCustomToast("Thanh toán thành công!")
+                viewModel.deleteBag()
+            } else {
+                activity?.showCustomToast("Thanh toán không thành công!")
+            }
+        }
     }
 
     private fun updateLocationUI(location: GetLocationCustomerResponse) {
@@ -250,12 +293,13 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
         findNavController().navigate(R.id.action_orderDetailFragment_to_shippingAddressFragment)
     }
 
-    private fun navigationToBaokimPayment(clientOrderId: String, amount: Double, phone: String) {
+    private fun navigationToBaoKimPayment(clientOrderId: String, amount: Double, phone: String) {
         val bundle = Bundle().apply {
             putString("clientOrderId", clientOrderId)
             putDouble("amount", amount)
-            putString("phone", phone)
+            putString("phone", "0$phone")
         }
+        dataManager.saveOrderClientID(clientOrderId)
         findNavController().navigate(R.id.action_orderDetailFragment_to_VNPFragment, bundle)
     }
 
@@ -275,11 +319,19 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
     }
 
     private fun generateOrderCode(): String {
-        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-        val randomCode = (1..10)
-            .map { characters.random() }
+        val letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        val digits = "0123456789"
+
+        // Generate a random sequence of letters and digits
+        val randomLetters = (1..6) // 6 chữ cái
+            .map { letters.random() }
             .joinToString("")
-        return "FSORDER$randomCode"
+
+        val randomDigits = (1..6) // 6 chữ số
+            .map { digits.random() }
+            .joinToString("")
+
+        return "FSORDER$randomLetters$randomDigits"
     }
 
 }

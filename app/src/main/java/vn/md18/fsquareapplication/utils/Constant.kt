@@ -99,5 +99,10 @@ object Constant {
         const val FORMAT_TIMESTAMP_LOG = "yyyyMMddHHmm"
     }
 
+    const val URL_PAYMENT_SUCCESS = "https://www.baokim.vn/?created_at="
+    const val KEY_ORDER_ID = "KEY_ORDER_ID"
+    const val KEY_ORDER_CLIENT_CODE = "KEY_ORDER_CLIENT_CODE"
+    const val KEY_SEARCH_QUERY = "KEY_SEARCH_QUERY"
+
 
 }

@@ -6,8 +6,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import vn.md18.fsquareapplication.features.main.adapter.HistorySearchAdapter
 import vn.md18.fsquareapplication.features.main.adapter.MainPagerAdapter
+import vn.md18.fsquareapplication.features.main.adapter.NotificationAdapter
 import vn.md18.fsquareapplication.features.main.adapter.ProductBannerAdapter
+import vn.md18.fsquareapplication.features.main.adapter.SearchProductAdapter
 
 
 @InstallIn(ActivityComponent::class)
@@ -29,5 +32,18 @@ class ViewModule {
         return LinearLayoutManager(fragmentActivity)
     }
 
+    @Provides
+    fun  providerItemSearchHistoryAdapter() : HistorySearchAdapter {
+        return HistorySearchAdapter()
+    }
 
+    @Provides
+    fun providerSearchProductAdapter() : SearchProductAdapter {
+        return SearchProductAdapter()
+    }
+
+    @Provides
+    fun providerNotificationAdapter() : NotificationAdapter {
+        return NotificationAdapter()
+    }
 }

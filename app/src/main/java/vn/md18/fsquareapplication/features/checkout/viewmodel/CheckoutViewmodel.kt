@@ -3,9 +3,14 @@ package vn.md18.fsquareapplication.features.checkout.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
+import vn.md18.fsquareapplication.core.eventbus.CheckPaymentStatus
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.request.CheckPaymentRequest
 import vn.md18.fsquareapplication.data.network.model.request.LoginRequest
 import vn.md18.fsquareapplication.data.network.model.request.PostPaymentRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
@@ -27,6 +32,7 @@ import vn.md18.fsquareapplication.features.main.repository.OrderRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.ProfileRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.editprofile.EditProfileRepository
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepository
+import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
@@ -63,6 +69,8 @@ class CheckoutViewmodel @Inject constructor(
 
     private val _deleteBagState: MutableLiveData<DataState<DeleteBagResponse>> = MutableLiveData()
     val deleteBagState: LiveData<DataState<DeleteBagResponse>> get() = _deleteBagState
+
+
 
     override fun onDidBindViewModel() {}
 
@@ -122,6 +130,7 @@ class CheckoutViewmodel @Inject constructor(
 
     fun getOrderFee(clientOrderCode: String, toName: String,toPhone: String, toAddress: String, toWardName: String, toDistrictName: String, toProvinceName: String, codAmount: Double, weight: Double, content: String) {
         val orderFeeRequest = OrderFeeRequest(clientOrderCode = clientOrderCode,toName = toName,toPhone = toPhone,toAddress = toAddress, toWardName = toWardName, toDistrictName = toDistrictName, toProvinceName = toProvinceName, codAmount = codAmount, weight = weight, content = content)
+        FSLogger.e("Huynd: data request $orderFeeRequest")
         networkExtension.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
@@ -130,6 +139,7 @@ class CheckoutViewmodel @Inject constructor(
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
                         .subscribe({ response ->
+                            FSLogger.e("Huynd: data response $response")
                             _getOrderFeeState.value = DataState.Success(response)
                         }, { err ->
                             _getOrderFeeState.value = DataState.Error(err)
@@ -271,5 +281,59 @@ class CheckoutViewmodel @Inject constructor(
             }
         }
     }
+
+
+
+    private val _paymentSuccess = MutableLiveData<Boolean>()
+    val paymentSuccess: LiveData<Boolean> get() = _paymentSuccess
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onCheckPaymentStatus(event: CheckPaymentStatus) {
+        FSLogger.e("Huynd: SubscribeSubscribe onCheckPaymentStatus - status: ${event.status}")
+        checkPaymentSuccess {
+            _paymentSuccess.postValue(event.status)
+        }
+    }
+
+     fun checkPaymentSuccess(callBack: (Boolean) -> Unit) {
+        setLoading(true)
+        val clientOrderId = dataManager.getOrderClientID() ?: Constant.EMPTY_STRING
+        val orderId = dataManager.getOrderId() ?: Constant.EMPTY_STRING
+
+        FSLogger.e("Huynd: checkPaymentSuccess Request - clientOrderId: $clientOrderId, orderId: $orderId")
+
+        if (clientOrderId.isEmpty() || orderId.isEmpty()) {
+            FSLogger.e("Huynd: Invalid clientOrderId or orderId")
+            callBack(false)
+            return
+        }
+
+        val request = CheckPaymentRequest(clientOrderCode = clientOrderId, orderId = orderId)
+
+        networkExtension.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    orderRepository.getPaymentStatus(request)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .toObservable()
+                        .subscribe({ response ->
+                            setLoading(false)
+                            _paymentSuccess.value = response
+                            FSLogger.e("Huynd: checkPaymentSuccess Response: $response")
+                            callBack(response)
+                        }, { err ->
+                            setLoading(false)
+                            FSLogger.e("Huynd: checkPaymentSuccess Error: ${err.message}")
+                            callBack(false)
+                        })
+                )
+            } else {
+                FSLogger.e("Huynd: No internet connection")
+                callBack(false)
+            }
+        }
+    }
+
 
 }

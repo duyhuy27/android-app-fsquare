@@ -22,6 +22,7 @@ import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 
 @AndroidEntryPoint
 class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
@@ -86,7 +87,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
                     }
                     is DataState.Success -> {
                         data.data?.let { token ->
-
+                            FSLogger.e("huynd: token: ${token.data}")
                             dataManager.setToken(token.data.toString())
                         }
                         if(type.equals(Constant.KEY_SIGNUP, ignoreCase = true)){

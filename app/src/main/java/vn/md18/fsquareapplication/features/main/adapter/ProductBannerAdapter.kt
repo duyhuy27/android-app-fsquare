@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ItemProductBannerDashboardBinding
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
-import vn.md18.fsquareapplication.utils.extensions.loadImageUri
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
+import vn.md18.fsquareapplication.core.recyclerview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import java.text.DecimalFormat
 import javax.inject.Inject

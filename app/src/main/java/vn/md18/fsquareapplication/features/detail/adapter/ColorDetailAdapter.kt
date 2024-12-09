@@ -4,12 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import vn.md18.fsquareapplication.R
-import vn.md18.fsquareapplication.data.network.model.response.ClassificationShoes
 import vn.md18.fsquareapplication.data.network.model.response.GetClassificationResponse
-import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.databinding.ItemColorDatailProduxBinding
-import vn.md18.fsquareapplication.databinding.ItemShippingAddressBinding
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
+import vn.md18.fsquareapplication.core.recyclerview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
 import javax.inject.Inject
 

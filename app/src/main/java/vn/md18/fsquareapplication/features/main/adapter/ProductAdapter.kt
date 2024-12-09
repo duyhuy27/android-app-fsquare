@@ -21,7 +21,6 @@ import javax.inject.Inject
 
 class ProductAdapter @Inject constructor(
     @ApplicationContext private val context: Context,
-
 ) : BaseAdapter() {
 
     private lateinit var viewModel: MainViewModel
@@ -94,10 +93,8 @@ class ProductAdapter @Inject constructor(
 
         }
 
-
         return view
     }
-
 
     fun updateProducts(newProducts: List<ProductResponse>) {
         productList = newProducts

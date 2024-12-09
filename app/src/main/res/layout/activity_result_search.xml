@@ -9,13 +9,23 @@
     android:background="#fff"
     tools:context=".features.main.ui.SearchActivity">
 
+    <vn.md18.fsquareapplication.utils.view.CustomToolbar
+        android:id="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:textStyle="bold"
+        app:titleToolbar="" />
+
     <!-- Search Bar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:id="@+id/searchBar"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="0dp"
