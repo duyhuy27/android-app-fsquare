@@ -11,6 +11,7 @@ import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.response.Classification
 import vn.md18.fsquareapplication.data.network.model.response.ClassificationShoes
 import vn.md18.fsquareapplication.data.network.model.response.GetClassificationResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
@@ -34,6 +35,9 @@ class DetailProductViewModel @Inject constructor(
     val listColor: LiveData<List<GetClassificationResponse>> = _listColor
     private val _listSize = MutableLiveData<List<ClassificationShoes>>()
     val listSize: LiveData<List<ClassificationShoes>> = _listSize
+
+    private val _listReview = MutableLiveData<List<GetReviewResponse>>()
+    val listReview: LiveData<List<GetReviewResponse>> = _listReview
 
     private val _classification = MutableLiveData<Classification>()
     val classification: LiveData<Classification> = _classification
@@ -212,6 +216,29 @@ class DetailProductViewModel @Inject constructor(
             } else {
                 setLoading(false)
                 setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun getReviewsList(id: String) {
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    detailProductRepository.getReviews(id)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            response.data.let {
+                                _listReview.value = it
+                            }
+                        },
+                            { throwable ->
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            } else {
+                setErrorStringId(R.string.error_have_no_internet)
             }
         }
     }

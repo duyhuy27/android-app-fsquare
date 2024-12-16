@@ -17,6 +17,7 @@ import vn.md18.fsquareapplication.data.network.model.response.Classification
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ActivityDetailProductBinding
 import vn.md18.fsquareapplication.features.detail.adapter.ColorDetailAdapter
+import vn.md18.fsquareapplication.features.detail.adapter.ReviewAdapter
 import vn.md18.fsquareapplication.features.detail.adapter.SizeDetailAdapter
 import vn.md18.fsquareapplication.features.detail.viewmodel.DetailProductViewModel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
@@ -39,6 +40,9 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
     @Inject
     lateinit var sizeDetailAdapter: SizeDetailAdapter
+
+    @Inject
+    lateinit var reviewAdapter: ReviewAdapter
 
     var quantity = 0
     var sizeId = ""
@@ -107,6 +111,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                     viewModel.callApiGetDetailProduct(it)
                 }
                 viewModel.getColorList(it)
+                viewModel.getReviewsList(it)
             }
         }
 
@@ -122,6 +127,12 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 setHasFixedSize(true)
                 adapter = sizeDetailAdapter
             }
+
+            rcvReviews.apply {
+                layoutManager = LinearLayoutManager(this@DetailProductActivity, LinearLayoutManager.VERTICAL, false)
+                setHasFixedSize(true)
+                adapter = reviewAdapter
+            }
         }
 
         binding.txtProductQuantityCart.text = quantity.toString()
@@ -132,6 +143,10 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
         viewModel.product.observe(this@DetailProductActivity) { productResponse ->
             setViewData(productResponse)
+        }
+
+        viewModel.listReview.observe(this@DetailProductActivity){
+            reviewAdapter.submitList(it)
         }
 
         viewModel.listColor.observe(this@DetailProductActivity) {

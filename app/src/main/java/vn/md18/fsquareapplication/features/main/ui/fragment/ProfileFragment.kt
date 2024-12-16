@@ -23,6 +23,7 @@ import vn.md18.fsquareapplication.features.profileandsetting.viewmodel.ProfileVi
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
 import vn.md18.fsquareapplication.utils.extensions.loadImageUri
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 
 @AndroidEntryPoint
@@ -76,7 +77,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     private fun navigation(status: String){
-        openActivity(NotificationActivity::class.java)
+        val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
+        intent.putExtra("STATUS_KEY", status)
+        startActivity(intent)
     }
 
     fun logout(){
@@ -96,7 +99,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
         binding.btnConfirm.setOnClickListener {
             dataManager.setToken("")
-            FSLogger.d("Phuczk", "token: ${dataManager.getToken()}")
             alertDialog.dismiss()
             val intent = Intent(requireContext(), AuthActivity::class.java)
             startActivity(intent)

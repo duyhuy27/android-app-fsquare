@@ -45,6 +45,7 @@ object AppAPi {
     const val PAYMENT = "api/customer/v1/payments"
 
     const val REVIEWS = "api/customer/v1/reviews"
+    const val LIST_REVIEWS = "api/customer/v2/reviews/shoes"
 
     const val POPULAR = "api/customer/v2/statistical"
 

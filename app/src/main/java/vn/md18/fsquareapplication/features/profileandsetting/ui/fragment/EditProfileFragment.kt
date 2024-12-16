@@ -25,16 +25,13 @@ import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileViewModel>() {
 
     override val viewModel: ProfileViewModel by viewModels()
-//    private val sharedPreferences: SharedPreferences by lazy {
-//        requireContext().getSharedPreferences("CountryPrefs", Context.MODE_PRIVATE)
-//    }
 
-    private var selectedCountry: CPCountry? = null
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentEditProfileBinding =
         FragmentEditProfileBinding.inflate(layoutInflater)
 
@@ -43,7 +40,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
     }
 
     override fun onViewLoaded() {
-        setupCountryPickerView()
         viewModel.getProfile()
     }
 
@@ -56,15 +52,45 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
                 val day = calendar.get(Calendar.DAY_OF_MONTH)
 
                 val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+                    val formattedDate = String.format("%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay)
                     edtBirth.setText(formattedDate)
                 }, year, month, day)
                 datePickerDialog.show()
             }
 
             btnSubmit.setOnClickListener {
-                viewModel.updateProfile(edtFirstName.getText().toString(), edtLastName.getText(), edtBirth.getText().toString(), edtNumberPhone.getText().toString(), "")
+                val firstName = edtFirstName.getText().toString().trim()
+                val lastName = edtLastName.getText().toString().trim()
+                val birthDate = edtBirth.text.toString().trim()
+                val phoneNumber = edtNumberPhone.getText().toString().trim()
+
+                if (firstName.isEmpty()) {
+                    activity?.showCustomToast("Chưa nhập họ", Constant.ToastStatus.FAILURE)
+                    return@setOnClickListener
+                }
+
+                if (lastName.isEmpty()) {
+                    activity?.showCustomToast("Chưa nhập tên", Constant.ToastStatus.FAILURE)
+                    return@setOnClickListener
+                }
+
+                if (birthDate.isEmpty()) {
+                    activity?.showCustomToast("Chưa nhập ngày sinh", Constant.ToastStatus.FAILURE)
+                    return@setOnClickListener
+                }
+
+                if (phoneNumber.isEmpty()) {
+                    activity?.showCustomToast("Chưa nhập số điện thoại", Constant.ToastStatus.FAILURE)
+                    return@setOnClickListener
+                }
+
+                if (!isValidVietnamPhoneNumber(phoneNumber)) {
+                    activity?.showCustomToast("Không đúng định dạng số điện thoại Việt Nam", Constant.ToastStatus.FAILURE)
+                    return@setOnClickListener
+                }
+                viewModel.updateProfile(firstName, lastName, birthDate, phoneNumber, "")
             }
+
             toolbarEditProfile.onClickBackPress = {
                 val intent = Intent(requireContext(), MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -88,55 +114,46 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, ProfileView
     override fun addDataObserver() {
         viewModel.getProfile.observe(this@EditProfileFragment) {
             binding.apply {
-                if (it is DataState.Success){
-                    it.data?.let { it1 -> edtFirstName.setText(it1.firstName) }
-                    it.data?.let { it1 -> edtLastName.setText(it1.lastName) }
-                    it.data?.let { it1 -> edtBirth.setText(it1.birthDay) }
-                    it.data?.let { it1 -> edtEmail.setText(it1.email) }
-                    edtNumberPhone.setText(it.data?.phone.toString())
+                if (it is DataState.Success) {
+                    it.data?.let { data ->
+                        edtFirstName.setText(data.firstName)
+                        edtLastName.setText(data.lastName)
+                        val formattedBirthDate = formatDateToDisplay(data.birthDay)
+                        edtBirth.setText(formattedBirthDate)
+                        edtEmail.setText(data.email)
+                        edtNumberPhone.setText(data.phone.toString())
+                    }
                 }
             }
         }
 
         viewModel.updateProfileState.observe(this@EditProfileFragment) {
-            if(it is DataState.Success){
-                activity?.showCustomToast("Update Profile Success", Constant.ToastStatus.SUCCESS)
-            }else{
-                activity?.showCustomToast("Update Profile Failed", Constant.ToastStatus.FAILURE)
+            if (it is DataState.Success) {
+                activity?.showCustomToast("Cập nhật thông tin cá nhân thành công", Constant.ToastStatus.SUCCESS)
+            } else {
+                activity?.showCustomToast("Cập nhật thông tin cá nhân thất bại", Constant.ToastStatus.FAILURE)
             }
         }
     }
 
-    private fun setupCountryPickerView() {
-        val countryPicker = binding.countryPicker
-        countryPicker.cpViewHelper.cpViewConfig.viewTextGenerator = { cpCountry: CPCountry ->
-            "${cpCountry.name}"
-        }
-
-//        val savedCountryName = sharedPreferences.getString("selected_country_name", null)
-//        if (savedCountryName != null) {
-//            countryPicker.cpViewHelper.setCountryForAlphaCode(getCountryCodeFromName(savedCountryName))
-//        }
-        countryPicker.cpViewHelper.onCountryChangedListener = { selectedCountry ->
-            this.selectedCountry = selectedCountry
-        }
-        countryPicker.cpViewHelper.refreshView()
+    private fun isValidVietnamPhoneNumber(phone: String): Boolean {
+        val vietnamPhoneRegex = Regex("^(03|05|07|08|09)[0-9]{8}\$")
+        return vietnamPhoneRegex.matches(phone)
     }
 
-//    private fun getCountryCodeFromName(countryName: String?): String? {
-//        return if (countryName != null) {
-//            binding.countryPicker.cpViewHelper.cpDataStore.countryList
-//                .firstOrNull { it.name.equals(countryName, ignoreCase = true) }?.alpha2
-//        } else {
-//            null
-//        }
-//    }
+    private fun formatDateToDisplay(inputDate: String?): String {
+        if (inputDate.isNullOrEmpty()) return ""
+        return try {
+            val inputFormat = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            inputFormat.timeZone = java.util.TimeZone.getTimeZone("UTC")
 
-    private fun saveSelectedCountry() {
-//        selectedCountry?.let { country ->
-//            sharedPreferences.edit().putString("selected_country_name", country.name).apply()
-//        } ?: run {
-//
-//        }
+            val outputFormat = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+            val parsedDate = inputFormat.parse(inputDate)
+            outputFormat.format(parsedDate)
+        } catch (e: Exception) {
+            inputDate
+        }
     }
+
 }
