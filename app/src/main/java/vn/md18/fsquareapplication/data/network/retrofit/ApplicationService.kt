@@ -44,6 +44,7 @@ import vn.md18.fsquareapplication.data.network.model.response.GetPaymentDetailRe
 import vn.md18.fsquareapplication.data.network.model.response.GetPaymentResponse
 
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
 import vn.md18.fsquareapplication.data.network.model.response.HistorySearchResponse
 import vn.md18.fsquareapplication.data.network.model.response.NotificationResponse
@@ -277,6 +278,11 @@ interface ApplicationService {
     fun getReview(
         @Path("_id") id: String
     ) : Flowable<DataResponse<List<ReviewResponse>, PaginationResponse>>
+
+    @GET(AppAPi.LIST_REVIEWS + "/{id}")
+    fun getReviews(
+        @Path("id") id: String,
+    ) : Flowable<DataResponse<List<GetReviewResponse>, PaginationResponse>>
 
     @GET(AppAPi.HISTORY_SEARCH)
     fun getHistorySearch(

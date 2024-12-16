@@ -5,6 +5,7 @@ import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.response.Classification
 import vn.md18.fsquareapplication.data.network.model.response.ClassificationShoes
 import vn.md18.fsquareapplication.data.network.model.response.GetClassificationResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
@@ -31,6 +32,10 @@ class DetailProductRepositoryImpl @Inject constructor(private val applicationSer
 
     override fun getSize(id: String): Flowable<DataResponse<List<ClassificationShoes>, PaginationResponse>> {
         return applicationService.getSize((id))
+    }
+
+    override fun getReviews(id: String): Flowable<DataResponse<List<GetReviewResponse>, PaginationResponse>> {
+        return applicationService.getReviews(id)
     }
 
 }
