@@ -105,9 +105,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     }
 
     private fun navigation(status: String){
-        val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
-        intent.putExtra("STATUS_KEY", status)
-        startActivity(intent)
+        if (dataManager.getToken() != null && dataManager.getToken() != "") {
+            val intent = Intent(requireContext(), ProfileAndSettingActivity::class.java)
+            intent.putExtra("STATUS_KEY", status)
+            startActivity(intent)
+        }else{
+            showDialogConfirm()
+        }
+
     }
 
     fun logout(){

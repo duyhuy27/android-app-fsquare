@@ -43,12 +43,10 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
     override fun getTagFragment(): String = OrderFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        setupTabs()
-        setupRecyclerView()
-        fetchOrdersByStatus(selectedStatus)
-        orderAdapter.setOrderActionListener(this)
 
         if (dataManager.getToken() != null && dataManager.getToken() != "") {
+            setupTabs()
+            setupRecyclerView()
             fetchOrdersByStatus(selectedStatus)
             orderAdapter.setOrderActionListener(this)
         }else{
@@ -58,7 +56,13 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
 
     override fun addViewListener() {
         binding.apply {
+            root.setOnClickListener {
+                if (dataManager.getToken() != null && dataManager.getToken() != "") {
 
+                }else{
+                    showDialogConfirm()
+                }
+            }
         }
     }
 
