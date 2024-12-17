@@ -54,6 +54,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         binding.btnAddress.setOnClickListener { navigation(Constant.KEY_ADDRESS) }
         binding.btnProfile.setOnClickListener { navigation(Constant.KEY_EDIT_PROFILE)}
         binding.btnNotification.setOnClickListener{ navigation(Constant.KEY_NOTIFICATION) }
+        binding.btnContact.setOnClickListener{ navigation(Constant.KEY_CONTACT) }
         binding.btnSecurity.setOnClickListener{ navigation(Constant.KEY_SECURITY) }
         binding.btnPrivacy.setOnClickListener{ navigation(Constant.KEY_POLICY) }
         binding.btnLogout.setOnClickListener{ logout() }

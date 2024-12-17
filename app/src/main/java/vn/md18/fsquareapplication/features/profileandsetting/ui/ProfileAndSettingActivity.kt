@@ -48,6 +48,7 @@ class ProfileAndSettingActivity : BaseActivity<ActivityProfileAndSettingBinding,
             Constant.KEY_SECURITY -> navController.navigate(R.id.securityFragment)
             Constant.KEY_LANGUAGE -> navController.navigate(R.id.languageFragment)
             Constant.KEY_POLICY -> navController.navigate(R.id.privacyPolicyFragment)
+            Constant.KEY_CONTACT -> navController.navigate(R.id.contactFragment)
         }
     }
 

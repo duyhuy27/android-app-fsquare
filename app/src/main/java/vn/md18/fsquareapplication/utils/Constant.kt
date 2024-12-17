@@ -17,6 +17,7 @@ object Constant {
     const val KEY_LANGUAGE = "LANGUAGE"
     const val KEY_POLICY = "PRIVACY_POLICY"
     const val KEY_NOTIFICATION = "NOTIFICATION"
+    const val KEY_CONTACT = "CONTACT"
     const val KEY_PAYMENT = "PAYMENT"
 
     const val PENDING = "Pending"
