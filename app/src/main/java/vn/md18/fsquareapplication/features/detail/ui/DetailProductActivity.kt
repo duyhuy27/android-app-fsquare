@@ -16,6 +16,9 @@ import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.response.Classification
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ActivityDetailProductBinding
+import vn.md18.fsquareapplication.databinding.CustomDialogOrderSuccessfulBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmGuestBinding
+import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.detail.adapter.ColorDetailAdapter
 import vn.md18.fsquareapplication.features.detail.adapter.ReviewAdapter
 import vn.md18.fsquareapplication.features.detail.adapter.SizeDetailAdapter
@@ -94,6 +97,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 if(!dataManager.getToken().isNullOrEmpty()){
                     viewModel.createBag(sizeId, quantity)
                 }else{
+                    showDialogConfirm()
                     showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
                 }
             }
@@ -183,6 +187,26 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
         }
         startActivity(intent)
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+    }
+
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(this@DetailProductActivity).inflate(R.layout.dialog_confirm_guest, null)
+        val binding = DialogConfirmGuestBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this@DetailProductActivity)
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnViewOrder.setOnClickListener {
+                val intent = Intent(this@DetailProductActivity, AuthActivity::class.java)
+                startActivity(intent)
+            }
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+        }
+
+        alertDialog.show()
     }
 
 

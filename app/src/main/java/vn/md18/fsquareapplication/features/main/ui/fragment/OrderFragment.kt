@@ -1,4 +1,5 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -16,9 +17,12 @@ import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.databinding.DialogCancelOrderBinding
 import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmGuestBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
+import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.ui.DetailOrderActivity
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.OrderStatus
@@ -43,6 +47,13 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
         setupRecyclerView()
         fetchOrdersByStatus(selectedStatus)
         orderAdapter.setOrderActionListener(this)
+
+        if (dataManager.getToken() != null && dataManager.getToken() != "") {
+            fetchOrdersByStatus(selectedStatus)
+            orderAdapter.setOrderActionListener(this)
+        }else{
+            showDialogConfirm()
+        }
     }
 
     override fun addViewListener() {
@@ -193,6 +204,26 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
             }
             btnConfirm.setOnClickListener {
                 viewModel.updateOrder(order.id, OrderStatus.CONFIRMED)
+                alertDialog.dismiss()
+            }
+        }
+
+        alertDialog.show()
+    }
+
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_guest, null)
+        val binding = DialogConfirmGuestBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnViewOrder.setOnClickListener {
+                val intent = Intent(requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+            }
+            btnCancel.setOnClickListener {
                 alertDialog.dismiss()
             }
         }

@@ -74,7 +74,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                 }
                 when (order.status) {
                     "pending" -> {
-                        btnVerify.text = "Cancel"
+                        btnVerify.text = "Hủy hàng"
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
                         btnVerify.visibility = View.VISIBLE
@@ -95,7 +95,15 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                         }
                     }
                     "confirmed" -> {
-                        btnVerify.text = "Đánh giá"
+                        if(!order.isReview){
+                            btnVerify.text = "Đánh giá"
+                            btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
+                            btnVerify.setTextColor(Color.WHITE)
+                            btnVerify.visibility = View.VISIBLE
+                        }else{
+                            btnVerify.visibility = View.GONE
+                        }
+
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
                         btnVerify.visibility = View.VISIBLE

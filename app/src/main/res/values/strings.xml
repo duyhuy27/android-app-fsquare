@@ -127,6 +127,8 @@
     <string name="Reset">Làm lại</string>
     <string name="Apply">Áp dụng</string>
     <string name="Promo">Khuyến mại</string>
+    =======
+    >>>>>>> bb7258a1ff96a71d086ad7d56c8c0962da284ede
 
     <!-- Setting cart strings -->
     <string name="Checkuot">Thanh Toán</string>
@@ -149,8 +151,22 @@
     <string name="Size">Kích thước</string>
     <string name="Color">Màu sắc</string>
     <string name="Product_description">Mô tả sản phẩm</string>
-    <string name="Price">Giá</string>
     <string name="Add_to_Cart">Thêm vào giỏ hàng</string>
+    =======
+
+    <!-- Filter strings -->
+    <string name="Filter">Bộ lọc</string>
+    <string name="Categories">Thể loại</string>
+    <string name="Gender">Giới tính</string>
+    <string name="All">Tất cả</string>
+    <string name="Man">Nam</string>
+    <string name="Women">Nữ</string>
+    <string name="Price">Giá</string>
+    <string name="Popular">Phổ biến</string>
+    <string name="Newest_shoes">Mới nhất</string>
+    <string name="Special">Đặc biệt</string>
+    <string name="Rating">Xếp hạng</string>
+    >>>>>>> bb7258a1ff96a71d086ad7d56c8c0962da284ede
 
 
     <!-- Setting wallet strings -->
@@ -176,16 +192,6 @@
     <string name="pull_refresh_view_end">Thả để làm mới</string>
     <string name="text_btn_save">Lưu</string>
 
-    <string name="Filter">Bộ lọc</string>
-    <string name="Categories">Thể loại</string>
-    <string name="Gender">Giới tính</string>
-    <string name="All">Tất cả</string>
-    <string name="Man">Nam</string>
-    <string name="Women">Nữ</string>
-    <string name="Popular">Phổ biến</string>
-    <string name="Newest_shoes">Mới nhất</string>
-    <string name="Special">Đặc biệt</string>
-    <string name="Rating">Xếp hạng</string>
 
     <string name="no_internet_connection">không có kết nối internet</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -12,6 +12,7 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmGuestBinding
 import vn.md18.fsquareapplication.databinding.FragmentProfileBinding
 import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.auth.ui.fragment.LoginFragment
@@ -34,11 +35,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
     override fun getTagFragment(): String = ProfileFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        viewModel.getProfile()
+
         binding.apply {
             btnEditAvatar.setOnClickListener {
 
             }
+        }
+
+        if (dataManager.getToken() != null && dataManager.getToken() != "") {
+            viewModel.getProfile()
+        }else{
+            showDialogConfirm()
         }
 
     }
@@ -47,9 +54,30 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         binding.btnAddress.setOnClickListener { navigation(Constant.KEY_ADDRESS) }
         binding.btnProfile.setOnClickListener { navigation(Constant.KEY_EDIT_PROFILE)}
         binding.btnNotification.setOnClickListener{ navigation(Constant.KEY_NOTIFICATION) }
+        binding.btnContact.setOnClickListener{ navigation(Constant.KEY_CONTACT) }
         binding.btnSecurity.setOnClickListener{ navigation(Constant.KEY_SECURITY) }
         binding.btnPrivacy.setOnClickListener{ navigation(Constant.KEY_POLICY) }
         binding.btnLogout.setOnClickListener{ logout() }
+    }
+
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_guest, null)
+        val binding = DialogConfirmGuestBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnViewOrder.setOnClickListener {
+                val intent = Intent(requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+            }
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+        }
+
+        alertDialog.show()
     }
 
     override fun addDataObserver() {

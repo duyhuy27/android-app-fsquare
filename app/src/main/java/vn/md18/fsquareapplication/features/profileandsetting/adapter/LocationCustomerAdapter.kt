@@ -52,6 +52,7 @@ class LocationCustomerAdapter @Inject constructor() : BaseRecycleAdapter<GetLoca
                 if(location.isDefault){
                     txtDefault.text = "mac dinh"
                 }else{
+                    txtDefault.background = null
                     txtDefault.text = null
                 }
                 btnEditAddress.setOnClickListener {
