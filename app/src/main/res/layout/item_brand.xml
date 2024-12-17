@@ -31,6 +31,7 @@
             android:textSize="@dimen/_15sdp"
             android:textAlignment="center"
             android:maxLength="10"
+            android:ellipsize="end"
             android:maxLines="1"
             android:fontFamily="@font/opensans_semi_bold"
             android:textColor="@color/black"

@@ -72,12 +72,15 @@
                     android:id="@+id/edtBirth"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:inputType="phone"
+                    android:inputType="none"
                     android:background="@null"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:textSize="15dp"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:clickable="false"
                     android:textColor="@color/dark_blue"
                     android:maxLength="13"/>
                 <ImageView
