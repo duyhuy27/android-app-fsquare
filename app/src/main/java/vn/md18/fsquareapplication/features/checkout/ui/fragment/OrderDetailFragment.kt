@@ -15,13 +15,17 @@ import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.core.eventbus.CheckPaymentStatus
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.data.network.model.response.location.GetLocationCustomerResponse
 import vn.md18.fsquareapplication.data.network.model.response.profile.GetProfileResponse
+import vn.md18.fsquareapplication.databinding.CustomDialogOrderSuccessfulBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderDetailBinding
 import vn.md18.fsquareapplication.features.checkout.adapter.CheckoutAdapter
 import vn.md18.fsquareapplication.features.checkout.viewmodel.CheckoutViewmodel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
+import vn.md18.fsquareapplication.utils.OrderStatus
 import vn.md18.fsquareapplication.utils.extensions.delayFunction
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import java.text.DecimalFormat
@@ -233,6 +237,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
                 is DataState.Success -> {
                     viewModel.deleteBag()
                     activity?.showCustomToast("Tạo đơn hàng thành công!")
+                    showDialogConfirm()
                 }
                 is DataState.Error -> {
                     activity?.showCustomToast("Tạo đơn hàng thất bại: ${state.exception.message}")
@@ -301,6 +306,23 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
         }
         dataManager.saveOrderClientID(clientOrderId)
         findNavController().navigate(R.id.action_orderDetailFragment_to_VNPFragment, bundle)
+    }
+
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog_order_successful, null)
+        val binding = CustomDialogOrderSuccessfulBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnViewOrder.setOnClickListener {
+                navigateBackToMain()
+            }
+
+        }
+
+        alertDialog.show()
     }
 
 

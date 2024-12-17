@@ -12,7 +12,9 @@ data class GetOrderRespose(
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("firstOrderItem")
-    val firstProduct: Product
+    val firstProduct: Product,
+    @SerializedName("isReview")
+    val isReview: Boolean
 )
 
 data class Product(
