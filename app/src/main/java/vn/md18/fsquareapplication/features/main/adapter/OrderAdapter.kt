@@ -100,16 +100,14 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                             btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                             btnVerify.setTextColor(Color.WHITE)
                             btnVerify.visibility = View.VISIBLE
+                            btnVerify.setOnClickListener {
+                                orderActionListener?.review(order)
+                            }
                         }else{
                             btnVerify.visibility = View.GONE
                         }
 
-                        btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
-                        btnVerify.setTextColor(Color.WHITE)
-                        btnVerify.visibility = View.VISIBLE
-                        btnVerify.setOnClickListener {
-                            orderActionListener?.review(order)
-                        }
+
                     }
                     else -> {
                         btnVerify.visibility = View.GONE

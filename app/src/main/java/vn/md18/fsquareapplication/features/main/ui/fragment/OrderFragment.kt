@@ -153,7 +153,14 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
             if(it is DataState.Success){
                 viewModel.getOrderList(status)
             }else{
-                activity?.showCustomToast("huy don hang that bai ", Constant.ToastStatus.FAILURE)
+                activity?.showCustomToast("Hủy đơn hàng thất bại ", Constant.ToastStatus.FAILURE)
+            }
+        }
+        viewModel.addReviewState.observe(this@OrderFragment){
+            if(it is DataState.Success){
+                viewModel.getOrderList(status)
+            }else{
+                activity?.showCustomToast("Đánh giá thất bại", Constant.ToastStatus.FAILURE)
             }
         }
     }

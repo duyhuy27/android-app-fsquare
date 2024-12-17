@@ -55,8 +55,14 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
     override fun addViewListener() {
         binding.apply {
             btnCheckout.setOnClickListener {
-                val intent = Intent(requireContext(), CheckoutActivity::class.java)
-                startActivity(intent)
+                viewModel.listBag.value?.let { list ->
+                    if (list.isNotEmpty()) {
+                        val intent = Intent(requireContext(), CheckoutActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        activity?.showCustomToast("Giỏ hàng trống, không thể thanh toán", Constant.ToastStatus.FAILURE)
+                    }
+                }
             }
 
             imgDeleteList.setOnClickListener {
