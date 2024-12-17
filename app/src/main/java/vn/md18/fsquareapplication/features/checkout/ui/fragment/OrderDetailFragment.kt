@@ -308,7 +308,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
         findNavController().navigate(R.id.action_orderDetailFragment_to_VNPFragment, bundle)
     }
 
-    fun showDialogConfirm() {
+    private fun showDialogConfirm() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog_order_successful, null)
         val binding = CustomDialogOrderSuccessfulBinding.bind(dialogView)
         val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
