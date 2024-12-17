@@ -13,7 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
+import vn.md18.fsquareapplication.databinding.CustomDialogOrderSuccessfulBinding
 import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmGuestBinding
 import vn.md18.fsquareapplication.databinding.FragmentCardBinding
 import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.checkout.ui.CheckoutActivity
@@ -40,29 +42,58 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
     override fun getTagFragment(): String = CardFragment::class.java.simpleName
 
     override fun onViewLoaded() {
+        if (dataManager.getToken() != null && dataManager.getToken() != "") {
+            viewModel.getBagList()
+            binding.apply {
+                rcvProductCart.apply {
+                    layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    setHasFixedSize(true)
+                    adapter = bagAdapter
+                }
+            }
+        }else{
+            showDialogConfirm()
+        }
         bagAdapter.setBagActionListener(this)
-        viewModel.getBagList()
+
+    }
+
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_guest, null)
+        val binding = DialogConfirmGuestBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
 
         binding.apply {
-            rcvProductCart.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                setHasFixedSize(true)
-                adapter = bagAdapter
+            btnViewOrder.setOnClickListener {
+                val intent = Intent(requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+            }
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
             }
         }
+
+        alertDialog.show()
     }
 
     override fun addViewListener() {
         binding.apply {
             btnCheckout.setOnClickListener {
-                viewModel.listBag.value?.let { list ->
-                    if (list.isNotEmpty()) {
-                        val intent = Intent(requireContext(), CheckoutActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        activity?.showCustomToast("Giỏ hàng trống, không thể thanh toán", Constant.ToastStatus.FAILURE)
+                if (dataManager.getToken() != null && dataManager.getToken() != "") {
+                    viewModel.listBag.value?.let { list ->
+                        if (list.isNotEmpty()) {
+                            val intent = Intent(requireContext(), CheckoutActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            activity?.showCustomToast("Giỏ hàng trống, không thể thanh toán", Constant.ToastStatus.FAILURE)
+                        }
                     }
+                }else{
+                    showDialogConfirm()
                 }
+
             }
 
             imgDeleteList.setOnClickListener {
