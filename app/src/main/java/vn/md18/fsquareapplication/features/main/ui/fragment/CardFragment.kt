@@ -15,6 +15,7 @@ import vn.md18.fsquareapplication.core.base.BaseFragment
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
 import vn.md18.fsquareapplication.databinding.FragmentCardBinding
+import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.checkout.ui.CheckoutActivity
 import vn.md18.fsquareapplication.features.detail.ui.DetailProductActivity
 import vn.md18.fsquareapplication.features.main.adapter.BagAdapter
@@ -59,7 +60,7 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
             }
 
             imgDeleteList.setOnClickListener {
-                viewModel.deleteBag()
+                showDialogConfirmDeleteBag()
             }
         }
     }
@@ -130,6 +131,29 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
 
         binding.btnConfirm.setOnClickListener {
             viewModel.deleteBagById(productId)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+    }
+
+    private fun showDialogConfirmDeleteBag(){
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_delete_fav, null)
+        val binding = DialogConfirmDeleteFavBinding.bind(dialogView)
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.txtTitle.text = "Xóa danh sách sản phẩm"
+        binding.txtContent.text = "bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng"
+
+        binding.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        binding.btnConfirm.setOnClickListener {
+            viewModel.deleteBag()
             alertDialog.dismiss()
         }
 

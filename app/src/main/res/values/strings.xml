@@ -125,7 +125,6 @@
     <string name="Add_video">Thêm video</string>
     <string name="Comment">Bình luận</string>
     <string name="Reset">Làm lại</string>
-<<<<<<< HEAD
     <string name="Apply">Áp dụng</string>
     <string name="Promo">Khuyến mại</string>
 =======
@@ -148,12 +147,10 @@
     <string name="You_have_successfully_made_order">Bạn đã đặt hàng thành công</string>
     <string name="View_Order">Quay lại giỏ hàng</string>
     <string name="View_E_Receipt">Xem biên nhận điện tử</string>
-<<<<<<< HEAD
     <string name="Description">Mô tả</string>
     <string name="Size">Kích thước</string>
     <string name="Color">Màu sắc</string>
     <string name="Product_description">Mô tả sản phẩm</string>
-    <string name="Price">Giá</string>
     <string name="Add_to_Cart">Thêm vào giỏ hàng</string>
 =======
 
@@ -195,16 +192,7 @@
     <string name="pull_refresh_view_end">Thả để làm mới</string>
     <string name="text_btn_save">Lưu</string>
 
-    <string name="Filter">Bộ lọc</string>
-    <string name="Categories">Thể loại</string>
-    <string name="Gender">Giới tính</string>
-    <string name="All">Tất cả</string>
-    <string name="Man">Nam</string>
-    <string name="Women">Nữ</string>
-    <string name="Popular">Phổ biến</string>
-    <string name="Newest_shoes">Mới nhất</string>
-    <string name="Special">Đặc biệt</string>
-    <string name="Rating">Xếp hạng</string>
+
 
     <string name="no_internet_connection">không có kết nối internet</string>
     <!-- TODO: Remove or change this placeholder text -->

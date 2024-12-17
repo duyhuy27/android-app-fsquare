@@ -258,16 +258,13 @@ dependencies {
     implementation 'com.github.Ajinkrishnak:CountryCodePicker:1.0.2'
     implementation 'com.hbb20:android-country-picker:0.0.7'
 
-<<<<<<< HEAD
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.hbb20:ccp:2.5.2'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-=======
     //RangeSlider
     implementation 'com.google.android.material:material:1.9.0'
-
->>>>>>> bb7258a1ff96a71d086ad7d56c8c0962da284ede
+    
 }
 
 static def getCurrentDayTime() {
