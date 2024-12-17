@@ -91,12 +91,17 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
 
     override fun addViewListener() {
         binding.tvSeeMoreNewest.setOnClickListener {
-            val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
-                putExtra("typeFavNew", "New")
+        if(dataManager.getToken() != null && dataManager.getToken() != ""){
 
-            }
-            startActivity(intent)
-        }
+                val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
+                    putExtra("typeFavNew", "New")
+
+                }
+                startActivity(intent)
+
+        }else{
+            activity?.showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
+        }}
     }
 
     override fun addDataObserver() {
