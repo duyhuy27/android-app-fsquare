@@ -68,5 +68,13 @@ class DataManagerImpl @Inject constructor(private val mPreferences: AppPreferenc
         return getSharePreferences().getString("ABCC", Constant.EMPTY_STRING)
     }
 
+    override fun setTokenFirebase(token: String) {
+        getSharePreferences().edit().putString(Constant.KEY_TOKEN_FIREBASE, token).apply()
+    }
+
+    override fun getTokenFirebase(): String? {
+        return getSharePreferences().getString(Constant.KEY_TOKEN_FIREBASE, Constant.EMPTY_STRING)
+    }
+
 
 }

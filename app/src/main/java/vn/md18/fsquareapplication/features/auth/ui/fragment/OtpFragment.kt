@@ -149,8 +149,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding, AuthViewModel>() {
     }
 
     private fun navigateToHomePage() {
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
+        val bundle = Bundle().apply {
+            putBoolean(Constant.KEY_SEND_TOKEN_FIREBASE_TO_BE, true)
+        }
+        openActivity(MainActivity::class.java, bundle)
         requireActivity().finish()
     }
 

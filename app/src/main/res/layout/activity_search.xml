@@ -57,6 +57,7 @@
             android:contentDescription="@string/todo"
             android:background="@drawable/bg_edt_corner_neutral_50"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

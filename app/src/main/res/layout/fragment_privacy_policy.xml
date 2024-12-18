@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semi_bold"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam egestas id ultrices morbi ullamcorper malesuada in. Cursus euismod augue mi felis maecenas. Aliquet aliquam neque, nunc sed dictum. Amet, augue amet, lacus vestibulum vehicula pharetra hendrerit dui."
+                    android:text="Chào mừng bạn đến với ứng dụng bán giày của chúng tôi! Chúng tôi cam kết mang đến cho khách hàng những sản phẩm giày chất lượng cao, phong cách đa dạng và dịch vụ tốt nhất. Chính sách dưới đây giúp đảm bảo quyền lợi của bạn khi sử dụng dịch vụ."
                     android:textColor="#676767"
                     android:textSize="@dimen/size_14" />
 
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semi_bold"
-                    android:text="Venenatis, ut ridiculus iaculis diam. Ac, vestibulum sed gravida dolor. Commodo tellus tristique sit in risus elit vulputate malesuada. Tortor sit aliquet vitae nunc adipiscing laoreet turpis amet. Enim gravida ut integer enim blandit. Sit tincidunt cras non nisl in ornare facilisis volutpat. Libero vestibulum, euismod ullamcorper etiam."
+                    android:text="Chính sách đổi trả: Khách hàng có thể đổi trả sản phẩm trong vòng 7 ngày kể từ ngày nhận hàng, với điều kiện sản phẩm còn nguyên vẹn, chưa qua sử dụng và đầy đủ hộp cùng hóa đơn. Vui lòng liên hệ với bộ phận hỗ trợ để được hướng dẫn chi tiết."
                     android:textColor="#676767"
                     android:textSize="@dimen/size_14"
                     android:layout_marginTop="@dimen/permission_dp_20"/>
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semi_bold"
-                    android:text="Volutpat lectus et, libero pellentesque pharetra neque, elit aliquet facilisis. Sit morbi nulla in libero, congue pellentesque fermentum at. Porttitor neque nec, faucibus fames. Est ligula vitae magna nam vulputate amet, mauris. Suscipit fringilla habitant bibendum tempor, quis convallis scelerisque tellus. Dui purus sapien ac malesuada suscipit. Mi, massa proin sed nullam purus, vivamus sapien convallis massa. Ipsum vitae maecenas dui eu."
+                    android:text="Chính sách bảo hành: Chúng tôi bảo hành sản phẩm trong vòng 30 ngày với các lỗi kỹ thuật từ nhà sản xuất. Để được hỗ trợ bảo hành, vui lòng cung cấp hóa đơn mua hàng và ảnh sản phẩm lỗi."
                     android:textColor="#676767"
                     android:textSize="@dimen/size_14"
                     android:layout_marginTop="@dimen/permission_dp_20"/>
@@ -62,10 +62,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semi_bold"
-                    android:text="Felis est, a sed risus ut sed. Amet, nisi, vitae scelerisque leo dolor velit odio orci. Ut mauris pellentesque porttitor molestie orci facilisis sed a. In eu, augue ullamcorper egestas eget commodo neque laoreet. Leo faucibus urna posuere cursus viverra rhoncus, morbi ultrices sit."
+                    android:text="Chính sách vận chuyển: Chúng tôi cung cấp dịch vụ giao hàng trên toàn quốc. Thời gian giao hàng từ 3 đến 7 ngày làm việc, tùy thuộc vào địa chỉ giao hàng. Phí vận chuyển sẽ được hiển thị trong quá trình đặt hàng."
                     android:textColor="#676767"
                     android:textSize="@dimen/size_14"
                     android:layout_marginTop="@dimen/permission_dp_20"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:text="Chính sách bảo mật: Thông tin cá nhân của khách hàng sẽ được bảo mật tuyệt đối và chỉ sử dụng cho mục đích cung cấp dịch vụ. Chúng tôi cam kết không chia sẻ thông tin khách hàng với bên thứ ba mà không có sự đồng ý của bạn."
+                    android:textColor="#676767"
+                    android:textSize="@dimen/size_14"
+                    android:layout_marginTop="@dimen/permission_dp_20"/>
+
 
             </LinearLayout>
         </ScrollView>

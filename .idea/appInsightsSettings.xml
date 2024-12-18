@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="vn.md18.fsquareapplication" />
+                  <option name="mobileSdkAppId" value="1:364343475392:android:19797315403e0f84fb0125" />
+                  <option name="projectId" value="fsquare-665cf" />
+                  <option name="projectNumber" value="364343475392" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

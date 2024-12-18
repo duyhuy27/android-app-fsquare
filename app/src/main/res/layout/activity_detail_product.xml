@@ -80,6 +80,7 @@
                         android:textColor="#676767"
                         android:textSize="@dimen/_15sdp" />
                     <TextView
+                        android:id="@+id/tv_sold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

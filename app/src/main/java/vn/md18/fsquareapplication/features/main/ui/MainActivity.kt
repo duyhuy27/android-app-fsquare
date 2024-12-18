@@ -18,8 +18,6 @@ import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel.Companio
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel.Companion.TAB_DASHBOARD_PAGE
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel.Companion.TAB_ORDERS
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel.Companion.TAB_PROFILE
-import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel.Companion.TAB_WALLET
-import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import javax.inject.Inject
 
@@ -36,6 +34,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
     override fun inflateLayout(layoutInflater: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onViewLoaded() {
+        viewModel.apply {
+            getTokenFirebase()
+        }
         binding.pagerMain.adapter = mPagerAdapter
         TabLayoutMediator(binding.tabMain, binding.pagerMain) { tab, position ->
             when (position) {

@@ -41,7 +41,6 @@ class ProductBannerAdapter @Inject constructor() : BaseRecycleAdapter<ProductRes
             val product: ProductResponse = itemList[position]
             binding.apply {
                 val formatter: DecimalFormat = DecimalFormat("#,###")
-                tvPrice.text = formatter.format(product.maxPrice) + " VND"
                 tvTitle.text = product.name
                 imgProduct.loadImageURL(product.thumbnail?.url)
             }

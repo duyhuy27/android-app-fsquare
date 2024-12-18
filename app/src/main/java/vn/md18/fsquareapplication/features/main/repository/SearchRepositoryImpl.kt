@@ -27,7 +27,7 @@ class SearchRepositoryImpl @Inject constructor(
         brand: String?,
         category: String?
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
-        return applicationServices.getProductV1(size = size!!, page = page!!, search = search)
+        return applicationServices.getProduct(size = size!!, page = page!!, search = search)
     }
 
     override fun saveKeyWordSearch(keyword: String): Flowable<Boolean> {

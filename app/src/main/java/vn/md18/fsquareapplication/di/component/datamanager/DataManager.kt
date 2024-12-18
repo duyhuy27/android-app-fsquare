@@ -33,4 +33,8 @@ interface DataManager {
 
     fun getOrderID(): String?
 
+    fun setTokenFirebase(token: String)
+
+    fun getTokenFirebase(): String?
+
 }

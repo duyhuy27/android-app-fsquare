@@ -3,20 +3,24 @@ package vn.md18.fsquareapplication.features.main.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import vn.md18.fsquareapplication.R
 import vn.md18.fsquareapplication.core.base.BaseViewModel
 import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
+import vn.md18.fsquareapplication.data.network.model.request.UpdateProfileRequest
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
 import vn.md18.fsquareapplication.data.network.model.response.CategoriesResponse
 import vn.md18.fsquareapplication.data.network.model.response.favorite.CreateFavoriteResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.AddBagResponse
 import vn.md18.fsquareapplication.features.main.repository.MainRepository
+import vn.md18.fsquareapplication.utils.ErrorUtils
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
@@ -81,7 +85,7 @@ class MainViewModel @Inject constructor(
         networkExtensions.checkInternet { isConnect ->
             if (isConnect) {
                 compositeDisposable.add(
-                    mainRepository.getProductList(size = 10, page = 1)
+                    mainRepository.getProductListPopular(size = 10, page = 1)
                         .subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.ui())
                         .toObservable()
@@ -257,6 +261,36 @@ class MainViewModel @Inject constructor(
                 )
             } else {
                 setErrorStringId(R.string.no_internet_connection)
+            }
+        }
+    }
+
+    fun getTokenFirebase() {
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+            if (token != null) {
+                Timber.e("Change Token -> $token")
+                sendTokenFirebase(token)
+            }
+        }
+    }
+
+    private fun sendTokenFirebase(token: String) {
+        networkExtensions.checkInternet { internet ->
+            if (internet) {
+                dataManager.setTokenFirebase(token)
+                compositeDisposable.add(
+                    mainRepository.sendTokenToBackend(token)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .subscribe({
+                            Timber.e("Complete Send firebase token to Backend ")
+                        }, { throwable ->
+                            Timber.e("Error Send firebase token to Backend ")
+                            ErrorUtils.getError(throwable)?.let { error -> setError(error) }
+                        })
+                )
+
+            } else {
             }
         }
     }

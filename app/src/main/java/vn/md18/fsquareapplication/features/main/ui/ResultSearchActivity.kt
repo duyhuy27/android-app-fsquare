@@ -26,40 +26,51 @@ import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ResultSearchActivity : BaseActivity<ActivityResultSearchBinding, SearchViewModel>(), SearchProductAdapter.ProductCallback {
+class ResultSearchActivity : BaseActivity<ActivityResultSearchBinding, SearchViewModel>(),
+    SearchProductAdapter.ProductCallback {
+
     override val viewModel: SearchViewModel by viewModels()
+
     @Inject
     lateinit var productAdapter: SearchProductAdapter
 
-    override fun inflateLayout(layoutInflater: LayoutInflater): ActivityResultSearchBinding = ActivityResultSearchBinding.inflate(layoutInflater)
+    override fun inflateLayout(layoutInflater: LayoutInflater): ActivityResultSearchBinding =
+        ActivityResultSearchBinding.inflate(layoutInflater)
 
     override fun onViewLoaded() {
-        //get data from bundle
+        // Lấy query từ SearchActivity qua Intent
         val query = intent.getStringExtra(Constant.KEY_SEARCH_QUERY) ?: ""
-        FSLogger.e("huynd: $query")
+        FSLogger.e("Query từ SearchActivity: $query")
+
         binding.apply {
-            edtSearch.setText(query)
+            edtSearch.setText(query) // Đặt query vào EditText
+
+            // Sử dụng OnTouchListener để back về khi chạm
+            edtSearch.setOnTouchListener { _, _ ->
+                finish() // Kết thúc activity khi chạm vào EditText
+                true // Xử lý sự kiện
+            }
         }
-        viewModel.getProductListGridBySearch(query)
+
+        // Thực hiện tìm kiếm dựa trên query
+        if (query.isNotEmpty()) {
+            viewModel.getProductListGridBySearch(query)
+        }
         setupRecyclerView()
     }
 
-    override fun addViewListener() {
-        binding.edtSearch.safeClickWithRx {
-    finish()
-        }
 
+
+    override fun addViewListener() {
         binding.toolbar.onClickBackPress = {
             onBackPressed()
         }
-
     }
 
     override fun addDataObserver() {
         super.addDataObserver()
         viewModel.listProductResultSearch.observe(this) { productList ->
             if (productList.isNotEmpty()) {
-                FSLogger.e("huynd: ${productList.size}")
                 binding.apply {
                     imgNoData.visibility = View.GONE
                     tvNoData.visibility = View.GONE
@@ -73,13 +84,12 @@ class ResultSearchActivity : BaseActivity<ActivityResultSearchBinding, SearchVie
         viewModel.favoriteState.observe(this@ResultSearchActivity) { data ->
             when (data) {
                 is DataState.Error -> {
-                    showCustomToast("Action Failed", Constant.ToastStatus.FAILURE)
+                    showCustomToast("Thao tác thất bại", Constant.ToastStatus.FAILURE)
                 }
                 DataState.Loading -> {  }
                 is DataState.Success -> {
-                    val action = if (data.data) "added to" else "removed from"
-                    showCustomToast("Successfully $action favorite", Constant.ToastStatus.SUCCESS
-                    )
+                    val action = if (data.data) "thêm vào" else "xoá khỏi"
+                    showCustomToast("Đã $action mục yêu thích", Constant.ToastStatus.SUCCESS)
                 }
             }
         }
@@ -87,19 +97,13 @@ class ResultSearchActivity : BaseActivity<ActivityResultSearchBinding, SearchVie
 
     private fun setupRecyclerView() {
         binding.rcvProduct.apply {
-            layoutManager = LinearLayoutManager(this@ResultSearchActivity) // Hoặc GridLayoutManager
+            layoutManager = GridLayoutManager(this@ResultSearchActivity, 2) // Hiển thị dạng lưới 2 cột
             adapter = productAdapter
-//            setLoadingMoreEnabled(true)
-//            setPullRefreshEnabled(true)
         }
         productAdapter.setProductCallback(this)
     }
 
     private fun showProductGridView(productList: List<ProductResponse>) {
-        binding.rcvProduct.apply {
-            layoutManager = GridLayoutManager(this@ResultSearchActivity, 2) // 2 cột
-            adapter = productAdapter
-        }
         productAdapter.submitList(productList)
     }
 
@@ -113,10 +117,14 @@ class ResultSearchActivity : BaseActivity<ActivityResultSearchBinding, SearchVie
     }
 
     override fun onProductClick(product: ProductResponse) {
-        TODO("Not yet implemented")
+        // Xử lý khi click vào sản phẩm
     }
 
     override fun createFavorite(id: String, isAdding: Boolean) {
-        TODO("Not yet implemented")
+        if(dataManager.getToken().isNullOrEmpty()){
+            showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
+        } else {
+            viewModel.createFavorite(id, isAdding)
+        }
     }
 }

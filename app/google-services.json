@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "364343475392",
+    "project_id": "fsquare-665cf",
+    "storage_bucket": "fsquare-665cf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364343475392:android:19797315403e0f84fb0125",
+        "android_client_info": {
+          "package_name": "vn.md18.fsquareapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUt0yPovonP4Ubg5N5F62MowG--XooEdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364343475392:android:656f152ffe224ee6fb0125",
+        "android_client_info": {
+          "package_name": "vn.md18.fsquareapplication.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUt0yPovonP4Ubg5N5F62MowG--XooEdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

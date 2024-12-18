@@ -219,6 +219,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
             binding.txtDescriptionDetailProduct.text = it.describe
             binding.txtPriceDetailProduct.text = it.maxPrice.toString() + " - " + it.minPrice.toString()
             binding.txtRatingDetailProduct.text = it.rating.toString()
+            binding.tvSold.text = it.sales.toString() + " đã bán"
             binding.imgDetailProduct.loadImageUrlDiskCacheStrategy(it.thumbnail?.url, R.drawable.null_shoes)
             var idShoes = it._id
             var isAdding = false

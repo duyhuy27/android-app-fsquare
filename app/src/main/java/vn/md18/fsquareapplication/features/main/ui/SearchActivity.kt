@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,23 +38,15 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(),
         ActivitySearchBinding.inflate(layoutInflater)
 
     override fun onViewLoaded() {
-        setupRecyclerView()
-        viewModel.checkTokenIfNeeded { isLogin ->
-            if (isLogin) {
-                viewModel.getHistoryKeyWordSearchByUserId()
-            } else {
-                updateViewIfNotLogin()
-            }
-        }
+//        setupRecyclerView()
     }
 
     override fun onResume() {
         super.onResume()
         // Focus vào edtSearch khi quay lại màn hình
         binding.edtSearch.requestFocus()
-        viewModel.getHistoryKeyWordSearchByUserId()
+//        viewModel.getHistoryKeyWordSearchByUserId()
     }
-
 
     override fun addViewListener() {
         setupListeners()
@@ -67,15 +60,14 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(),
         historySearchAdapter.setSearchHistoryCallback(this)
     }
 
-
     private fun observeViewModel() {
-        viewModel.listKeywordSearch.observe(this) { keywordList ->
-            if (keywordList.isNotEmpty()) {
-                showHistoryRecyclerView(keywordList)
-            } else {
-                showEmptyState("Không có lịch sử tìm kiếm")
-            }
-        }
+//        viewModel.listKeywordSearch.observe(this) { keywordList ->
+//            if (keywordList.isNotEmpty()) {
+//                showHistoryRecyclerView(keywordList)
+//            } else {
+//                showEmptyState("Không có lịch sử tìm kiếm")
+//            }
+//        }
     }
 
     private fun setupListeners() {
@@ -83,12 +75,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(),
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = binding.edtSearch.text.toString().trim()
                 if (query.isNotEmpty()) {
-                    viewModel.saveKeywordSearch(query)
-                    //bundle query to ResultSearchActivity
-                    val data = Bundle().apply {
-                        putString(Constant.KEY_SEARCH_QUERY, query)
+                    // Truyền query trực tiếp qua Intent
+                    val intent = Intent(this, ResultSearchActivity::class.java).apply {
+                        putExtra(Constant.KEY_SEARCH_QUERY, query)
                     }
-                    openActivity(ResultSearchActivity::class.java, data)
+                    startActivity(intent)
                 }
                 true
             } else {
@@ -97,15 +88,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(),
         }
     }
 
-    private fun updateViewIfNotLogin() {
-        binding.apply {
-            imgNoData.visibility = View.VISIBLE
-            tvNoData.visibility = View.VISIBLE
-            tvNoData.text = "Đăng nhập để xem lịch sử tìm kiếm"
-            searchBar.disable()
-            edtSearch.disable()
-        }
-    }
 
     private fun showHistoryRecyclerView(keywordList: List<HistorySearchResponse>) {
         binding.apply {
@@ -156,11 +138,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(),
     }
 
     override fun createFavorite(id: String, isAdding: Boolean) {
-        if(dataManager.getToken().isNullOrEmpty()){
+        if (dataManager.getToken().isNullOrEmpty()) {
             showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
-        }else{
+        } else {
             viewModel.createFavorite(id, isAdding)
         }
     }
 }
+
 

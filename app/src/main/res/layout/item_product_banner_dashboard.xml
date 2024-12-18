@@ -51,17 +51,6 @@
                android:maxLines="1"
                 />
 
-           <TextView
-               android:id="@+id/tv_price"
-               style="@style/TextSimiBoldTitleDark24"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="@dimen/size_6"
-               android:textColor="@color/primary"
-               android:textSize="@dimen/text_size_18"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@id/tv_title"
-               app:layout_constraintBottom_toBottomOf="parent"/>
        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

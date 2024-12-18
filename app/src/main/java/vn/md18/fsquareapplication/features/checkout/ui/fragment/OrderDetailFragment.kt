@@ -111,10 +111,10 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
     private fun showPaymentSuccessPopup() {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Thanh toán thành công")
-        builder.setMessage("Đơn hàng của bạn đã được thanh toán. Bạn có muốn tiếp tục để tạo đơn hàng?")
+        builder.setMessage("Đơn hàng của bạn đã được thanh toán. Vui lòng check trạng thái đơn hàng của bạn")
         builder.setCancelable(false) // Không thể hủy popup bằng cách nhấn ra ngoài hoặc nút Back.
 
-        builder.setPositiveButton("Tiếp tục") { _, _ ->
+        builder.setPositiveButton("Tôi biết!") { _, _ ->
             navigateBackToMain()
         }
 
