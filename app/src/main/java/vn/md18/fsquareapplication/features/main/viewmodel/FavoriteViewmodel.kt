@@ -32,6 +32,9 @@ class FavoriteViewmodel @Inject constructor(
 
     private val _listProduct = MutableLiveData<List<ProductResponse>>()
     val listProduct: LiveData<List<ProductResponse>> = _listProduct
+
+    private val _listProductBrand = MutableLiveData<List<ProductResponse>>()
+    val listProductBrand: LiveData<List<ProductResponse>> = _listProductBrand
     override fun onDidBindViewModel() {
 
     }
@@ -77,6 +80,37 @@ class FavoriteViewmodel @Inject constructor(
                             setLoading(false)
                             response.data.let {
                                 _listProduct.value = it
+                                setErrorString(response.message.toString())
+                            }
+                        },
+                            { throwable ->
+                                setLoading(false)
+                                setErrorString(throwable.message.toString())
+                            })
+                )
+            }
+            else {
+                setLoading(false)
+                setErrorStringId(R.string.error_have_no_internet)
+            }
+        }
+    }
+
+
+
+    fun getProductByBrandV1(idBrand: String) {
+        setLoading(true)
+        networkExtensions.checkInternet { isConnect ->
+            if (isConnect) {
+                compositeDisposable.add(
+                    mainRepository.getProductListByBrandV1(size = 10, page = 1, brand = idBrand)
+                        .subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.ui())
+                        .toObservable()
+                        .subscribe({ response ->
+                            setLoading(false)
+                            response.data.let {
+                                _listProductBrand.value = it
                                 setErrorString(response.message.toString())
                             }
                         },

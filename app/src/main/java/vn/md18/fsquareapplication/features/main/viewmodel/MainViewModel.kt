@@ -60,8 +60,8 @@ class MainViewModel @Inject constructor(
         const val TAB_DASHBOARD_PAGE = 0
         const val TAB_CARD_CONTEXT = 1
         const val TAB_ORDERS = 2
-        const val TAB_WALLET = 3
-        const val TAB_PROFILE = 4
+        const val TAB_WALLET = 5
+        const val TAB_PROFILE = 3
     }
 
     fun checkLoading() {

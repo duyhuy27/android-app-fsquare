@@ -34,6 +34,7 @@ import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.editpro
 import vn.md18.fsquareapplication.features.profileandsetting.repositoriy.location.LocationCustomerRepository
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
+import vn.md18.fsquareapplication.utils.extensions.delayFunction
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
@@ -58,8 +59,8 @@ class CheckoutViewmodel @Inject constructor(
     private val _getOrderFeeState: MutableLiveData<DataState<OrderFeeResponse>> = MutableLiveData()
     val getOrderFeeState: LiveData<DataState<OrderFeeResponse>> get() = _getOrderFeeState
 
-    private val _createOrderState: MutableLiveData<DataState<AddOrderResponse>> = MutableLiveData()
-    val createOrderState: LiveData<DataState<AddOrderResponse>> get() = _createOrderState
+    private val _createOrderState: MutableLiveData<DataState<AddOrderResponse>?> = MutableLiveData()
+    val createOrderState: MutableLiveData<DataState<AddOrderResponse>?> get() = _createOrderState
 
     private val _getProfile = MutableLiveData<DataState<GetProfileResponse>>()
     val getProfile: LiveData<DataState<GetProfileResponse>> get() = _getProfile
@@ -71,7 +72,9 @@ class CheckoutViewmodel @Inject constructor(
     val deleteBagState: LiveData<DataState<DeleteBagResponse>> get() = _deleteBagState
 
 
-
+    fun setCreateOrderStateIsNull() {
+        _createOrderState.value = null
+    }
     override fun onDidBindViewModel() {}
 
     fun getBagList() {
@@ -151,7 +154,22 @@ class CheckoutViewmodel @Inject constructor(
         }
     }
 
-    fun createOrder(toName: String, toPhone: String, toAddress: String, toWardName: String, toDistrictName: String, toProvinceName: String, clientOrderCode: String, weight: Double, codAmount: Double, shippingFee: Double, content: String, isFreeShip: Boolean, isPayment: Boolean, note: String) {
+    fun createOrder(
+        toName: String,
+        toPhone: String,
+        toAddress: String,
+        toWardName: String,
+        toDistrictName: String,
+        toProvinceName: String,
+        clientOrderCode: String,
+        weight: Double,
+        codAmount: Double,
+        shippingFee: Double,
+        content: String,
+        isFreeShip: Boolean,
+        isPayment: Boolean,
+        note: String
+    ) {
         val shippingAddress = ShippingAddress(
             toName = toName,
             toPhone = toPhone,
@@ -188,27 +206,23 @@ class CheckoutViewmodel @Inject constructor(
 
         val addOrderRequest = AddOrderRequest(order = order, orderItems = orderItems)
 
-        setLoading(true)
-        networkExtension.checkInternet { isConnect ->
-            if (isConnect) {
-                compositeDisposable.add(
-                    orderRepository.createOrder(addOrderRequest = addOrderRequest)
-                        .subscribeOn(schedulerProvider.io())
-                        .observeOn(schedulerProvider.ui())
-                        .toObservable()
-                        .subscribe({ response ->
-                            setLoading(false)
-                            _createOrderState.value = DataState.Success(response)
-                        }, { err ->
-                            setLoading(false)
-                            _createOrderState.value = DataState.Error(err)
-                            FSLogger.d("loi khi them order $err")
-                        })
-                )
-            } else {
-                setLoading(false)
-                setErrorStringId(R.string.no_internet_connection)
-            }
+        FSLogger.d("Huynd: createOrder: Request Data - $addOrderRequest")
+        delayFunction(1000) {
+            compositeDisposable.add(
+                orderRepository.createOrder(addOrderRequest = addOrderRequest)
+                    .subscribeOn(schedulerProvider.io())
+                    .observeOn(schedulerProvider.ui())
+                    .toObservable()
+                    .subscribe({ response ->
+                        setLoading(false)
+                        _createOrderState.value = DataState.Success(response)
+                        FSLogger.d("Huynd: Tạo order thành công - Response: $response")
+                    }, { err ->
+                        setLoading(false)
+                        _createOrderState.value = DataState.Error(err)
+                        FSLogger.e("Huynd: Lỗi khi gọi API createOrder - $err")
+                    })
+            )
         }
     }
 

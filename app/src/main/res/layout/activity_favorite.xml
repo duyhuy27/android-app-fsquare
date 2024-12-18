@@ -35,6 +35,7 @@
             android:id="@+id/btnSearch"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:visibility="gone"
             android:src="@drawable/search"
             android:padding="10dp"/>
     </LinearLayout>

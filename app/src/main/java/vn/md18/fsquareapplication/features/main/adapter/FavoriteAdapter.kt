@@ -65,7 +65,6 @@ class FavoriteAdapter @Inject constructor(
                     setImageResource(R.drawable.null_shoes)
                 }
             }
-            imgAddToFav.setImageResource(R.drawable.trash)
             imgAddToFav.setOnClickListener {
                 favoriteActionListener?.onRemoveFavorite(product._id)
             }

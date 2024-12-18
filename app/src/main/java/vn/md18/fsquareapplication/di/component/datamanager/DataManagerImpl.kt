@@ -60,5 +60,13 @@ class DataManagerImpl @Inject constructor(private val mPreferences: AppPreferenc
         return getSharePreferences().getString(Constant.KEY_ORDER_CLIENT_CODE, Constant.EMPTY_STRING)
     }
 
+    override fun saveOrderID(orderID: String) {
+        getSharePreferences().edit().putString("ABCC", orderID).apply()
+    }
+
+    override fun getOrderID(): String? {
+        return getSharePreferences().getString("ABCC", Constant.EMPTY_STRING)
+    }
+
 
 }

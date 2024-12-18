@@ -35,6 +35,22 @@ interface MainRepository {
         category: String? = null
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
 
+    fun getProductListPopular(
+        size: Int? = null,
+        page: Int? = null,
+        search: String? = null,
+        brand: String? = null,
+        category: String? = null
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
+    fun getProductListByBrandV1(
+        size: Int? = null,
+        page: Int? = null,
+        search: String? = null,
+        brand: String? = null,
+        category: String? = null
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
     fun getProductListV1(
         size: Int? = null,
         page: Int? = null,

@@ -9,9 +9,10 @@
     tools:context=".features.main.ui.NotificationActivity">
 
     <vn.md18.fsquareapplication.utils.view.CustomToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleToolbar="Notification"
+        app:titleToolbar="Thông báo"
         app:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView

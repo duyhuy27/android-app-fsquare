@@ -47,26 +47,91 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
     private var isLocationSelected = false
     private var isPayment = true
 
+    private fun createOrder() {
+        val location = viewModel.defaultLocation.value
+        val orderFeeState = viewModel.getOrderFeeState.value
+        val totalPrice = viewModel.listBag.value?.sumOf { it.price * it.quantity } ?: 0.0
+
+        FSLogger.e("Huynd: createOrder() - Location: $location, OrderFeeState: $orderFeeState, TotalPrice: $totalPrice")
+
+        if (location != null && orderFeeState is DataState.Success) {
+            val shippingFee = orderFeeState.data.data ?: run {
+                FSLogger.e("Huynd: Shipping Fee null")
+                activity?.showCustomToast("Phí giao hàng không hợp lệ!")
+                return
+            }
+            val clientOrderCode = generateOrderCode()
+
+            viewModel.getProfile.value?.let { profileState ->
+                if (profileState is DataState.Success) {
+                    val profile = profileState.data
+                    FSLogger.e("Huynd: Gọi API createOrder với profile: $profile")
+                    viewModel.createOrder(
+                        toName = profile.firstName,
+                        toPhone = profile.phone,
+                        toAddress = location.address,
+                        toWardName = location.wardName,
+                        toDistrictName = location.districtName,
+                        toProvinceName = location.provinceName,
+                        clientOrderCode = clientOrderCode,
+                        weight = 1500.0,
+                        codAmount = totalPrice,
+                        shippingFee = shippingFee,
+                        content = "Nội dung đơn hàng",
+                        isFreeShip = false,
+                        isPayment = isPayment,
+                        note = "Đơn hàng gấp"
+                    )
+
+                } else {
+                    FSLogger.e("Huynd: Không thể lấy thông tin hồ sơ khách hàng!")
+                    activity?.showCustomToast("Không thể lấy thông tin hồ sơ khách hàng!")
+                }
+            }
+        } else {
+            FSLogger.e("Huynd: Điều kiện location hoặc orderFeeState thất bại!")
+            activity?.showCustomToast("Vui lòng kiểm tra địa chỉ hoặc phí giao hàng!")
+        }
+    }
+
+    private fun handlePaymentResult() {
+        parentFragmentManager.setFragmentResultListener("PAYMENT_RESULT", viewLifecycleOwner) { _, bundle ->
+            val isPaymentSuccess = bundle.getBoolean("PAYMENT_SUCCESS", false)
+            FSLogger.e("Huynd: PAYMENT_RESULT: $isPaymentSuccess")
+
+            if (isPaymentSuccess) {
+                FSLogger.e("Huynd: Hiển thị popup xác nhận thanh toán thành công")
+                showPaymentSuccessPopup()
+            } else {
+                activity?.showCustomToast("Thanh toán không thành công!")
+            }
+        }
+    }
+
+    private fun showPaymentSuccessPopup() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setTitle("Thanh toán thành công")
+        builder.setMessage("Đơn hàng của bạn đã được thanh toán. Bạn có muốn tiếp tục để tạo đơn hàng?")
+        builder.setCancelable(false) // Không thể hủy popup bằng cách nhấn ra ngoài hoặc nút Back.
+
+        builder.setPositiveButton("Tiếp tục") { _, _ ->
+            navigateBackToMain()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+
+
+
     override fun onViewLoaded() {
+        handlePaymentResult()
+        viewModel.setCreateOrderStateIsNull()
+
         viewModel.getProfile()
         viewModel.getLocationCustomerList()
         viewModel.getBagList()
-        parentFragmentManager.setFragmentResultListener("PAYMENT_RESULT", viewLifecycleOwner) { _, bundle ->
-            val isPaymentSuccess = bundle.getBoolean("PAYMENT_SUCCESS", false)
-            FSLogger.e("Huynd: FragmentResultListener - isPaymentSuccess: $isPaymentSuccess")
-            if (isPaymentSuccess) {
-                viewModel.checkPaymentSuccess { isSuccess ->
-                    if (isSuccess) {
-                        activity?.showCustomToast("Thanh toán thành công!")
-                        viewModel.deleteBag()
-                    } else {
-                        activity?.showCustomToast("Thanh toán không thành công!")
-                    }
-                }
-            }
-        }
-
-
         parentFragmentManager.setFragmentResultListener("REQUEST_KEY_LOCATION", this) { _, bundle ->
             val location = bundle.getSerializable("SELECTED_LOCATION") as? GetLocationCustomerResponse
             FSLogger.e("Huynd: dasdsadasdasdasd $location")
@@ -141,12 +206,32 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
                     if(isPayment){
                         viewModel.getProfile.value?.let { profileState ->
                             if (profileState is DataState.Success) {
-                                phone = profileState.data.phone
+                                val profile = profileState.data
+                                if (shippingFee != null) {
+                                    dataManager.saveOrderID(clientOrderCode)
+                                    viewModel.createOrder(
+                                        toName = profile.firstName,
+                                        toPhone = profile.phone,
+                                        toAddress = location.address,
+                                        toWardName = location.wardName,
+                                        toDistrictName = location.districtName,
+                                        toProvinceName = location.provinceName,
+                                        clientOrderCode = clientOrderCode,
+                                        weight = 1500.0,
+                                        codAmount = totalPrice,
+                                        shippingFee = shippingFee,
+                                        content = "Nội dung đơn hàng",
+                                        isFreeShip = false,
+                                        isPayment = false,
+                                        note = "Đơn hàng gấp"
+                                    )
+                                }else{
+
+                                }
                             } else {
                                 activity?.showCustomToast("Không thể lấy thông tin số điện thoại!")
                             }
                         }
-                        navigationToBaoKimPayment(generateOrderCode(), totalPrice, phone)
 
                     }else{
                         viewModel.getProfile.value?.let { profileState ->
@@ -232,19 +317,44 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding, CheckoutVie
             }
         }
 
-        viewModel.createOrderState.observe(this@OrderDetailFragment) { state ->
-            when (state) {
-                is DataState.Success -> {
-                    viewModel.deleteBag()
-                    activity?.showCustomToast("Tạo đơn hàng thành công!")
-                    showDialogConfirm()
+            viewModel.createOrderState.observe(viewLifecycleOwner) { state ->
+                when (state) {
+                    is DataState.Success -> {
+                        viewModel.deleteBag()
+                        FSLogger.d("Huynd: Tạo đơn hàng thành công!")
+                        if (isPayment) {
+                            val totalPrice = viewModel.listBag.value?.sumOf { it.price * it.quantity } ?: 0.0
+                            viewModel.getProfile.value?.let { profileState ->
+                                if (profileState is DataState.Success) {
+                                    val profile = profileState.data
+                                    dataManager.getOrderID()
+                                        ?.let { delayFunction(5000) {
+                                            navigationToBaoKimPayment(it, totalPrice, profile.phone)
+                                        } }
+                                } else {
+                                    activity?.showCustomToast("Không thể lấy thông tin số điện thoại!")
+                                }
+                            }
+                        }
+                        else {
+                            activity?.showCustomToast("Tạo đơn hàng thành công!")
+                            navigateBackToMain()
+                        }
+                    }
+                    is DataState.Error -> {
+                        activity?.showCustomToast("Tạo đơn hàng thất bại: ${state.exception.message}")
+                        FSLogger.e("Huynd: Tạo đơn hàng thất bại: ${state.exception.message}")
+                    }
+                    is DataState.Loading -> {
+                        activity?.showCustomToast("Đang tạo đơn hàng...")
+                    }
+
+                    else -> {
+                        FSLogger.e("Huynd: Tạo đơn hàng thất bại!")}
                 }
-                is DataState.Error -> {
-                    activity?.showCustomToast("Tạo đơn hàng thất bại: ${state.exception.message}")
-                }
-                DataState.Loading -> {}
             }
-        }
+
+
 
         viewModel.paymentSuccess.observe(this@OrderDetailFragment) { isSuccess ->
             if (isSuccess) {

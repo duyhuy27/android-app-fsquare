@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
@@ -44,6 +45,7 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
 
     override fun onViewLoaded() {
         type = intent.getStringExtra("typeFavNew").toString()
+        val brandName = intent.getStringExtra("brandName").toString()
         when(type){
             "New" -> {
                 viewModel.getProductV1()
@@ -64,11 +66,11 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
                 }
             }
             "Brand" -> {
-                viewModel.getProductV1()
+                viewModel.getProductByBrandV1(idBrand = intent.getStringExtra("brandId").toString())
                 binding.apply {
-                    txtTitle.text = getString(R.string.Favorite)
+                    txtTitle.text = brandName
                     grdProduct.apply {
-                        adapter = favoriteAdapter
+                        adapter = productAdapter
                     }
                 }
             }
@@ -91,12 +93,24 @@ class FavoriteAndNewestActivity : BaseActivity<ActivityFavoriteBinding, Favorite
     override fun addViewListener() {
         binding.apply {
             btnBack.setOnClickListener {
-                onBackPressed()
+
+                    val intent = Intent(this@FavoriteAndNewestActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("SELECTED_TAB", MainViewModel.TAB_DASHBOARD_PAGE)
+                    }
+                    startActivity(intent)
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
             }
         }
     }
 
     override fun addDataObserver() {
+        viewModel.listProductBrand.observe(this@FavoriteAndNewestActivity) {
+            binding.apply {
+                productAdapter.updateProducts(it)
+            }
+        }
         viewModel.listFavorite.observe(this@FavoriteAndNewestActivity) {
             binding.apply {
                 favoriteAdapter.updateProducts(it)

@@ -130,7 +130,6 @@ inline fun View.safeClickWithRx(crossinline onClickView: () -> Unit) {
         .subscribe {
             onClickView.invoke()
         }
-
 }
 
 inline fun SwitchCompat.checkChangeWithRx(crossinline onChangeState: (Boolean) -> Unit) {

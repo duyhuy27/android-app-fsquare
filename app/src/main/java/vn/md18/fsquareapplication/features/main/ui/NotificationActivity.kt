@@ -44,6 +44,9 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding, Notificat
     }
 
     override fun addViewListener() {
+        binding.toolbar.onClickBackPress = {
+            onBackPressed()
+        }
     }
 
     override fun addDataObserver() {
@@ -52,6 +55,7 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding, Notificat
                 notificationAdapter.submitList(it)
             }
         }
+
     }
 
     override fun onNotificationClick(notification: NotificationResponse) {

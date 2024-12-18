@@ -43,6 +43,16 @@ class MainRepositoryImpl @Inject constructor(
         return applicationServices.getProduct(size = size!!, page = page!!)
     }
 
+    override fun getProductListPopular(
+        size: Int?,
+        page: Int?,
+        search: String?,
+        brand: String?,
+        category: String?
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
+        return applicationServices.getProductPopular(size = size!!, page = page!!)
+    }
+
     override fun getProductListV1(
         size: Int?,
         page: Int?,
@@ -52,6 +62,18 @@ class MainRepositoryImpl @Inject constructor(
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
         return applicationServices.getProductV1(size = size!!, page = page!!)
     }
+
+    override fun getProductListByBrandV1(
+        size: Int?,
+        page: Int?,
+        search: String?,
+        brand: String?,
+        category: String?
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
+        return applicationServices.getProductV1(size = size!!, page = page!!, brand = brand!!)
+    }
+
+
 
     override fun getFavoriteList(): Flowable<DataResponse<List<FavoriteResponse>, PaginationResponse>> {
         return applicationServices.getFavorite()

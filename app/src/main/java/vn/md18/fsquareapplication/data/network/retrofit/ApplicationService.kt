@@ -98,6 +98,15 @@ interface ApplicationService {
         @Query("category") category: String? = null
     ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
 
+    @GET(AppAPi.POPULAR)
+    fun getProductPopular(
+        @Query("size") size: Int,
+        @Query("page") page: Int,
+        @Query("search") search: String? = null,
+        @Query("brand") brand: String? = null,
+        @Query("category") category: String? = null
+    ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
     @GET(AppAPi.PRODUCT_LIST_V1)
     fun getProductV1(
         @Query("size") size: Int,

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -105,8 +106,17 @@ class CardFragment : BaseFragment<FragmentCardBinding, BagViewmodel>(), BagAdapt
     override fun addDataObserver() {
         viewModel.listBag.observe(this@CardFragment) {
             binding.apply {
-                bagAdapter.submitList(it)
-                FSLogger.e("cart enum : $it")
+                if (it.isEmpty()) {
+                    binding.rcvProductCart.visibility = View.GONE
+                    binding.imgNoOrders.visibility = View.VISIBLE
+                }
+                else {
+                    binding.rcvProductCart.visibility = View.VISIBLE
+                    binding.imgNoOrders.visibility = View.GONE
+                    bagAdapter.submitList(it)
+                    FSLogger.e("cart enum : $it")
+                }
+
             }
             if (!it.isNullOrEmpty()) {
                 val totalPrice = it.sumOf { item -> item.price * item.quantity }

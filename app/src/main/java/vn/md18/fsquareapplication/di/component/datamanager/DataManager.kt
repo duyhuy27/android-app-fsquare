@@ -29,4 +29,8 @@ interface DataManager {
 
     fun getOrderClientID(): String?
 
+    fun saveOrderID(orderID: String)
+
+    fun getOrderID(): String?
+
 }

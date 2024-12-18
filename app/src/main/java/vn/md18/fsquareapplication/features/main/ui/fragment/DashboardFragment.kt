@@ -196,6 +196,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
         val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
             putExtra("typeFavNew", "Brand")
             putExtra("brandId", brand._id)
+            putExtra("brandName", brand.name)
         }
         startActivity(intent)
     }
