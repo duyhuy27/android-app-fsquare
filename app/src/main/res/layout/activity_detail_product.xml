@@ -80,6 +80,7 @@
                         android:textColor="#676767"
                         android:textSize="@dimen/_15sdp" />
                     <TextView
+                        android:id="@+id/tv_sold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -177,20 +178,27 @@
             android:text="- Style: hot trend of this year.\n- Size: 38 - 45.\n- Material: PU leather- Sole material: Molded solid rubber, good friction resistance, light, smooth, balanced and breathable.\n- Sole type: High"
             android:textColor="#676767"
             android:textSize="13sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="#cfcfcf"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_review_shoes"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
-            <TextView
+            <View
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:text="@string/Price"
-                android:textColor="#676767"
-                android:textSize="16sp" />
+                android:layout_weight="1"/>
             <TextView
                 android:id="@+id/txt_quantity"
                 android:layout_width="wrap_content"
@@ -198,15 +206,25 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/montserrat_semi_bold"
-                android:text="@string/Price"
+                android:text="Số lượng: 0"
                 android:textColor="#676767"
                 android:textSize="16sp" />
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/Price"
+            android:textColor="#676767"
+            android:textSize="16sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="20dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp">
             <TextView
                 android:id="@+id/txt_price_detail_product"
                 android:layout_width="wrap_content"
@@ -254,7 +272,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:background="@drawable/bg_button_corner_30_primary"
-            android:layout_marginBottom="@dimen/permission_dp_40"
+            android:layout_marginBottom="@dimen/permission_dp_30"
             android:layout_marginLeft="@dimen/permission_dp_20"
             android:layout_marginRight="@dimen/permission_dp_20"
             android:padding="10dp">

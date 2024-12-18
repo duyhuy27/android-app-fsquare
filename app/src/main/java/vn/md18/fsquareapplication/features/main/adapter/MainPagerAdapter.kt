@@ -18,14 +18,13 @@ class MainPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm.supportFr
     private var homeFragment: HomeFragment = HomeFragment.newInstance()
     private var cartFragment: CardFragment = CardFragment.newInstance()
     private var orderFragment: OrderFragment = OrderFragment.newInstance()
-    private var walletFragment : WalletFragment = WalletFragment.newInstance()
     private var profileFragment: ProfileFragment = ProfileFragment.newInstance()
 
     /**
      * Return the number of views available.
      */
     override fun getItemCount(): Int {
-        return 5
+        return 4
     }
 
     /**
@@ -36,8 +35,7 @@ class MainPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm.supportFr
             0 -> homeFragment // devices and rooms
             1 -> cartFragment   // scene list
             2 -> orderFragment
-            3 -> walletFragment
-            4 -> profileFragment// notification list
+            3 -> profileFragment// notification list
             else -> Fragment()
         }
     }

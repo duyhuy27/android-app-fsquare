@@ -1,10 +1,12 @@
-package vn.vnpt.ONEHome.core.recycleview
+package vn.md18.fsquareapplication.core.recyclerview
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import vn.md18.fsquareapplication.databinding.ItemDefaultBinding
+import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import vn.vnpt.ONEHome.core.recycleview.StateRecycleView
 
 @SuppressLint("NotifyDataSetChanged")
 abstract class BaseRecycleAdapter<T : Any> : RecyclerView.Adapter<BaseViewHolder<*>>() {

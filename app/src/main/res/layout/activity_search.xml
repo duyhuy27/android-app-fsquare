@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fff"
     tools:context=".features.main.ui.SearchActivity">
 
-    <LinearLayout
+    <!-- Search Bar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:orientation="horizontal">
+        android:id="@+id/searchBar"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/bg_edt_corner_neutral_50">
+            android:background="@drawable/bg_edt_corner_neutral_50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_filter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/todo"
                 android:src="@drawable/search"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp" />
 
             <EditText
                 android:id="@+id/edt_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:autofillHints=""
                 android:background="@null"
-                android:hint="search"
-                android:layout_weight="1"/>
+                android:hint="Tìm kiếm"
+                android:layout_weight="1"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                />
 
         </LinearLayout>
 
@@ -42,30 +52,50 @@
             android:id="@+id/btn_filter"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/todo"
             android:src="@drawable/ic_filter"
             android:padding="10dp"
-            android:background="@drawable/bg_edt_corner_neutral_50"/>
-    </LinearLayout>
+            android:contentDescription="@string/todo"
+            android:background="@drawable/bg_edt_corner_neutral_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Empty State -->
+    <ImageView
+        android:id="@+id/img_no_data"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@drawable/ic_no_order"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-<!--    <GridView-->
-<!--        android:id="@+id/grdProduct"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="15dp"-->
-<!--        android:numColumns="2"-->
-<!--        android:verticalSpacing="15dp"-->
-<!--        android:horizontalSpacing="15dp"-->
-<!--        tools:listitem="@layout/item_search_product"-->
-<!--        />-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Không có dữ liệu tìm kiếm"
+        android:textColor="#888888"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/img_no_data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvProduct"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:padding="15dp"
         android:scrollbars="vertical"
-        tools:listitem="@layout/item_search_product"/>
+        android:visibility="visible"
+        tools:listitem="@layout/item_search_product"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

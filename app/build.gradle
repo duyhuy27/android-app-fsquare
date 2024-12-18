@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 def versionPropsFile = file('../version.properties')
@@ -169,6 +170,7 @@ dependencies {
     implementation libs.activity
     implementation libs.navigation.fragment.ktx
     implementation libs.navigation.ui.ktx
+    implementation libs.firebase.messaging
     testImplementation rootProject.ext.dependencies["j_unit_version"]
     androidTestImplementation rootProject.ext.dependencies["android_j_unit_test"]
     androidTestImplementation rootProject.ext.dependencies["android_j_unit_test_espresso"]
@@ -209,6 +211,7 @@ dependencies {
     implementation rootProject.ext.dependencies["okhttp3_logging"]
     implementation rootProject.ext.dependencies["okhttp3"]
 
+
     //Reactive - Programming
     implementation rootProject.ext.dependencies["rxjava2"]
     implementation rootProject.ext.dependencies["rxandroid2"]
@@ -223,6 +226,9 @@ dependencies {
     //Glide loading Image
     implementation rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide_kapt"]
+
+    // Eventbus
+    implementation rootProject.ext.dependencies["eventBus"]
 
     //Core activity and fragment KTX
     implementation rootProject.ext.dependencies["activity_ktx"]
@@ -242,6 +248,8 @@ dependencies {
 
     implementation rootProject.ext.dependencies["reactivenetwork"]
 
+    implementation rootProject.ext.dependencies["notification"]
+
     implementation rootProject.ext.dependencies["timber"]
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
@@ -258,6 +266,11 @@ dependencies {
     implementation 'com.hbb20:ccp:2.5.2'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //RangeSlider
+    implementation 'com.google.android.material:material:1.9.0'
+
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }
 
 static def getCurrentDayTime() {

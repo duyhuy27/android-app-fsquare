@@ -15,12 +15,15 @@ import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.features.main.ui.FavoriteAndNewestActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.FavoriteViewmodel
 import vn.md18.fsquareapplication.features.main.viewmodel.MainViewModel
+import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
+import vn.md18.fsquareapplication.utils.extensions.showCustomToast
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class ProductAdapter @Inject constructor(
     @ApplicationContext private val context: Context,
-
+    private val dataManager: DataManager
 ) : BaseAdapter() {
 
     private lateinit var viewModel: MainViewModel
@@ -62,7 +65,8 @@ class ProductAdapter @Inject constructor(
 
         val product = productList[position]
         binding.apply {
-            txtProductPrice.text = "${product.maxPrice} VND"
+            val formatter: DecimalFormat = DecimalFormat("#,###")
+            txtProductPrice.text = formatter.format(product.minPrice)
             txtProductName.text = product.name
             txtRating.text = "${product.rating}"
             txtSale.text = "${product.sales} sold"
@@ -78,12 +82,16 @@ class ProductAdapter @Inject constructor(
                 if (product.isFavorite) R.drawable.add_to_fav else R.drawable.add_fav
             )
             imgAddToFav.setOnClickListener {
-                val isAdding = !product.isFavorite
-                product.isFavorite = isAdding
-                imgAddToFav.setImageResource(
-                    if (isAdding) R.drawable.add_to_fav else R.drawable.add_fav
-                )
-                productCallback?.createFavorite(product._id, isAdding)
+                if (dataManager.getToken() != null && dataManager.getToken() != ""){
+                    val isAdding = !product.isFavorite
+                    product.isFavorite = isAdding
+                    imgAddToFav.setImageResource(
+                        if (isAdding) R.drawable.add_to_fav else R.drawable.add_fav
+                    )
+                    productCallback?.createFavorite(product._id, isAdding)
+                }else{
+                    context.showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
+                }
             }
 
             root.setOnClickListener {
@@ -92,10 +100,8 @@ class ProductAdapter @Inject constructor(
 
         }
 
-
         return view
     }
-
 
     fun updateProducts(newProducts: List<ProductResponse>) {
         productList = newProducts

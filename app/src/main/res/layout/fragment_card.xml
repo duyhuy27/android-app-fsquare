@@ -40,6 +40,15 @@
            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
            tools:listitem="@layout/item_product_cart" />
 
+       <ImageView
+           android:id="@+id/imgNoOrders"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:padding="140dp"
+           android:src="@drawable/ic_no_order"
+           android:visibility="gone"
+           />
+
        <androidx.appcompat.widget.AppCompatButton
            android:id="@+id/btn_Checkout"
            android:layout_width="match_parent"

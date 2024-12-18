@@ -11,6 +11,7 @@ import retrofit2.http.Query
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.AppAPi
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
+import vn.md18.fsquareapplication.data.network.model.request.CheckPaymentRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.GetPaymentDetailRequest
 
@@ -43,7 +44,10 @@ import vn.md18.fsquareapplication.data.network.model.response.GetPaymentDetailRe
 import vn.md18.fsquareapplication.data.network.model.response.GetPaymentResponse
 
 import vn.md18.fsquareapplication.data.network.model.response.GetProvinceResponse
+import vn.md18.fsquareapplication.data.network.model.response.GetReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.GetWardsRepose
+import vn.md18.fsquareapplication.data.network.model.response.HistorySearchResponse
+import vn.md18.fsquareapplication.data.network.model.response.NotificationResponse
 import vn.md18.fsquareapplication.data.network.model.response.auth.LoginResponse
 import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.PostPaymentResponse
@@ -87,6 +91,15 @@ interface ApplicationService {
 
     @GET(AppAPi.PRODUCT_LIST)
     fun getProduct(
+        @Query("size") size: Int,
+        @Query("page") page: Int,
+        @Query("search") search: String? = null,
+        @Query("brand") brand: String? = null,
+        @Query("category") category: String? = null
+    ) : Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
+    @GET(AppAPi.POPULAR)
+    fun getProductPopular(
         @Query("size") size: Int,
         @Query("page") page: Int,
         @Query("search") search: String? = null,
@@ -274,4 +287,32 @@ interface ApplicationService {
     fun getReview(
         @Path("_id") id: String
     ) : Flowable<DataResponse<List<ReviewResponse>, PaginationResponse>>
+
+    @GET(AppAPi.LIST_REVIEWS + "/{id}")
+    fun getReviews(
+        @Path("id") id: String,
+    ) : Flowable<DataResponse<List<GetReviewResponse>, PaginationResponse>>
+
+    @GET(AppAPi.HISTORY_SEARCH)
+    fun getHistorySearch(
+    ) : Flowable<DataResponse<List<HistorySearchResponse>, PaginationResponse>>
+
+    @POST(AppAPi.SAVE_KEYWORD_SEARCH)
+    fun saveKeyWordSearch(
+        @Body keyword: String
+    ) : Flowable<DataResponse<HistorySearchResponse, PaginationResponse>>
+
+    @GET(AppAPi.GET_LIST_NOTIFICATION)
+    fun getListNotification(
+    ) : Flowable<DataResponse<List<NotificationResponse>, PaginationResponse>>
+
+    @DELETE(AppAPi.DELETE_LIST_NOTIFICATION + "/{id}")
+    fun deleteListNotification(
+        @Path("id") id: String
+    ) : Flowable<DataResponse<NotificationResponse, PaginationResponse>>
+
+    @POST(AppAPi.CHECK_PAYMENT_ORDER)
+    fun checkPaymentOrder(
+        @Body checkPaymentRequest: CheckPaymentRequest
+    ) : Flowable<DataResponse<PostPaymentResponse, PaginationResponse>>
 }

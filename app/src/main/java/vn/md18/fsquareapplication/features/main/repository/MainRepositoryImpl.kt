@@ -1,11 +1,13 @@
 package vn.md18.fsquareapplication.features.main.repository
 
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.FavoriteRequest
 import vn.md18.fsquareapplication.data.network.model.request.GetPaymentDetailRequest
 import vn.md18.fsquareapplication.data.network.model.request.PostPaymentRequest
+import vn.md18.fsquareapplication.data.network.model.request.UpdateProfileRequest
 import vn.md18.fsquareapplication.data.network.model.request.UpdateQuantityBagRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.OrderFeeRequest
 import vn.md18.fsquareapplication.data.network.model.response.BrandResponse
@@ -22,6 +24,7 @@ import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.PostPaymentResponse
 import vn.md18.fsquareapplication.data.network.model.response.PostReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import vn.md18.fsquareapplication.data.network.model.response.UpdateProfileResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.OrderFeeResponse
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
@@ -43,6 +46,16 @@ class MainRepositoryImpl @Inject constructor(
         return applicationServices.getProduct(size = size!!, page = page!!)
     }
 
+    override fun getProductListPopular(
+        size: Int?,
+        page: Int?,
+        search: String?,
+        brand: String?,
+        category: String?
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
+        return applicationServices.getProductPopular(size = size!!, page = page!!)
+    }
+
     override fun getProductListV1(
         size: Int?,
         page: Int?,
@@ -52,6 +65,18 @@ class MainRepositoryImpl @Inject constructor(
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
         return applicationServices.getProductV1(size = size!!, page = page!!)
     }
+
+    override fun getProductListByBrandV1(
+        size: Int?,
+        page: Int?,
+        search: String?,
+        brand: String?,
+        category: String?
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>> {
+        return applicationServices.getProductV1(size = size!!, page = page!!, brand = brand!!)
+    }
+
+
 
     override fun getFavoriteList(): Flowable<DataResponse<List<FavoriteResponse>, PaginationResponse>> {
         return applicationServices.getFavorite()
@@ -119,4 +144,9 @@ class MainRepositoryImpl @Inject constructor(
     override fun getDetailPayment(getPaymentDetailRequest: GetPaymentDetailRequest): Flowable<DataResponse<GetPaymentDetailResponse, PaginationResponse>> {
         return applicationServices.getPaymentDetail(getPaymentDetailRequest)
     }
+
+    override fun sendTokenToBackend(token: String): Flowable<UpdateProfileResponse> {
+        return applicationServices.updateProfile(UpdateProfileRequest(fcmToken = token))
+    }
+
 }

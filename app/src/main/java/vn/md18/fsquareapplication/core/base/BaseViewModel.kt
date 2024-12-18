@@ -1,15 +1,24 @@
 package vn.md18.fsquareapplication.core.base
 
 import androidx.core.app.NotificationCompat.MessagingStyle.Message
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import vn.md18.fsquareapplication.core.eventbus.CheckPaymentStatus
 import vn.md18.fsquareapplication.data.model.ErrorResponse
+import vn.md18.fsquareapplication.data.network.model.request.CheckPaymentRequest
 import vn.md18.fsquareapplication.di.component.datamanager.DataManager
 import vn.md18.fsquareapplication.di.component.resource.ResourcesService
 import vn.md18.fsquareapplication.di.component.scheduler.SchedulerProvider
+import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.SingleLiveEvent
+import vn.md18.fsquareapplication.utils.extensions.NetworkExtensions
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -21,6 +30,8 @@ abstract class BaseViewModel : ViewModel() {
     open val errorState = SingleLiveEvent<String>()
     open val loadingState = SingleLiveEvent<Boolean>()
     open val errorMessage = SingleLiveEvent<Int>()
+
+
 
 
 
@@ -39,10 +50,14 @@ abstract class BaseViewModel : ViewModel() {
         compositeDisposable = CompositeDisposable()
     }
 
-    abstract fun onDidBindViewModel()
+    open fun onDidBindViewModel()
+    {
+        EventBus.getDefault().register(this)
+    }
 
     override fun onCleared() {
         super.onCleared()
+        EventBus.getDefault().unregister(this)
         compositeDisposable.dispose()
     }
 
@@ -76,5 +91,22 @@ abstract class BaseViewModel : ViewModel() {
         else {
             callBackNavigation(true)
         }
+    }
+    private var numberPage: Int = 0
+
+    open fun loadMoreItems() {
+        numberPage += 1
+    }
+
+    open fun refreshItemList() {
+        numberPage = 0
+    }
+
+    fun getCurrentPageNumber(): Int {
+        return numberPage
+    }
+
+    fun setCurrentPageNumber(pageNumber: Int) {
+        this.numberPage = pageNumber
     }
 }

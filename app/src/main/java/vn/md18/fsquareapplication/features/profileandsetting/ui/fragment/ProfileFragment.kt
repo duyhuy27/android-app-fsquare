@@ -38,7 +38,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         binding.btnAddress.setOnClickListener { Toast.makeText(requireContext(), "hihi1", Toast.LENGTH_SHORT).show() }
         binding.btnProfile.setOnClickListener { Toast.makeText(context, "hihi", Toast.LENGTH_SHORT).show() }
         binding.btnNotification.setOnClickListener{ navigation(Constant.KEY_NOTIFICATION) }
-        binding.btnSecurity.setOnClickListener{ navigation(Constant.KEY_SECURITY) }
+//        binding.btnSecurity.setOnClickListener{ navigation(Constant.KEY_SECURITY) }
         binding.btnPrivacy.setOnClickListener{ navigation(Constant.KEY_POLICY) }
         binding.btnLogout.setOnClickListener{ logout() }
     }

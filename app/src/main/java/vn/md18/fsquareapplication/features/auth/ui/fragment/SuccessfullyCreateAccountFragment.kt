@@ -13,6 +13,7 @@ import vn.md18.fsquareapplication.databinding.FragmentOtpBinding
 import vn.md18.fsquareapplication.databinding.FragmentSuccessfullyCreateAccountBinding
 import vn.md18.fsquareapplication.features.auth.viewmodel.AuthViewModel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
+import vn.md18.fsquareapplication.utils.Constant
 
 @AndroidEntryPoint
 class SuccessfullyCreateAccountFragment : BaseFragment<FragmentSuccessfullyCreateAccountBinding, AuthViewModel>() {
@@ -39,8 +40,10 @@ class SuccessfullyCreateAccountFragment : BaseFragment<FragmentSuccessfullyCreat
     }
 
     private fun navigateToHomePage() {
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(intent)
+        val bundle = Bundle().apply {
+            putBoolean(Constant.KEY_SEND_TOKEN_FIREBASE_TO_BE, true)
+        }
+        openActivity(MainActivity::class.java, bundle)
         requireActivity().finish()
     }
 

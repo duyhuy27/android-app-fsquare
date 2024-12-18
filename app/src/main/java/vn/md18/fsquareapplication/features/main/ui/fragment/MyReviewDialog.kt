@@ -109,11 +109,6 @@ class MyBottomSheetDialog : BottomSheetDialogFragment() {
         buttonAction.setOnClickListener {
             val content = txtComment.getText().toString()
 
-            if (selectedFiles.isEmpty()) {
-                FSLogger.d("phuc", "Không có file nào được chọn")
-                return@setOnClickListener
-            }
-
             if (selectedRating == 0) {
                 FSLogger.d("phuc", "Chưa chọn số sao")
                 return@setOnClickListener

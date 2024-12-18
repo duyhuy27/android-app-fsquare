@@ -15,7 +15,7 @@
            android:id="@+id/toolbarCheckout"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           app:titleToolbar="Checkout"
+           app:titleToolbar="Đặt hàng"
            app:textStyle="bold"/>
        <ScrollView
            android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                                android:id="@+id/txt_amuont_checkout"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
-                               android:text="$1,458.28"
+                               android:text="-"
                                android:textSize="16dp"
                                android:fontFamily="@font/montserrat_semi_bold"
                                android:textColor="#333333"/>
@@ -222,7 +222,7 @@
                                android:id="@+id/txt_total_checkout"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
-                               android:text="$1,458.28"
+                               android:text="-"
                                android:textSize="16dp"
                                android:fontFamily="@font/montserrat_semi_bold"
                                android:textColor="#333333"/>

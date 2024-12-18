@@ -44,4 +44,37 @@ class DataManagerImpl @Inject constructor(private val mPreferences: AppPreferenc
         getSharePreferences().edit().putString(Constant.KEY_TOKEN,token).apply()
     }
 
+    override fun saveOrderId(orderId: String) {
+        getSharePreferences().edit().putString(Constant.KEY_ORDER_ID, orderId).apply()
+    }
+
+    override fun getOrderId(): String? {
+        return getSharePreferences().getString(Constant.KEY_ORDER_ID, Constant.EMPTY_STRING)
+    }
+
+    override fun saveOrderClientID(orderClientID: String) {
+        getSharePreferences().edit().putString(Constant.KEY_ORDER_CLIENT_CODE, orderClientID).apply()
+    }
+
+    override fun getOrderClientID(): String? {
+        return getSharePreferences().getString(Constant.KEY_ORDER_CLIENT_CODE, Constant.EMPTY_STRING)
+    }
+
+    override fun saveOrderID(orderID: String) {
+        getSharePreferences().edit().putString("ABCC", orderID).apply()
+    }
+
+    override fun getOrderID(): String? {
+        return getSharePreferences().getString("ABCC", Constant.EMPTY_STRING)
+    }
+
+    override fun setTokenFirebase(token: String) {
+        getSharePreferences().edit().putString(Constant.KEY_TOKEN_FIREBASE, token).apply()
+    }
+
+    override fun getTokenFirebase(): String? {
+        return getSharePreferences().getString(Constant.KEY_TOKEN_FIREBASE, Constant.EMPTY_STRING)
+    }
+
+
 }

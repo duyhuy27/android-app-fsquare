@@ -24,6 +24,7 @@ ext {
     final rxJava_version = "2.2.19"
     final rxAndroid_version = "2.1.1"
     final rxBinding_version = "4.0.0"
+    final eventbus_version = "3.1.1"
     final lottie_version = "3.7.0"
     final jdbc_version = "3.36.0"
     final kotlin_std_lib = "1.8.0"
@@ -46,7 +47,6 @@ ext {
     final wifi_utils_version = "1.6.6"
     final date_picker_version = "1.3.1"
     final mpegMediaMetadataRetriever = "1.0.15"
-    final eventbus_version = "3.1.1"
     final mp_androidchart_version = "v3.1.0"
     final number_picker_view = "1.2.0"
     final nv_bluetooth = "1.8"
@@ -63,6 +63,7 @@ ext {
     dependencies = [
             "toasty"                      : "com.github.GrenderG:Toasty:1.3.0",   //Toast
             "eventBus"                    : "org.greenrobot:eventbus:3.1.1",//
+            "notification"                : "io.karn:notify:$notification_version",
             "recyclerview-v7"             : "androidx.recyclerview:recyclerview:1.0.0",
             "gson"                        : "com.google.code.gson:gson:2.8.2",
             "lifecycle"                   : "android.arch.lifecycle:extensions:1.1.1",

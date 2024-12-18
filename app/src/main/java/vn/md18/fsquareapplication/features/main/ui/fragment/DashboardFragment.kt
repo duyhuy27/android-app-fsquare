@@ -91,12 +91,17 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
 
     override fun addViewListener() {
         binding.tvSeeMoreNewest.setOnClickListener {
-            val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
-                putExtra("typeFavNew", "New")
+        if(dataManager.getToken() != null && dataManager.getToken() != ""){
 
-            }
-            startActivity(intent)
-        }
+                val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
+                    putExtra("typeFavNew", "New")
+
+                }
+                startActivity(intent)
+
+        }else{
+            activity?.showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
+        }}
     }
 
     override fun addDataObserver() {
@@ -180,7 +185,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
     }
 
     override fun createFavorite(id: String, isAdding: Boolean) {
-        if(dataManager.getToken().isNullOrEmpty()){
+        if(!dataManager.getToken().isNullOrEmpty()){
             viewModel.createFavorite(id, isAdding)
         }else{
             activity?.showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
@@ -191,6 +196,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, MainViewModel>(
         val intent = Intent(context, FavoriteAndNewestActivity::class.java).apply {
             putExtra("typeFavNew", "Brand")
             putExtra("brandId", brand._id)
+            putExtra("brandName", brand.name)
         }
         startActivity(intent)
     }

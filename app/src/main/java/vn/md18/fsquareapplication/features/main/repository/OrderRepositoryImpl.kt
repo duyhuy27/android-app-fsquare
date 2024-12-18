@@ -2,6 +2,7 @@ package vn.md18.fsquareapplication.features.main.repository
 
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
+import vn.md18.fsquareapplication.data.network.model.request.CheckPaymentRequest
 import vn.md18.fsquareapplication.data.network.model.request.PostReviewRequest
 import vn.md18.fsquareapplication.data.network.model.request.location.UpdateOrderRequest
 import vn.md18.fsquareapplication.data.network.model.request.order.AddOrderRequest
@@ -13,13 +14,14 @@ import vn.md18.fsquareapplication.data.network.model.response.order.DeleteOrderR
 import vn.md18.fsquareapplication.data.network.model.response.order.GetOrderDetailResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.UpdateOrderResponse
 import vn.md18.fsquareapplication.data.network.retrofit.ApplicationService
+import vn.md18.fsquareapplication.utils.fslogger.FSLogger
 import javax.inject.Inject
 
 class OrderRepositoryImpl @Inject constructor(
     private var applicationService: ApplicationService
 ) : OrderRepository {
     override fun getOrderList(status: String?): Flowable<DataResponse<List<GetOrderRespose>, PaginationResponse>> {
-        return applicationService.getOrder(status=status!!)
+        return applicationService.getOrder(status = status!!)
     }
 
     override fun getOrderDetail(id: String): Flowable<DataResponse<GetOrderDetailResponse, PaginationResponse>> {
@@ -43,6 +45,15 @@ class OrderRepositoryImpl @Inject constructor(
 
     override fun postReviews(postReviewRequest: PostReviewRequest): Flowable<PostReviewResponse> {
         return applicationService.postReview(postReviewRequest)
+    }
+
+    override fun getPaymentStatus(checkPaymentRequest: CheckPaymentRequest): Flowable<Boolean> {
+        return applicationService.checkPaymentOrder(checkPaymentRequest).map {
+            FSLogger.e("Huynd: Check payment status: ${it.status}")
+            it.status == "success"
+        }.onErrorReturn {
+            false
+        }
     }
 
 }

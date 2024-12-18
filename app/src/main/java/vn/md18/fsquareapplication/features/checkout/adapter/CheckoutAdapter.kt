@@ -5,13 +5,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import dagger.hilt.android.qualifiers.ApplicationContext
-import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.GetBagResponse
 import vn.md18.fsquareapplication.databinding.ItemOrderListCheckoutBinding
-import vn.md18.fsquareapplication.features.main.adapter.ProductAdapter
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
+import vn.md18.fsquareapplication.core.recyclerview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class CheckoutAdapter @Inject constructor(
@@ -57,7 +56,8 @@ class CheckoutAdapter @Inject constructor(
             binding.apply {
                 txtProductNameOrderList.text = product.shoes.name
                 txtProductColorOrderList.text = product.color
-                txtProductPriceOrderList.text = "$ " + product.price.toString()
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                txtProductPriceOrderList.text = formatter.format(product.price)
                 txtProductSizeOrderList.text = product.size.sizeNumber
                 txtProductQuantityOrderList.text = product.quantity.toString()
                 imgCart.loadImageURL(product.thumbnail?.url)

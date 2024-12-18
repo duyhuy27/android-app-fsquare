@@ -16,7 +16,11 @@ import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.response.Classification
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
 import vn.md18.fsquareapplication.databinding.ActivityDetailProductBinding
+import vn.md18.fsquareapplication.databinding.CustomDialogOrderSuccessfulBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmGuestBinding
+import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.detail.adapter.ColorDetailAdapter
+import vn.md18.fsquareapplication.features.detail.adapter.ReviewAdapter
 import vn.md18.fsquareapplication.features.detail.adapter.SizeDetailAdapter
 import vn.md18.fsquareapplication.features.detail.viewmodel.DetailProductViewModel
 import vn.md18.fsquareapplication.features.main.ui.MainActivity
@@ -26,6 +30,7 @@ import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.extensions.loadImageUrlDiskCacheStrategy
 import vn.md18.fsquareapplication.utils.extensions.showCustomToast
 import vn.md18.fsquareapplication.utils.fslogger.FSLogger
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +43,9 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
     @Inject
     lateinit var sizeDetailAdapter: SizeDetailAdapter
+
+    @Inject
+    lateinit var reviewAdapter: ReviewAdapter
 
     var quantity = 0
     var sizeId = ""
@@ -86,9 +94,10 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 updateTotalPrice(productPrice)
             }
             btnAddToCart.setOnClickListener {
-                if(dataManager.getToken().isNullOrEmpty()){
+                if(!dataManager.getToken().isNullOrEmpty()){
                     viewModel.createBag(sizeId, quantity)
                 }else{
+                    showDialogConfirm()
                     showCustomToast("Vui lòng đăng nhập để thực hiện", Constant.ToastStatus.FAILURE)
                 }
             }
@@ -106,6 +115,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                     viewModel.callApiGetDetailProduct(it)
                 }
                 viewModel.getColorList(it)
+                viewModel.getReviewsList(it)
             }
         }
 
@@ -121,6 +131,12 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
                 setHasFixedSize(true)
                 adapter = sizeDetailAdapter
             }
+
+            rcvReviews.apply {
+                layoutManager = LinearLayoutManager(this@DetailProductActivity, LinearLayoutManager.VERTICAL, false)
+                setHasFixedSize(true)
+                adapter = reviewAdapter
+            }
         }
 
         binding.txtProductQuantityCart.text = quantity.toString()
@@ -131,6 +147,10 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
 
         viewModel.product.observe(this@DetailProductActivity) { productResponse ->
             setViewData(productResponse)
+        }
+
+        viewModel.listReview.observe(this@DetailProductActivity){
+            reviewAdapter.submitList(it)
         }
 
         viewModel.listColor.observe(this@DetailProductActivity) {
@@ -169,6 +189,26 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
     }
 
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(this@DetailProductActivity).inflate(R.layout.dialog_confirm_guest, null)
+        val binding = DialogConfirmGuestBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this@DetailProductActivity)
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnViewOrder.setOnClickListener {
+                val intent = Intent(this@DetailProductActivity, AuthActivity::class.java)
+                startActivity(intent)
+            }
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+        }
+
+        alertDialog.show()
+    }
+
 
     private fun setViewData(productResponse: ProductResponse?) {
         productResponse?.let {
@@ -179,6 +219,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
             binding.txtDescriptionDetailProduct.text = it.describe
             binding.txtPriceDetailProduct.text = it.maxPrice.toString() + " - " + it.minPrice.toString()
             binding.txtRatingDetailProduct.text = it.rating.toString()
+            binding.tvSold.text = it.sales.toString() + " đã bán"
             binding.imgDetailProduct.loadImageUrlDiskCacheStrategy(it.thumbnail?.url, R.drawable.null_shoes)
             var idShoes = it._id
             var isAdding = false
@@ -201,13 +242,15 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding, DetailP
         classification?.let {
             binding.apply {
                 updateTotalPrice(it.price)
-                txtPriceDetailProduct.text = "${it.price * quantity} VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                binding.txtPriceDetailProduct.text = formatter.format(it.price * quantity)
             }
         }
     }
 
     private fun updateTotalPrice(price: Double) {
         val totalPrice = quantity * price
-        binding.txtPriceDetailProduct.text = "${totalPrice} VND"
+        val formatter: DecimalFormat = DecimalFormat("#,###")
+        binding.txtPriceDetailProduct.text = formatter.format(totalPrice)
     }
 }

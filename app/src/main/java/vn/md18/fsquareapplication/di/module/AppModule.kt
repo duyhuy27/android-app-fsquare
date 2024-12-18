@@ -1,4 +1,5 @@
 package vn.md18.fsquareapplication.di.module
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,12 @@ object AppModule {
     @Singleton
     fun providerAppPreference(appPreferenceImpl: AppPreferenceImpl): AppPreference {
         return appPreferenceImpl
+    }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return Gson()
     }
 
     @Provides

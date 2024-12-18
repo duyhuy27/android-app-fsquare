@@ -10,8 +10,9 @@ import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.databinding.ItemProductOrderBinding
 import vn.md18.fsquareapplication.utils.OrderStatus
 import vn.md18.fsquareapplication.utils.extensions.loadImageURL
-import vn.vnpt.ONEHome.core.recycleview.BaseRecycleAdapter
+import vn.md18.fsquareapplication.core.recyclerview.BaseRecycleAdapter
 import vn.vnpt.ONEHome.core.recycleview.BaseViewHolder
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>() {
@@ -73,7 +74,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                 }
                 when (order.status) {
                     "pending" -> {
-                        btnVerify.text = "Cancel"
+                        btnVerify.text = "Hủy hàng"
                         btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
                         btnVerify.setTextColor(Color.WHITE)
                         btnVerify.visibility = View.VISIBLE
@@ -81,7 +82,7 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                             orderActionListener?.showDialog(order)
                         }
                     }
-                    "shipped", "canceled", "processing" -> {
+                    "shipped", "canceled", "processing", "returned" -> {
                         btnVerify.visibility = View.GONE
                     }
                     "delivered" -> {
@@ -94,13 +95,19 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                         }
                     }
                     "confirmed" -> {
-                        btnVerify.text = "Đánh giá"
-                        btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
-                        btnVerify.setTextColor(Color.WHITE)
-                        btnVerify.visibility = View.VISIBLE
-                        btnVerify.setOnClickListener {
-                            orderActionListener?.review(order)
+                        if(!order.isReview){
+                            btnVerify.text = "Đánh giá"
+                            btnVerify.setBackgroundResource(R.drawable.bg_button_cancel)
+                            btnVerify.setTextColor(Color.WHITE)
+                            btnVerify.visibility = View.VISIBLE
+                            btnVerify.setOnClickListener {
+                                orderActionListener?.review(order)
+                            }
+                        }else{
+                            btnVerify.visibility = View.GONE
                         }
+
+
                     }
                     else -> {
                         btnVerify.visibility = View.GONE
@@ -108,7 +115,8 @@ class OrderAdapter @Inject constructor() : BaseRecycleAdapter<GetOrderRespose>()
                 }
 
                 txtProductNameCart.text = order.firstProduct.name
-                txtProductPriceCart.text = "${order.firstProduct.price} VND"
+                val formatter: DecimalFormat = DecimalFormat("#,###")
+                txtProductPriceCart.text = formatter.format(order.firstProduct.price)
                 imgCart.loadImageURL(order.firstProduct.thumbnail?.url)
             }
         }

@@ -1,4 +1,5 @@
 package vn.md18.fsquareapplication.features.main.ui.fragment
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -16,9 +17,12 @@ import vn.md18.fsquareapplication.data.model.DataState
 import vn.md18.fsquareapplication.data.network.model.response.GetOrderRespose
 import vn.md18.fsquareapplication.databinding.DialogCancelOrderBinding
 import vn.md18.fsquareapplication.databinding.DialogConfirmDeleteFavBinding
+import vn.md18.fsquareapplication.databinding.DialogConfirmGuestBinding
 import vn.md18.fsquareapplication.databinding.FragmentOrderBinding
+import vn.md18.fsquareapplication.features.auth.ui.AuthActivity
 import vn.md18.fsquareapplication.features.main.adapter.OrderAdapter
 import vn.md18.fsquareapplication.features.main.ui.DetailOrderActivity
+import vn.md18.fsquareapplication.features.main.ui.MainActivity
 import vn.md18.fsquareapplication.features.main.viewmodel.OrderViewModel
 import vn.md18.fsquareapplication.utils.Constant
 import vn.md18.fsquareapplication.utils.OrderStatus
@@ -30,7 +34,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
     override val viewModel: OrderViewModel by activityViewModels()
 
     private lateinit var orderAdapter: OrderAdapter
-    private val tabTitles = listOf("Chờ xác nhận", "Chờ lấy hàng", "Đang vận chuyển", "Đang giao tới", "Đã nhận", "Đã hủy")
+    private val tabTitles = listOf("Chờ xác nhận", "Chờ lấy hàng", "Đang vận chuyển", "Đang giao tới", "Đã nhận", "Đã hủy", "Trả hàng")
     private var selectedStatus: OrderStatus = OrderStatus.PENDING
 
     override fun inflateLayout(layoutInflater: LayoutInflater): FragmentOrderBinding =
@@ -39,15 +43,26 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
     override fun getTagFragment(): String = OrderFragment::class.java.simpleName
 
     override fun onViewLoaded() {
-        setupTabs()
-        setupRecyclerView()
-        fetchOrdersByStatus(selectedStatus)
-        orderAdapter.setOrderActionListener(this)
+
+        if (dataManager.getToken() != null && dataManager.getToken() != "") {
+            setupTabs()
+            setupRecyclerView()
+            fetchOrdersByStatus(selectedStatus)
+            orderAdapter.setOrderActionListener(this)
+        }else{
+            showDialogConfirm()
+        }
     }
 
     override fun addViewListener() {
         binding.apply {
+            root.setOnClickListener {
+                if (dataManager.getToken() != null && dataManager.getToken() != "") {
 
+                }else{
+                    showDialogConfirm()
+                }
+            }
         }
     }
 
@@ -142,7 +157,14 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
             if(it is DataState.Success){
                 viewModel.getOrderList(status)
             }else{
-                activity?.showCustomToast("huy don hang that bai ", Constant.ToastStatus.FAILURE)
+                activity?.showCustomToast("Hủy đơn hàng thất bại ", Constant.ToastStatus.FAILURE)
+            }
+        }
+        viewModel.addReviewState.observe(this@OrderFragment){
+            if(it is DataState.Success){
+                viewModel.getOrderList(status)
+            }else{
+                activity?.showCustomToast("Đánh giá thất bại", Constant.ToastStatus.FAILURE)
             }
         }
     }
@@ -193,6 +215,26 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderViewModel>(), Orde
             }
             btnConfirm.setOnClickListener {
                 viewModel.updateOrder(order.id, OrderStatus.CONFIRMED)
+                alertDialog.dismiss()
+            }
+        }
+
+        alertDialog.show()
+    }
+
+    fun showDialogConfirm() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_confirm_guest, null)
+        val binding = DialogConfirmGuestBinding.bind(dialogView)
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        binding.apply {
+            btnViewOrder.setOnClickListener {
+                val intent = Intent(requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+            }
+            btnCancel.setOnClickListener {
                 alertDialog.dismiss()
             }
         }

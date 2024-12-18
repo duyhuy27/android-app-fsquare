@@ -7,188 +7,23 @@
     tools:context=".features.profileandsetting.ui.fragment.NotificationFragment">
 
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Custom toolbar -->
         <vn.md18.fsquareapplication.utils.view.CustomToolbar
-            android:id="@+id/toolbarNotification"
+            android:id="@+id/toolbar_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleToolbar="Notification"
+            app:titleToolbar="Thông báo"
             app:textStyle="bold" />
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_notification"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/txt_general_notification"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/General_Notification"
-                android:textSize="@dimen/permission_sp_16"
-                android:textColor="@android:color/black"
-                android:gravity="start"
-                android:fontFamily="sans-serif-medium"/>
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:showText="false"
-                android:switchMinWidth="50dp"
-                android:switchPadding="0dp"
-                android:textOff="Notifications Off"
-                android:textOn="Notifications On"
-                android:track="@drawable/switch_track"
-                android:thumb="@drawable/switch_thumb"
-                android:background="@drawable/switch_background"
-                android:padding="@dimen/permission_dp_5"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/txt_sound"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/Sound"
-                android:textSize="@dimen/permission_sp_16"
-                android:textColor="@android:color/black"
-                android:gravity="start"
-                android:fontFamily="sans-serif-medium"/>
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:showText="false"
-                android:switchMinWidth="50dp"
-                android:switchPadding="0dp"
-                android:textOff="Notifications Off"
-                android:textOn="Notifications On"
-                android:track="@drawable/switch_track"
-                android:thumb="@drawable/switch_thumb"
-                android:background="@drawable/switch_background"
-                android:padding="@dimen/permission_dp_5"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/txt_special_offers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Special_Offers"
-            android:textSize="@dimen/permission_sp_16"
-            android:textColor="@android:color/black"
-            android:gravity="start"
-            android:fontFamily="sans-serif-medium"
-            android:padding="@dimen/permission_sp_16"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/txt_promo_and_discount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/Promo_And_Discount"
-                android:textSize="@dimen/permission_sp_16"
-                android:textColor="@android:color/black"
-                android:gravity="start"
-                android:fontFamily="sans-serif-medium"/>
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:showText="false"
-                android:switchMinWidth="50dp"
-                android:switchPadding="0dp"
-                android:textOff="Notifications Off"
-                android:textOn="Notifications On"
-                android:track="@drawable/switch_track"
-                android:thumb="@drawable/switch_thumb"
-                android:background="@drawable/switch_background"
-                android:padding="@dimen/permission_dp_5"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/txt_payments"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/Payments"
-                android:textSize="@dimen/permission_sp_16"
-                android:textColor="@android:color/black"
-                android:gravity="start"
-                android:fontFamily="sans-serif-medium"/>
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:showText="false"
-                android:switchMinWidth="50dp"
-                android:switchPadding="0dp"
-                android:textOff="Notifications Off"
-                android:textOn="Notifications On"
-                android:track="@drawable/switch_track"
-                android:thumb="@drawable/switch_thumb"
-                android:background="@drawable/switch_background"
-                android:padding="@dimen/permission_dp_5"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/txt_cashback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Cashback"
-            android:textSize="@dimen/permission_sp_16"
-            android:textColor="@android:color/black"
-            android:gravity="start"
-            android:fontFamily="sans-serif-medium"
-            android:padding="@dimen/permission_sp_16"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/txt_appa_update"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/App_Updates"
-                android:textSize="@dimen/permission_sp_16"
-                android:textColor="@android:color/black"
-                android:gravity="start"
-                android:fontFamily="sans-serif-medium"/>
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:showText="false"
-                android:switchMinWidth="50dp"
-                android:switchPadding="0dp"
-                android:textOff="Notifications Off"
-                android:textOn="Notifications On"
-                android:track="@drawable/switch_track"
-                android:thumb="@drawable/switch_thumb"
-                android:background="@drawable/switch_background"
-                android:padding="@dimen/permission_dp_5"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/txtnew_service_available"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/New_Service_Available"
-            android:textSize="@dimen/permission_sp_16"
-            android:textColor="@android:color/black"
-            android:gravity="start"
-            android:fontFamily="sans-serif-medium"
-            android:padding="@dimen/permission_sp_16"/>
-
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_notification"/>
     </LinearLayout>
 </FrameLayout>

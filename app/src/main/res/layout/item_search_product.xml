@@ -30,5 +30,6 @@
         android:id="@+id/btn_cancel_search"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_gravity="center"
         android:src="@drawable/ic_cancel_search"/>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package vn.md18.fsquareapplication.features.main.repository
 
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import vn.md18.fsquareapplication.data.model.DataResponse
 import vn.md18.fsquareapplication.data.network.model.request.AddBagRequest
@@ -22,12 +23,29 @@ import vn.md18.fsquareapplication.data.network.model.response.PaginationResponse
 import vn.md18.fsquareapplication.data.network.model.response.PostPaymentResponse
 import vn.md18.fsquareapplication.data.network.model.response.PostReviewResponse
 import vn.md18.fsquareapplication.data.network.model.response.ProductResponse
+import vn.md18.fsquareapplication.data.network.model.response.UpdateProfileResponse
 import vn.md18.fsquareapplication.data.network.model.response.bag.UpdateQuantityBagResponse
 import vn.md18.fsquareapplication.data.network.model.response.order.OrderFeeResponse
 
 interface MainRepository {
 
     fun getProductList(
+        size: Int? = null,
+        page: Int? = null,
+        search: String? = null,
+        brand: String? = null,
+        category: String? = null
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
+    fun getProductListPopular(
+        size: Int? = null,
+        page: Int? = null,
+        search: String? = null,
+        brand: String? = null,
+        category: String? = null
+    ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
+    fun getProductListByBrandV1(
         size: Int? = null,
         page: Int? = null,
         search: String? = null,
@@ -42,6 +60,7 @@ interface MainRepository {
         brand: String? = null,
         category: String? = null
     ): Flowable<DataResponse<List<ProductResponse>, PaginationResponse>>
+
     fun getFavoriteList() : Flowable<DataResponse<List<FavoriteResponse>, PaginationResponse>>
 
     fun createFavorite( favoriteRequest: FavoriteRequest ) : Flowable<CreateFavoriteResponse>
@@ -83,5 +102,7 @@ interface MainRepository {
     fun getDetailPayment(
         getPaymentDetailRequest: GetPaymentDetailRequest
     ) : Flowable<DataResponse<GetPaymentDetailResponse, PaginationResponse>>
+
+    fun sendTokenToBackend(token: String): Flowable<UpdateProfileResponse>
 
 }
